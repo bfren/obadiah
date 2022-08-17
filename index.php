@@ -4,18 +4,18 @@ namespace Feeds;
 
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class) . ".class.php";
-    $inc = str_replace("churchsuitefeeds", "inc", strtolower($path));
+    $inc = str_replace("feeds", "inc", strtolower($path));
     require_once($inc);
 });
 
-// run preflight checks
+// run preflight checks and load config
 $base = Base::preflight(getcwd());
 
-// load rota files
-$rota = Rota\Rota::load_csv($base->dir_rota);
+// load rota
+$rota = Rota\Rota::load_csv($base);
 
-// load lectionary files
-$lectionary = Lectionary\Lectionary::load_csv($base->dir_lectionary);
+// load lectionary
+$lectionary = Lectionary\Lectionary::load_airtable($base);
 print_r($lectionary);
 
 ?>
