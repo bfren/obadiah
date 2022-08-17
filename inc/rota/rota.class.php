@@ -2,7 +2,8 @@
 
 namespace Feeds\Rota;
 
-class Rota {
+class Rota
+{
     /**
      * The services covered by this rota.
      *
@@ -15,7 +16,9 @@ class Rota {
      *
      * @return void
      */
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     /**
      * Load all files from a rota data directory.
@@ -23,35 +26,35 @@ class Rota {
      * @param string $path              Rota data directory.
      * @return Rota                     Rota object with services data loaded.
      */
-    public static function load_csv( $path )
+    public static function load_csv(string $path)
     {
         // create rota
         $rota = new Rota();
 
         // get csv files from path
-        $csv = glob( $path . "/*.csv" );
+        $csv = glob($path . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
 
             // open the file for reading
-            $f = fopen( $file, "r" );
-            if ( $f === false ) {
-                die( "Unable to open the file: $file." );
+            $f = fopen($file, "r");
+            if ($f === false) {
+                die("Unable to open the file: $file.");
             }
 
             // read each line of the csv file
             $include = false;
             $header_row = array();
 
-            while ( ( $row = fgetcsv( $f ) ) !== false ) {
+            while (($row = fgetcsv($f)) !== false) {
                 // include the service
-                if ( $include ) {
-                    $rota->services[] = new Service( $header_row, $row );
+                if ($include) {
+                    $rota->services[] = new Service($header_row, $row);
                 }
 
                 // check whether to include the next row
-                if ( $row[0] === "Date" ) {
+                if ($row[0] === "Date") {
                     $header_row = $row;
                     $include = true;
                 }

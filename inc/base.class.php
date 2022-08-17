@@ -2,7 +2,8 @@
 
 namespace Feeds;
 
-class Base {
+class Base
+{
 
     /**
      * Path to lectionary data directory.
@@ -23,7 +24,9 @@ class Base {
      *
      * @return void
      */
-    private function __construct() { }
+    private function __construct()
+    {
+    }
 
     /**
      * Run preflight checks.
@@ -31,7 +34,7 @@ class Base {
      * @param string $cwd               The current working directory.
      * @return Base
      */
-    public static function preflight( $cwd )
+    public static function preflight(string $cwd)
     {
         // create base
         $base = new Base();
@@ -42,9 +45,9 @@ class Base {
         $base->dir_rota = "$dir_data/rota";
 
         // ensure data directories exist
-        self::ensure_directory_exists( $dir_data );
-        self::ensure_directory_exists( $base->dir_lectionary );
-        self::ensure_directory_exists( $base->dir_rota );
+        self::ensure_directory_exists($dir_data);
+        self::ensure_directory_exists($base->dir_lectionary);
+        self::ensure_directory_exists($base->dir_rota);
 
         // return base
         return $base;
@@ -56,10 +59,10 @@ class Base {
      * @param string $path              Directory path to create if it does not already exist.
      * @return void
      */
-    private static function ensure_directory_exists( $path )
+    private static function ensure_directory_exists(string $path)
     {
-        if ( ! file_exists($path) ) {
-            mkdir( $path );
+        if (!file_exists($path)) {
+            mkdir($path);
         }
     }
 }

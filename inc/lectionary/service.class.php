@@ -2,7 +2,8 @@
 
 namespace Feeds\Lectionary;
 
-class Service {
+class Service
+{
     /**
      * The start time of this service.
      *

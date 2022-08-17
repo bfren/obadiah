@@ -2,7 +2,8 @@
 
 namespace Feeds\Lectionary;
 
-class Day {
+class Day
+{
     /**
      * String (sortable) representation of the date for this day in the lectionary.
      *
