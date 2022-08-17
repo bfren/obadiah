@@ -3,9 +3,8 @@
 namespace ChurchSuiteFeeds\Rota;
 
 class Rota {
-
     /**
-     * All the services in this rota.
+     * The services covered by this rota.
      *
      * @var Service[]
      */
@@ -21,10 +20,10 @@ class Rota {
     /**
      * Load all files from a rota data directory.
      *
-     * @param string $path Rota data directory.
-     * @return Rota
+     * @param string $path              Rota data directory.
+     * @return Rota                     Rota object with services data loaded.
      */
-    public static function load( $path )
+    public static function load_csv( $path )
     {
         // create rota
         $rota = new Rota();
@@ -41,11 +40,11 @@ class Rota {
                 die( "Unable to open the file: $file." );
             }
 
-            // read each line
+            // read each line of the csv file
             $include = false;
             $header_row = array();
-            while ( ( $row = fgetcsv( $f ) ) !== false ) {
 
+            while ( ( $row = fgetcsv( $f ) ) !== false ) {
                 // include the service
                 if ( $include ) {
                     $rota->services[] = new Service( $header_row, $row );
@@ -56,7 +55,6 @@ class Rota {
                     $header_row = $row;
                     $include = true;
                 }
-
             }
         }
 
