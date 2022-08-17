@@ -46,7 +46,7 @@ class Lectionary
         $services = new Airtable($base, "Service");
 
         // get days
-        $days_records = $days->make_request(array("view" => "Feed"));
+        $days_records = $days->make_request(array("view" => "Feed", "fields" => array("Date", "Name")));
         print_r($days_records);
     }
 }
