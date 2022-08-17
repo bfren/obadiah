@@ -1,6 +1,6 @@
 <?php
 
-namespace ChurchSuiteFeeds;
+namespace Feeds;
 
 spl_autoload_register(function ( $class ) {
     $path = str_replace( '\\', '/', $class ) . ".class.php";

@@ -1,6 +1,6 @@
 <?php
 
-namespace ChurchSuiteFeeds\Rota;
+namespace Feeds\Rota;
 
 use DateTime;
 

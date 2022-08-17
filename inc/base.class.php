@@ -1,7 +1,6 @@
 <?php
 
-namespace ChurchSuiteFeeds;
-
+namespace Feeds;
 
 class Base {
 

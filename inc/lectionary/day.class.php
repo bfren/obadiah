@@ -1,6 +1,6 @@
 <?php
 
-namespace ChurchSuiteFeeds\Lectionary;
+namespace Feeds\Lectionary;
 
 class Day {
     /**
