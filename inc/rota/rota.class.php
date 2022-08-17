@@ -2,6 +2,8 @@
 
 namespace Feeds\Rota;
 
+use Feeds\Base;
+
 class Rota
 {
     /**
@@ -23,16 +25,16 @@ class Rota
     /**
      * Load all files from a rota data directory.
      *
-     * @param string $path              Rota data directory.
+     * @param Base $base                Base object.
      * @return Rota                     Rota object with services data loaded.
      */
-    public static function load_csv(string $path)
+    public static function load_csv(Base $base)
     {
         // create rota
         $rota = new Rota();
 
         // get csv files from path
-        $csv = glob($path . "/*.csv");
+        $csv = glob($base->dir_rota . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
