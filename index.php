@@ -12,8 +12,11 @@ spl_autoload_register(function ( $class ) {
 $base = Base::preflight( getcwd() );
 
 // load rota files
-$rota = Rota\Rota::load( $base->dir_rota );
-print_r($rota);
+$rota = Rota\Rota::load_csv( $base->dir_rota );
+
+// load lectionary files
+$lectionary = Lectionary\Lectionary::load_csv( $base->dir_lectionary );
+print_r($lectionary);
 
 ?>
 <!DOCTYPE html>
