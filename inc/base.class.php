@@ -20,6 +20,13 @@ class Base
     public string $dir_rota;
 
     /**
+     * Airtable
+     *
+     * @var string
+     */
+    public string $airtable_api_key;
+
+    /**
      * Construct using Base::preflight.
      *
      * @return void
@@ -48,6 +55,12 @@ class Base
         self::ensure_directory_exists($dir_data);
         self::ensure_directory_exists($base->dir_lectionary);
         self::ensure_directory_exists($base->dir_rota);
+
+        // read Airtable API key
+        $file_airtable_api_key = "$dir_data/airtable_api_key.txt";
+        if (file_exists($file_airtable_api_key)) {
+            $base->airtable_api_key = trim(file_get_contents($file_airtable_api_key));
+        }
 
         // return base
         return $base;
