@@ -22,7 +22,7 @@ $links = array(
 </head>
 
 <body class="d-flex flex-column h-100">
-    <div class="container">
+    <div class="container-fluid">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <img class="logo me-4" src="/img/logo-small.jpg" alt="Christ Church Selly Park" />
@@ -44,4 +44,4 @@ $links = array(
     </div>
 
     <main class="flex-shrink-0">
-        <div class="container">
+        <div class="container-fluid">
