@@ -12,21 +12,28 @@ class Config_Formats
     public string $csv_import_datetime;
 
     /**
-     * Display date format string.
+     * Display date.
      *
      * @var string
      */
     public string $display_date;
 
     /**
-     * Display time format string.
+     * Display time.
      *
      * @var string
      */
     public string $display_time;
 
     /**
-     * Sortable date format string.
+     * ICS date time.
+     *
+     * @var string
+     */
+    public string $ics_datetime;
+
+    /**
+     * Sortable date.
      *
      * @var string
      */
@@ -43,6 +50,7 @@ class Config_Formats
         $this->csv_import_datetime = $config["csv_import_datetime"];
         $this->display_date = $config["display_date"];
         $this->display_time = $config["display_time"];
+        $this->ics_datetime = $config["ics_datetime"];
         $this->sortable_date = $config["sortable_date"];
     }
 }
