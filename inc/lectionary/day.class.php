@@ -27,7 +27,7 @@ class Day
      *
      * @var Service[]
      */
-    public array $services;
+    public array $services = array();
 
     /**
      * Get lectionary details for a service at the specified time.

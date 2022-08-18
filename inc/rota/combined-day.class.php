@@ -25,5 +25,5 @@ class Combined_Day
      *
      * @var Combined_Service[]
      */
-    public array $services;
+    public array $services = array();
 }

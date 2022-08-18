@@ -19,14 +19,14 @@ class Rota
      *
      * @var Service[]
      */
-    public array $services;
+    public array $services = array();
 
     /**
      * All the different people in this rota.
      *
      * @var string[]
      */
-    public array $people;
+    public array $people = array();
 
     /**
      * The time the rota csv file was last modified.
@@ -62,8 +62,6 @@ class Rota
             // read each line of the csv file
             $include = false;
             $header_row = array();
-            $this->people = array();
-            $this->services = array();
 
             while (($row = fgetcsv($f)) !== false) {
                 // include the service

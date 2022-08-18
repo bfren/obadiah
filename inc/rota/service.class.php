@@ -31,14 +31,14 @@ class Service
      *          string role_name => string[] people
      *      )
      */
-    public array $roles;
+    public array $roles = array();
 
     /**
      * All the people in the current service.
      *
      * @var string[]
      */
-    public array $people;
+    public array $people = array();
 
     /**
      * Construct a service object from an array of data.
@@ -70,7 +70,6 @@ class Service
         $this->description = $this->get_description($data);
 
         // get the roles
-        $this->people = array();
         $this->roles = $this->get_roles($data);
     }
 

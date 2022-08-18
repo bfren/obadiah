@@ -65,5 +65,5 @@ class Combined_Service
      *
      * @var array
      */
-    public array $roles;
+    public array $roles = array();
 }

@@ -15,7 +15,7 @@ class Lectionary
      *
      * @var Day[]
      */
-    public array $days;
+    public array $days = array();
 
     /**
      * Load lectionary from Airtable.
