@@ -4,6 +4,7 @@ namespace Feeds\Lectionary;
 
 use Feeds\Airtable\Airtable;
 use Feeds\Base;
+use Feeds\Helpers\Arr;
 
 class Lectionary
 {
@@ -50,8 +51,8 @@ class Lectionary
             // create Day
             $day = new Day();
             $day_fields = $day_record["fields"];
-            $day->date = self::get_field($day_fields, "Date");
-            $day->name = self::get_field($day_fields, "Name");
+            $day->date = Arr::get($day_fields, "Date");
+            $day->name = Arr::get($day_fields, "Name");
 
             // if date is not set, continue
             if (!$day->date) {
@@ -72,33 +73,17 @@ class Lectionary
             foreach ($day_services as $service_record) {
                 $service = new Service();
                 $service_fields = $service_record["fields"];
-                $service->time = self::get_field($service_fields, "Time");
-                $service->series = self::get_field($service_fields, "Series Title");
-                $service->num = self::get_field($service_fields, "Sermon Num");
-                $service->title = self::get_field($service_fields, "Sermon Title");
-                $service->main_reading = self::get_field($service_fields, "Main Reading");
-                $service->additional_reading = self::get_field($service_fields, "Additional Reading");
+                $service->time = Arr::get($service_fields, "Time");
+                $service->series = Arr::get($service_fields, "Series Title");
+                $service->num = Arr::get($service_fields, "Sermon Num");
+                $service->title = Arr::get($service_fields, "Sermon Title");
+                $service->main_reading = Arr::get($service_fields, "Main Reading");
+                $service->additional_reading = Arr::get($service_fields, "Additional Reading");
                 $day->services[] = $service;
             }
 
             // add Day to Lectionary
             $this->days[] = $day;
         }
-    }
-
-    /**
-     * Safely get a value from a $fields array.
-     *
-     * @param array $fields             Array of field values.
-     * @param string $key               The key to search for.
-     * @return string                   Key value, or empty string if key is not found.
-     */
-    private static function get_field(array $fields, string $key) : string
-    {
-        if (array_key_exists($key, $fields)) {
-            return $fields[$key];
-        }
-
-        return "";
     }
 }
