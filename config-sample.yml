@@ -1,0 +1,13 @@
+airtable:
+  api_key: ""
+  base: ""
+
+cache:
+  duration_in_seconds: 600
+
+formats:
+  csv_import_datetime: "d-M-Yg:ia"
+  sortable_date: "Y-m-d"
+
+rota:
+  default_days: 14
