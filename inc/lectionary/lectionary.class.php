@@ -15,25 +15,13 @@ class Lectionary
     public array $days;
 
     /**
-     * Construct using Lectionary::load().
-     *
-     * @return void
-     */
-    private function __construct()
-    {
-    }
-
-    /**
      * Load lectionary from Airtable.
      *
      * @param Base $base                Base object.
-     * @return Lectionary               Lectionary object with readings and titles data loaded.
+     * @return void
      */
-    public static function load_airtable(Base $base) : Lectionary
+    public function __construct(Base $base)
     {
-        // create Lectionary
-        $lectionary = new Lectionary();
-
         // create Airtable loaders
         $days = new Airtable($base, "Day");
         $services = new Airtable($base, "Service");
@@ -94,13 +82,17 @@ class Lectionary
             }
 
             // add Day to Lectionary
-            $lectionary->days[] = $day;
+            $this->days[] = $day;
         }
-
-        // return lectionary
-        return $lectionary;
     }
 
+    /**
+     * Safely get a value from a $fields array.
+     *
+     * @param array $fields             Array of field values.
+     * @param string $key               The key to search for.
+     * @return string                   Key value, or empty string if key is not found.
+     */
     private static function get_field(array $fields, string $key) : string
     {
         if (array_key_exists($key, $fields)) {

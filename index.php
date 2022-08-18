@@ -2,6 +2,7 @@
 
 namespace Feeds;
 
+// automatically load class definitions from inc directory
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class) . ".class.php";
     $inc = str_replace("feeds", "inc", strtolower($path));
@@ -9,19 +10,19 @@ spl_autoload_register(function ($class) {
 });
 
 // run preflight checks and load config
-$base = Base::preflight(getcwd());
+$base = new Base(getcwd());
 
 // create cache
 $cache = new Cache\Cache($base->dir_cache, 600);
 
 // get rota
 $rota = $cache->get_rota(function() use ($base) {
-    return Rota\Rota::load_csv($base);
+    return new Rota\Rota($base);
 });
 
 // get lectionary
 $lectionary = $cache->get_lectionary(function() use ($base) {
-    return Lectionary\Lectionary::load_airtable($base);
+    return new Lectionary\Lectionary($base);
 });
 
 ?>

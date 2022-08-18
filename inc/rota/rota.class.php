@@ -14,27 +14,15 @@ class Rota
     public array $services;
 
     /**
-     * Construct using Rota::load().
-     *
-     * @return void
-     */
-    private function __construct()
-    {
-    }
-
-    /**
      * Load all files from a rota data directory.
      *
      * @param Base $base                Base object.
-     * @return Rota                     Rota object with services data loaded.
+     * @return void
      */
-    public static function load_csv(Base $base) : Rota
+    public function __construct()
     {
-        // create rota
-        $rota = new Rota();
-
         // get csv files from path
-        $csv = glob($base->dir_rota . "/*.csv");
+        $csv = glob($this->dir_rota . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
@@ -52,7 +40,7 @@ class Rota
             while (($row = fgetcsv($f)) !== false) {
                 // include the service
                 if ($include) {
-                    $rota->services[] = new Service($header_row, $row);
+                    $this->services[] = new Service($header_row, $row);
                 }
 
                 // check whether to include the next row
@@ -62,8 +50,5 @@ class Rota
                 }
             }
         }
-
-        // return the rota object
-        return $rota;
     }
 }
