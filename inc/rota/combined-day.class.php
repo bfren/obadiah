@@ -7,21 +7,21 @@ use DateTime;
 class Combined_Day
 {
     /**
-     * Service start time (e.g. 10:30).
+     * Date.
      *
      * @var DateTime
      */
     public DateTime $dt;
 
     /**
-     * Service description (e.g. 'Morning Prayer').
+     * Lectionary name.
      *
      * @var null|string
      */
     public ?string $name;
 
     /**
-     * Optional series title.
+     * Services on this day.
      *
      * @var Combined_Service[]
      */
