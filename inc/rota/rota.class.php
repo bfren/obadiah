@@ -63,6 +63,7 @@ class Rota
             $include = false;
             $header_row = array();
             $this->people = array();
+            $this->services = array();
 
             while (($row = fgetcsv($f)) !== false) {
                 // include the service
