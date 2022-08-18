@@ -2,7 +2,7 @@
 
 namespace Feeds\Rota;
 
-use Feeds\Config\Config;
+use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Rota\Filters\After;
 use Feeds\Rota\Filters\Before;
@@ -36,7 +36,7 @@ class Rota
     public function __construct()
     {
         // get csv files from path
-        $csv = glob(Config::$dir_rota . "/*.csv");
+        $csv = glob(C::$dir_rota . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
@@ -65,6 +65,9 @@ class Rota
                 }
             }
         }
+
+        // sort services by timestamp
+        usort($this->services, fn ($a, $b) => ($a->timestamp < $b->timestamp) ? -1 : 1);
     }
 
     /**
@@ -73,7 +76,7 @@ class Rota
      * @param array                     Filters to apply (usually from the query string).
      * @return Service[]                Services matching the supplied filters.
      */
-    public function apply_filters(array $filters) : array
+    public function apply_filters(array $filters): array
     {
         // if the filters array is empty, or include=all is set, return all services
         if (!$filters || empty($filters) || Arr::get($filters, "include") == "all") {
@@ -95,17 +98,17 @@ class Rota
             $include = true;
 
             // apply person filter
-            $include = $include && $person_filter->apply($service, Arr::get($filters, "person"));
+            $include = $include && $person_filter->apply($service, Arr::get($filters, "person") ?: "");
 
             // apply date filters
-            $include = $include && $after_filter->apply($service, Arr::get($filters, "from"));
-            $include = $include && $before_filter->apply($service, Arr::get($filters, "to"));
+            $include = $include && $after_filter->apply($service, Arr::get($filters, "from") ?: "");
+            $include = $include && $before_filter->apply($service, Arr::get($filters, "to") ?: "");
 
             // apply start time filter
-            $include = $include && $start_filter->apply($service, Arr::get($filters, "start"));
+            $include = $include && $start_filter->apply($service, Arr::get($filters, "start") ?: "");
 
             // apply day of the week filter
-            $include = $include && $day_filter->apply($service, Arr::get($filters, "day"));
+            $include = $include && $day_filter->apply($service, Arr::get($filters, "day") ?: "");
 
             // include the service if one of the filters has matched
             if ($include) {

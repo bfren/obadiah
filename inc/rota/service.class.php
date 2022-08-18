@@ -3,7 +3,9 @@
 namespace Feeds\Rota;
 
 use DateTime;
-use Feeds\Config\Config;
+use Feeds\Config\Config as C;
+use Feeds\Lectionary\Lectionary;
+use Feeds\Lectionary\Service as LectionaryService;
 
 defined("IDX") || die("Nice try.");
 
@@ -56,24 +58,45 @@ class Service
         };
 
         // get the date as a timestamp
-        $dt = DateTime::createFromFormat(Config::$formats->csv_import_datetime, $data["Date"] . $time);
+        $dt = DateTime::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time);
         $this->timestamp = $dt->getTimestamp();
 
-        // get the service description from the note, or use the rota service if not set
-        $this->description = $data["Service Note"] ?: $data["Service"];
+        // get the service description
+        $this->description = $this->get_description($data);
 
         // get the roles
-        $this->read_roles($data);
+        $this->roles = $this->get_roles($data);
+    }
+
+    /**
+     * Get the service description from the note, or use the rota service name if not set.
+     *
+     * @param array $data               Associative array of service data.
+     * @return string                   Service description.
+     */
+    private function get_description(array $data): string
+    {
+        // use Service Note as description, or the rota service name if it's not set
+        $description = $data["Service Note"] ?: $data["Service"];
+
+        // sanitise names to remove unnecessary information
+        return match ($description) {
+            "Wednesday Morning Prayer 8:00am" => "Morning Prayer",
+            default => $description
+        };
     }
 
     /**
      * Get all supported roles and the people assigned to each one, and add to $this->roles.
      *
-     * @param array $data               Associative array of roles and people.
-     * @return void
+     * @param array $data               Associative array of service data.
+     * @return array                    Associative array of roles
      */
-    private function read_roles(array $data)
+    private function get_roles(array $data): array
     {
+        // create empty roles array
+        $roles = array();
+
         // any roles not listed here will not be added to the service
         $supported_roles = array(
             "Communion Assistants" => "",
@@ -101,10 +124,14 @@ class Service
                 if (str_starts_with($rota_role, $supported_role)) {
                     $role = $override ?: $supported_role;
                     $sanitised = $this->sanitise_people($people);
-                    $this->roles[$role] = $sanitised;
+                    $roles[$role] = $sanitised;
                 }
             }
         }
+
+        // sort and return roles
+        ksort($roles);
+        return $roles;
     }
 
     /**
@@ -113,7 +140,7 @@ class Service
      * @param string $people            List of people assigned to this role (and other bits of information).
      * @return string[]                 Array of people's names.
      */
-    private function sanitise_people(string $people) : array
+    private function sanitise_people(string $people): array
     {
         // remove any notes
         $sanitised = preg_replace('/Notes:(.*)\n\n/s', "", $people);

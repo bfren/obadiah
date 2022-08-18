@@ -3,7 +3,7 @@
 namespace Feeds\Rota\Filters;
 
 use DateTime;
-use Feeds\Config\Config;
+use Feeds\Config\Config as C;
 use Feeds\Rota\Service;
 
 defined("IDX") || die("Nice try.");
@@ -25,9 +25,9 @@ class After implements Filter
         }
 
         // convert the date to a timestamp
-        $dt = DateTime::createFromFormat(Config::$formats->sortable_date, $value);
+        $dt = DateTime::createFromFormat(C::$formats->sortable_date, $value);
         if ($dt) {
-            return date(Config::$formats->sortable_date, $service->timestamp) >= $dt->format(Config::$formats->sortable_date);
+            return date(C::$formats->sortable_date, $service->timestamp) >= $dt->format(C::$formats->sortable_date);
         }
 
         // if we get here $value was an invalid date format so return false

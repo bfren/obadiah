@@ -16,35 +16,35 @@ class Service
     /**
      * The name of the teaching series.
      *
-     * @var string
+     * @var null|string
      */
-    public string $series;
+    public ?string $series;
 
     /**
      * The 1-based index of this sermon within the teaching series.
      *
-     * @var int
+     * @var null|int
      */
-    public int $num;
+    public ?int $num;
 
     /**
      * The sermon title.
      *
-     * @var string
+     * @var null|string
      */
-    public string $title;
+    public ?string $title;
 
     /**
      * The main reading.
      *
-     * @var string
+     * @var null|string
      */
-    public string $main_reading;
+    public ?string $main_reading;
 
     /**
      * An optional additional reading.
      *
-     * @var string
+     * @var null|string
      */
-    public string $additional_reading;
+    public ?string $additional_reading;
 }
