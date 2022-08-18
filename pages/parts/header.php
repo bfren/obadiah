@@ -25,7 +25,7 @@ $links = array(
     <div class="container-fluid">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img class="logo me-4" src="/img/logo-small.jpg" alt="Christ Church Selly Park" />
+                <img class="logo me-4" style="max-height: 40px;" src="/img/logo-small.png" alt="Christ Church Selly Park" />
                 <span class="fs-4">Church Suite Feeds</span>
             </a>
 
