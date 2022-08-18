@@ -8,13 +8,8 @@ use Feeds\Rota\Builder;
 defined("IDX") || die("Nice try.");
 
 /** @var string $title */
-/** @var \Feeds\Lectionary\Lectionary $lectionary */
-/** @var \Feeds\Rota\Rota $rota */
-/** @var \Feeds\Rota\Service[] $services */
-
-// build rota
-$builder = new Builder();
-$combined_days = $builder->build_combined_rota($lectionary, $services);
+/** @var \Feeds\Rota\Combined_Day[] $combined_days */
+/** @var array $filters */
 
 // get days of the week
 $days_of_the_week = array(
@@ -106,7 +101,7 @@ require_once("parts/header.php"); ?>
 
                         <hr class="mt-3 mb-3" />
                         <p class="fw-bold mb-0">
-                            <?php echo $combined_service->time; ?> <?php echo $combined_service->description ?>
+                            <?php echo $combined_service->time; ?> <?php echo $combined_service->name ?>
                         </p>
 
                         <div class="small">
