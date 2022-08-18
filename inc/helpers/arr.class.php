@@ -2,6 +2,8 @@
 
 namespace Feeds\Helpers;
 
+defined("IDX") || die("Nice try.");
+
 class Arr
 {
     /**

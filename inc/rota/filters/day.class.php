@@ -2,8 +2,9 @@
 
 namespace Feeds\Rota\Filters;
 
-use DateTime;
 use Feeds\Rota\Service;
+
+defined("IDX") || die("Nice try.");
 
 class Day implements Filter
 {

@@ -4,6 +4,8 @@ namespace Feeds\Rota\Filters;
 
 use Feeds\Rota\Service;
 
+defined("IDX") || die("Nice try.");
+
 class Person implements Filter
 {
     /**

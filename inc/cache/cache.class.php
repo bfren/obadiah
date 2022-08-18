@@ -5,6 +5,8 @@ namespace Feeds\Cache;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Rota;
 
+defined("IDX") || die("Nice try.");
+
 class Cache
 {
     /**

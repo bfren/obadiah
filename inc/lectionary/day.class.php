@@ -2,6 +2,8 @@
 
 namespace Feeds\Lectionary;
 
+defined("IDX") || die("Nice try.");
+
 class Day
 {
     /**
