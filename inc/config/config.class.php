@@ -5,34 +5,6 @@ namespace Feeds\Config;
 class Config
 {
     /**
-     * Root working directory.
-     *
-     * @var string
-     */
-    public static string $cwd;
-
-    /**
-     * Path to  data directory.
-     *
-     * @var string
-     */
-    public static string $dir_data;
-
-    /**
-     * Path to cache data directory.
-     *
-     * @var string
-     */
-    public static string $dir_cache;
-
-    /**
-     * Path to rota data directory.
-     *
-     * @var string
-     */
-    public static string $dir_rota;
-
-    /**
      * Request URI path.
      *
      * @var string
@@ -52,6 +24,13 @@ class Config
      * @var Config_Cache
      */
     public static Config_Cache $cache;
+
+    /**
+     * Dir config object.
+     *
+     * @var Config_Dir
+     */
+    public static Config_Dir $dir;
 
     /**
      * Formats config object.
@@ -75,17 +54,6 @@ class Config
      */
     public static function load(string $cwd): void
     {
-        // standard config
-        self::$cwd = $cwd;
-        self::$dir_data = $cwd . "/data";
-        self::$dir_cache = self::$dir_data . "/cache";
-        self::$dir_rota = self::$dir_data . "/rota";
-
-        // ensure data directories exist
-        self::ensure_directory_exists(self::$dir_data);
-        self::ensure_directory_exists(self::$dir_cache);
-        self::ensure_directory_exists(self::$dir_rota);
-
         // set Request URI
         self::$uri = $_SERVER["REQUEST_URI"];
 
@@ -96,20 +64,8 @@ class Config
         // create configuration objects
         self::$airtable = new Config_Airtable($config["airtable"]);
         self::$cache = new Config_Cache($config["cache"]);
+        self::$dir = new Config_Dir($cwd);
         self::$formats = new Config_Formats($config["formats"]);
         self::$rota = new Config_Rota($config["rota"]);
-    }
-
-    /**
-     * Ensure a directory exists.
-     *
-     * @param string $path              Directory path to create if it does not already exist.
-     * @return void
-     */
-    private static function ensure_directory_exists(string $path): void
-    {
-        if (!file_exists($path)) {
-            mkdir($path);
-        }
     }
 }

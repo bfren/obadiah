@@ -25,9 +25,9 @@ $page = Arr::get($parts, 0);
 $action = Arr::get($parts, 1);
 
 // output requested page, or home by default
-$path = C::$cwd . "/pages/$page.php";
+$path = C::$dir->cwd . "/pages/$page.php";
 if (!file_exists($path)) {
-    $path = C::$cwd . "/pages/home.php";
+    $path = C::$dir->cwd . "/pages/home.php";
 }
 
 require_once($path);
