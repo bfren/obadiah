@@ -5,6 +5,13 @@ namespace Feeds\Rota;
 class Combined_Service
 {
     /**
+     * Service start timestamp.
+     *
+     * @var int
+     */
+    public int $timestamp;
+
+    /**
      * Service start time (e.g. 10:30).
      *
      * @var string
@@ -12,11 +19,11 @@ class Combined_Service
     public string $time;
 
     /**
-     * Service description (e.g. 'Morning Prayer').
+     * Service name (e.g. 'Morning Prayer').
      *
      * @var string
      */
-    public string $description;
+    public string $name;
 
     /**
      * Optional series title.

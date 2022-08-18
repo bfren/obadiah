@@ -44,8 +44,9 @@ class Builder
             foreach ($rota_services as $rota_service) {
                 // add rota information
                 $c_service = new Combined_Service();
+                $c_service->timestamp = $rota_service->timestamp;
                 $c_service->time = date(C::$formats->display_time, $rota_service->timestamp);
-                $c_service->description = $rota_service->description;
+                $c_service->name = $rota_service->description;
                 $c_service->roles = $rota_service->roles;
 
                 // get lectionary information
