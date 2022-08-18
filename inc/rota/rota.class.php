@@ -22,6 +22,13 @@ class Rota
     public array $services;
 
     /**
+     * All the different people in this rota.
+     *
+     * @var string[]
+     */
+    public array $people;
+
+    /**
      * The number of days ahead to show on the main rota page.
      *
      * @var int
@@ -50,11 +57,15 @@ class Rota
             // read each line of the csv file
             $include = false;
             $header_row = array();
+            $this->people = array();
 
             while (($row = fgetcsv($f)) !== false) {
                 // include the service
                 if ($include) {
-                    $this->services[] = new Service($header_row, $row);
+                    $service = new Service($header_row, $row);
+                    $this->people = array_unique(array_merge($this->people, $service->people));
+                    asort($this->people);
+                    $this->services[] = $service;
                 }
 
                 // if the first value is 'Date' this is the header row,

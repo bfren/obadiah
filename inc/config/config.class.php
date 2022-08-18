@@ -33,6 +33,13 @@ class Config
     public static string $dir_rota;
 
     /**
+     * Request URI path.
+     *
+     * @var string
+     */
+    public static string $uri;
+
+    /**
      * Airtable config object.
      *
      * @var Config_Airtable
@@ -78,6 +85,9 @@ class Config
         self::ensure_directory_exists(self::$dir_data);
         self::ensure_directory_exists(self::$dir_cache);
         self::ensure_directory_exists(self::$dir_rota);
+
+        // set Request URI
+        self::$uri = $_SERVER["REQUEST_URI"];
 
         // read configuration file
         $config_file = "$cwd/config.yml";

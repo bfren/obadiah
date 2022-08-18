@@ -19,7 +19,7 @@ spl_autoload_register(function ($class) {
 C::load(__DIR__);
 
 // get requested page
-$uri = explode("/", Arr::get($_SERVER, "REQUEST_URI"));
+$uri = explode("/", C::$uri);
 $parts = array_values(array_filter($uri));
 $page = Arr::get($parts, 0);
 $action = Arr::get($parts, 1);

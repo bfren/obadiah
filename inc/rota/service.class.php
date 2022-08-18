@@ -4,8 +4,6 @@ namespace Feeds\Rota;
 
 use DateTime;
 use Feeds\Config\Config as C;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Lectionary\Service as LectionaryService;
 
 defined("IDX") || die("Nice try.");
 
@@ -34,6 +32,13 @@ class Service
      *      )
      */
     public array $roles;
+
+    /**
+     * All the people in the current service.
+     *
+     * @var string[]
+     */
+    public array $people;
 
     /**
      * Construct a service object from an array of data.
@@ -65,6 +70,7 @@ class Service
         $this->description = $this->get_description($data);
 
         // get the roles
+        $this->people = array();
         $this->roles = $this->get_roles($data);
     }
 
@@ -143,16 +149,21 @@ class Service
     private function sanitise_people(string $people): array
     {
         // remove any notes
-        $sanitised = preg_replace('/Notes:(.*)\n\n/s', "", $people);
+        $sanitised = preg_replace("/Notes:(.*)\n\n/s", "", $people);
 
         // split by new line
-        $individuals = preg_split('/\n/', trim($sanitised));
+        $individuals = preg_split("/\n/", trim($sanitised));
 
         // remove clash indicators
         $without_clash = str_replace("!! ", "", $individuals);
 
         // sort alphabetically
         sort($without_clash);
+
+        // remove roles
+        $without_roles = preg_replace("/ \(.*\)/", "", $without_clash);
+        $this->people = array_unique(array_merge($this->people, $without_roles));
+        asort($this->people);
 
         // return
         return $without_clash;

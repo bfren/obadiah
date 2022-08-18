@@ -16,8 +16,7 @@ $lectionary = $cache->get_lectionary(fn() => new Lectionary());
 
 // get and apply filters
 $default_filters = array(
-    "from" => date(C::$formats->sortable_date),
-    "to" => date(C::$formats->sortable_date, strtotime("+" . C::$rota->default_days . " days"))
+    "from" => date(C::$formats->sortable_date)
 );
 $filters = array_merge($default_filters, $_GET);
 $services = $rota->apply_filters($filters);
@@ -25,7 +24,6 @@ $services = $rota->apply_filters($filters);
 // get action page
 $action_page = match($action) {
     "ics" => "rota-ics.php",
-    "json" => "rota-json.php",
     default => "rota-html.php"
 };
 
