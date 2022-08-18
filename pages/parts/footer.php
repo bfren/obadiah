@@ -11,7 +11,10 @@ defined("IDX") || die("Nice try.");
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container-fluid">
-        <span class="text-muted small">Copyright &copy; 2022 Christ Church Selly Park.</span>
+        <span class="text-muted small">
+            Copyright &copy; 2022 <a href="https://christchurchb29.org">Christ Church Selly Park</a>.
+            Source on <a href="https://github.com/bfren/churchsuite-feeds" target="_blank">GitHub</a>.
+        </span>
     </div>
 </footer>
 
