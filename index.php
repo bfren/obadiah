@@ -11,12 +11,18 @@ spl_autoload_register(function ($class) {
 // run preflight checks and load config
 $base = Base::preflight(getcwd());
 
-// load rota
-$rota = Rota\Rota::load_csv($base);
+// create cache
+$cache = new Cache\Cache($base->dir_cache, 600);
 
-// load lectionary
-$lectionary = Lectionary\Lectionary::load_airtable($base);
-print_r($lectionary);
+// get rota
+$rota = $cache->get_rota(function() use ($base) {
+    return Rota\Rota::load_csv($base);
+});
+
+// get lectionary
+$lectionary = $cache->get_lectionary(function() use ($base) {
+    return Lectionary\Lectionary::load_airtable($base);
+});
 
 ?>
 <!DOCTYPE html>
