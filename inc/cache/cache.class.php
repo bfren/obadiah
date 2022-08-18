@@ -42,7 +42,7 @@ class Cache
      * @param callable $callable        Callable function to generate a Rota if not set / expired.
      * @return Rota                     Rota value.
      */
-    public function get_rota(callable $callable) : Rota
+    public function get_rota(callable $callable): Rota
     {
         return $this->get_or_set("rota", $callable);
     }
@@ -53,7 +53,7 @@ class Cache
      * @param callable $callable        Callable function to generate a Lectionary if not set / expired.
      * @return Lectionary               Lectionary value.
      */
-    public function get_lectionary(callable $callable) : Lectionary
+    public function get_lectionary(callable $callable): Lectionary
     {
         return $this->get_or_set("lectionary", $callable);
     }

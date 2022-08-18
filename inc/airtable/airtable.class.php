@@ -2,8 +2,7 @@
 
 namespace Feeds\Airtable;
 
-use Feeds\Base;
-use Feeds\Config\Config;
+use Feeds\Config\Config as C;
 
 defined("IDX") || die("Nice try.");
 
@@ -31,8 +30,8 @@ class Airtable
      */
     public function __construct(string $table)
     {
-        $this->key = Config::$airtable->api_key;
-        $this->url = sprintf("https://api.airtable.com/v0/%s/%s", Config::$airtable->base, $table);
+        $this->key = C::$airtable->api_key;
+        $this->url = sprintf("https://api.airtable.com/v0/%s/%s", C::$airtable->base, $table);
     }
 
     /**
@@ -41,7 +40,7 @@ class Airtable
      * @param array $data               Request data.
      * @return array                    All records for the specified view.
      */
-    public function make_request(array $data) : array
+    public function make_request(array $data): array
     {
         // build HTTP query from data
         $query = http_build_query($data);

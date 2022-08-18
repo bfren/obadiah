@@ -13,12 +13,12 @@ class Arr
      * @param string $key               The key to search for.
      * @return mixed                    Key value, or empty string if key is not found.
      */
-    public static function get(array $array, string $key)
+    public static function get(array $array, string $key): mixed
     {
         if (array_key_exists($key, $array)) {
             return $array[$key];
         }
 
-        return "";
+        return null;
     }
 }

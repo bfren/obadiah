@@ -3,6 +3,7 @@
 namespace Feeds\Lectionary;
 
 use Feeds\Airtable\Airtable;
+use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 
 defined("IDX") || die("Nice try.");
@@ -60,7 +61,7 @@ class Lectionary
             }
 
             // get Services for Day
-            $day_services = array_filter($services_records, function($v, $k) use ($day) {
+            $day_services = array_filter($services_records, function ($v, $k) use ($day) {
                 return $v["fields"]["Date"] === $day->date;
             }, ARRAY_FILTER_USE_BOTH);
 

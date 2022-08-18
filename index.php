@@ -2,7 +2,8 @@
 
 namespace Feeds;
 
-use Feeds\Config\Config;
+use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 
 // each PHP script checks if this is defined to ensure incorrect access is denied
 define("IDX", true);
@@ -15,18 +16,18 @@ spl_autoload_register(function ($class) {
 });
 
 // load config, run preflight checks, etc.
-Config::load(__DIR__);
+C::load(__DIR__);
 
 // get requested page
-$uri = explode("/", Helpers\Arr::get($_SERVER, "REQUEST_URI"));
+$uri = explode("/", Arr::get($_SERVER, "REQUEST_URI"));
 $parts = array_values(array_filter($uri));
-$page = Helpers\Arr::get($parts, 0);
-$action = Helpers\Arr::get($parts, 1);
+$page = Arr::get($parts, 0);
+$action = Arr::get($parts, 1);
 
 // output requested page, or home by default
-$path = Config::$cwd . "/pages/$page.php";
+$path = C::$cwd . "/pages/$page.php";
 if (!file_exists($path)) {
-    $path = Config::$cwd . "/pages/home.php";
+    $path = C::$cwd . "/pages/home.php";
 }
 
 require_once($path);
