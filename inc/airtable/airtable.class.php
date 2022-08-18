@@ -44,7 +44,7 @@ class Airtable
      * @param array $data               Request data.
      * @return array                    All records for the specified view.
      */
-    public function make_request(array $data)
+    public function make_request(array $data) : array
     {
         // build HTTP query from data
         $query = http_build_query($data);

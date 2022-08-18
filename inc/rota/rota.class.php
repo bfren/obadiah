@@ -28,7 +28,7 @@ class Rota
      * @param Base $base                Base object.
      * @return Rota                     Rota object with services data loaded.
      */
-    public static function load_csv(Base $base)
+    public static function load_csv(Base $base) : Rota
     {
         // create rota
         $rota = new Rota();

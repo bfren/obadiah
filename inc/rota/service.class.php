@@ -107,7 +107,7 @@ class Service
      * @param string $people            List of people assigned to this role (and other bits of information).
      * @return string[]                 Array of people's names.
      */
-    private function sanitise_people(string $people)
+    private function sanitise_people(string $people) : array
     {
         // remove any notes
         $sanitised = preg_replace('/Notes:(.*)\n\n/s', "", $people);
