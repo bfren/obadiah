@@ -87,6 +87,7 @@ class Service
 
         // sanitise names to remove unnecessary information
         return match ($description) {
+            "HC" => "Holy Communion",
             "Wednesday Morning Prayer 8:00am" => "Morning Prayer",
             default => $description
         };
