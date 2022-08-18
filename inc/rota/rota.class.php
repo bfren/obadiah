@@ -29,11 +29,11 @@ class Rota
     public array $people;
 
     /**
-     * The number of days ahead to show on the main rota page.
+     * The time the rota csv file was last modified.
      *
      * @var int
      */
-    public int $default_days;
+    public int $last_modified_timestamp = 0;
 
     /**
      * Load all files from a rota data directory.
@@ -43,10 +43,15 @@ class Rota
     public function __construct()
     {
         // get csv files from path
-        $csv = glob(C::$dir_rota . "/*.csv");
+        $csv = glob(C::$dir->rota . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
+            // store the file modification time
+            $last_modified = filemtime($file);
+            if ($last_modified > $this->last_modified_timestamp) {
+                $this->last_modified_timestamp = $last_modified;
+            }
 
             // open the file for reading
             $f = fopen($file, "r");
