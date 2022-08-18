@@ -3,6 +3,9 @@
 namespace Feeds\Rota;
 
 use DateTime;
+use Feeds\Config\Config;
+
+defined("IDX") || die("Nice try.");
 
 class Service
 {
@@ -53,7 +56,7 @@ class Service
         };
 
         // get the date as a timestamp
-        $dt = DateTime::createFromFormat("d-M-Yg:ia", $data["Date"] . $time);
+        $dt = DateTime::createFromFormat(Config::$formats->csv_import_datetime, $data["Date"] . $time);
         $this->timestamp = $dt->getTimestamp();
 
         // get the service description from the note, or use the rota service if not set

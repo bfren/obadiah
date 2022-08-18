@@ -2,42 +2,31 @@
 
 namespace Feeds;
 
+use Feeds\Config\Config;
+
+// each PHP script checks if this is defined to ensure incorrect access is denied
+define("IDX", true);
+
 // automatically load class definitions from inc directory
 spl_autoload_register(function ($class) {
-    $path = str_replace('\\', '/', $class) . ".class.php";
+    $path = str_replace(array("\\", "_"), array("/", "-"), $class) . ".class.php";
     $inc = str_replace("feeds", "inc", strtolower($path));
     require_once($inc);
 });
 
-// run preflight checks and load config
-$base = new Base(getcwd());
+// load config, run preflight checks, etc.
+Config::load(__DIR__);
 
-// create cache
-$cache = new Cache\Cache($base->dir_cache, 5);
+// get requested page
+$uri = explode("/", Helpers\Arr::get($_SERVER, "REQUEST_URI"));
+$parts = array_values(array_filter($uri));
+$page = Helpers\Arr::get($parts, 0);
+$action = Helpers\Arr::get($parts, 1);
 
-// get rota
-$rota = $cache->get_rota(function() use ($base) {
-    return new Rota\Rota($base);
-});
+// output requested page, or home by default
+$path = Config::$cwd . "/pages/$page.php";
+if (!file_exists($path)) {
+    $path = Config::$cwd . "/pages/home.php";
+}
 
-// get lectionary
-$lectionary = $cache->get_lectionary(function() use ($base) {
-    return new Lectionary\Lectionary($base);
-});
-
-// apply filters
-$services = $rota->apply_filters($_GET);
-
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Church Suite Feeds</title>
-</head>
-
-<body>
-    <h1>Church Suite Feeds</h1>
-</body>
-
-</html>
+require_once($path);

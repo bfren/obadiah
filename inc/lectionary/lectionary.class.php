@@ -3,8 +3,9 @@
 namespace Feeds\Lectionary;
 
 use Feeds\Airtable\Airtable;
-use Feeds\Base;
 use Feeds\Helpers\Arr;
+
+defined("IDX") || die("Nice try.");
 
 class Lectionary
 {
@@ -18,14 +19,13 @@ class Lectionary
     /**
      * Load lectionary from Airtable.
      *
-     * @param Base $base                Base object.
      * @return void
      */
-    public function __construct(Base $base)
+    public function __construct()
     {
         // create Airtable loaders
-        $days = new Airtable($base, "Day");
-        $services = new Airtable($base, "Service");
+        $days = new Airtable("Day");
+        $services = new Airtable("Service");
 
         // get days
         $days_fields = array(

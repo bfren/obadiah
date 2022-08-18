@@ -3,14 +3,12 @@
 namespace Feeds\Airtable;
 
 use Feeds\Base;
+use Feeds\Config\Config;
+
+defined("IDX") || die("Nice try.");
 
 class Airtable
 {
-    /**
-     * Airtable Base ref.
-     */
-    private const BASE = "appTweAghmB40WEbS";
-
     /**
      * Airtable API key.
      *
@@ -28,14 +26,13 @@ class Airtable
     /**
      * Connect to the Airtable API for the specified table.
      *
-     * @param Base $base                Base config.
      * @param string $table             Table name.
      * @return void
      */
-    public function __construct(Base $base, string $table)
+    public function __construct(string $table)
     {
-        $this->key = $base->airtable_api_key;
-        $this->url = sprintf("https://api.airtable.com/v0/%s/%s", self::BASE, $table);
+        $this->key = Config::$airtable->api_key;
+        $this->url = sprintf("https://api.airtable.com/v0/%s/%s", Config::$airtable->base, $table);
     }
 
     /**

@@ -2,13 +2,15 @@
 
 namespace Feeds\Rota;
 
-use Feeds\Base;
+use Feeds\Config\Config;
 use Feeds\Helpers\Arr;
 use Feeds\Rota\Filters\After;
 use Feeds\Rota\Filters\Before;
 use Feeds\Rota\Filters\Day;
 use Feeds\Rota\Filters\Person;
 use Feeds\Rota\Filters\Start;
+
+defined("IDX") || die("Nice try.");
 
 class Rota
 {
@@ -20,15 +22,21 @@ class Rota
     public array $services;
 
     /**
+     * The number of days ahead to show on the main rota page.
+     *
+     * @var int
+     */
+    public int $default_days;
+
+    /**
      * Load all files from a rota data directory.
      *
-     * @param Base $base                Base object.
      * @return void
      */
-    public function __construct(Base $base)
+    public function __construct()
     {
         // get csv files from path
-        $csv = glob($base->dir_rota . "/*.csv");
+        $csv = glob(Config::$dir_rota . "/*.csv");
 
         // read each file
         foreach ($csv as $file) {
