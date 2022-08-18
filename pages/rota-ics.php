@@ -3,6 +3,7 @@
 namespace Feeds\Pages;
 
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 use Feeds\Rota\Combined_Day;
 use Feeds\Rota\Combined_Service;
 
@@ -53,7 +54,7 @@ foreach ($combined_days as $date => $c_day) {
         $lines[] = "LAST-MODIFIED:" .       date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DTSTAMP:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DESCRIPTION:" .         get_description($c_day, $c_service);
-        $lines[] = "SUMMARY:" .             get_summary($c_service, $filters["person"]);
+        $lines[] = "SUMMARY:" .             get_summary($c_service, Arr::get($filters, "person") ?: "");
         $lines[] = "END:VEVENT" .           "";
     }
 }
