@@ -23,7 +23,10 @@ class Service
     /**
      * The roles and people assigned to this service.
      *
-     * @var string[]                    Associative array of roles, key = role, value = people assigned to that role.
+     * @var array                       Associative array of roles, key = role, value = people assigned to that role.
+     *      $roles = array(
+     *          string role_name => string[] people
+     *      )
      */
     public array $roles;
 
