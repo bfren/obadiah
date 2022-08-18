@@ -124,7 +124,7 @@ require_once("parts/header.php"); ?>
                                     <p class="mb-0">
                                         <?php
                                         $names = join(", ", $people);
-                                        $highlighted = str_replace($filters["person"], "<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">" . $filters["person"] . "</span>", $names);
+                                        $highlighted = str_replace(Arr::get($filters, "person"), "<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">" . Arr::get($filters, "person") . "</span>", $names);
                                         ?>
                                         <?php echo $role; ?>: <span class="text-muted"><?php echo $highlighted; ?></span>
                                     </p>
