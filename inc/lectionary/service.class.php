@@ -23,7 +23,7 @@ class Service
      *
      * @var int
      */
-    public int $series_num;
+    public int $num;
 
     /**
      * The sermon title.
@@ -42,7 +42,7 @@ class Service
     /**
      * An optional additional reading.
      *
-     * @var ?string
+     * @var string
      */
-    public ?string $additional_reading;
+    public string $additional_reading;
 }

@@ -4,13 +4,12 @@ namespace Feeds;
 
 class Base
 {
-
     /**
-     * Path to lectionary data directory.
+     * Path to cache data directory.
      *
      * @var string
      */
-    public string $dir_lectionary;
+    public string $dir_cache;
 
     /**
      * Path to rota data directory.
@@ -48,12 +47,12 @@ class Base
 
         // build paths to data directories
         $dir_data = "$cwd/data";
-        $base->dir_lectionary = "$dir_data/lectionary";
+        $base->dir_cache = "$dir_data/cache";
         $base->dir_rota = "$dir_data/rota";
 
         // ensure data directories exist
         self::ensure_directory_exists($dir_data);
-        self::ensure_directory_exists($base->dir_lectionary);
+        self::ensure_directory_exists($base->dir_cache);
         self::ensure_directory_exists($base->dir_rota);
 
         // read Airtable API key
