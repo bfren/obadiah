@@ -11,7 +11,7 @@ defined("IDX") || die("Nice try.");
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container-fluid">
-        <span class="text-muted">Copyright &copy; 2022 Christ Church Selly Park.</span>
+        <span class="text-muted small">Copyright &copy; 2022 Christ Church Selly Park.</span>
     </div>
 </footer>
 

@@ -34,7 +34,7 @@ require_once("parts/header.php"); ?>
         <label for="person" class="col-2 col-form-label">Person</label>
         <div class="col-8 col-md-9">
             <select class="form-control" name="person">
-                <option value="">Please select a person</option>
+                <option value="">Select a person</option>
                 <?php foreach ($rota->people as $person) : $selected = $person == Arr::get($filters, "person") ? "selected" : ""; ?>
                     <option value="<?php echo $person; ?>" <?php echo $selected; ?>><?php echo $person; ?></option>
                 <?php endforeach; ?>
@@ -61,7 +61,7 @@ require_once("parts/header.php"); ?>
         <label for="day" class="col-2 col-form-label">Day</label>
         <div class="col-5">
             <select class="form-control" name="day">
-                <option value="">Please select a day of the week</option>
+                <option value="">Select a day of the week</option>
                 <?php foreach ($days_of_the_week as $num => $txt) :  $selected = $num == Arr::get($filters, "day") ? "selected" : ""; ?>
                     <option value="<?php echo $num; ?>" <?php echo $selected; ?>><?php echo $txt; ?></option>
                 <?php endforeach; ?>
