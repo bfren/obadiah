@@ -3,6 +3,7 @@
 namespace Feeds\Pages;
 
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 use Feeds\Rota\Builder;
 
 defined("IDX") || die("Nice try.");
@@ -34,14 +35,14 @@ require_once("parts/header.php"); ?>
         <div class="col-8 col-md-9">
             <select class="form-control" name="person">
                 <option value="">Please select a person</option>
-                <?php foreach ($rota->people as $person) : $selected = $person == $filters["person"] ? "selected" : ""; ?>
+                <?php foreach ($rota->people as $person) : $selected = $person == Arr::get($filters, "person") ? "selected" : ""; ?>
                     <option value="<?php echo $person; ?>" <?php echo $selected; ?>><?php echo $person; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
         <div class="col-2 col-md-1 d-flex align-items-center">
             <div class="form-check">
-                <?php $checked = $filters["include"] == "all" ? "checked" : ""; ?>
+                <?php $checked = Arr::get($filters, "include") == "all" ? "checked" : ""; ?>
                 <input class="form-check-input" type="checkbox" value="all" name="include" id="include" <?php echo $checked; ?> />
                 <label class="form-check-label" for="include">All</label>
             </div>
@@ -50,10 +51,10 @@ require_once("parts/header.php"); ?>
     <div class="row mb-2">
         <label for="from" class="col-2 col-form-label">Dates</label>
         <div class="col-5">
-            <input type="date" class="form-control" name="from" placeholder="From" value="<?php echo $filters["from"]; ?>" />
+            <input type="date" class="form-control" name="from" placeholder="From" value="<?php echo Arr::get($filters, "from"); ?>" />
         </div>
         <div class="col-5">
-            <input type="date" class="form-control" name="to" placeholder="To" value="<?php echo $filters["to"]; ?>" />
+            <input type="date" class="form-control" name="to" placeholder="To" value="<?php echo Arr::get($filters, "to"); ?>" />
         </div>
     </div>
     <div class="row mb-2">
@@ -61,13 +62,13 @@ require_once("parts/header.php"); ?>
         <div class="col-5">
             <select class="form-control" name="day">
                 <option value="">Please select a day of the week</option>
-                <?php foreach ($days_of_the_week as $num => $txt) :  $selected = $num == $filters["day"] ? "selected" : ""; ?>
+                <?php foreach ($days_of_the_week as $num => $txt) :  $selected = $num == Arr::get($filters, "day") ? "selected" : ""; ?>
                     <option value="<?php echo $num; ?>" <?php echo $selected; ?>><?php echo $txt; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
         <div class="col-5">
-            <input type="time" class="form-control" name="start" placeholder="Start" value="<?php echo $filters["start"]; ?>" />
+            <input type="time" class="form-control" name="start" placeholder="Start" value="<?php echo Arr::get($filters, "start"); ?>" />
         </div>
     </div>
     <div class="row">
