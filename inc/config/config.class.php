@@ -66,7 +66,7 @@ class Config
      * @param string $cwd               Current working directory.
      * @return void
      */
-    public static function load(string $cwd)
+    public static function load(string $cwd): void
     {
         // standard config
         self::$cwd = $cwd;
@@ -96,7 +96,7 @@ class Config
      * @param string $path              Directory path to create if it does not already exist.
      * @return void
      */
-    private static function ensure_directory_exists(string $path)
+    private static function ensure_directory_exists(string $path): void
     {
         if (!file_exists($path)) {
             mkdir($path);
