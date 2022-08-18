@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
 $base = new Base(getcwd());
 
 // create cache
-$cache = new Cache\Cache($base->dir_cache, 600);
+$cache = new Cache\Cache($base->dir_cache, 5);
 
 // get rota
 $rota = $cache->get_rota(function() use ($base) {
@@ -24,6 +24,9 @@ $rota = $cache->get_rota(function() use ($base) {
 $lectionary = $cache->get_lectionary(function() use ($base) {
     return new Lectionary\Lectionary($base);
 });
+
+// apply filters
+$services = $rota->apply_filters($_GET);
 
 ?>
 <!DOCTYPE html>
