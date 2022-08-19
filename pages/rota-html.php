@@ -82,6 +82,7 @@ require_once("parts/header.php"); ?>
 </form>
 
 <!-- Rota -->
+<?php $person = Arr::get($filters, "person"); ?>
 <h2 class="border-bottom">
     <?php echo $title; ?>
     <a class="ps-3 fs-6" data-bs-toggle="collapse" data-bs-target=".people" href="#collapsePeople" role="button" aria-expanded="true">show / hide people</a>
@@ -110,12 +111,12 @@ require_once("parts/header.php"); ?>
                             <!-- Teaching Details -->
                             <p class="mb-0">
                                 <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
-                                <?php if ($combined_service->sermon_num) echo "(" . $combined_service->sermon_num . ")"; ?>
-                                <?php if ($combined_service->sermon_title) echo " - &ldquo;" . $combined_service->sermon_title . "&rdquo;"; ?>
+                                <?php if ($combined_service->sermon_num) echo sprintf("(%s)", $combined_service->sermon_num); ?>
+                                <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
                             </p>
                             <p class="mb-0">
                                 <?php if ($combined_service->main_reading) echo $combined_service->main_reading; ?>
-                                <?php if ($combined_service->additional_reading) echo "<em>" . $combined_service->additional_reading . "</em>"; ?>
+                                <?php if ($combined_service->additional_reading) echo sprintf("<em>%s</em>", $combined_service->additional_reading); ?>
                             </p>
 
                             <!-- Rota Roles -->
@@ -124,7 +125,7 @@ require_once("parts/header.php"); ?>
                                     <p class="mb-0">
                                         <?php
                                         $names = join(", ", $people);
-                                        $highlighted = str_replace(Arr::get($filters, "person"), "<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">" . Arr::get($filters, "person") . "</span>", $names);
+                                        $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                         ?>
                                         <?php echo $role; ?>: <span class="text-muted"><?php echo $highlighted; ?></span>
                                     </p>

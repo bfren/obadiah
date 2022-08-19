@@ -10,7 +10,7 @@ define("IDX", true);
 
 // automatically load class definitions from inc directory
 spl_autoload_register(function ($class) {
-    $path = str_replace(array("\\", "_"), array("/", "-"), $class) . ".class.php";
+    $path = sprintf("%s.class.php", str_replace(array("\\", "_"), array("/", "-"), $class));
     $inc = str_replace("feeds", "inc", strtolower($path));
     require_once($inc);
 });
@@ -25,9 +25,9 @@ $page = Arr::get($parts, 0);
 $action = Arr::get($parts, 1);
 
 // output requested page, or home by default
-$path = C::$dir->cwd . "/pages/$page.php";
+$path = sprintf("%s/pages/%s.php", C::$dir->cwd, $page);
 if (!file_exists($path)) {
-    $path = C::$dir->cwd . "/pages/home.php";
+    $path = sprintf("%s/pages/home.php", C::$dir->cwd);
 }
 
 require_once($path);

@@ -151,7 +151,7 @@ function get_summary(Combined_Service $service, string $person)
 
     // sort roles and add to summary
     sort($roles);
-    return $summary . " (" . join(", ", $roles) . ")";
+    return sprintf("%s (%s)", $summary, join(", ", $roles));
 }
 
 /**
@@ -181,24 +181,24 @@ function get_description(Combined_Day $day, Combined_Service $service)
         if ($service->series_title) {
             $title = $service->series_title;
             if ($service->sermon_num) {
-                $title = $title . " (" . $service->sermon_num . ")";
+                $title = sprintf("%s (%s)", $title, $service->sermon_num);
             }
             $description[] = $title;
         }
 
         // sermon title
         if ($service->sermon_title) {
-            $description[] = $service->sermon_title;
+            $description[] = sprintf("Title: %s", $service->sermon_title);
         }
 
         // main reading
         if ($service->main_reading) {
-            $description[] = "Main Reading: " . $service->main_reading;
+            $description[] = sprintf("Main Reading: %s", $service->main_reading);
         }
 
         // additional reading
         if ($service->additional_reading) {
-            $description[] = "Additional Reading: " . $service->additional_reading;
+            $description[] = sprintf("Additional Reading: %s", $service->additional_reading);
         }
 
         $description[] = "";
@@ -208,7 +208,7 @@ function get_description(Combined_Day $day, Combined_Service $service)
     if ($service->roles) {
         $description[] = "= Roles =";
         foreach ($service->roles as $role => $people) {
-            $description[] = $role . ": " . join(", ", $people);
+            $description[] = sprintf("%s: %s", $role, join(", ", $people));
         }
     }
 

@@ -43,7 +43,7 @@ class Rota
     public function __construct()
     {
         // get csv files from path
-        $csv = glob(C::$dir->rota . "/*.csv");
+        $csv = glob(sprintf("%s/*.csv", C::$dir->rota));
 
         // read each file
         foreach ($csv as $file) {
