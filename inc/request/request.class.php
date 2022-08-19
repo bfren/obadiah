@@ -25,6 +25,13 @@ class Request
     public static bool $auth;
 
     /**
+     * True if the request is marked with a debug flag.
+     *
+     * @var bool
+     */
+    public static bool $debug;
+
+    /**
      * Request method (e.g. POST).
      *
      * @var string
@@ -54,6 +61,7 @@ class Request
 
         // set request values
         self::$auth = Arr::get($_SESSION, self::AUTH) === true || Arr::get($_GET, "api") == C::$login->api;
+        self::$debug = isset($_GET["debug"]);
         self::$method = Arr::get($_SERVER, "REQUEST_METHOD");
         self::$uri = Arr::get($_SERVER, "REQUEST_URI");
     }

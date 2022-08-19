@@ -3,6 +3,7 @@
 namespace Feeds\Rota;
 
 use DateTime;
+use DateTimeZone;
 use Feeds\Config\Config as C;
 
 defined("IDX") || die("Nice try.");
@@ -10,11 +11,11 @@ defined("IDX") || die("Nice try.");
 class Service
 {
     /**
-     * Service date and time, stored as a Unix timestap.
+     * Service date and time.
      *
-     * @var int
+     * @var DateTime
      */
-    public int $timestamp;
+    public DateTime $dt;
 
     /**
      * Service description, e.g. 'Morning Prayer'.
@@ -63,8 +64,7 @@ class Service
         };
 
         // get the date as a timestamp
-        $dt = DateTime::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time);
-        $this->timestamp = $dt->getTimestamp();
+        $this->dt = DateTime::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time, C::$events->timezone);
 
         // get the service description
         $this->description = $this->get_description($data);

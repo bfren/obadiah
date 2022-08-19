@@ -26,6 +26,13 @@ class Config
     public static Config_Dir $dir;
 
     /**
+     * Events config object.
+     *
+     * @var Config_Events
+     */
+    public static Config_Events $events;
+
+    /**
      * Formats config object.
      *
      * @var Config_Formats
@@ -62,6 +69,7 @@ class Config
         self::$airtable = new Config_Airtable($config["airtable"]);
         self::$cache = new Config_Cache($config["cache"]);
         self::$dir = new Config_Dir($cwd);
+        self::$events = new Config_Events($config["events"]);
         self::$formats = new Config_Formats($config["formats"]);
         self::$login = new Config_Login($config["login"]);
         self::$rota = new Config_Rota($config["rota"]);

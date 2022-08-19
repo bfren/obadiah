@@ -23,6 +23,6 @@ class Start implements Filter
         }
 
         // compare the time with the value
-        return date("H:i", $service->timestamp) == $value;
+        return $service->dt->format("H:i") == $value;
     }
 }

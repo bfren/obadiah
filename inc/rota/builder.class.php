@@ -26,7 +26,7 @@ class Builder
         foreach ($lectionary->days as $day) {
             // look for any services on this day
             $rota_services = array_filter($services, function ($service) use ($day) {
-                return date(C::$formats->sortable_date, $service->timestamp) == $day->date;
+                return $service->dt->format(C::$formats->sortable_date) == $day->date;
             });
 
             // if there are no services, continue
@@ -36,7 +36,7 @@ class Builder
 
             // add the day to the rota
             $c_day = new Combined_Day();
-            $c_day->dt = DateTime::createFromFormat(C::$formats->sortable_date, $day->date, new DateTimeZone("Europe/London"))->setTime(0, 0);
+            $c_day->dt = DateTime::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0);
             $c_day->name = $day->name;
             $c_day->services = array();
 
@@ -44,13 +44,13 @@ class Builder
             foreach ($rota_services as $rota_service) {
                 // add rota information
                 $c_service = new Combined_Service();
-                $c_service->timestamp = $rota_service->timestamp;
-                $c_service->time = date(C::$formats->display_time, $rota_service->timestamp);
+                $c_service->dt = $rota_service->dt;
+                $c_service->time = $rota_service->dt->format(C::$formats->display_time);
                 $c_service->name = $rota_service->description;
                 $c_service->roles = $rota_service->roles;
 
                 // get lectionary information
-                $lectionary_service = $day->get_service($rota_service->timestamp);
+                $lectionary_service = $day->get_service($rota_service->dt);
                 if ($lectionary_service) {
                     $c_service->series_title = $lectionary_service->series;
                     $c_service->sermon_num = $lectionary_service->num;
@@ -70,4 +70,124 @@ class Builder
         // return built rota
         return $rota;
     }
+
+    /**
+     * Generate a unique ID for a service.
+     *
+     * @param Combined_Service $service     Service object.
+     * @return string                       Unique hashed ID.
+     */
+    public function get_uuid(Combined_Service $service): string
+    {
+        return md5($service->dt->format("c") . $service->name);
+    }
+
+    /**
+     * Generate an event summary for a service, including role indicators for the specified person.
+     *
+     * @param Combined_Service $service     Service object.
+     * @param string $person                Selected person.
+     * @return string                       Service name with role indicators.
+     */
+    public function get_summary(Combined_Service $service, string $person): string
+    {
+        // use the name as the basic summary
+        $summary = $service->name;
+
+        // if no person is set, return the summary
+        if (!$person) {
+            return $summary;
+        }
+
+        // look for certain roles
+        $roles = array();
+        foreach ($service->roles as $role => $people) {
+            foreach ($people as $p) {
+                if (str_starts_with($p, $person)) {
+                    $roles[] = match ($role) {
+                        "Duty Warden" => "W",
+                        "Intercessions" => "Py",
+                        "Lead Musician" => "M",
+                        "Leader" => "L",
+                        "Preacher" => "Pr",
+                        "President" => "Ps",
+                        default => null
+                    };
+                }
+            }
+        }
+
+        // if there are no roles, return the summary
+        $roles = array_filter($roles);
+        if (!$roles) {
+            return $summary;
+        }
+
+        // sort roles and add to summary
+        sort($roles);
+        return sprintf("%s (%s)", $summary, join(", ", $roles));
+    }
+
+    /**
+     * Generate an event description for a service, including lectionary / teaching info and roles.
+     *
+     * @param Combined_Day $day             Lectionary day information.
+     * @param Combined_Service $service     Service object.
+     * @return string                       Event description.
+     */
+    function get_description(Combined_Day $day, Combined_Service $service): string
+    {
+        // create empty array for description lines
+        $description = array();
+
+        // add lectionary info
+        if ($day->name) {
+            $description[] = "= Liturgical Day =";
+            $description[] = $day->name;
+            $description[] = "";
+        }
+
+        // add teaching
+        if ($service->series_title || $service->sermon_title || $service->main_reading) {
+            $description[] = "= Teaching =";
+
+            // series title
+            if ($service->series_title) {
+                $title = $service->series_title;
+                if ($service->sermon_num) {
+                    $title = sprintf("%s (%s)", $title, $service->sermon_num);
+                }
+                $description[] = $title;
+            }
+
+            // sermon title
+            if ($service->sermon_title) {
+                $description[] = sprintf("Title: %s", $service->sermon_title);
+            }
+
+            // main reading
+            if ($service->main_reading) {
+                $description[] = sprintf("Main Reading: %s", $service->main_reading);
+            }
+
+            // additional reading
+            if ($service->additional_reading) {
+                $description[] = sprintf("Additional Reading: %s", $service->additional_reading);
+            }
+
+            $description[] = "";
+        }
+
+        // add roles
+        if ($service->roles) {
+            $description[] = "= Roles =";
+            foreach ($service->roles as $role => $people) {
+                $description[] = sprintf("%s: %s", $role, join(", ", $people));
+            }
+        }
+
+        // return description
+        return join("\\n", $description);
+    }
+
 }

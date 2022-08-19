@@ -23,6 +23,6 @@ class Day implements Filter
         }
 
         // compare the day of the week with the value
-        return date("N", $service->timestamp) == $value;
+        return $service->dt->format("N") == $value;
     }
 }

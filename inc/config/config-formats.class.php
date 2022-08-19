@@ -33,6 +33,13 @@ class Config_Formats
     public string $ics_datetime;
 
     /**
+     * JSON date time.
+     *
+     * @var string
+     */
+    public string $json_datetime;
+
+    /**
      * Sortable date.
      *
      * @var string
@@ -51,6 +58,7 @@ class Config_Formats
         $this->display_date = $config["display_date"];
         $this->display_time = $config["display_time"];
         $this->ics_datetime = $config["ics_datetime"];
+        $this->json_datetime = $config["json_datetime"];
         $this->sortable_date = $config["sortable_date"];
     }
 }

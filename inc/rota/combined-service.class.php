@@ -2,14 +2,16 @@
 
 namespace Feeds\Rota;
 
+use DateTime;
+
 class Combined_Service
 {
     /**
-     * Service start timestamp.
+     * Service start DateTime.
      *
-     * @var int
+     * @var DateTime
      */
-    public int $timestamp;
+    public DateTime $dt;
 
     /**
      * Service start time (e.g. 10:30).

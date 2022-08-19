@@ -82,7 +82,7 @@ class Rota
         }
 
         // sort services by timestamp
-        usort($this->services, fn ($a, $b) => ($a->timestamp < $b->timestamp) ? -1 : 1);
+        usort($this->services, fn ($a, $b) => $a->dt->getTimestamp() < $b->dt->getTimestamp() ? -1 : 1);
     }
 
     /**
