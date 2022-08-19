@@ -5,11 +5,16 @@ airtable:
 cache:
   duration_in_seconds: 10
 
+events:
+  length_in_minutes: 60
+  timezone: "Europe/London"
+
 formats:
   csv_import_datetime: "d-M-Yg:ia"
   display_date: "D j M Y"
   display_time: "H:i"
   ics_datetime: 'Ymd\THis'
+  json_datetime: 'Y-m-d\TH:i:sO'
   sortable_date: "Y-m-d"
 
 login:
