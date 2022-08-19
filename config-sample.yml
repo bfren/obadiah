@@ -3,11 +3,19 @@ airtable:
   base: ""
 
 cache:
-  duration_in_seconds: 600
+  duration_in_seconds: 10
 
 formats:
   csv_import_datetime: "d-M-Yg:ia"
+  display_date: "D j M Y"
+  display_time: "H:i"
+  ics_datetime: 'Ymd\THis'
   sortable_date: "Y-m-d"
 
+login:
+  api: ""
+  max_attempts: 5
+  pass: ""
+
 rota:
-  default_days: 14
+  default_days: 28
