@@ -75,7 +75,7 @@ require_once("parts/header.php"); ?>
         <div class="col-2"></div>
         <div class="col-10">
             <button type="submit" class="btn btn-primary">Apply</button>
-            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>" class="btn btn-primary" target="_blank">ICS Feed</a>
+            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-primary" target="_blank">ICS Feed</a>
             <a href="/rota/" class="btn btn-danger ms-4">Reset</a>
         </div>
     </div>

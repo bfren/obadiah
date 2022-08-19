@@ -40,6 +40,13 @@ class Config
     public static Config_Formats $formats;
 
     /**
+     * Login config object.
+     *
+     * @var Config_Login
+     */
+    public static Config_Login $login;
+
+    /**
      * Rota config object.
      *
      * @var Config_Rota
@@ -66,6 +73,7 @@ class Config
         self::$cache = new Config_Cache($config["cache"]);
         self::$dir = new Config_Dir($cwd);
         self::$formats = new Config_Formats($config["formats"]);
+        self::$login = new Config_Login($config["login"]);
         self::$rota = new Config_Rota($config["rota"]);
     }
 }

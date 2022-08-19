@@ -5,18 +5,15 @@ namespace Feeds;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 
-// each PHP script checks if this is defined to ensure incorrect access is denied
-define("IDX", true);
-
-// automatically load class definitions from inc directory
-spl_autoload_register(function ($class) {
-    $path = sprintf("%s.class.php", str_replace(array("\\", "_"), array("/", "-"), $class));
-    $inc = str_replace("feeds", "inc", strtolower($path));
-    require_once($inc);
-});
+// include autoloader
+require_once("inc/autoload.php");
 
 // load config, run preflight checks, etc.
 C::load(__DIR__);
+
+// start session and check auth
+session_start();
+$_SESSION["auth"] === true || $_GET["api"] == C::$login->api || header("Location: /login.php");
 
 // get requested page
 $uri = explode("/", C::$uri);

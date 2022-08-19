@@ -5,13 +5,17 @@ namespace Feeds\Pages;
 defined("IDX") || die("Nice try.");
 
 // build navigation links
-$links = array(
-    "Home" => "/",
-    "Rota" => "/rota",
-    "Prayer Calendar" => "/prayer"
-);
+if ($_SESSION["auth"]) {
+    $links = array(
+        "Home" => "/",
+        "Rota" => "/rota",
+        "Prayer" => "/prayer",
+        "Log Out" => "/logout.php"
+    );
+}
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
@@ -21,7 +25,7 @@ $links = array(
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
         :root {
-            --bs-font-sans-serif: -apple-system,Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            --bs-font-sans-serif: -apple-system, Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
     </style>
 </head>
@@ -35,11 +39,11 @@ $links = array(
             </a>
 
             <ul class="nav nav-pills">
-                <?php foreach($links as $link_title => $link): ?>
+                <?php foreach ($links as $link_title => $link) : ?>
                     <li class="nav-item">
-                        <?php if($title == $link_title): ?>
+                        <?php if ($title == $link_title) : ?>
                             <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
-                        <?php else: ?>
+                        <?php else : ?>
                             <a href="<?php echo $link; ?>" class="nav-link"><?php echo $link_title; ?></a>
                         <?php endif; ?>
                     </li>
