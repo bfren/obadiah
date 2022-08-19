@@ -3,15 +3,13 @@
 namespace Feeds;
 
 use Feeds\Config\Config as C;
+use Feeds\Request\Request;
 
 // include autoloader
 require_once("inc/autoload.php");
 
 // load config, run preflight checks, etc.
-C::load(__DIR__);
-
-// start session
-session_start();
+Request::init(__DIR__);
 
 // output login page, or die
 $path = sprintf("%s/pages/login.php", C::$dir->cwd);

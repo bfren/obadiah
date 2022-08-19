@@ -5,13 +5,6 @@ namespace Feeds\Config;
 class Config
 {
     /**
-     * Request URI path.
-     *
-     * @var string
-     */
-    public static string $uri;
-
-    /**
      * Airtable config object.
      *
      * @var Config_Airtable
@@ -54,16 +47,13 @@ class Config
     public static Config_Rota $rota;
 
     /**
-     * Set standard config values, and read config YAML file into objects.
+     * Read config YAML file into objects.
      *
      * @param string $cwd               Current working directory.
      * @return void
      */
     public static function load(string $cwd): void
     {
-        // set Request URI
-        self::$uri = $_SERVER["REQUEST_URI"];
-
         // read configuration file
         $config_file = "$cwd/config.yml";
         $config = yaml_parse_file($config_file);

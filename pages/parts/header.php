@@ -2,16 +2,20 @@
 
 namespace Feeds\Pages;
 
+use Feeds\Request\Request;
+
 defined("IDX") || die("Nice try.");
 
 // build navigation links
-if ($_SESSION["auth"]) {
+if (Request::$auth) {
     $links = array(
         "Home" => "/",
         "Rota" => "/rota",
         "Prayer" => "/prayer",
         "Log Out" => "/logout.php"
     );
+} else {
+    $links = array();
 }
 
 ?>
@@ -40,13 +44,13 @@ if ($_SESSION["auth"]) {
 
             <ul class="nav nav-pills">
                 <?php foreach ($links as $link_title => $link) : ?>
-                    <li class="nav-item">
-                        <?php if ($title == $link_title) : ?>
-                            <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
-                        <?php else : ?>
-                            <a href="<?php echo $link; ?>" class="nav-link"><?php echo $link_title; ?></a>
-                        <?php endif; ?>
-                    </li>
+                        <li class="nav-item">
+                            <?php if ($title == $link_title) : ?>
+                                <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
+                            <?php else : ?>
+                                <a href="<?php echo $link; ?>" class="nav-link"><?php echo $link_title; ?></a>
+                            <?php endif; ?>
+                        </li>
                 <?php endforeach; ?>
             </ul>
         </header>

@@ -3,24 +3,25 @@
 namespace Feeds\Pages;
 
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
+use Feeds\Request\Request;
 
 defined("IDX") || die("Nice try.");
 
 // handle post requests
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (Request::$method == "POST") {
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
-    if ($_POST["pass"] == C::$login->pass) {
-        $_SESSION["auth"] = true;
-        header("location: /");
+    if (Arr::get($_POST, "pass") == C::$login->pass) {
+        Request::authorise();
+        Request::redirect("/");
     } else {
-        unset($_SESSION["auth"]);
-        $_SESSION["count"]++;
+        Request::deny();
     }
 }
 
 // check login attempts
-$_SESSION["count"] < C::$login->max_attempts || die("You're done - try again later.");
+Request::get_login_attempts() < C::$login->max_attempts || die("You're done - try again later.");
 
 // output header
 $title = "Login";
