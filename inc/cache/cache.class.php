@@ -65,7 +65,7 @@ class Cache
      * @param callable $callable        Callable function to get cache value if expired or not set.
      * @return mixed                    Value (cached or generated).
      */
-    private function get_or_set(string $id, callable $callable)
+    private function get_or_set(string $id, callable $callable): mixed
     {
         // create path to cache file
         $file = "$this->dir_path/$id.cache";

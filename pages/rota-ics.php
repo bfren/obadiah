@@ -103,7 +103,7 @@ exit($ics);
  * @param Combined_Service $service     Service object.
  * @return string                       Unique hashed ID.
  */
-function get_uuid(Combined_Service $service)
+function get_uuid(Combined_Service $service): string
 {
     return md5($service->timestamp . $service->name);
 }
@@ -115,7 +115,7 @@ function get_uuid(Combined_Service $service)
  * @param string $person                Selected person.
  * @return string                       Service name with role indicators.
  */
-function get_summary(Combined_Service $service, string $person)
+function get_summary(Combined_Service $service, string $person): string
 {
     // use the name as the basic summary
     $summary = $service->name;
@@ -161,7 +161,7 @@ function get_summary(Combined_Service $service, string $person)
  * @param Combined_Service $service     Service object.
  * @return string                       Event description.
  */
-function get_description(Combined_Day $day, Combined_Service $service)
+function get_description(Combined_Day $day, Combined_Service $service): string
 {
     // create empty array for description lines
     $description = array();
