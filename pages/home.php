@@ -15,10 +15,10 @@ require_once("parts/header.php");
 
 ?>
 
-<h1>Welcome</h1>
+<h2 class="border-bottom">Welcome</h2>
 <p>These pages house the various feeds generated from Church Suite.</p>
 
-<h2>Rota</h2>
+<h3>Rota</h3>
 <p>The following links will give you quick and printable rotas for upcoming services. To view the full rota or filter by person, please visit the <a href="/rota">Rota page</a>.</p>
 
 <?php
@@ -27,7 +27,7 @@ require_once("parts/header.php");
         "day" => 7, // Sunday
         "start" => "10:30",
         "from" => $sunday_ten_thirty_from->format(C::$formats->sortable_date),
-        "to" => $sunday_ten_thirty_from->add(new DateInterval("P4W"))->format(C::$formats->sortable_date)
+        "to" => $sunday_ten_thirty_from->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
     );
 ?>
 <p><a href="/rota/print/?<?php echo http_build_query($sunday_ten_thirty) ?>">Sunday 10:30 servies for the next four weeks</a></p>

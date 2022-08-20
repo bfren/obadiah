@@ -10,6 +10,6 @@ require_once("parts/header.php");
 
 ?>
 
-<h1><?php echo $title; ?></h1>
+<h2 class="border-bottom"><?php echo $title; ?></h2>
 
 <?php require_once("parts/footer.php"); ?>
