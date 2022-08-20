@@ -3,7 +3,7 @@
 namespace Feeds\Pages;
 
 use DateInterval;
-use DateTime;
+use DateTimeImmutable;
 
 use Feeds\Config\Config as C;
 
@@ -22,7 +22,7 @@ require_once("parts/header.php");
 <p>The following links will give you quick and printable rotas for upcoming services. To view the full rota or filter by person, please visit the <a href="/rota">Rota page</a>.</p>
 
 <?php
-    $sunday_ten_thirty_from = new DateTime("next Sunday");
+    $sunday_ten_thirty_from = new DateTimeImmutable("next Sunday");
     $sunday_ten_thirty = array(
         "day" => 7, // Sunday
         "start" => "10:30",
@@ -33,7 +33,7 @@ require_once("parts/header.php");
 <p><a href="/rota/print/?<?php echo http_build_query($sunday_ten_thirty) ?>">Sunday 10:30 servies for the next four weeks</a></p>
 
 <?php
-    $wednesday_eight_oclock_from = new DateTime("next Wednesday");
+    $wednesday_eight_oclock_from = new DateTimeImmutable("next Wednesday");
     $wednesday_eight_oclock = array(
         "day" => 3, // Wednesday
         "start" => "08:00",

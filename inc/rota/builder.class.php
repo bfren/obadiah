@@ -2,7 +2,7 @@
 
 namespace Feeds\Rota;
 
-use DateTime;
+use DateTimeImmutable;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
@@ -11,7 +11,7 @@ use Feeds\Rota\Service;
 class Builder
 {
     /**
-     * Array of days of the week, starting with Sunday, numbered to match DateTime format 'N'
+     * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
      *
      * @var array
      */
@@ -50,7 +50,7 @@ class Builder
 
             // add the day to the rota
             $c_day = new Combined_Day();
-            $c_day->dt = DateTime::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0);
+            $c_day->dt = DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0);
             $c_day->name = $day->name;
             $c_day->services = array();
 
@@ -58,7 +58,8 @@ class Builder
             foreach ($rota_services as $rota_service) {
                 // add rota information
                 $c_service = new Combined_Service();
-                $c_service->dt = $rota_service->dt;
+                $c_service->start = $rota_service->dt;
+                $c_service->end = $rota_service->dt->add($rota_service->length);
                 $c_service->time = $rota_service->dt->format(C::$formats->display_time);
                 $c_service->name = $rota_service->description;
                 $c_service->roles = $rota_service->roles;
@@ -104,7 +105,7 @@ class Builder
      */
     public static function get_uuid(Combined_Service $service): string
     {
-        return md5($service->dt->format("c") . $service->name);
+        return md5($service->start->format("c") . $service->name);
     }
 
     /**

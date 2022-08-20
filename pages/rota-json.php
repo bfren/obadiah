@@ -25,8 +25,8 @@ foreach ($combined_days as $date => $c_day) {
         $services[] = array(
             "id" =>             Builder::get_uuid($c_service),
             "title" =>          Builder::get_summary($c_service, Arr::get($filters, "person") ?: ""),
-            "start" =>          $c_service->dt->format(C::$formats->json_datetime),
-            "end" =>            $c_service->dt->add($interval)->format(C::$formats->json_datetime),
+            "start" =>          $c_service->start->format(C::$formats->json_datetime),
+            "end" =>            $c_service->end->format(C::$formats->json_datetime),
             "description" =>    Builder::get_description($c_day, $c_service),
             "editable" =>       false
         );

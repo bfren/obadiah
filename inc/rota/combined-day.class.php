@@ -2,16 +2,16 @@
 
 namespace Feeds\Rota;
 
-use DateTime;
+use DateTimeImmutable;
 
 class Combined_Day
 {
     /**
      * Date.
      *
-     * @var DateTime
+     * @var DateTimeImmutable
      */
-    public DateTime $dt;
+    public DateTimeImmutable $dt;
 
     /**
      * Lectionary name.

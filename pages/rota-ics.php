@@ -46,11 +46,11 @@ $lines[] = "END:VTIMEZONE";
 $interval = new DateInterval(sprintf("PT%sM", C::$events->length_in_minutes));
 foreach ($combined_days as $date => $c_day) {
     foreach ($c_day->services as $c_service) {
-        $tzid = $c_service->dt->getTimezone()->getName();
+        $tzid = $c_service->start->getTimezone()->getName();
         $lines[] = "BEGIN:VEVENT" .         "";
         $lines[] = "UID:" .                 Builder::get_uuid($c_service);
-        $lines[] = "DTSTART;TZID=$tzid:" .  $c_service->dt->format(C::$formats->ics_datetime);
-        $lines[] = "DTEND;TZID=$tzid:" .    $c_service->dt->add($interval)->format(C::$formats->ics_datetime);
+        $lines[] = "DTSTART;TZID=$tzid:" .  $c_service->start->format(C::$formats->ics_datetime);
+        $lines[] = "DTEND;TZID=$tzid:" .    $c_service->end->format(C::$formats->ics_datetime);
         $lines[] = "CREATED:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "LAST-MODIFIED:" .       date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DTSTAMP:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);

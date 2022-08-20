@@ -2,7 +2,7 @@
 
 namespace Feeds\Lectionary;
 
-use DateTime;
+use DateTimeImmutable;
 use Feeds\Config\Config as C;
 
 defined("IDX") || die("Nice try.");
@@ -33,10 +33,10 @@ class Day
     /**
      * Get lectionary details for a service at the specified time.
      *
-     * @param DateTime $dt              Service start time to search for.
+     * @param DateTimeImmutable $dt              Service start time to search for.
      * @return null|Service             Matching lectionary service or null if not found.
      */
-    public function get_service(DateTime $dt): ?Service
+    public function get_service(DateTimeImmutable $dt): ?Service
     {
         // get formatted time value
         $time = $dt->format(C::$formats->display_time);

@@ -2,16 +2,23 @@
 
 namespace Feeds\Rota;
 
-use DateTime;
+use DateTimeImmutable;
 
 class Combined_Service
 {
     /**
-     * Service start DateTime.
+     * Service start.
      *
-     * @var DateTime
+     * @var DateTimeImmutable
      */
-    public DateTime $dt;
+    public DateTimeImmutable $start;
+
+    /**
+     * Service end.
+     *
+     * @var DateTimeImmutable
+     */
+    public DateTimeImmutable $end;
 
     /**
      * Service start time (e.g. 10:30).

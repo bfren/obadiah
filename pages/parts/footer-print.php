@@ -2,12 +2,12 @@
 
 namespace Feeds\Pages;
 
-use DateTime;
+use DateTimeImmutable;
 use Feeds\Config\Config as C;
 
 defined("IDX") || die("Nice try.");
 
-$today = new DateTime("now", C::$events->timezone);
+$today = new DateTimeImmutable("now", C::$events->timezone);
 
 ?>
 

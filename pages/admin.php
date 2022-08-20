@@ -2,7 +2,7 @@
 
 namespace Feeds\Pages;
 
-use DateTime;
+use DateTimeImmutable;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
@@ -17,7 +17,7 @@ if (Request::$method == "POST") {
     // handle rota upload
     if ($submit == "rota") {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel ")) || die("You may only upload CSV files.");
+        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
 
         // make sure the name was set
         $name = $_POST["name"];
@@ -61,7 +61,7 @@ sort($csv_files);
  */
 function get_csv_modified(string $file): string
 {
-    $modified = new DateTime("@" . filemtime(sprintf("%s/%s", C::$dir->rota, $file)));
+    $modified = new DateTimeImmutable("@" . filemtime(sprintf("%s/%s", C::$dir->rota, $file)));
     $modified->setTimezone(C::$events->timezone);
     return $modified->format(C::$formats->sortable_datetime);
 }

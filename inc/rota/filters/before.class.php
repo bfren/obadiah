@@ -2,7 +2,7 @@
 
 namespace Feeds\Rota\Filters;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeZone;
 use Feeds\Config\Config as C;
 use Feeds\Rota\Service;
@@ -26,7 +26,7 @@ class Before implements Filter
         }
 
         // convert the date to a timestamp
-        $dt = DateTime::createFromFormat(C::$formats->sortable_date, $value, C::$events->timezone);
+        $dt = DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $value, C::$events->timezone);
         if ($dt) {
             return $service->dt->format(C::$formats->sortable_date) <= $dt->format(C::$formats->sortable_date);
         }

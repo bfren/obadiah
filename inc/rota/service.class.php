@@ -2,8 +2,8 @@
 
 namespace Feeds\Rota;
 
-use DateTime;
-use DateTimeZone;
+use DateInterval;
+use DateTimeImmutable;
 use Feeds\Config\Config as C;
 
 defined("IDX") || die("Nice try.");
@@ -13,9 +13,16 @@ class Service
     /**
      * Service date and time.
      *
-     * @var DateTime
+     * @var DateTimeImmutable
      */
-    public DateTime $dt;
+    public DateTimeImmutable $dt;
+
+    /**
+     * Service length.
+     *
+     * @var DateInterval
+     */
+    public DateInterval $length;
 
     /**
      * Service description, e.g. 'Morning Prayer'.
@@ -56,16 +63,17 @@ class Service
             $data[$header_row[$i]] = $row[$i];
         }
 
-        // get the service time
+        // get the service time and length (as a DateInterval string)
         $time = match ($data["Service"]) {
-            "Socially Distanced Service 9:00am" => "9:00am",
-            "Sunday Morning Service 10:30am" => "10:30am",
-            "Wednesday Morning Prayer 8:00am" => "8:00am",
+            "Socially Distanced Service 9:00am" => array("9:00am", "PT30M"),
+            "Sunday Morning Service 10:30am" => array("10:30am", "PT90M"),
+            "Wednesday Morning Prayer 8:00am" => array("8:00am", "PT30M"),
             default => "0:00am"
         };
 
         // get the date as a timestamp
-        $this->dt = DateTime::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time, C::$events->timezone);
+        $this->dt = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time[0], C::$events->timezone);
+        $this->length = new DateInterval($time[1]);
 
         // get the service description
         $this->description = $this->get_description($data);
