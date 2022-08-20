@@ -131,6 +131,11 @@ class Rota
             }
         }
 
+        // if max is set return that number of services
+        if ($max = Arr::get($filters, "max")) {
+            return array_slice($services, 0, $max, true);
+        }
+
         // return all matched services
         return $services;
     }
