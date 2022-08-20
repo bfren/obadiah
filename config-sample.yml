@@ -16,6 +16,7 @@ formats:
   ics_datetime: 'Ymd\THis'
   json_datetime: 'Y-m-d\TH:i:sO'
   sortable_date: "Y-m-d"
+  sortable_datetime: "Y-m-d H:i"
 
 login:
   admin: ""
