@@ -135,7 +135,7 @@ class Builder
                         "Intercessions" => "Py",
                         "Lead Musician" => "M",
                         "Leader" => "L",
-                        "Leader & Preacher" => "L / Pr",
+                        "Leader & Preacher" => "L/Pr",
                         "Preacher" => "Pr",
                         "President" => "Ps",
                         default => null
@@ -152,7 +152,7 @@ class Builder
 
         // sort roles and add to summary
         sort($roles);
-        return sprintf("%s (%s)", $summary, join(", ", $roles));
+        return sprintf("%s (%s)", $summary, join("/", $roles));
     }
 
     /**
