@@ -4,11 +4,9 @@ namespace Feeds\Pages;
 
 defined("IDX") || die("Nice try.");
 
-/** @var string $title */
-
 ?>
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -16,11 +14,12 @@ defined("IDX") || die("Nice try.");
     <title><?php echo $title; ?> | Church Suite Feeds</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/feeds.min.css" rel="stylesheet" />
+    <link href="/css/print.min.css" rel="stylesheet" />
 </head>
 
-<body class="d-flex flex-column h-100">
+<body>
 
     <?php require_once("header-nav.php"); ?>
 
-    <main class="flex-shrink-0">
+    <main>
         <div class="container-fluid">
