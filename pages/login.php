@@ -16,7 +16,7 @@ if (Request::$method == "POST") {
     if ($pass == C::$login->pass) {
         Request::authorise();
         Request::redirect("/");
-    } else if ($pass == C::$login->admin) {
+    } elseif ($pass == C::$login->admin) {
         Request::authorise(true);
         Request::redirect("/admin");
     } else {
@@ -35,13 +35,11 @@ require_once("parts/header.php");
 
 <p>Please enter the password to access.</p>
 
-<form class="row row-cols-lg-auto g-3 align-items-center" method="POST">
-    <div class="col-12">
+<form class="row row-cols-lg-auto g-3 align-items-center needs-validation" method="POST" novalidate>
+    <div class="col-12 position-relative">
         <label class="visually-hidden" for="pass">Password</label>
-        <div class="input-group">
-            <div class="input-group-text">*</div>
-            <input type="password" class="form-control" name="pass" id="pass" placeholder="Password" />
-        </div>
+        <input type="password" class="form-control" name="pass" id="pass" placeholder="Password" required />
+        <div class="invalid-tooltip">Please enter the password.</div>
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
