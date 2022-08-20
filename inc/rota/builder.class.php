@@ -174,7 +174,6 @@ class Builder
 
         // add lectionary info
         if ($day->name) {
-            $description[] = "= Liturgical Day =";
             $description[] = $day->name;
             $description[] = "";
         }
@@ -216,6 +215,7 @@ class Builder
             foreach ($service->roles as $role => $people) {
                 $description[] = sprintf("%s: %s", $role, join(", ", $people));
             }
+            $description[] = "";
         }
 
         // return description
