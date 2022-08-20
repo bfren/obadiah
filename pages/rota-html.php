@@ -64,14 +64,15 @@ require_once("parts/header.php"); ?>
         <div class="col-2"></div>
         <div class="col-10">
             <button type="submit" class="btn btn-primary">Apply</button>
-            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-primary" target="_blank">ICS Feed</a>
-            <a href="/rota/" class="btn btn-danger ms-4">Reset</a>
+            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary" target="_blank">ICS</a>
+            <a href="/rota/json/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary d-none d-sm-inline" target="_blank">JSON</a>
+            <a href="/rota/" class="btn btn-danger ms-3">Reset</a>
         </div>
     </div>
 </form>
 
 <!-- Rota -->
-<h2 class="border-bottom">
+<h2 class="border-bottom mt-3">
     <?php echo $title; ?>
     <a class="ps-3 fs-6" data-bs-toggle="collapse" data-bs-target=".people" href="#collapsePeople" role="button" aria-expanded="true">show / hide people</a>
 </h2>
