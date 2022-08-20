@@ -10,7 +10,7 @@ defined("IDX") || die("Nice try.");
 
 // handle post requests
 if (Request::$method == "POST") {
-    $pass = Arr::get($_POST, "pass");
+    $pass = Arr::get($_POST, "password");
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
     if ($pass == C::$login->pass) {
@@ -37,8 +37,8 @@ require_once("parts/header.php");
 
 <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" method="POST" novalidate>
     <div class="col-12 position-relative">
-        <label class="visually-hidden" for="pass">Password</label>
-        <input type="password" class="form-control" name="pass" id="pass" placeholder="Password" required />
+        <label class="visually-hidden" for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
         <div class="invalid-tooltip">Please enter the password.</div>
     </div>
     <div class="col-12">
