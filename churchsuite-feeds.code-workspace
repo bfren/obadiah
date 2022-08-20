@@ -7,6 +7,14 @@
 	"settings": {
 		"editor.renderWhitespace": "boundary",
 		"files.insertFinalNewline": true,
-		"files.trimTrailingWhitespace": true
+		"files.trimTrailingWhitespace": true,
+		"liveSassCompile.settings.formats": [
+			{
+				"format": "compressed",
+				"extensionName": ".min.css",
+				"savePath": null,
+				"savePathReplacementPairs": null
+			}
+		]
 	}
 }
