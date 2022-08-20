@@ -41,7 +41,7 @@ class Request
      *
      * @var string
      */
-    public static bool $method;
+    public static string $method;
 
     /**
      * Request URI path.
