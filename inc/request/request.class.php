@@ -8,6 +8,11 @@ use Feeds\Helpers\Arr;
 class Request
 {
     /**
+     * Admin user session key.
+     */
+    private const ADMIN = "admin";
+
+    /**
      * Authenticated user session key.
      */
     private const AUTH = "auth";
@@ -69,12 +74,18 @@ class Request
     /**
      * Mark request as authorised and reset failed login attempts.
      *
+     * @param bool $admin               If true, the session will be given admin credentials.
      * @return void
      */
-    public static function authorise(): void
+    public static function authorise(bool $admin = false): void
     {
         // mark session as authenticated
         $_SESSION[self::AUTH] = true;
+
+        // mark session as admin
+        if ($admin) {
+            $_SESSION[self::ADMIN] = true;
+        }
 
         // reset login attempts
         unset($_SESSION[self::COUNT]);
@@ -89,6 +100,7 @@ class Request
     {
         // unset auth session value
         unset($_SESSION[self::AUTH]);
+        unset($_SESSION[self::ADMIN]);
 
         // keep track of failed login attempts
         if (isset($_SESSION[self::COUNT])) {
@@ -110,6 +122,16 @@ class Request
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Returns true if the current session has admin credentials.
+     *
+     * @return bool                     Whether or not the current session has admin credentials.
+     */
+    public static function is_admin(): bool
+    {
+        return isset($_SESSION[self::ADMIN]) && $_SESSION[self::ADMIN];
     }
 
     /**

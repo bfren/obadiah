@@ -10,11 +10,15 @@ defined("IDX") || die("Nice try.");
 
 // handle post requests
 if (Request::$method == "POST") {
+    $pass = Arr::get($_POST, "pass");
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
-    if (Arr::get($_POST, "pass") == C::$login->pass) {
+    if ($pass == C::$login->pass) {
         Request::authorise();
         Request::redirect("/");
+    } else if ($pass == C::$login->admin) {
+        Request::authorise(true);
+        Request::redirect("/admin");
     } else {
         Request::deny();
     }

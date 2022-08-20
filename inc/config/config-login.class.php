@@ -5,6 +5,13 @@ namespace Feeds\Config;
 class Config_Login
 {
     /**
+     * Admin passphrase.
+     *
+     * @var string
+     */
+    public string $admin;
+
+    /**
      * API passphrase.
      *
      * @var string
@@ -33,6 +40,7 @@ class Config_Login
      */
     public function __construct(array $config)
     {
+        $this->admin = $config["admin"];
         $this->api = $config["api"];
         $this->max_attempts = $config["max_attempts"];
         $this->pass = $config["pass"];

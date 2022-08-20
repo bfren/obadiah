@@ -18,6 +18,7 @@ formats:
   sortable_date: "Y-m-d"
 
 login:
+  admin: ""
   api: ""
   max_attempts: 5
   pass: ""
