@@ -23,13 +23,13 @@ $filters = array_merge($default_filters, $_GET);
 $services = $rota->apply_filters($filters);
 
 // build rota
-$builder = new Builder();
-$combined_days = $builder->build_combined_rota($lectionary, $services);
+$combined_days = Builder::build_combined_rota($lectionary, $services);
 
 // get action page
 $action_page = match($action) {
     "ics" => "rota-ics.php",
     "json" => "rota-json.php",
+    "print" => "rota-print.php",
     default => "rota-html.php"
 };
 
