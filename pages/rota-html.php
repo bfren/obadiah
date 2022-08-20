@@ -10,6 +10,7 @@ defined("IDX") || die("Nice try.");
 
 /** @var string $title */
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
+/** @var \Feeds\Lectionary\Lectionary $lectionary */
 /** @var array $filters */
 
 // output header
@@ -59,7 +60,7 @@ require_once("parts/header.php"); ?>
                 <span class="input-group-text" for="day">Day</span>
                 <select class="form-control" name="day">
                     <option value="">Choose...</option>
-                    <?php foreach (Builder::$days_of_the_week as $num => $txt) :  $selected = $num == Arr::get($filters, "day") ? "selected" : ""; ?>
+                    <?php foreach (Builder::$days_of_the_week as $num => $txt) : $selected = $num == Arr::get($filters, "day") ? "selected" : ""; ?>
                         <option value="<?php echo $num; ?>" <?php echo $selected; ?>><?php echo $txt; ?></option>
                     <?php endforeach; ?>
                 </select>
@@ -69,6 +70,30 @@ require_once("parts/header.php"); ?>
             <div class="input-group">
                 <span class="input-group-text" for="time">Time</span>
                 <input type="time" class="form-control" name="start" placeholder="Start" value="<?php echo Arr::get($filters, "start"); ?>" />
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-6">
+            <div class="input-group">
+                <span class="input-group-text" for="max">Limit</span>
+                <select class="form-control" name="max">
+                    <option value="">Show All</option>
+                    <?php for ($i = 1; $i <= 20; $i++) : $selected = $i == Arr::get($filters, "max") ? "selected" : ""; ?>
+                        <option value="<?php echo $i; ?>" <?php echo $selected; ?>><?php echo $i; ?> service<?php echo $i > 1 ? "s" : ""; ?></option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <span class="input-group-text" for="series">Series</span>
+                <select class="form-control" name="series">
+                    <option value="">Choose...</option>
+                    <?php foreach ($lectionary->series as $series) : $selected = $series == Arr::get($filters, "series") ? "selected" : ""; ?>
+                        <option value="<?php echo htmlentities($series); ?>" <?php echo $selected; ?>><?php echo $series; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
     </div>

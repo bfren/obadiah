@@ -20,7 +20,7 @@ $default_filters = array(
     "from" => date(C::$formats->sortable_date)
 );
 $filters = array_merge($default_filters, $_GET);
-$services = $rota->apply_filters($filters);
+$services = $rota->apply_filters($filters, $lectionary);
 
 // build rota
 $combined_days = Builder::build_combined_rota($lectionary, $services);

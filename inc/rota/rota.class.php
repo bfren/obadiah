@@ -4,11 +4,13 @@ namespace Feeds\Rota;
 
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Rota\Filters\After;
-use Feeds\Rota\Filters\Before;
-use Feeds\Rota\Filters\Day;
-use Feeds\Rota\Filters\Person;
-use Feeds\Rota\Filters\Start;
+use Feeds\Lectionary\Lectionary;
+use Feeds\Rota\Filters\After_Filter;
+use Feeds\Rota\Filters\Before_Filter;
+use Feeds\Rota\Filters\Day_Filter;
+use Feeds\Rota\Filters\Person_Filter;
+use Feeds\Rota\Filters\Series_Filter;
+use Feeds\Rota\Filters\Start_Filter;
 
 defined("IDX") || die("Nice try.");
 
@@ -89,9 +91,10 @@ class Rota
      * Apply filters and return matching services.
      *
      * @param array                     Filters to apply (usually from the query string).
+     * @param Lectionary                Lectionary object.
      * @return Service[]                Services matching the supplied filters.
      */
-    public function apply_filters(array $filters): array
+    public function apply_filters(array $filters, Lectionary $lectionary): array
     {
         // if the filters array is empty, or include=all is set, return all services
         if (!$filters || empty($filters) || Arr::get($filters, "include") == "all") {
@@ -102,28 +105,32 @@ class Rota
         $services = array();
 
         // create filter objects
-        $person_filter = new Person();
-        $after_filter = new After();
-        $before_filter = new Before();
-        $start_filter = new Start();
-        $day_filter = new Day();
+        $person_filter = new Person_Filter();
+        $after_filter = new After_Filter();
+        $before_filter = new Before_Filter();
+        $start_filter = new Start_Filter();
+        $day_filter = new Day_Filter();
+        $series_filter = new Series_Filter();
 
         foreach ($this->services as $service) {
             // include by default
             $include = true;
 
             // apply person filter
-            $include = $include && $person_filter->apply($service, Arr::get($filters, "person") ?: "");
+            $include = $include && $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
 
             // apply date filters
-            $include = $include && $after_filter->apply($service, Arr::get($filters, "from") ?: "");
-            $include = $include && $before_filter->apply($service, Arr::get($filters, "to") ?: "");
+            $include = $include && $after_filter->apply($lectionary, $service, Arr::get($filters, "from", ""));
+            $include = $include && $before_filter->apply($lectionary, $service, Arr::get($filters, "to", ""));
 
             // apply start time filter
-            $include = $include && $start_filter->apply($service, Arr::get($filters, "start") ?: "");
+            $include = $include && $start_filter->apply($lectionary, $service, Arr::get($filters, "start", ""));
 
             // apply day of the week filter
-            $include = $include && $day_filter->apply($service, Arr::get($filters, "day") ?: "");
+            $include = $include && $day_filter->apply($lectionary, $service, Arr::get($filters, "day", ""));
+
+            // apply series filter
+            $include = $include && $series_filter->apply($lectionary, $service, Arr::get($filters, "series", ""));
 
             // include the service if one of the filters has matched
             if ($include) {
