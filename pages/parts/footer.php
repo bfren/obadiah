@@ -20,6 +20,7 @@ defined("IDX") || die("Nice try.");
 
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/validate.js"></script>
 
 </body>
 
