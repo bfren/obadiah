@@ -47,6 +47,13 @@ class Config_Formats
     public string $sortable_date;
 
     /**
+     * Sortable date time.
+     *
+     * @var string
+     */
+    public string $sortable_datetime;
+
+    /**
      * Get values from formats configuration array.
      *
      * @param array $config             Formats configuration array.
@@ -60,5 +67,6 @@ class Config_Formats
         $this->ics_datetime = $config["ics_datetime"];
         $this->json_datetime = $config["json_datetime"];
         $this->sortable_date = $config["sortable_date"];
+        $this->sortable_datetime = $config["sortable_datetime"];
     }
 }
