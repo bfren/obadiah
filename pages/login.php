@@ -24,7 +24,7 @@ if (Request::$method == "POST") {
     }
 }
 
-// check login attempts
+// check login attempts to stop people trying over and over to guess the password
 Request::get_login_attempts() < C::$login->max_attempts || die("You're done - try again later.");
 
 // output header
