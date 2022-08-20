@@ -17,7 +17,7 @@ if (Request::$method == "POST") {
     // handle rota upload
     if ($submit == "rota") {
         // only allow CSV files
-        $_FILES["file"]["type"] == "text/csv" || die("You may only upload CSV files.");
+        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel ")) || die("You may only upload CSV files.");
 
         // make sure the name was set
         $name = $_POST["name"];
