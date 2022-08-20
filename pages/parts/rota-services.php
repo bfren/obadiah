@@ -40,7 +40,7 @@ $person = Arr::get($filters, "person");
                             </p>
                             <p class="mb-0">
                                 <?php if ($combined_service->main_reading) echo $combined_service->main_reading; ?>
-                                <?php if ($combined_service->additional_reading) echo sprintf("<em>%s</em>", $combined_service->additional_reading); ?>
+                                <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", $combined_service->additional_reading); ?>
                             </p>
 
                             <!-- Rota Roles -->

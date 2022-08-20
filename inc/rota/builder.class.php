@@ -134,6 +134,7 @@ class Builder
                         "Intercessions" => "Py",
                         "Lead Musician" => "M",
                         "Leader" => "L",
+                        "Leader & Preacher" => "L / Pr",
                         "Preacher" => "Pr",
                         "President" => "Ps",
                         default => null

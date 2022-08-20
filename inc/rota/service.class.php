@@ -58,6 +58,7 @@ class Service
 
         // get the service time
         $time = match ($data["Service"]) {
+            "Socially Distanced Service 9:00am" => "9:00am",
             "Sunday Morning Service 10:30am" => "10:30am",
             "Wednesday Morning Prayer 8:00am" => "8:00am",
             default => "0:00am"
@@ -114,6 +115,7 @@ class Service
             "Readings" => "Reader",
             "Refreshments" => "",
             "Service Leader" => "Leader",
+            "Socially Distanced Service Leader 22-2" => "Leader & Preacher",
             "Sound Desk" => "",
             "Wednesday Morning Prayer" => "Leader",
             "Welcome" => ""
@@ -155,7 +157,7 @@ class Service
         $individuals = preg_split("/\n/", trim($sanitised));
 
         // remove clash indicators
-        $without_clash = str_replace("!! ", "", $individuals);
+        $without_clash = str_replace(array("!! ", "** "), "", $individuals);
 
         // sort alphabetically
         sort($without_clash);

@@ -65,7 +65,7 @@ class Rota
 
             while (($row = fgetcsv($f)) !== false) {
                 // include the service
-                if ($include) {
+                if ($include && $row[1] != "No service") {
                     $service = new Service($header_row, $row);
                     $this->people = array_unique(array_merge($this->people, $service->people));
                     asort($this->people);
