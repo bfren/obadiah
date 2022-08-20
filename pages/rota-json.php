@@ -6,6 +6,7 @@ use DateInterval;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
+use Feeds\Rota\Builder;
 
 defined("IDX") || die("Nice try.");
 
@@ -22,11 +23,11 @@ $interval = new DateInterval(sprintf("PT%sM", C::$events->length_in_minutes));
 foreach ($combined_days as $date => $c_day) {
     foreach ($c_day->services as $c_service) {
         $services[] = array(
-            "id" =>             $builder->get_uuid($c_service),
-            "title" =>          $builder->get_summary($c_service, Arr::get($filters, "person") ?: ""),
+            "id" =>             Builder::get_uuid($c_service),
+            "title" =>          Builder::get_summary($c_service, Arr::get($filters, "person") ?: ""),
             "start" =>          $c_service->dt->format(C::$formats->json_datetime),
             "end" =>            $c_service->dt->add($interval)->format(C::$formats->json_datetime),
-            "description" =>    $builder->get_description($c_day, $c_service),
+            "description" =>    Builder::get_description($c_day, $c_service),
             "editable" =>       false
         );
     }

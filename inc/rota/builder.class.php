@@ -3,7 +3,6 @@
 namespace Feeds\Rota;
 
 use DateTime;
-use DateTimeZone;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
@@ -12,13 +11,28 @@ use Feeds\Rota\Service;
 class Builder
 {
     /**
+     * Array of days of the week, starting with Sunday, numbered to match DateTime format 'N'
+     *
+     * @var array
+     */
+    public static array $days_of_the_week = array(
+        7 => "Sunday",
+        1 => "Monday",
+        2 => "Tuesday",
+        3 => "Wednesday",
+        4 => "Thursday",
+        5 => "Friday",
+        6 => "Saturday",
+    );
+
+    /**
      * Build a rota of matching services, combining rota and lectionary information.
      *
      * @param Lectionary $lectionary    Lectionary object.
      * @param Service[] $services       Services matching the current filters.
      * @return Combined_Day[]           Array of objects combining rota and lectionary service info.
      */
-    public function build_combined_rota(Lectionary $lectionary, array $services): array
+    public static function build_combined_rota(Lectionary $lectionary, array $services): array
     {
         // create an empty array to hold the combined rota
         $rota = array();
@@ -72,12 +86,23 @@ class Builder
     }
 
     /**
+     * Get the name of the specified day of the week.
+     *
+     * @param int $num                  Day number.
+     * @return string
+     */
+    public static function get_day(int $num): string
+    {
+        return Arr::get(self::$days_of_the_week, $num);
+    }
+
+    /**
      * Generate a unique ID for a service.
      *
      * @param Combined_Service $service     Service object.
      * @return string                       Unique hashed ID.
      */
-    public function get_uuid(Combined_Service $service): string
+    public static function get_uuid(Combined_Service $service): string
     {
         return md5($service->dt->format("c") . $service->name);
     }
@@ -89,7 +114,7 @@ class Builder
      * @param string $person                Selected person.
      * @return string                       Service name with role indicators.
      */
-    public function get_summary(Combined_Service $service, string $person): string
+    public static function get_summary(Combined_Service $service, string $person): string
     {
         // use the name as the basic summary
         $summary = $service->name;
@@ -135,7 +160,7 @@ class Builder
      * @param Combined_Service $service     Service object.
      * @return string                       Event description.
      */
-    function get_description(Combined_Day $day, Combined_Service $service): string
+    public static function get_description(Combined_Day $day, Combined_Service $service): string
     {
         // create empty array for description lines
         $description = array();
@@ -189,5 +214,4 @@ class Builder
         // return description
         return join("\\n", $description);
     }
-
 }

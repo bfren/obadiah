@@ -6,6 +6,7 @@ use DateInterval;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
+use Feeds\Rota\Builder;
 
 defined("IDX") || die("Nice try.");
 
@@ -47,14 +48,14 @@ foreach ($combined_days as $date => $c_day) {
     foreach ($c_day->services as $c_service) {
         $tzid = $c_service->dt->getTimezone()->getName();
         $lines[] = "BEGIN:VEVENT" .         "";
-        $lines[] = "UID:" .                 $builder->get_uuid($c_service);
+        $lines[] = "UID:" .                 Builder::get_uuid($c_service);
         $lines[] = "DTSTART;TZID=$tzid:" .  $c_service->dt->format(C::$formats->ics_datetime);
         $lines[] = "DTEND;TZID=$tzid:" .    $c_service->dt->add($interval)->format(C::$formats->ics_datetime);
         $lines[] = "CREATED:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "LAST-MODIFIED:" .       date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DTSTAMP:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
-        $lines[] = "DESCRIPTION:" .         $builder->get_description($c_day, $c_service);
-        $lines[] = "SUMMARY:" .             $builder->get_summary($c_service, Arr::get($filters, "person") ?: "");
+        $lines[] = "DESCRIPTION:" .         Builder::get_description($c_day, $c_service);
+        $lines[] = "SUMMARY:" .             Builder::get_summary($c_service, Arr::get($filters, "person") ?: "");
         $lines[] = "END:VEVENT" .           "";
     }
 }
