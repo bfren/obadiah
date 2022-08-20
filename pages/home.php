@@ -19,7 +19,17 @@ require_once("parts/header.php");
 <p>These pages house the various feeds generated from Church Suite.</p>
 
 <h3>Rota</h3>
-<p>The following links will give you quick and printable rotas for upcoming services. To view the full rota or filter by person, please visit the <a href="/rota">Rota page</a>.</p>
+<?php
+    $this_week_from = new DateTimeImmutable();
+    $this_week = array(
+        "from" => $this_week_from->format(C::$formats->sortable_date),
+        "to" => $this_week_from->add(new DateInterval("P7D"))->format(C::$formats->sortable_date)
+    );
+?>
+<p>To view this week's services, please click <a href="/rota/?<?php echo http_build_query($this_week); ?>">here</a>.</p>
+
+<h4>Printable Rotas</h4>
+<p>The following links will give you quick and printable rotas for upcoming services (for best results print in landscape format).</p>
 
 <?php
     $sunday_ten_thirty_from = new DateTimeImmutable("next Sunday");
@@ -30,7 +40,7 @@ require_once("parts/header.php");
         "to" => $sunday_ten_thirty_from->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
     );
 ?>
-<p><a href="/rota/print/?<?php echo http_build_query($sunday_ten_thirty) ?>">Sunday 10:30 servies for the next four weeks</a></p>
+<p><a href="/rota/print/?<?php echo http_build_query($sunday_ten_thirty); ?>">Sunday 10:30 servies for the next four weeks</a></p>
 
 <?php
     $wednesday_eight_oclock_from = new DateTimeImmutable("next Wednesday");
@@ -42,14 +52,5 @@ require_once("parts/header.php");
     );
 ?>
 <p><a href="/rota/print/?<?php echo http_build_query($wednesday_eight_oclock); ?>">Wednesday Morning Prayer for the next four months</a></p>
-
-<?php
-    $socially_distanced = array(
-        "day" => 7, // Sunday
-        "start" => "09:00",
-        "max" => 1
-    );
-?>
-<p><a href="/rota/print/?<?php echo http_build_query($socially_distanced); ?>">The next socially-distanced service</a></p>
 
 <?php require_once("parts/footer.php"); ?>
