@@ -64,9 +64,10 @@ require_once("parts/header.php"); ?>
         <div class="col-2"></div>
         <div class="col-10">
             <button type="submit" class="btn btn-primary">Apply</button>
-            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary" target="_blank">ICS</a>
-            <a href="/rota/json/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary d-none d-sm-inline" target="_blank">JSON</a>
-            <a href="/rota/" class="btn btn-danger ms-3">Reset</a>
+            <a href="/rota/" class="btn btn-danger">Reset</a>
+            <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary ms-3" target="_blank">ICS</a>
+            <a href="/rota/json/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary d-none d-sm-inline-block" target="_blank">JSON</a>
+            <a href="/rota/print/?<?php echo $_SERVER["QUERY_STRING"]; ?>" class="btn btn-secondary d-none d-sm-inline-block" target="_blank">Print</a>
         </div>
     </div>
 </form>

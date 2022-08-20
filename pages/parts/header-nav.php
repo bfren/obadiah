@@ -41,7 +41,7 @@ if (Request::$auth) {
             </button>
 
             <div class="collapse navbar-collapse justify-content-end text-end" id="navbar">
-                <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+                <ul class="navbar-nav ms-auto mb-0">
                     <?php foreach ($links as $link_title => $link) : ?>
                         <li class="nav-item">
                             <?php if ($title == $link_title) : ?>
