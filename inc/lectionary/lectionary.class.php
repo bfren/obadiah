@@ -2,6 +2,7 @@
 
 namespace Feeds\Lectionary;
 
+use DateTimeImmutable;
 use Feeds\Airtable\Airtable;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
@@ -16,6 +17,13 @@ class Lectionary
      * @var Day[]
      */
     public array $days = array();
+
+    /**
+     * The series covered by this lectionary, sorted alphabetically.
+     *
+     * @var string[]
+     */
+    public array $series = array();
 
     /**
      * Load lectionary from Airtable.
@@ -48,6 +56,7 @@ class Lectionary
         $services_records = $services->make_request(array("view" => "Feed", "fields" => $services_fields));
 
         // add days and services
+        $series = array();
         foreach ($days_records as $day_record) {
             // create Day
             $day = new Day();
@@ -81,10 +90,38 @@ class Lectionary
                 $service->main_reading = Arr::get($service_fields, "Main Reading");
                 $service->additional_reading = Arr::get($service_fields, "Additional Reading");
                 $day->services[] = $service;
+                $series[] = $service->series;
             }
 
             // add Day to Lectionary
             $this->days[] = $day;
         }
+
+        // store series
+        $this->series = array_unique(array_filter($series));
+        asort($this->series);
+    }
+
+    /**
+     * Get service information from the Lectionary for the specified date and time.
+     *
+     * @param DateTimeImmutable $dt     Service date and time.
+     * @return null|Service             Lectionary service.
+     */
+    public function get_service(DateTimeImmutable $dt): ?Service
+    {
+        // get the Lectionary day
+        $date = $dt->format(C::$formats->sortable_date);
+        $days = array_values(array_filter($this->days, function (Day $day) use ($date) {
+            return $day->date == $date;
+        }));
+
+        // there should be precisely one day - if not, return null
+        if (count($days) != 1) {
+            return null;
+        }
+
+        // get the service at the specified time on this day
+        return $days[0]->get_service($dt);
     }
 }
