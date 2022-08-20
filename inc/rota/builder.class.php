@@ -11,6 +11,11 @@ use Feeds\Rota\Service;
 class Builder
 {
     /**
+     * Character used to join roles in service summary descriptions.
+     */
+    private const ROLE_JOIN = "/";
+
+    /**
      * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
      *
      * @var array
@@ -135,7 +140,7 @@ class Builder
                         "Intercessions" => "Py",
                         "Lead Musician" => "M",
                         "Leader" => "L",
-                        "Leader & Preacher" => "L/Pr",
+                        "Leader & Preacher" => join(self::ROLE_JOIN, array("L", "Pr")),
                         "Preacher" => "Pr",
                         "President" => "Ps",
                         default => null
@@ -152,7 +157,7 @@ class Builder
 
         // sort roles and add to summary
         sort($roles);
-        return sprintf("%s (%s)", $summary, join("/", $roles));
+        return sprintf("%s (%s)", $summary, join(self::ROLE_JOIN, $roles));
     }
 
     /**
