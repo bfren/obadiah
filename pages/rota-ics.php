@@ -55,7 +55,7 @@ foreach ($combined_days as $date => $c_day) {
         $lines[] = "LAST-MODIFIED:" .       date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DTSTAMP:" .             date(C::$formats->ics_datetime, $rota->last_modified_timestamp);
         $lines[] = "DESCRIPTION:" .         Builder::get_description($c_day, $c_service);
-        $lines[] = "SUMMARY:" .             Builder::get_summary($c_service, Arr::get($filters, "person") ?: "");
+        $lines[] = "SUMMARY:" .             Builder::get_summary($c_service, Arr::get($filters, "person", ""));
         $lines[] = "END:VEVENT" .           "";
     }
 }
