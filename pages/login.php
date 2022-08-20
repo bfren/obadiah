@@ -47,7 +47,7 @@ require_once("parts/header.php");
 </form>
 
 <script type="text/javascript">
-    document.getElementById("pass").focus();
+    document.getElementById("password").focus();
 </script>
 
 <?php require_once("parts/footer.php"); ?>
