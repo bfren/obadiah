@@ -21,7 +21,7 @@ require_once("parts/header.php"); ?>
 <form method="GET" action="/rota/">
     <div class="row mb-2">
         <div class="col-8 col-sm-6">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-text" for="person">Person</span>
                 <select class="form-control" name="person">
                     <option value="">Choose...</option>
@@ -31,8 +31,8 @@ require_once("parts/header.php"); ?>
                 </select>
             </div>
         </div>
-        <div class="col-4 col-sm-6 d-flex align-items-end">
-            <div class="form-check ">
+        <div class="col-4 col-sm-6 d-flex align-items-center">
+            <div class="form-check">
                 <?php $checked = Arr::get($filters, "include") == "all" ? "checked" : ""; ?>
                 <input class="form-check-input" type="checkbox" value="all" name="include" id="include" <?php echo $checked; ?> />
                 <label class="form-check-label" for="include">Include All</label>
@@ -41,13 +41,13 @@ require_once("parts/header.php"); ?>
     </div>
     <div class="row mb-2">
         <div class="col-6">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-text" for="from">From</span>
                 <input type="date" class="form-control" name="from" id="from" placeholder="From" value="<?php echo Arr::get($filters, "from"); ?>" />
             </div>
         </div>
         <div class="col-6">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-text" for="to">To</span>
                 <input type="date" class="form-control" name="to" id="to" placeholder="To" value="<?php echo Arr::get($filters, "to"); ?>" />
             </div>
@@ -55,7 +55,7 @@ require_once("parts/header.php"); ?>
     </div>
     <div class="row mb-2">
         <div class="col-6">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-text" for="day">Day</span>
                 <select class="form-control" name="day">
                     <option value="">Choose...</option>
@@ -66,7 +66,7 @@ require_once("parts/header.php"); ?>
             </div>
         </div>
         <div class="col-6">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-text" for="time">Time</span>
                 <input type="time" class="form-control" name="start" placeholder="Start" value="<?php echo Arr::get($filters, "start"); ?>" />
             </div>
