@@ -90,9 +90,9 @@ class Builder
      * Get the name of the specified day of the week.
      *
      * @param int $num                  Day number.
-     * @return string
+     * @return null|string              Day name.
      */
-    public static function get_day(int $num): string
+    public static function get_day(int $num): null|string
     {
         return Arr::get(self::$days_of_the_week, $num);
     }
