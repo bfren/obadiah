@@ -2,20 +2,22 @@
 
 namespace Feeds\Rota\Filters;
 
+use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
 defined("IDX") || die("Nice try.");
 
-class Person implements Filter
+class Person_Filter implements Filter
 {
     /**
      * Returns true if the person ($value) is doing one of the roles.
      *
+     * @param Lectionary $lectionary    Lectionary object
      * @param Service $service          Service object.
      * @param string $value             A person's name.
      * @return bool                     True if person ($value) is doing one of the roles in the service.
      */
-    public function apply(Service $service, string $value) : bool
+    public function apply(Lectionary $lectionary, Service $service, string $value) : bool
     {
         // if no person value is set, include the service
         if (!$value) {

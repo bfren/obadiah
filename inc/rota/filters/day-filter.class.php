@@ -2,20 +2,22 @@
 
 namespace Feeds\Rota\Filters;
 
+use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
 defined("IDX") || die("Nice try.");
 
-class Day implements Filter
+class Day_Filter implements Filter
 {
     /**
      * Returns true if the service is on the specified day of the week.
      *
+     * @param Lectionary $lectionary    Lectionary object
      * @param Service $service          Service object.
      * @param string $value             Day of the week number (Sunday is 1).
      * @return bool                     True if the service is on the specified day of the week.
      */
-    public function apply(Service $service, string $value): bool
+    public function apply(Lectionary $lectionary, Service $service, string $value): bool
     {
         // if no time value is set, include the service
         if (!$value) {

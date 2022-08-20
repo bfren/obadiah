@@ -5,20 +5,22 @@ namespace Feeds\Rota\Filters;
 use DateTimeImmutable;
 use DateTimeZone;
 use Feeds\Config\Config as C;
+use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
 defined("IDX") || die("Nice try.");
 
-class Before implements Filter
+class Before_Filter implements Filter
 {
     /**
      * Returns true if the service is before the specified date.
      *
+     * @param Lectionary $lectionary    Lectionary object
      * @param Service $service          Service object.
      * @param string $value             A date formatted YYYY-MM-DD.
      * @return bool                     True if the service is before the specified date.
      */
-    public function apply(Service $service, string $value): bool
+    public function apply(Lectionary $lectionary, Service $service, string $value): bool
     {
         // if no date value is set, include the service
         if (!$value) {
