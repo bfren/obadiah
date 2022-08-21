@@ -83,6 +83,7 @@ class Lectionary
             $l_services = array();
             foreach ($day_services as $service_record) {
                 $service_fields = $service_record["fields"];
+                $series[] = Arr::get($service_fields, "Series Title");
                 $l_services[] = new Service(
                     Arr::get($service_fields, "Time"),
                     Arr::get($service_fields, "Series Title"),
@@ -91,7 +92,6 @@ class Lectionary
                     Arr::get($service_fields, "Main Reading"),
                     Arr::get($service_fields, "Additional Reading")
                 );
-                $series[] = Arr::get($service_fields, "Series Title");
             }
 
             // add Day to Lectionary
