@@ -98,8 +98,10 @@ class Lectionary
             $days[] = new Day($date, Arr::get($day_fields, "Name"), $l_services);
         }
 
-        // store arrays
+        // store days
         $this->days = $days;
+
+        // store series
         asort($series);
         $this->series = array_unique(array_filter($series));
     }
