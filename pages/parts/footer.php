@@ -18,9 +18,9 @@ defined("IDX") || die("Nice try.");
     </div>
 </footer>
 
-<script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/validate.js"></script>
+<script src="/resources/js/popper.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/validate.js"></script>
 
 </body>
 

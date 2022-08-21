@@ -22,7 +22,7 @@ $today = new DateTimeImmutable("now", C::$events->timezone);
     </div>
 </footer>
 
-<script src="/js/bootstrap.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 
 </body>
 

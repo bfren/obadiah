@@ -14,8 +14,8 @@ defined("IDX") || die("Nice try.");
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php echo $title; ?> | Church Suite Feeds</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/feeds.min.css" rel="stylesheet" />
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/css/feeds.min.css" rel="stylesheet" />
 </head>
 
 <body class="d-flex flex-column h-100">

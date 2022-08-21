@@ -33,7 +33,7 @@ if (Request::$auth) {
     <nav class="navbar navbar-expand-md navbar-light bg-light py-3 mb-4 border-bottom">
         <div class="container-fluid d-flex justify-content-between">
             <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none">
-                <img class="logo me-4" style="max-height: 40px;" src="/img/logo-small.png" alt="Christ Church Selly Park" />
+                <img class="logo me-4" src="/resources/img/logo-small.png" alt="Christ Church Selly Park" />
                 <span class="fs-4">Church Feeds</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
