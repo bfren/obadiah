@@ -31,8 +31,8 @@ if (Request::$auth) {
 
 <header class="d-print-none">
     <nav class="navbar navbar-expand-md navbar-light bg-light py-3 mb-4 border-bottom">
-        <div class="container-fluid">
-            <a href="/" class="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
+        <div class="container-fluid d-flex justify-content-between">
+            <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none">
                 <img class="logo me-4" style="max-height: 40px;" src="/img/logo-small.png" alt="Christ Church Selly Park" />
                 <span class="fs-4">Church Feeds</span>
             </a>
@@ -40,10 +40,10 @@ if (Request::$auth) {
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-end text-end" id="navbar">
-                <ul class="navbar-nav ms-auto mb-0">
+            <div class="collapse navbar-collapse text-end" id="navbar">
+                <ul class="navbar-nav ms-5 mb-0">
                     <?php foreach ($links as $link_title => $link) : ?>
-                        <li class="nav-item">
+                        <li class="nav-item ms-5">
                             <?php if ($title == $link_title) : ?>
                                 <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
                             <?php else : ?>
@@ -56,25 +56,3 @@ if (Request::$auth) {
         </div>
     </nav>
 </header>
-<!--
-<div class="container-fluid d-print-none">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img class="logo me-4" style="max-height: 40px;" src="/img/logo-small.png" alt="Christ Church Selly Park" />
-            <span class="fs-4">Church Suite Feeds</span>
-        </a>
-
-        <ul class="nav nav-pills">
-            <?php foreach ($links as $link_title => $link) : ?>
-                <li class="nav-item">
-                    <?php if ($title == $link_title) : ?>
-                        <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
-                    <?php else : ?>
-                        <a href="<?php echo $link; ?>" class="nav-link"><?php echo $link_title; ?></a>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </header>
-</div>
-                    -->
