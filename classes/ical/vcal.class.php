@@ -100,14 +100,14 @@ class VCal
                 }
 
                 // get the first $max characters
-                $folded .= substr($str, 0, $max) . "\r\n ";
+                $folded .= sprintf("%s\r\n", substr($str, 0, $max));
 
                 // remove the first $max characters and go again
                 $str = substr($str, $max);
             }
 
             // add the folded string to the ics string
-            $ics .= $folded . "\r\n";
+            $ics .= sprintf("%s\r\n", $folded);
         }
 
         // output text

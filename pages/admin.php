@@ -62,7 +62,8 @@ sort($csv_files);
  */
 function get_csv_modified(string $file): string
 {
-    $modified = new DateTimeImmutable("@" . filemtime(sprintf("%s/%s", C::$dir->rota, $file)));
+    $path = sprintf("%s/%s", C::$dir->rota, $file);
+    $modified = new DateTimeImmutable(sprintf("@%s", filemtime($path)));
     $modified->setTimezone(C::$events->timezone);
     return $modified->format(C::$formats->sortable_datetime);
 }

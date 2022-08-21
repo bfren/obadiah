@@ -62,7 +62,7 @@ class Rota
             // open the file for reading
             $f = fopen($file, "r");
             if ($f === false) {
-                die("Unable to open the file: $file.");
+                die(sprintf("Unable to open the file: %s.", $file));
             }
 
             // read each line of the csv file

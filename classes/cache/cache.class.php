@@ -55,7 +55,7 @@ class Cache
     private function get_or_set(string $id, callable $callable): mixed
     {
         // create path to cache file
-        $file = "$this->dir_path/$id.cache";
+        $file = sprintf("%s/%s.cache", $this->dir_path, $id);
 
         // if the file exists, and the cache file has not expired, read and unserialise the value
         if (file_exists($file) && time() - filemtime($file) < $this->duration_in_seconds) {

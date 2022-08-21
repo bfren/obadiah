@@ -53,7 +53,7 @@ class Airtable
         // decode JSON response and output on error
         $result = json_decode($json, true);
         if (isset($result["error"])) {
-            return "Error: " . $result["error"]["message"];
+            return sprintf("Error: %s", $result["error"]["message"]);
         }
 
         // get records

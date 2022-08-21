@@ -39,15 +39,15 @@ class VEvent
     public function add_to_array(array &$lines, int $last_modified): void
     {
         $tzid = $this->start->getTimezone()->getName();
-        $lines[] = "BEGIN:VEVENT" .         "";
-        $lines[] = "UID:" .                 $this->uid;
-        $lines[] = "DTSTART;TZID=$tzid:" .  $this->start->format(C::$formats->ics_datetime);
-        $lines[] = "DTEND;TZID=$tzid:" .    $this->end->format(C::$formats->ics_datetime);
-        $lines[] = "SUMMARY:" .             $this->summary;
-        $lines[] = "DESCRIPTION:" .         $this->description;
-        $lines[] = "CREATED:" .             date(C::$formats->ics_datetime, $last_modified);
-        $lines[] = "LAST-MODIFIED:" .       date(C::$formats->ics_datetime, $last_modified);
-        $lines[] = "DTSTAMP:" .             date(C::$formats->ics_datetime, $last_modified);
-        $lines[] = "END:VEVENT" .           "";
+        $lines[] = "BEGIN:VEVENT";
+        $lines[] = sprintf("UID:%s", $this->uid);
+        $lines[] = sprintf("DTSTART;TZID=%s:%s", $tzid, $this->start->format(C::$formats->ics_datetime));
+        $lines[] = sprintf("DTEND;TZID=%s:%s", $tzid, $this->end->format(C::$formats->ics_datetime));
+        $lines[] = sprintf("SUMMARY:%s", $this->summary);
+        $lines[] = sprintf("DESCRIPTION:%s", $this->description);
+        $lines[] = sprintf("CREATED:%s", date(C::$formats->ics_datetime, $last_modified));
+        $lines[] = sprintf("LAST-MODIFIED:%s", date(C::$formats->ics_datetime, $last_modified));
+        $lines[] = sprintf("DTSTAMP:%s", date(C::$formats->ics_datetime, $last_modified));
+        $lines[] = "END:VEVENT";
     }
 }

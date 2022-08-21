@@ -72,7 +72,7 @@ class Service
         };
 
         // get the date as a timestamp
-        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time[0], C::$events->timezone);
+        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $time[0]), C::$events->timezone);
         $this->length = new DateInterval($time[1]);
 
         // get the service description
