@@ -9,14 +9,14 @@ class Config_Airtable
      *
      * @var string
      */
-    public string $api_key;
+    public readonly string $api_key;
 
     /**
      * Base reference.
      *
      * @var string
      */
-    public string $base;
+    public readonly string $base;
 
     /**
      * Get values from Airtable configuration array.

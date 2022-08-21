@@ -9,49 +9,49 @@ class Config_Formats
      *
      * @var string
      */
-    public string $csv_import_datetime;
+    public readonly string $csv_import_datetime;
 
     /**
      * Display date.
      *
      * @var string
      */
-    public string $display_date;
+    public readonly string $display_date;
 
     /**
      * Display time.
      *
      * @var string
      */
-    public string $display_time;
+    public readonly string $display_time;
 
     /**
      * ICS date time.
      *
      * @var string
      */
-    public string $ics_datetime;
+    public readonly string $ics_datetime;
 
     /**
      * JSON date time.
      *
      * @var string
      */
-    public string $json_datetime;
+    public readonly string $json_datetime;
 
     /**
      * Sortable date.
      *
      * @var string
      */
-    public string $sortable_date;
+    public readonly string $sortable_date;
 
     /**
      * Sortable date time.
      *
      * @var string
      */
-    public string $sortable_datetime;
+    public readonly string $sortable_datetime;
 
     /**
      * Get values from formats configuration array.

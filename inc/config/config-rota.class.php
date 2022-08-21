@@ -11,14 +11,14 @@ class Config_Rota
      *
      * @var int
      */
-    public int $default_days;
+    public readonly int $default_days;
 
     /**
      * Array of roles on this rota, with override descriptions and abbreviations.
      *
      * @var Config_Rota_Role[]
      */
-    public array $roles = array();
+    public readonly array $roles;
 
     /**
      * Get values from rota configuration array.
@@ -29,9 +29,11 @@ class Config_Rota
     public function __construct(array $config)
     {
         $this->default_days = $config["default_days"];
+        $roles = array();
         foreach ($config["roles"] as $role) {
-            $this->roles[] = new Config_Rota_Role($role);
+            $roles[] = new Config_Rota_Role($role);
         }
+        $this->roles = $roles;
     }
 
     /**

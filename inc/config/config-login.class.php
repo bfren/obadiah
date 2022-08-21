@@ -9,28 +9,28 @@ class Config_Login
      *
      * @var string
      */
-    public string $admin;
+    public readonly string $admin;
 
     /**
      * API passphrase.
      *
      * @var string
      */
-    public string $api;
+    public readonly string $api;
 
     /**
      * Maximum number of login attempts.
      *
      * @var int
      */
-    public int $max_attempts;
+    public readonly int $max_attempts;
 
     /**
      * Login passphrase.
      *
      * @var string
      */
-    public string $pass;
+    public readonly string $pass;
 
     /**
      * Get values from Login configuration array.

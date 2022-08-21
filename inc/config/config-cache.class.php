@@ -9,7 +9,7 @@ class Config_Cache
      *
      * @var int
      */
-    public int $duration_in_seconds;
+    public readonly int $duration_in_seconds;
 
     /**
      * Get values from cache configuration array.

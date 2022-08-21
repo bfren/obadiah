@@ -9,28 +9,28 @@ class Config_Dir
      *
      * @var string
      */
-    public string $cwd;
+    public readonly string $cwd;
 
     /**
      * Path to data directory.
      *
      * @var string
      */
-    public string $data;
+    public readonly string $data;
 
     /**
      * Path to cache data directory.
      *
      * @var string
      */
-    public string $cache;
+    public readonly string $cache;
 
     /**
      * Path to rota data directory.
      *
      * @var string
      */
-    public string $rota;
+    public readonly string $rota;
 
     /**
      * Ensure data directories exist.

@@ -11,14 +11,14 @@ class Config_Events
      *
      * @var int
      */
-    public int $length_in_minutes;
+    public readonly int $length_in_minutes;
 
     /**
      * Default timezone.
      *
      * @var DateTimeZone
      */
-    public DateTimeZone $timezone;
+    public readonly DateTimeZone $timezone;
 
     /**
      * Get values from events configuration array.
