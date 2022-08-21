@@ -26,3 +26,9 @@ login:
 
 rota:
   default_days: 28
+  roles:
+    - { name: "Intercessions", desc: "Intercessor", abbv: "I" }
+    - { name: "Preacher", abbv: "Pr" }
+    - { name: "President", abbv: "Ps" }
+    - { name: "Readings", desc: "Reader", abbv: "R" }
+    - { name: "Service Leader", desc: "Leader", abbv: "L" }
