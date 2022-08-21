@@ -108,9 +108,9 @@ class Builder
      * @param Combined_Service $service     Service object.
      * @return string                       Unique hashed ID.
      */
-    public static function get_uuid(Combined_Service $service): string
+    public static function get_uid(Combined_Service $service): string
     {
-        return md5($service->start->format("c") . $service->name);
+        return sha1($service->start->format("c") . $service->name);
     }
 
     /**
