@@ -144,5 +144,6 @@ class Request
     {
         session_write_close();
         header(sprintf("Location: %s", $uri));
+        exit;
     }
 }
