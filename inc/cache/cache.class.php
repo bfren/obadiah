@@ -10,30 +10,16 @@ defined("IDX") || die("Nice try.");
 class Cache
 {
     /**
-     * Path to cache data directory.
-     *
-     * @var string
-     */
-    private readonly string $dir_path;
-
-    /**
-     * Duration in seconds before cache entries expire.
-     *
-     * @var int
-     */
-    private readonly int $duration_in_seconds;
-
-    /**
      * Create a new cache object.
      *
-     * @param string $dir_path          Cache data directory.
+     * @param string $dir_path          Absolute path to cache data directory.
      * @param int $duration_in_seconds  Duration in seconds before cache entries expire.
      * @return void
      */
-    public function __construct(string $dir_path, int $duration_in_seconds)
-    {
-        $this->dir_path = $dir_path;
-        $this->duration_in_seconds = $duration_in_seconds;
+    public function __construct(
+        public readonly string $dir_path,
+        public readonly int $duration_in_seconds
+    ) {
     }
 
     /**

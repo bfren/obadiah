@@ -5,20 +5,6 @@ namespace Feeds\ICal;
 class VCal
 {
     /**
-     * Array of events.
-     *
-     * @var VEvent[]
-     */
-    public array $events = array();
-
-    /**
-     * Timestamp when the calendar was last modified (used for created time).
-     *
-     * @var int
-     */
-    public readonly int $last_modified;
-
-    /**
      * Holds each line of the calendar output.
      *
      * @var string[]
@@ -28,13 +14,14 @@ class VCal
     /**
      * Add calendar headers and timezone settings for Europe/London.
      *
+     * @param VEvent[] $events          Array of events in this calendar.
      * @param int $last_modified        Timestamp when the calendar was last modified.
      * @return void
      */
-    public function __construct(int $last_modified)
-    {
-        $this->last_modified = $last_modified;
-
+    public function __construct(
+        public readonly array $events,
+        public readonly int $last_modified
+    ) {
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
         $this->lines[] = "PRODID:-//bcg|design//NONSGML CCSP//EN";

@@ -16,14 +16,14 @@ class Lectionary
      *
      * @var Day[]
      */
-    public array $days = array();
+    public readonly array $days;
 
     /**
      * The series covered by this lectionary, sorted alphabetically.
      *
      * @var string[]
      */
-    public array $series = array();
+    public readonly array $series;
 
     /**
      * Load lectionary from Airtable.
@@ -56,22 +56,21 @@ class Lectionary
         $services_records = $services->make_request(array("view" => "Feed", "fields" => $services_fields));
 
         // add days and services
+        $days = array();
         $series = array();
         foreach ($days_records as $day_record) {
-            // create Day
-            $day = new Day();
+            // get fields
             $day_fields = $day_record["fields"];
-            $day->date = Arr::get($day_fields, "Date");
-            $day->name = Arr::get($day_fields, "Name");
 
-            // if date is not set, continue
-            if (!$day->date) {
+            // check date - if it is not set, continue
+            $date = Arr::get($day_fields, "Date");
+            if (!$date) {
                 continue;
             }
 
             // get Services for Day
-            $day_services = array_filter($services_records, function ($v, $k) use ($day) {
-                return $v["fields"]["Date"] === $day->date;
+            $day_services = array_filter($services_records, function (array $v, int $k) use ($date) {
+                return $v["fields"]["Date"] === $date;
             }, ARRAY_FILTER_USE_BOTH);
 
             // if there are no services, continue
@@ -80,26 +79,28 @@ class Lectionary
             }
 
             // add Services to Day
+            $l_services = array();
             foreach ($day_services as $service_record) {
-                $service = new Service();
                 $service_fields = $service_record["fields"];
-                $service->time = Arr::get($service_fields, "Time");
-                $service->series = Arr::get($service_fields, "Series Title");
-                $service->num = Arr::get($service_fields, "Sermon Num");
-                $service->title = Arr::get($service_fields, "Sermon Title");
-                $service->main_reading = Arr::get($service_fields, "Main Reading");
-                $service->additional_reading = Arr::get($service_fields, "Additional Reading");
-                $day->services[] = $service;
-                $series[] = $service->series;
+                $l_services[] = new Service(
+                    Arr::get($service_fields, "Time"),
+                    Arr::get($service_fields, "Series Title"),
+                    Arr::get($service_fields, "Sermon Num"),
+                    Arr::get($service_fields, "Sermon Title"),
+                    Arr::get($service_fields, "Main Reading"),
+                    Arr::get($service_fields, "Additional Reading")
+                );
+                $series[] = Arr::get($service_fields, "Series Title");
             }
 
             // add Day to Lectionary
-            $this->days[] = $day;
+            $days[] = new Day($date, Arr::get($day_fields, "Name"), $l_services);
         }
 
-        // store series
+        // store arrays
+        $this->days = $days;
+        asort($series);
         $this->series = array_unique(array_filter($series));
-        asort($this->series);
     }
 
     /**

@@ -44,8 +44,8 @@ class Builder
 
         foreach ($lectionary->days as $day) {
             // look for any services on this day
-            $rota_services = array_filter($services, function ($service) use ($day) {
-                return $service->dt->format(C::$formats->sortable_date) == $day->date;
+            $rota_services = array_filter($services, function (Service $service) use ($day) {
+                return $service->start->format(C::$formats->sortable_date) == $day->date;
             });
 
             // if there are no services, continue
@@ -53,38 +53,31 @@ class Builder
                 continue;
             }
 
-            // add the day to the rota
-            $c_day = new Combined_Day();
-            $c_day->dt = DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0);
-            $c_day->name = $day->name;
-            $c_day->services = array();
-
             // add all the services
+            $c_services = array();
             foreach ($rota_services as $rota_service) {
-                // add rota information
-                $c_service = new Combined_Service();
-                $c_service->start = $rota_service->dt;
-                $c_service->end = $rota_service->dt->add($rota_service->length);
-                $c_service->time = $rota_service->dt->format(C::$formats->display_time);
-                $c_service->name = $rota_service->description;
-                $c_service->roles = $rota_service->roles;
-
-                // get lectionary information
-                $lectionary_service = $day->get_service($rota_service->dt);
-                if ($lectionary_service) {
-                    $c_service->series_title = $lectionary_service->series;
-                    $c_service->sermon_num = $lectionary_service->num;
-                    $c_service->sermon_title = $lectionary_service->title;
-                    $c_service->main_reading = $lectionary_service->main_reading;
-                    $c_service->additional_reading = $lectionary_service->additional_reading;
-                }
-
-                // add service to the rota
-                $c_day->services[] = $c_service;
+                // get lectionary information and create combined service
+                $lectionary_service = $day->get_service($rota_service->start);
+                $c_services[] = new Combined_Service(
+                    start: $rota_service->start,
+                    end: $rota_service->start->add($rota_service->length),
+                    time: $rota_service->start->format(C::$formats->display_time),
+                    name: $rota_service->description,
+                    roles: $rota_service->roles,
+                    series_title: $lectionary_service?->series,
+                    sermon_num: $lectionary_service?->num,
+                    sermon_title: $lectionary_service?->title,
+                    main_reading: $lectionary_service?->main_reading,
+                    additional_reading: $lectionary_service?->additional_reading
+                );
             }
 
             // add the day to the rota
-            $rota[$day->date] = $c_day;
+            $rota[$day->date] = new Combined_Day(
+                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0),
+                name: $day->name,
+                services: $c_services
+            );
         }
 
         // return built rota

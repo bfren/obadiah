@@ -7,44 +7,23 @@ defined("IDX") || die("Nice try.");
 class Service
 {
     /**
-     * The start time of this service.
+     * Create Service object.
      *
-     * @var string
+     * @param string $time                      The start time of this service.
+     * @param null|string $series               Optional name of the teaching series.
+     * @param null|int $num                     Optional 1-based index of this sermon within the teaching series.
+     * @param null|string $title                Optional sermon title.
+     * @param null|string $main_reading         Optional main reading.
+     * @param null|string $additional_reading   Optional additional reading.
+     * @return void
      */
-    public string $time;
-
-    /**
-     * The name of the teaching series.
-     *
-     * @var null|string
-     */
-    public ?string $series;
-
-    /**
-     * The 1-based index of this sermon within the teaching series.
-     *
-     * @var null|int
-     */
-    public ?int $num;
-
-    /**
-     * The sermon title.
-     *
-     * @var null|string
-     */
-    public ?string $title;
-
-    /**
-     * The main reading.
-     *
-     * @var null|string
-     */
-    public ?string $main_reading;
-
-    /**
-     * An optional additional reading.
-     *
-     * @var null|string
-     */
-    public ?string $additional_reading;
+    public function __construct(
+        public readonly string $time,
+        public readonly ?string $series,
+        public readonly ?int $num,
+        public readonly ?string $title,
+        public readonly ?string $main_reading,
+        public readonly ?string $additional_reading
+    ) {
+    }
 }

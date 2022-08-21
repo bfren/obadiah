@@ -14,13 +14,11 @@ defined("IDX") || die("Nice try.");
 /** @var \Feeds\Rota\Rota $rota */
 /** @var array $filters */
 
-// create calendar
-$vcal = new VCal($rota->last_modified_timestamp);
-
 // add each service
+$events = array();
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
-        $vcal->events[] = new VEvent(
+        $events[] = new VEvent(
             Builder::get_uid($c_service),
             $c_service->start,
             $c_service->end,
@@ -30,6 +28,7 @@ foreach ($combined_days as $c_day) {
     }
 }
 
-// output calendar
+// create and output calendar
+$vcal = new VCal($events, $rota->last_modified_timestamp);
 $vcal->send_headers("rota", Request::$debug);
 $vcal->print_output();

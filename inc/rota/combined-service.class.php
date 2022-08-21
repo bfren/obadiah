@@ -7,72 +7,31 @@ use DateTimeImmutable;
 class Combined_Service
 {
     /**
-     * Service start.
+     * Create Combined_Service object.
      *
-     * @var DateTimeImmutable
+     * @param DateTimeImmutable $start          Service start.
+     * @param DateTimeImmutable $end            Service end.
+     * @param string $time                      Service start time (e.g. 10:30).
+     * @param string $name                      Service name (e.g. 'Morning Prayer').
+     * @param null|string $series_title         Optional name of the teaching series.
+     * @param null|string $sermon_num           Optional 1-based index of this sermon within the teaching series.
+     * @param null|string $sermon_title         Optional sermon title.
+     * @param null|string $main_reading         Optional main reading.
+     * @param null|string $additional_reading   Optional additional reading.
+     * @param array $roles                      Roles from the rota.
+     * @return void
      */
-    public DateTimeImmutable $start;
-
-    /**
-     * Service end.
-     *
-     * @var DateTimeImmutable
-     */
-    public DateTimeImmutable $end;
-
-    /**
-     * Service start time (e.g. 10:30).
-     *
-     * @var string
-     */
-    public string $time;
-
-    /**
-     * Service name (e.g. 'Morning Prayer').
-     *
-     * @var string
-     */
-    public string $name;
-
-    /**
-     * Optional series title.
-     *
-     * @var null|string
-     */
-    public ?string $series_title;
-
-    /**
-     * Optional sermon number.
-     *
-     * @var null|string
-     */
-    public ?string $sermon_num;
-
-    /**
-     * Optional sermon title.
-     *
-     * @var null|string
-     */
-    public ?string $sermon_title;
-
-    /**
-     * Optional main reading.
-     *
-     * @var null|string
-     */
-    public ?string $main_reading;
-
-    /**
-     * Optional additional reading.
-     *
-     * @var null|string
-     */
-    public ?string $additional_reading;
-
-    /**
-     * Roles from the rota.
-     *
-     * @var array
-     */
-    public array $roles = array();
+    public function __construct(
+        public readonly DateTimeImmutable $start,
+        public readonly DateTimeImmutable $end,
+        public readonly string $time,
+        public readonly string $name,
+        public readonly ?string $series_title,
+        public readonly ?string $sermon_num,
+        public readonly ?string $sermon_title,
+        public readonly ?string $main_reading,
+        public readonly ?string $additional_reading,
+        public readonly array $roles
+    ) {
+    }
 }

@@ -9,18 +9,11 @@ defined("IDX") || die("Nice try.");
 class Airtable
 {
     /**
-     * Airtable API key.
-     *
-     * @var string
-     */
-    private string $key;
-
-    /**
      * Constructed URL to the API for a specified table (see constructor).
      *
      * @var string
      */
-    private string $url;
+    private readonly string $url;
 
     /**
      * Connect to the Airtable API for the specified table.
@@ -30,7 +23,6 @@ class Airtable
      */
     public function __construct(string $table)
     {
-        $this->key = C::$airtable->api_key;
         $this->url = sprintf("https://api.airtable.com/v0/%s/%s", C::$airtable->base, $table);
     }
 
@@ -46,8 +38,8 @@ class Airtable
         $query = http_build_query($data);
 
         // create curl request
-        $ch = curl_init("$this->url?$query");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $this->key"));
+        $ch = curl_init(sprintf("%s?%s", $this->url, $query));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Bearer %s", C::$airtable->api_key)));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         // make request and output on error

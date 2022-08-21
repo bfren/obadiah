@@ -21,21 +21,21 @@ class Rota
      *
      * @var Service[]
      */
-    public array $services = array();
+    public readonly array $services;
 
     /**
      * All the different people in this rota.
      *
      * @var string[]
      */
-    public array $people = array();
+    public readonly array $people;
 
     /**
      * The time the rota csv file was last modified.
      *
      * @var int
      */
-    public int $last_modified_timestamp = 0;
+    public readonly int $last_modified_timestamp;
 
     /**
      * Load all files from a rota data directory.
@@ -47,12 +47,15 @@ class Rota
         // get csv files from path
         $csv = glob(sprintf("%s/*.csv", C::$dir->rota));
 
-        // read each file
+        // read each file into arrays
+        $services = array();
+        $people = array();
+        $last_modified_timestamp = 0;
         foreach ($csv as $file) {
             // store the file modification time
             $last_modified = filemtime($file);
-            if ($last_modified > $this->last_modified_timestamp) {
-                $this->last_modified_timestamp = $last_modified;
+            if ($last_modified > $last_modified_timestamp) {
+                $last_modified_timestamp = $last_modified;
             }
 
             // open the file for reading
@@ -64,14 +67,16 @@ class Rota
             // read each line of the csv file
             $include = false;
             $header_row = array();
-
             while (($row = fgetcsv($f)) !== false) {
                 // include the service
                 if ($include && $row[1] != "No service") {
+                    // create service
                     $service = new Service($header_row, $row);
-                    $this->people = array_unique(array_merge($this->people, $service->people));
-                    asort($this->people);
-                    $this->services[] = $service;
+                    $services[] = $service;
+
+                    // add people, keeping array unique and sorted alphabetically
+                    $people = array_unique(array_merge($people, $service->people));
+                    asort($people);
                 }
 
                 // if the first value is 'Date' this is the header row,
@@ -84,7 +89,12 @@ class Rota
         }
 
         // sort services by timestamp
-        usort($this->services, fn ($a, $b) => $a->dt->getTimestamp() < $b->dt->getTimestamp() ? -1 : 1);
+        usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
+
+        // set values
+        $this->last_modified_timestamp = $last_modified_timestamp;
+        $this->services = $services;
+        $this->people = $people;
     }
 
     /**

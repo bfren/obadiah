@@ -11,42 +11,41 @@ defined("IDX") || die("Nice try.");
 class Service
 {
     /**
-     * Service date and time.
+     * Service start date and time.
      *
      * @var DateTimeImmutable
      */
-    public DateTimeImmutable $dt;
+    public readonly DateTimeImmutable $start;
 
     /**
      * Service length.
      *
      * @var DateInterval
      */
-    public DateInterval $length;
+    public readonly DateInterval $length;
 
     /**
      * Service description, e.g. 'Morning Prayer'.
      *
      * @var string
      */
-    public string $description;
+    public readonly string $description;
 
     /**
      * The roles and people assigned to this service.
      *
-     * @var array                       Associative array of roles, key = role, value = people assigned to that role.
-     *      $roles = array(
-     *          string role_name => string[] people
-     *      )
+     * @var array
+     *      Associative array of roles, key = role, value = people assigned to that role.
+     *      array(string role_name => string[] people)
      */
-    public array $roles = array();
+    public readonly array $roles;
 
     /**
      * All the people in the current service.
      *
      * @var string[]
      */
-    public array $people = array();
+    public readonly array $people;
 
     /**
      * Construct a service object from an array of data.
@@ -72,7 +71,7 @@ class Service
         };
 
         // get the date as a timestamp
-        $this->dt = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time[0], C::$events->timezone);
+        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, $data["Date"] . $time[0], C::$events->timezone);
         $this->length = new DateInterval($time[1]);
 
         // get the service description
@@ -80,6 +79,17 @@ class Service
 
         // get the roles
         $this->roles = $this->get_roles($data);
+
+        // get all the people involved in this service
+        $people = array();
+        foreach ($this->roles as $role_people) {
+            // remove extra information and merge arrays
+            $people = array_merge(preg_replace("/ \(.*\)/", "", $role_people), $people);
+        }
+
+        // sort alphabetically and remove duplicates
+        asort($people);
+        $this->people = array_unique($people);
     }
 
     /**
@@ -151,11 +161,6 @@ class Service
 
         // sort alphabetically
         sort($without_clash);
-
-        // remove roles
-        $without_roles = preg_replace("/ \(.*\)/", "", $without_clash);
-        $this->people = array_unique(array_merge($this->people, $without_roles));
-        asort($this->people);
 
         // return
         return $without_clash;

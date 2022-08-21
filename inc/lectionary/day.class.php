@@ -11,30 +11,24 @@ defined("IDX") || die("Nice try.");
 class Day
 {
     /**
-     * String (sortable) representation of the date for this day in the lectionary.
+     * Create Day object.
      *
-     * @var string
+     * @param string $date              String (sortable) representation of the date for this day in the lectionary.
+     * @param null|string $name         The name of this day in the lectionary (e.g. 8th after Trinity).
+     * @param array $services           List of services on this particular day, sorted by start time.
+     * @return void
      */
-    public string $date;
-
-    /**
-     * The name of this day in the lectionary (e.g. 8th after Trinity).
-     *
-     * @var null|string
-     */
-    public ?string $name;
-
-    /**
-     * List of services on this particular day, sorted by start time.
-     *
-     * @var Service[]
-     */
-    public array $services = array();
+    public function __construct(
+        public readonly string $date,
+        public readonly ?string $name,
+        public readonly array $services
+    ) {
+    }
 
     /**
      * Get lectionary details for a service at the specified time.
      *
-     * @param DateTimeImmutable $dt              Service start time to search for.
+     * @param DateTimeImmutable $dt     Service start time to search for.
      * @return null|Service             Matching lectionary service or null if not found.
      */
     public function get_service(DateTimeImmutable $dt): ?Service

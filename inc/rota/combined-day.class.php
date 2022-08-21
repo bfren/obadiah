@@ -7,23 +7,17 @@ use DateTimeImmutable;
 class Combined_Day
 {
     /**
-     * Date.
+     * Create Combined_Day object.
      *
-     * @var DateTimeImmutable
+     * @param DateTimeImmutable $date   DateTime object referencing midnight of the specified day.
+     * @param null|string $name         Lectionary name (e.g. '15th after Trinity').
+     * @param array $services           Array of services on this day.
+     * @return void
      */
-    public DateTimeImmutable $dt;
-
-    /**
-     * Lectionary name.
-     *
-     * @var null|string
-     */
-    public ?string $name;
-
-    /**
-     * Services on this day.
-     *
-     * @var Combined_Service[]
-     */
-    public array $services = array();
+    public function __construct(
+        public readonly DateTimeImmutable $date,
+        public readonly ?string $name,
+        public readonly array $services
+    ) {
+    }
 }
