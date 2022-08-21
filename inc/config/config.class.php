@@ -62,7 +62,7 @@ class Config
     public static function load(string $cwd): void
     {
         // read configuration file
-        $config_file = "$cwd/config.yml";
+        $config_file = sprintf("%s/config.yml", $cwd);
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
