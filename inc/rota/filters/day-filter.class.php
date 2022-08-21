@@ -25,6 +25,6 @@ class Day_Filter implements Filter
         }
 
         // compare the day of the week with the value
-        return $service->dt->format("N") == $value;
+        return $service->start->format("N") == $value;
     }
 }

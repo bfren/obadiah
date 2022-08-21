@@ -30,7 +30,7 @@ class Before_Filter implements Filter
         // convert the date to a timestamp
         $dt = DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $value, C::$events->timezone);
         if ($dt) {
-            return $service->dt->format(C::$formats->sortable_date) <= $dt->format(C::$formats->sortable_date);
+            return $service->start->format(C::$formats->sortable_date) <= $dt->format(C::$formats->sortable_date);
         }
 
         // if we get here $value was an invalid date format so return false

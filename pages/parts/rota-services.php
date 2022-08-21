@@ -19,7 +19,7 @@ $person = Arr::get($filters, "person");
                 <div class="card-body">
 
                     <!-- Date -->
-                    <h5 class="card-title"><?php echo $combined_day->dt->format(C::$formats->display_date); ?></h5>
+                    <h5 class="card-title"><?php echo $combined_day->date->format(C::$formats->display_date); ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?php echo $combined_day->name; ?></h6>
 
                     <!-- Services -->

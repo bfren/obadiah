@@ -25,7 +25,7 @@ class Series_Filter implements Filter
         }
 
         // get the lectionary service
-        $l_service = $lectionary->get_service($service->dt);
+        $l_service = $lectionary->get_service($service->start);
         if (!$l_service) {
             return false;
         }

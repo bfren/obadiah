@@ -25,6 +25,6 @@ class Start_Filter implements Filter
         }
 
         // compare the time with the value
-        return $service->dt->format("H:i") == $value;
+        return $service->start->format("H:i") == $value;
     }
 }
