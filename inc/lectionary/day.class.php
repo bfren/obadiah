@@ -4,6 +4,7 @@ namespace Feeds\Lectionary;
 
 use DateTimeImmutable;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 
 defined("IDX") || die("Nice try.");
 
@@ -42,9 +43,9 @@ class Day
         $time = $dt->format(C::$formats->display_time);
 
         // search for a service at the specified time
-        $services = array_values(array_filter($this->services, function ($service) use ($time) {
+        $services = Arr::match($this->services, function (Service $service) use ($time) {
             return $service->time == $time;
-        }));
+        });
 
         // if no services (or multiple services) were found, return null
         if (!$services || count($services) != 1) {

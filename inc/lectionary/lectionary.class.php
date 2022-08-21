@@ -112,9 +112,9 @@ class Lectionary
     {
         // get the Lectionary day
         $date = $dt->format(C::$formats->sortable_date);
-        $days = array_values(array_filter($this->days, function (Day $day) use ($date) {
+        $days = Arr::match($this->days, function (Day $day) use ($date) {
             return $day->date == $date;
-        }));
+        });
 
         // there should be precisely one day - if not, return null
         if (count($days) != 1) {

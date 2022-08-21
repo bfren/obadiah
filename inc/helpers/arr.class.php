@@ -22,4 +22,17 @@ class Arr
 
         return $default;
     }
+
+    /**
+     * Return matching elements of $array by using $callback. If $callback is null,
+     * it will remove empty elements.
+     *
+     * @param array $array              Array to search.
+     * @param null|callable $callback   Callback function (should return bool),
+     * @return array                    Array of matching elements.
+     */
+    public static function match(array $array, ?callable $callback = null): array
+    {
+        return array_values(array_filter($array, $callback));
+    }
 }

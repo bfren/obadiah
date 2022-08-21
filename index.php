@@ -17,7 +17,7 @@ Request::$auth || Request::redirect("/login.php");
 
 // get requested page
 $uri = explode("/", Request::$uri);
-$parts = array_values(array_filter($uri));
+$parts = Arr::match($uri);
 $page = Arr::get($parts, 0);
 $action = Arr::get($parts, 1);
 
