@@ -2,7 +2,7 @@
 
 namespace Feeds\Pages;
 
-use DateTimeImmutable;
+use Feeds\Admin\Rota_File;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
@@ -11,62 +11,18 @@ use Feeds\Request\Request;
 App::check();
 Request::is_admin() || Request::redirect("/logout.php");
 
-// handle uploads
+// handle actions
 if (Request::$method == "POST") {
-    $submit = Arr::get($_POST, "submit");
-
-    // handle rota upload
-    if ($submit == "rota") {
-        // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
-
-        // make sure the name was set
-        $name = $_POST["name"];
-        if (!$name) die("You must enter the rota name, e.g. 22-2.");
-
-        // get paths
-        $tmp_path = $_FILES["file"]["tmp_name"];
-        $csv_path = sprintf("%s/%s.csv", C::$dir->rota, $name);
-
-        // move file to the correct location, overwriting whatever is already there
-        if (move_uploaded_file($tmp_path, $csv_path)) {
-            $success = sprintf("The rota file '%s' was uploaded successfully.", $name);
-            unlink(sprintf("%s/rota.cache", C::$dir->cache));
-        } else {
-            $warning = "Something went wrong uploading the rota file, please try again.";
-        }
-    }
-}
-
-// handle delete CSV file
-if ($delete_csv = Arr::get($_GET, "delete_csv")) {
-    $path = sprintf("%s/%s", C::$dir->rota, $delete_csv);
-    if (file_exists($path)) {
-        unlink($path);
-        unlink(sprintf("%s/rota.cache", C::$dir->cache));
-        $success = sprintf("CSV file '%s' was deleted.", $delete_csv);
-    } else {
-        $warning = sprintf("Unable to find CSV file '%s'.", $delete_csv);
-    }
+    $result = match (Arr::get($_POST, "submit")) {
+        "rota" => Rota_File::upload()
+    };
+} elseif ($delete_csv = Arr::get($_GET, "delete_csv")) {
+    $result = Rota_File::delete($delete_csv);
 }
 
 // get uploaded rota files and sort by name
 $csv_files = array_slice(scandir(C::$dir->rota), 2);
 sort($csv_files);
-
-/**
- * Return a formatted date time string for when the specified rota CSV file was last modified.
- *
- * @param string $file                  File name (without path).
- * @return string                       Formatted last modified string.
- */
-function get_csv_modified(string $file): string
-{
-    $path = sprintf("%s/%s", C::$dir->rota, $file);
-    $modified = new DateTimeImmutable(sprintf("@%s", filemtime($path)));
-    $modified->setTimezone(C::$events->timezone);
-    return $modified->format(C::$formats->sortable_datetime);
-}
 
 // output header
 $title = "Admin";
@@ -74,10 +30,8 @@ require_once("parts/header.php");
 
 ?>
 
-<?php if (isset($warning)) : ?>
-    <div class="alert alert-warning" role="alert"><?php echo $warning; ?></div>
-<?php elseif (isset($success)) : ?>
-    <div class="alert alert-success" role="alert"><?php echo $success; ?></div>
+<?php if (isset($result)): $alert = $result->success ? "success" : "warning"; ?>
+    <div class="alert alert-<?php echo $alert; ?>"><?php echo $result->message; ?></div>
 <?php endif; ?>
 
 <h2 class="border-bottom"><?php echo $title; ?></h2>
@@ -105,7 +59,7 @@ require_once("parts/header.php");
 <ul>
     <?php foreach ($csv_files as $file) : ?>
         <li>
-            <?php echo $file; ?> (last modified <?php echo get_csv_modified($file); ?>)
+            <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
             <a class="badge rounded-pill text-bg-danger fw-bold" href="/admin/?delete_csv=<?php echo $file; ?>">delete</a>
         </li>
     <?php endforeach; ?>
