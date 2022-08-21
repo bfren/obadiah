@@ -6,6 +6,8 @@ use Feeds\App;
 
 App::check();
 
+/** @var string $title */
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

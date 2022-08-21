@@ -8,6 +8,7 @@ use Feeds\Helpers\Arr;
 
 App::check();
 
+/** @var array $filters */
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 
 $person = Arr::get($filters, "person");

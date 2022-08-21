@@ -11,6 +11,8 @@ use Feeds\Rota\Rota;
 
 App::check();
 
+/** @var string $action */
+
 // create cache and get rota and lectionary
 $cache = new Cache(C::$dir->cache, C::$cache->duration_in_seconds);
 $rota = $cache->get_rota(fn() => new Rota());
