@@ -14,14 +14,14 @@ class Cache
      *
      * @var string
      */
-    private string $dir_path;
+    private readonly string $dir_path;
 
     /**
      * Duration in seconds before cache entries expire.
      *
      * @var int
      */
-    private int $duration_in_seconds;
+    private readonly int $duration_in_seconds;
 
     /**
      * Create a new cache object.
