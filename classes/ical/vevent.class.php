@@ -3,7 +3,10 @@
 namespace Feeds\ICal;
 
 use DateTimeImmutable;
+use Feeds\App;
 use Feeds\Config\Config as C;
+
+App::check();
 
 class VEvent
 {

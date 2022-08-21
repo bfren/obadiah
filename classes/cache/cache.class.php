@@ -2,10 +2,11 @@
 
 namespace Feeds\Cache;
 
+use Feeds\App;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Rota;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 class Cache
 {

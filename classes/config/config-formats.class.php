@@ -2,6 +2,10 @@
 
 namespace Feeds\Config;
 
+use Feeds\App;
+
+App::check();
+
 class Config_Formats
 {
     /**

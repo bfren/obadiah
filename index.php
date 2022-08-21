@@ -6,11 +6,9 @@ use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 
-// include autoloader
-require_once("inc/autoload.php");
-
-// load config, run preflight checks, etc.
-Request::init(__DIR__);
+// initialise app
+require_once("classes/app.class.php");
+App::init(__DIR__);
 
 // check auth
 Request::$auth || Request::redirect("/login.php");

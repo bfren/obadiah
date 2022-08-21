@@ -2,13 +2,14 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Builder;
 use Feeds\Rota\Rota;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 // create cache and get rota and lectionary
 $cache = new Cache(C::$dir->cache, C::$cache->duration_in_seconds);

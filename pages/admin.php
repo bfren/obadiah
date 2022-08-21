@@ -3,11 +3,12 @@
 namespace Feeds\Pages;
 
 use DateTimeImmutable;
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 
-defined("IDX") || die("Nice try.");
+App::check();
 Request::is_admin() || Request::redirect("/logout.php");
 
 // handle uploads

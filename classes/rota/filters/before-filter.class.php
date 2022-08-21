@@ -3,12 +3,12 @@
 namespace Feeds\Rota\Filters;
 
 use DateTimeImmutable;
-use DateTimeZone;
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 class Before_Filter implements Filter
 {

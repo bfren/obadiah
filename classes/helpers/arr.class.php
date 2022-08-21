@@ -2,7 +2,9 @@
 
 namespace Feeds\Helpers;
 
-defined("IDX") || die("Nice try.");
+use Feeds\App;
+
+App::check();
 
 class Arr
 {

@@ -2,11 +2,12 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 // handle post requests
 if (Request::$method == "POST") {

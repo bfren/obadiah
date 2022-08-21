@@ -3,6 +3,9 @@
 namespace Feeds\Rota;
 
 use DateTimeImmutable;
+use Feeds\App;
+
+App::check();
 
 class Combined_Day
 {

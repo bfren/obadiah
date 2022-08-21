@@ -2,8 +2,11 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+
+App::check();
 
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 

@@ -2,7 +2,10 @@
 
 namespace Feeds\Config;
 
+use Feeds\App;
 use Feeds\Helpers\Arr;
+
+App::check();
 
 class Config_Rota_Role
 {

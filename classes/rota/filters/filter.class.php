@@ -2,10 +2,11 @@
 
 namespace Feeds\Rota\Filters;
 
+use Feeds\App;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 interface Filter
 {

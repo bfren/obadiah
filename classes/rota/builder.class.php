@@ -3,10 +3,13 @@
 namespace Feeds\Rota;
 
 use DateTimeImmutable;
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
+
+App::check();
 
 class Builder
 {

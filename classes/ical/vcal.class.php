@@ -2,6 +2,10 @@
 
 namespace Feeds\ICal;
 
+use Feeds\App;
+
+App::check();
+
 class VCal
 {
     /**

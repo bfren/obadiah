@@ -2,13 +2,14 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Helpers\Arr;
 use Feeds\ICal\VCal;
 use Feeds\ICal\VEvent;
 use Feeds\Request\Request;
 use Feeds\Rota\Builder;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 /** @var \Feeds\Rota\Rota $rota */

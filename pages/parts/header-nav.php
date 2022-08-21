@@ -2,9 +2,10 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Request\Request;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 /** @var string $title */
 

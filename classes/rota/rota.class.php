@@ -2,6 +2,7 @@
 
 namespace Feeds\Rota;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
@@ -12,7 +13,7 @@ use Feeds\Rota\Filters\Person_Filter;
 use Feeds\Rota\Filters\Series_Filter;
 use Feeds\Rota\Filters\Start_Filter;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 class Rota
 {

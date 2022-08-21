@@ -2,9 +2,10 @@
 
 namespace Feeds\Airtable;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 class Airtable
 {

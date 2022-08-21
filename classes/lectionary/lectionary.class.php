@@ -3,11 +3,12 @@
 namespace Feeds\Lectionary;
 
 use DateTimeImmutable;
+use Feeds\App;
 use Feeds\Airtable\Airtable;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 class Lectionary
 {

@@ -2,7 +2,9 @@
 
 namespace Feeds\Pages;
 
-defined("IDX") || die("Nice try.");
+use Feeds\App;
+
+App::check();
 
 /** @var string $title */
 

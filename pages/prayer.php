@@ -2,7 +2,9 @@
 
 namespace Feeds\Pages;
 
-defined("IDX") || die("Nice try.");
+use Feeds\App;
+
+App::check();
 
 // output header
 $title = "Prayer";

@@ -2,11 +2,12 @@
 
 namespace Feeds\Pages;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Rota\Builder;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 /** @var \Feeds\Lectionary\Lectionary $lectionary */

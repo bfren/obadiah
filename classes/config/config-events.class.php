@@ -3,6 +3,9 @@
 namespace Feeds\Config;
 
 use DateTimeZone;
+use Feeds\App;
+
+App::check();
 
 class Config_Events
 {

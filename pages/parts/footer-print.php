@@ -3,9 +3,10 @@
 namespace Feeds\Pages;
 
 use DateTimeImmutable;
+use Feeds\App;
 use Feeds\Config\Config as C;
 
-defined("IDX") || die("Nice try.");
+App::check();
 
 $today = new DateTimeImmutable("now", C::$events->timezone);
 

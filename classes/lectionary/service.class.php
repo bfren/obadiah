@@ -2,7 +2,9 @@
 
 namespace Feeds\Lectionary;
 
-defined("IDX") || die("Nice try.");
+use Feeds\App;
+
+App::check();
 
 class Service
 {

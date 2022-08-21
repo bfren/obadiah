@@ -2,8 +2,11 @@
 
 namespace Feeds\Request;
 
+use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+
+App::check();
 
 class Request
 {
