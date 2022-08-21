@@ -59,7 +59,7 @@ class Config
      * @param string $cwd               Current working directory.
      * @return void
      */
-    public static function load(string $cwd): void
+    public static function init(string $cwd): void
     {
         // read configuration file
         $config_file = sprintf("%s/config.yml", $cwd);

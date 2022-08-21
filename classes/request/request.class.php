@@ -51,20 +51,12 @@ class Request
     public static string $uri;
 
     /**
-     * Set request values and load config.
+     * Set request values.
      *
-     * @param string $cwd               Current working directory.
      * @return void
      */
-    public static function init(string $cwd): void
+    public static function init(): void
     {
-        // start session
-        session_start();
-
-        // load config
-        C::load($cwd);
-
-        // set request values
         self::$auth = Arr::get($_SESSION, self::AUTH) === true || Arr::get($_GET, "api") == C::$login->api;
         self::$debug = isset($_GET["debug"]);
         self::$method = Arr::get($_SERVER, "REQUEST_METHOD");
