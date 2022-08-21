@@ -8,7 +8,6 @@ use Feeds\Rota\Builder;
 
 defined("IDX") || die("Nice try.");
 
-/** @var string $title */
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 /** @var \Feeds\Lectionary\Lectionary $lectionary */
 /** @var array $filters */
