@@ -111,24 +111,6 @@ class Service
     {
         // create empty roles array
         $roles = array();
-
-        // any roles not listed here will not be added to the service
-        $supported_roles = array(
-            "Communion Assistants" => "",
-            "Duty Warden" => "",
-            "Intercessions" => "",
-            "Prayer Ministry" => "",
-            "Preacher" => "",
-            "President" => "",
-            "Readings" => "Reader",
-            "Refreshments" => "",
-            "Service Leader" => "Leader",
-            "Socially Distanced Service Leader 22-2" => "Leader & Preacher",
-            "Sound Desk" => "",
-            "Wednesday Morning Prayer" => "Leader",
-            "Welcome" => ""
-        );
-
         foreach ($data as $rota_role => $people) {
             // skip if no-one is assigned
             if (!$people) {
@@ -136,9 +118,9 @@ class Service
             }
 
             // add role if it is in the supported array
-            foreach ($supported_roles as $supported_role => $override) {
-                if (str_starts_with($rota_role, $supported_role)) {
-                    $role = $override ?: $supported_role;
+            foreach (C::$rota->roles as $supported_role) {
+                if (str_starts_with($rota_role, $supported_role->name)) {
+                    $role = $supported_role->description ?: $supported_role->name;
                     $sanitised = $this->sanitise_people($people);
                     $roles[$role] = $sanitised;
                 }

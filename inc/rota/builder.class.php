@@ -135,16 +135,7 @@ class Builder
         foreach ($service->roles as $role => $people) {
             foreach ($people as $p) {
                 if (str_starts_with($p, $person)) {
-                    $roles[] = match ($role) {
-                        "Duty Warden" => "W",
-                        "Intercessions" => "Py",
-                        "Lead Musician" => "M",
-                        "Leader" => "L",
-                        "Leader & Preacher" => join(self::ROLE_JOIN, array("L", "Pr")),
-                        "Preacher" => "Pr",
-                        "President" => "Ps",
-                        default => null
-                    };
+                    $roles[] = C::$rota->get_abbreviation($role);
                 }
             }
         }
