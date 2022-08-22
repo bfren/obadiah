@@ -13,6 +13,22 @@ App::check();
 
 $person = Arr::get($filters, "person");
 
+/**
+ * Return link to Bible Gateway to display text of a Bible reading.
+ *
+ * @param string $passage               Bible passage to link to.
+ * @return string                       Anchor tag with link to Bible Gateway and passage as text.
+ */
+function get_bible_reading(string $passage) :string
+{
+    $param = array(
+        "search" => $passage,
+        "version" => "NIVUK"
+    );
+    $url = sprintf("https://www.biblegateway.com/passage/?%s", http_build_query($param));
+    return sprintf("<a href=\"%s\" target=\"_blank\">%s</a>", $url, $passage);
+}
+
 ?>
 
 <div class="row rota-services">
@@ -43,8 +59,8 @@ $person = Arr::get($filters, "person");
                                 <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
                             </p>
                             <p class="mb-0">
-                                <?php if ($combined_service->main_reading) echo $combined_service->main_reading; ?>
-                                <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", $combined_service->additional_reading); ?>
+                                <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
+                                <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
                             </p>
 
                             <!-- Rota Roles -->
