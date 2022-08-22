@@ -106,7 +106,7 @@ class Builder
      */
     public static function get_uid(Combined_Service $service): string
     {
-        return sha1(sprintf("%s%s", $service->start->format("c"). $service->name));
+        return sha1(sprintf("%s%s", $service->start->format("c") . $service->name));
     }
 
     /**
@@ -136,15 +136,21 @@ class Builder
             }
         }
 
+        // filter out blank roles
+        $filtered = array_filter($roles);
+
         // if there are no roles, return the summary
-        $roles = array_filter($roles);
-        if (!$roles) {
+        // if there are roles, but filtered is empty, that means there are roles
+        // but they don't have abbreviations defined so add an asterisk instead
+        if (count($roles) == 0) {
             return $summary;
+        } elseif (count($filtered) == 0) {
+            return sprintf("%s (*)", $summary);
         }
 
-        // sort roles and add to summary
-        sort($roles);
-        return sprintf("%s (%s)", $summary, join(self::ROLE_JOIN, $roles));
+        // sort filtered roles and add to summary
+        sort($filtered);
+        return sprintf("%s (%s)", $summary, join(self::ROLE_JOIN, $filtered));
     }
 
     /**
