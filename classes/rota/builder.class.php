@@ -189,14 +189,13 @@ class Builder
                 $description[] = sprintf("Title: %s", $service->sermon_title);
             }
 
-            // main reading
+            // readings
             if ($service->main_reading) {
-                $description[] = sprintf("Main Reading: %s", $service->main_reading);
-            }
-
-            // additional reading
-            if ($service->additional_reading) {
-                $description[] = sprintf("Additional Reading: %s", $service->additional_reading);
+                if ($service->additional_reading) {
+                    $description[] = sprintf("Readings: %s and %s", $service->main_reading, $service->additional_reading);
+                } else {
+                    $description[] = sprintf("Reading: %s", $service->main_reading);
+                }
             }
 
             $description[] = "";
