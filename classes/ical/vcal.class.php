@@ -106,7 +106,7 @@ class VCal
                 }
 
                 // get the first $max characters
-                $folded .= sprintf("%s\r\n", substr($str, 0, $max));
+                $folded .= sprintf("%s\r\n ", substr($str, 0, $max));
 
                 // remove the first $max characters and go again
                 $str = substr($str, $max);
