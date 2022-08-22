@@ -52,6 +52,13 @@ class Config_Rota
             return ($role->name == $role_name || $role->description == $role_name) && $role->abbreviation;
         });
 
+
+        // TODO: store roles as role object not name to avoid clashes with multiple roles (e.g. 'Service Leader' and 'Wednesday Morning Prayer')
+        // or store abbreviations separately, by role description?
+
+
+        print_r($match);
+
         // return abbreviation if there is a match
         if (count($match) == 1) {
             return $match[0]->abbreviation;

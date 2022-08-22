@@ -49,10 +49,10 @@ $person = Arr::get($filters, "person");
 
                             <!-- Rota Roles -->
                             <div class="people collapse show mt-2">
-                                <?php foreach ($combined_service->roles as $role => $people) : ?>
+                                <?php foreach ($combined_service->roles as $role => $service_role) : ?>
                                     <p class="mb-0">
                                         <?php
-                                        $names = join(", ", $people);
+                                        $names = join(", ", $service_role->people);
                                         $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                         ?>
                                         <?php echo $role; ?>: <span class="text-muted"><?php echo $highlighted; ?></span>

@@ -128,10 +128,10 @@ class Builder
 
         // look for certain roles
         $roles = array();
-        foreach ($service->roles as $role => $people) {
-            foreach ($people as $p) {
+        foreach ($service->roles as $role => $service_role) {
+            foreach ($service_role->people as $p) {
                 if (str_starts_with($p, $person)) {
-                    $roles[] = C::$rota->get_abbreviation($role);
+                    $roles[] = $service_role->abbreviation;
                 }
             }
         }
@@ -204,8 +204,8 @@ class Builder
         // add roles
         if ($service->roles) {
             $description[] = "= Roles =";
-            foreach ($service->roles as $role => $people) {
-                $description[] = sprintf("%s: %s", $role, join(", ", $people));
+            foreach ($service->roles as $name => $service_role) {
+                $description[] = sprintf("%s: %s", $name, join(", ", $service_role->people));
             }
             $description[] = "";
         }

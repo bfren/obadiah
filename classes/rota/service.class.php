@@ -35,9 +35,7 @@ class Service
     /**
      * The roles and people assigned to this service.
      *
-     * @var array
-     *      Associative array of roles, key = role, value = people assigned to that role.
-     *      array(string role_name => string[] people)
+     * @var Service_Role[]              Array key is role name / description.
      */
     public readonly array $roles;
 
@@ -83,9 +81,9 @@ class Service
 
         // get all the people involved in this service
         $people = array();
-        foreach ($this->roles as $role_people) {
+        foreach ($this->roles as $service_roles) {
             // remove extra information and merge arrays
-            $people = array_merge(preg_replace("/ \(.*\)/", "", $role_people), $people);
+            $people = array_merge(preg_replace("/ \(.*\)/", "", $service_roles->people), $people);
         }
 
         // sort alphabetically and remove duplicates
@@ -116,7 +114,7 @@ class Service
      * Get all supported roles and the people assigned to each one, and add to $this->roles.
      *
      * @param array $data               Associative array of service data.
-     * @return array                    Associative array of roles
+     * @return Service_Role[]           Associative array of roles.
      */
     private function get_roles(array $data): array
     {
@@ -131,9 +129,8 @@ class Service
             // add role if it is in the supported array
             foreach (C::$rota->roles as $supported_role) {
                 if (str_starts_with($rota_role, $supported_role->name)) {
-                    $role = $supported_role->description ?: $supported_role->name;
-                    $sanitised = $this->sanitise_people($people);
-                    $roles[$role] = $sanitised;
+                    $name = $supported_role->description ?: $supported_role->name;
+                    $roles[$name] = new Service_Role($supported_role->abbreviation, $this->sanitise_people($people));
                 }
             }
         }

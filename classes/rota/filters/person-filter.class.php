@@ -26,8 +26,8 @@ class Person_Filter implements Filter
         }
 
         // loop through each role - the first time the person is matched, return true
-        foreach ($service->roles as $people) {
-            foreach ($people as $person) {
+        foreach ($service->roles as $service_role) {
+            foreach ($service_role->people as $person) {
                 if (str_starts_with($person, $value)) {
                     return true;
                 }

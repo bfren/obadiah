@@ -21,7 +21,7 @@ class Combined_Service
      * @param null|string $sermon_title         Optional sermon title.
      * @param null|string $main_reading         Optional main reading.
      * @param null|string $additional_reading   Optional additional reading.
-     * @param array $roles                      Roles from the rota.
+     * @param Service_Role[] $roles             Roles from the rota.
      * @return void
      */
     public function __construct(
