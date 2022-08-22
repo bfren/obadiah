@@ -2,7 +2,10 @@
 
 namespace Feeds\ICal;
 
+use DateTimeZone;
 use Feeds\App;
+use Feeds\Config\Config as C;
+use Feeds\ICal\TZ\Europe_London;
 
 App::check();
 
@@ -26,28 +29,31 @@ class VCal
         public readonly array $events,
         public readonly int $last_modified
     ) {
+        // begin calendar definition
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
-        $this->lines[] = "PRODID:-//bcg|design//NONSGML CCSP//EN";
+        $this->lines[] = "PRODID:-//bfren.dev//NONSGML CCSP//EN";
         $this->lines[] = "CALSCALE:GREGORIAN";
         $this->lines[] = "X-PUBLISHED-TTL:PT1H";
-        $this->lines[] = "BEGIN:VTIMEZONE";
-        $this->lines[] = "TZID:Europe/London";
-        $this->lines[] = "BEGIN:STANDARD";
-        $this->lines[] = "TZNAME:GMT";
-        $this->lines[] = "DTSTART:19710101T020000";
-        $this->lines[] = "TZOFFSETFROM:+0100";
-        $this->lines[] = "TZOFFSETTO:+0000";
-        $this->lines[] = "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU";
-        $this->lines[] = "END:STANDARD";
-        $this->lines[] = "BEGIN:DAYLIGHT";
-        $this->lines[] = "TZNAME:BST";
-        $this->lines[] = "DTSTART:19710101T010000";
-        $this->lines[] = "TZOFFSETFROM:+0000";
-        $this->lines[] = "TZOFFSETTO:+0100";
-        $this->lines[] = "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU";
-        $this->lines[] = "END:DAYLIGHT";
-        $this->lines[] = "END:VTIMEZONE";
+
+        // add timezone definition
+        $ical_timezone = $this->get_ical_timezone(C::$events->timezone);
+        $this->lines = array_merge($this->lines, $ical_timezone?->get_definition() ?: array());
+    }
+
+    /**
+     * Get ICal timezone definition, or null if not supported.
+     *
+     * @param DateTimeZone $timezone    Config timezone.
+     * @return null|Timezone            ICal timezone.
+     */
+    private function get_ical_timezone(DateTimeZone $timezone): ?Timezone
+    {
+        $name = $timezone->getName();
+        return match ($name) {
+            "Europe/London" => new Europe_London(),
+            default => null
+        };
     }
 
     /**
