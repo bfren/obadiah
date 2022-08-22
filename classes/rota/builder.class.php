@@ -106,7 +106,7 @@ class Builder
      */
     public static function get_uid(Combined_Service $service): string
     {
-        return sha1(sprintf("%s%s", $service->start->format("c") . $service->name));
+        return sha1(sprintf("%s%s", $service->start->format("c"), $service->name));
     }
 
     /**
