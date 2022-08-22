@@ -5,6 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Request\Request;
 use Feeds\Rota\Builder;
 
 App::check();
@@ -98,8 +99,14 @@ require_once("parts/header.php"); ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6 d-flex justify-content-end">
+        <div class="col-12 d-flex justify-content-end align-items-center">
+            <?php if(Request::is_admin()):?>
+                <div class="form-check d-none d-sm-block me-4">
+                    <?php $checked = Arr::get($filters, "debug") ? "checked" : ""; ?>
+                    <input class="form-check-input" type="checkbox" value="true" name="debug" id="debug" <?php echo $checked; ?> />
+                    <label class="form-check-label" for="debug">Debug</label>
+                </div>
+            <?php endif; ?>
             <button type="submit" class="btn btn-primary me-1">Apply</button>
             <a href="/rota/" class="btn btn-danger me-3">Reset</a>
             <a href="/rota/ics/?<?php echo $_SERVER["QUERY_STRING"]; ?>&api=<?php echo C::$login->api ?>" class="btn btn-secondary me-1" target="_blank">ICS</a>
