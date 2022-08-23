@@ -9,13 +9,6 @@ App::check();
 class Config_Dir
 {
     /**
-     * Current working directory.
-     *
-     * @var string
-     */
-    public readonly string $cwd;
-
-    /**
      * Path to data directory.
      *
      * @var string
@@ -37,25 +30,31 @@ class Config_Dir
     public readonly string $rota;
 
     /**
+     * Path to prayer calendar data directory.
+     *
+     * @var string
+     */
+    public readonly string $prayer;
+
+    /**
      * Ensure data directories exist.
      *
      * @param array $cwd                Current working directory.
      * @return void
      */
-    public function __construct(string $cwd)
+    public function __construct(public readonly string $cwd)
     {
-        // store working directory
-        $this->cwd = $cwd;
-
         // build paths to data directories
-        $this->data = "$cwd/data";
-        $this->cache = "$this->data/cache";
-        $this->rota = "$this->data/rota";
+        $this->data = sprintf("%s/data", $this->cwd);
+        $this->cache = sprintf("%s/cache", $this->data);
+        $this->rota = sprintf("%s/rota", $this->data);
+        $this->prayer = sprintf("%s/prayer", $this->data);
 
         // ensure data directories exist
         self::ensure_directory_exists($this->data);
         self::ensure_directory_exists($this->cache);
         self::ensure_directory_exists($this->rota);
+        self::ensure_directory_exists($this->prayer);
     }
 
     /**
