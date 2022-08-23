@@ -16,10 +16,11 @@ App::check();
 
 // output header
 $title = "Rota";
+$subtitle = "Use the filters to create a personalised rota.";
 require_once("parts/header.php"); ?>
 
 <!-- Filters -->
-<h2 class="border-bottom">Filters</h2>
+<h2>Filters</h2>
 <form method="GET" action="/rota/">
     <div class="row mb-2">
         <div class="col-8 col-sm-6">
@@ -117,7 +118,7 @@ require_once("parts/header.php"); ?>
 </form>
 
 <!-- Rota -->
-<h2 class="border-bottom mt-3">
+<h2>
     <?php echo $title; ?>
     <a class="ps-3 fs-6" data-bs-toggle="collapse" data-bs-target=".people" href="#collapsePeople" role="button" aria-expanded="true">show / hide people</a>
 </h2>

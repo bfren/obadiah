@@ -5,3 +5,12 @@
 img.logo {
     max-height: 40px;
 }
+
+h2 {
+    // border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    margin-top: 2rem;
+}
+
+.admin-prayer-calendar-column {
+    overflow-y: auto;
+}

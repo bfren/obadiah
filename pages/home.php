@@ -11,14 +11,12 @@ App::check();
 
 // output header
 $title = "Home";
+$subtitle = "These pages house the various feeds generated from Church Suite.";
 require_once("parts/header.php");
 
 ?>
 
-<h2 class="border-bottom">Welcome</h2>
-<p>These pages house the various feeds generated from Church Suite.</p>
-
-<h3>Rota</h3>
+<h2>Rota</h2>
 <?php
     $this_week_from = new DateTimeImmutable();
     $this_week = array(
@@ -28,7 +26,7 @@ require_once("parts/header.php");
 ?>
 <p>To view this week's services, please click <a href="/rota/?<?php echo http_build_query($this_week); ?>">here</a>.</p>
 
-<h4>Printable Rotas</h4>
+<h3>Printable</h3>
 <p>The following links will give you quick and printable rotas for upcoming services (for best results print in landscape format).</p>
 
 <?php
