@@ -6,17 +6,16 @@ use Feeds\App;
 
 App::check();
 
-/** @var string $title */
-
 ?>
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="vh-100">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php echo $title; ?> | Church Suite Feeds</title>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/css/dragula.min.css" rel="stylesheet" />
     <link href="/resources/css/feeds.min.css" rel="stylesheet" />
 </head>
 
@@ -24,5 +23,7 @@ App::check();
 
     <?php require_once("header-nav.php"); ?>
 
-    <main class="flex-shrink-0">
-        <div class="container-fluid">
+    <?php require_once("header-title.php"); ?>
+
+    <main class="flex-grow-1 h-100" style="overflow-y: auto">
+        <div class="container-fluid h-100">

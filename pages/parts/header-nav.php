@@ -31,7 +31,7 @@ if (Request::$auth) {
 ?>
 
 <header class="d-print-none">
-    <nav class="navbar navbar-expand-md navbar-light bg-light py-3 mb-4 border-bottom">
+    <nav class="navbar navbar-expand-md navbar-light bg-light py-3 border-bottom">
         <div class="container-fluid d-flex justify-content-between">
             <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none">
                 <img class="logo me-4" src="/resources/img/logo-small.png" alt="Christ Church Selly Park" />

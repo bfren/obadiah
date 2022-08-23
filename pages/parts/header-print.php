@@ -23,7 +23,5 @@ App::check();
 
 <body>
 
-    <?php require_once("header-nav.php"); ?>
-
     <main>
         <div class="container-fluid">
