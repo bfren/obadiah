@@ -117,6 +117,17 @@ class Cache
     }
 
     /**
+     * Get absolute path to cache file.
+     *
+     * @param string $id                Cache ID.
+     * @return string                   Absolute path to cache file.
+     */
+    private static function get_cache_file_path(string $id):string
+    {
+        return sprintf("%s/%s.cache", self::$dir_path, $id);
+    }
+
+    /**
      * Clear a cache.
      *
      * @param string $id                Cache file name.
@@ -124,8 +135,8 @@ class Cache
      */
     private static function clear(string $id): void
     {
-        // create path to cache file
-        $file = sprintf("%s/%s.cache", self::$dir_path, $id);
+        // get path to cache file
+        $file = self::get_cache_file_path($id);
 
         // delete the file if it exists
         file_exists($file) && unlink($file);
@@ -140,8 +151,8 @@ class Cache
      */
     private static function get_or_set(string $id, callable $callable): mixed
     {
-        // create path to cache file
-        $file = sprintf("%s/%s.cache", self::$dir_path, $id);
+        // get path to cache file
+        $file = self::get_cache_file_path($id);
 
         // if the file exists, and the cache file has not expired, read and unserialise the value
         if (file_exists($file) && time() - filemtime($file) < self::$duration_in_seconds) {
