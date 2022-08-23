@@ -2,7 +2,8 @@
 
 namespace Feeds;
 
-use Feeds\Config\Config;
+use Feeds\Cache\Cache;
+use Feeds\Config\Config as C;
 use Feeds\Request\Request;
 
 class App
@@ -33,10 +34,13 @@ class App
         });
 
         // load configuration
-        Config::init($cwd);
+        C::init($cwd);
 
         // initialise request variables
         Request::init($cwd);
+
+        // initialise cache
+        Cache::init(C::$dir->cache, C::$cache->duration_in_seconds);
     }
 
     /**

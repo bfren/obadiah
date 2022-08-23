@@ -14,9 +14,8 @@ App::check();
 /** @var string $action */
 
 // create cache and get rota and lectionary
-$cache = new Cache(C::$dir->cache, C::$cache->duration_in_seconds);
-$rota = $cache->get_rota(fn() => new Rota());
-$lectionary = $cache->get_lectionary(fn() => new Lectionary());
+$rota = Cache::get_rota(fn() => new Rota());
+$lectionary = Cache::get_lectionary(fn() => new Lectionary());
 
 // get and apply filters
 $default_filters = array(

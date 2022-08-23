@@ -34,7 +34,6 @@ class File
     {
         if (file_exists($path)) {
             unlink($path);
-            unlink(sprintf("%s/%s.cache", C::$dir->cache, $cache));
             return Result::success(sprintf("File '%s' was deleted.", $filename));
         } else {
             return  Result::failure(sprintf("Unable to find file '%s'.", $filename));

@@ -3,6 +3,7 @@
 namespace Feeds\Admin;
 
 use Feeds\App;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 
 App::check();
@@ -55,6 +56,15 @@ class Rota_File
      */
     public static function delete(string $filename): Result
     {
-        return File::delete($filename, sprintf("%s/%s", C::$dir->rota, $filename), "rota");
+        // delete the file
+        $result = File::delete($filename, sprintf("%s/%s", C::$dir->rota, $filename), "rota");
+
+        // clear cache on success
+        if($result->success){
+            Cache::clear_rota();
+        }
+
+        // return result
+        return $result;
     }
 }
