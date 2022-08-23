@@ -26,6 +26,7 @@ if (Request::$method == "POST") {
 
 // get action page
 $action_page = match($action) {
+    "prayer" => "admin-prayer.php",
     default => "admin-upload.php"
 };
 
