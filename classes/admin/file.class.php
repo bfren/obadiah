@@ -27,16 +27,14 @@ class File
      *
      * @param string $filename          File name.
      * @param string $path              Absolute path to file.
-     * @param string $cache             The cache to clear.
      * @return Result
      */
-    public static function delete(string $filename, string $path, string $cache): Result
+    public static function delete(string $filename, string $path): Result
     {
-        if (file_exists($path)) {
-            unlink($path);
+        if (file_exists($path) && unlink($path)) {
             return Result::success(sprintf("File '%s' was deleted.", $filename));
         } else {
-            return  Result::failure(sprintf("Unable to find file '%s'.", $filename));
+            return  Result::failure(sprintf("Unable to delete file '%s'.", $filename));
         }
     }
 }
