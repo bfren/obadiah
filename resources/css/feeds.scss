@@ -7,10 +7,18 @@ img.logo {
 }
 
 h2 {
-    // border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
     margin-top: 2rem;
+}
+
+div > h2:first-child {
+    margin-top: 0.5rem;
 }
 
 .admin-prayer-calendar-column {
     overflow-y: auto;
+
+    .people {
+        min-height: 50px;
+    }
 }
