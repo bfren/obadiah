@@ -9,6 +9,7 @@ if (document.querySelector(".admin-prayer-calendar-column") != null) {
 
     // save on drop
     drake.on("drop", () => save_prayer_calendar_data());
+    save_prayer_calendar_data();
 
     // when a user types in the search box, show only people matching the search string
     // (if they have typed two or more characters)
