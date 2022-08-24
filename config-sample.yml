@@ -12,10 +12,12 @@ events:
 formats:
   csv_import_datetime: 'd-M-Yg:ia'
   display_date: 'D j M Y'
+  display_day: 'D jS'
+  display_month: 'F Y'
   display_time: 'H:i'
   ics_datetime: 'Ymd\THis'
   json_datetime: 'Y-m-d\TH:i:sO'
-  prayer_month_id: 'Ym'
+  prayer_month_id: 'Y-m'
   sortable_date: 'Y-m-d'
   sortable_datetime: 'Y-m-d H:i'
 
@@ -33,3 +35,6 @@ rota:
     - { name: 'President', abbv: 'Ps' }
     - { name: 'Readings', desc: 'Reader', abbv: 'R' }
     - { name: 'Service Leader', desc: 'Leader', abbv: 'L' }
+
+prayer:
+  include_surname: true
