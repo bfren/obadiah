@@ -16,4 +16,15 @@
             form.classList.add('was-validated')
         }, false)
     })
-})()
+})();
+
+// check before doing something (e.g. deleting)
+document.querySelectorAll(".check-first").forEach((e) => {
+    e.addEventListener("click", (e) => {
+        var answer = confirm("Are you sure you want to do this?");
+        console.log(answer);
+        if (answer != true) {
+            e.preventDefault();
+        }
+    })
+});

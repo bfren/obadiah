@@ -14,7 +14,7 @@ $rota_files = array_slice(scandir(C::$dir->rota), 2);
 sort($rota_files);
 
 // get uploaded prayer calendar files and sort by name
-$prayer_files = array_slice(scandir(C::$dir->prayer), 2);
+$prayer_files = array_map("basename", glob(sprintf("%s/*.csv", C::$dir->prayer), 2));
 sort($prayer_files);
 
 // store Church Suite links
@@ -54,16 +54,13 @@ require_once("parts/alert.php"); ?>
     <?php foreach ($rota_files as $file) : ?>
         <li>
             <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
-            <a class="badge rounded-pill text-bg-danger fw-bold" href="/admin/?delete_rota=<?php echo $file; ?>">delete</a>
+            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/admin/?delete_rota=<?php echo $file; ?>">delete</a>
         </li>
     <?php endforeach; ?>
 </ul>
 
 <!-- Prayer Calendar file upload -->
-<h2>
-    Prayer Calendar
-    <a class="ps-3 fs-6" href="/admin/prayer">assign people to days</a>
-</h2>
+<h2>Prayer Calendar</h2>
 <p>Upload prayer calendar CSV files here. (For instructions click <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#prayer-calendar-instructions">here</a>.)</p>
 <form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/admin" enctype="multipart/form-data" novalidate>
     <div class="col-12">
@@ -98,7 +95,7 @@ require_once("parts/alert.php"); ?>
         <?php foreach ($prayer_files as $file) : ?>
             <li>
                 <?php echo $file; ?> (last modified <?php echo Prayer_File::get_last_modified($file); ?>)
-                <a class="badge rounded-pill text-bg-danger fw-bold" href="/admin/?delete_prayer=<?php echo $file; ?>">delete</a>
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/admin/?delete_prayer=<?php echo $file; ?>">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
