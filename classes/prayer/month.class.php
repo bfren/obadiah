@@ -89,4 +89,23 @@ class Month
         // return empty Month object
         return new Month($id, array(), array());
     }
+
+    /**
+     * Return most recent Month, or a blank Month object.
+     *
+     * @return Month                    Most recent (or blank) month.
+     */
+    public static function get_most_recent(): Month
+    {
+        // get months
+        $months = Prayer_Calendar::get_months();
+
+        // create Month object from the most recent
+        if($most_recent = end($months)) {
+            return self::load($most_recent);
+        }
+
+        // return blank month
+        return new Month("", array(), array());
+    }
 }
