@@ -22,6 +22,7 @@ if (Request::$method == "POST") {
     $result = Rota_File::delete($delete_rota);
 } elseif ($delete_prayer = Arr::get($_GET, "delete_prayer")) {
     $result = Prayer_File::delete($delete_prayer);
+    Request::redirect("/prayer");
 }
 
 // get action page
