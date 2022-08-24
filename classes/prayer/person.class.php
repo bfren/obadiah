@@ -28,7 +28,8 @@ class Person
      *
      * @return string                   Full name.
      */
-    public function get_full_name():string{
+    public function get_full_name(): string
+    {
         return sprintf("%s %s", $this->first_name, $this->last_name);
     }
 }

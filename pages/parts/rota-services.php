@@ -19,7 +19,7 @@ $person = Arr::get($filters, "person");
  * @param string $passage               Bible passage to link to.
  * @return string                       Anchor tag with link to Bible Gateway and passage as text.
  */
-function get_bible_reading(string $passage) :string
+function get_bible_reading(string $passage): string
 {
     $param = array(
         "search" => $passage,

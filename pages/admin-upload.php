@@ -145,8 +145,8 @@ require_once("parts/alert.php"); ?>
                 <h5>Step One</h5>
                 <p>Log in to <a href="https://ccsp.churchsuite.com" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php echo $prayer_calendar_adults_export_href; ?>" target="_blank">here</a> to open the export page for adults.<br/>
-                Click <a href="<?php echo $prayer_calendar_children_export_href; ?>" target="_blank">here</a> to open the export page for children.</p>
+                <p>Click <a href="<?php echo $prayer_calendar_adults_export_href; ?>" target="_blank">here</a> to open the export page for adults.<br />
+                    Click <a href="<?php echo $prayer_calendar_children_export_href; ?>" target="_blank">here</a> to open the export page for children.</p>
                 <h5>Step Three</h5>
                 <p>Hover your mouse over the 'More' button and select 'Download CSV'.</p>
                 <h5>Step Four</h5>
