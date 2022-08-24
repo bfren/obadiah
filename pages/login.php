@@ -34,7 +34,7 @@ require_once("parts/header.php");
 
 ?>
 
-<p>Please enter the password to access.</p>
+<p class="mt-2">Please enter the password to access.</p>
 
 <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" method="POST" novalidate>
     <div class="col-12 position-relative">
