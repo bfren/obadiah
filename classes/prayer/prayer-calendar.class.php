@@ -11,9 +11,10 @@ App::check();
 class Prayer_Calendar
 {
     /**
-     * The array of people in the Prayer Calendar.
+     * The array of people in the Prayer Calendar, stored by hash.
      *
      * @var Person[]
+     *      array(string $hash => Person $person)
      */
     public readonly array $people;
 
@@ -30,7 +31,7 @@ class Prayer_Calendar
 
         // merge and sort array by last name and then first name
         $people = array_merge($adults, $children);
-        usort($people, fn (Person $a, Person $b) => $a->last_name != $b->last_name ? strcmp($a->last_name, $b->last_name) : strcmp($a->first_name, $b->first_name));
+        uasort($people, fn (Person $a, Person $b) => $a->last_name != $b->last_name ? strcmp($a->last_name, $b->last_name) : strcmp($a->first_name, $b->first_name));
 
         // store people
         $this->people = $people;
