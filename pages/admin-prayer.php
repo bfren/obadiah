@@ -2,9 +2,16 @@
 
 namespace Feeds\Pages;
 
+use DateTimeImmutable;
+use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;
+use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
+use Feeds\Helpers\Hash;
+use Feeds\Prayer\Month;
 use Feeds\Prayer\Prayer_Calendar;
+use Throwable;
 
 App::check();
 
@@ -12,12 +19,31 @@ App::check();
 $prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
 
 // define variables
-$number_of_days = 24;
-$people_per_day = count($prayer_calendar->people) / $number_of_days;
+$people_per_day = round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
+
+// get template month (will pre-populate the days with this month's data)
+$from_id = Arr::get($_GET, "from");
+if ($from_id) {
+    $from = Month::load($from_id);
+}
+
+// get the month this calendar is for
+$for_id = Arr::get($_GET, "for");
+if (!$for_id) {
+    $result = Result::failure("You must set the month this calendar is for.");
+}
+
+try {
+    $for = new DateTimeImmutable(sprintf("%s-01", $for_id));
+} catch (Throwable $th) {
+    die("Unable to determine the month this calendar is for.");
+}
+
+$current = $for->modify("first day of");
 
 // output header
 $title = "Admin";
-$subtitle = "User this page to assign everyone to a day on the prayer calendar.";
+$subtitle = "Use this page to assign everyone to a day on the prayer calendar.";
 require_once("parts/header.php");
 
 // output alert
@@ -33,8 +59,13 @@ require_once("parts/alert.php"); ?>
             There need to be an average of <?php echo $people_per_day; ?> people assigned to each day.
         </p>
         <div class="people">
-            <?php foreach ($prayer_calendar->people as $person) : $colour = $person->is_child ? "info" : "warning"; ?>
-                <button type="button" class="btn btn-sm btn-<?php echo $colour; ?> m-1" data-name="<?php echo strtolower($person->get_full_name()); ?>">
+            <?php foreach ($prayer_calendar->people as $person) : ?>
+                <?php
+                $colour = $person->is_child ? "info" : "warning";
+                $name = strtolower($person->get_full_name());
+                $hash = Hash::person($person);
+                ?>
+                <button type="button" class="btn btn-sm btn-<?php echo $colour; ?> m-1" data-name="<?php echo $name; ?>" data-hash="<?php echo $hash; ?>">
                     <?php echo $person->get_full_name(); ?>
                 </button>
             <?php endforeach; ?>
@@ -42,48 +73,29 @@ require_once("parts/alert.php"); ?>
     </div>
     <div class="col-6 col-xxl-9 mh-100 admin-prayer-calendar-column">
         <div class="row">
-            <?php for ($i = 1; $i <= $number_of_days; $i++) : ?>
+            <div class="col-12">
+                <h5 class="mt-2">
+                    <?php echo $for->format(C::$formats->display_month); ?>
+                    <span class="ps-3 fs-6" id="save"></span>
+                </h5>
+            </div>
+            <?php for ($i = 1; $i <= Month::MAX_DAYS; $i++) : if ($current->format("N") == 7) $current = $current->modify("+1 day"); ?>
                 <div class="col-12 col-xxl-6">
-                    <div class="card m-2">
-                        <div class="card-header">Day <?php echo $i; ?></div>
+                    <div class="card mt-2 mb-2" id="day-<?php echo $i; ?>" data-date="<?php echo $current->format(C::$formats->sortable_date); ?>">
+                        <div class="card-header">Day <?php echo $i; ?> (<?php echo $current->format(C::$formats->display_day); ?>)</div>
                         <div class="card-body day"></div>
                     </div>
                 </div>
-            <?php endfor; ?>
+            <?php $current = $current->modify("+1 day");
+            endfor; ?>
         </div>
     </div>
 </div>
 
-<script src="/resources/js/dragula.min.js"></script>
-<script type="text/javascript" defer>
-    // enabled dragging between people and day containers
-    var drake = dragula({
-        isContainer: function(el) {
-            return el.classList.contains("people") || el.classList.contains("day");
-        },
-        revertOnSpill: true,
-    });
-
-    // when a user types in the search box, show only people matching the search string
-    // (if they have typed two or more characters)
-    document.querySelector(".people-search > input").addEventListener("keyup", (e) => {
-        // get search string and force it to lower case
-        var search = new String(e.srcElement.value).toLowerCase();
-
-        // get all people buttons
-        document.querySelectorAll(".people > button").forEach((e) => {
-            // return true if search length is under two characters,
-            // or if the data-name attribute contains the search string
-            var match = search.length < 2 || e.getAttribute("data-name").includes(search);
-
-            // set the display style to match
-            if (match) {
-                e.style.display = "inline-block";
-            } else {
-                e.style.display = "none";
-            }
-        })
-    });
+<script type="text/javascript">
+    var month_max_days = <?php echo Month::MAX_DAYS; ?>;
+    var month_id = "<?php echo $for->format(C::$formats->prayer_month_id); ?>";
+    var prayer_calendar_save_url = "/ajax";
 </script>
 
 <?php require_once("parts/footer.php"); ?>
