@@ -23,6 +23,20 @@ class Config_Formats
     public readonly string $display_date;
 
     /**
+     * Display day.
+     *
+     * @var string
+     */
+    public readonly string $display_day;
+
+    /**
+     * Display month.
+     *
+     * @var string
+     */
+    public readonly string $display_month;
+
+    /**
      * Display time.
      *
      * @var string
@@ -35,6 +49,13 @@ class Config_Formats
      * @var string
      */
     public readonly string $ics_datetime;
+
+    /**
+     * Prayer Calendar month ID.
+     *
+     * @var string
+     */
+    public readonly string $prayer_month_id;
 
     /**
      * JSON date time.
@@ -67,9 +88,12 @@ class Config_Formats
     {
         $this->csv_import_datetime = $config["csv_import_datetime"];
         $this->display_date = $config["display_date"];
+        $this->display_day = $config["display_day"];
+        $this->display_month = $config["display_month"];
         $this->display_time = $config["display_time"];
         $this->ics_datetime = $config["ics_datetime"];
         $this->json_datetime = $config["json_datetime"];
+        $this->prayer_month_id = $config["prayer_month_id"];
         $this->sortable_date = $config["sortable_date"];
         $this->sortable_datetime = $config["sortable_datetime"];
     }
