@@ -12,7 +12,7 @@ App::check();
 ?>
 <div class="container-fluid mt-2 border-bottom">
     <h1><?php echo $title; ?></h1>
-    <?php if ($subtitle) : ?>
+    <?php if (isset($subtitle)) : ?>
         <h6><?php echo $subtitle; ?></h6>
     <?php endif; ?>
 </div>
