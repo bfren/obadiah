@@ -20,9 +20,15 @@ App::check();
     </div>
 </footer>
 
+<!-- Bootstrap -->
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/validate.js"></script>
+
+<!-- Prayer Calendar -->
+<script src="/resources/js/axios.min.js"></script>
+<script src="/resources/js/dragula.min.js"></script>
+<script src="/resources/js/prayer.js"></script>
 
 </body>
 
