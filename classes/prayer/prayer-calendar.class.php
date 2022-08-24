@@ -4,6 +4,7 @@ namespace Feeds\Prayer;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Hash;
 
 App::check();
 
@@ -29,7 +30,7 @@ class Prayer_Calendar
 
         // merge and sort array by last name and then first name
         $people = array_merge($adults, $children);
-        usort($people, fn(Person $a, Person $b) => $a->last_name != $b->last_name ? strcmp($a->last_name, $b->last_name) : strcmp($a->first_name, $b->first_name));
+        usort($people, fn (Person $a, Person $b) => $a->last_name != $b->last_name ? strcmp($a->last_name, $b->last_name) : strcmp($a->first_name, $b->first_name));
 
         // store people
         $this->people = $people;
@@ -42,7 +43,7 @@ class Prayer_Calendar
      * @param bool $is_child            Whether or not the person is a child.
      * @return Person[]
      */
-    private function get_people(string $filename, bool $is_child):array
+    private function get_people(string $filename, bool $is_child): array
     {
         // get csv files from path
         $file = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
@@ -65,11 +66,22 @@ class Prayer_Calendar
                 continue;
             }
 
-            // add the person
-            $people[] = new Person($row[0], $row[1], $is_child);
+            // add the person using a hash of the name as array key
+            $person = new Person($row[0], $row[1], $is_child);
+            $people[Hash::person($person)] = $person;
         }
 
         // return the array of people
         return $people;
+    }
+
+    public static function get_months() : array
+    {
+        // get saved month files
+        $files = glob(sprintf("%s/*.month", C::$dir->prayer));
+        sort($files);
+
+        // return each month without the '.month' extension
+        return str_replace(array(C::$dir->prayer, "/", ".month"), "", $files);
     }
 }

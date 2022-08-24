@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Service;
 
@@ -106,7 +107,7 @@ class Builder
      */
     public static function get_uid(Combined_Service $service): string
     {
-        return sha1(sprintf("%s%s", $service->start->format("c"), $service->name));
+        return Hash::service($service);
     }
 
     /**
