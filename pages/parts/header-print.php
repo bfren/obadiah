@@ -18,7 +18,6 @@ App::check();
     <title><?php echo $title; ?> | Church Suite Feeds</title>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/resources/css/feeds.min.css" rel="stylesheet" />
-    <link href="/resources/css/print.min.css" rel="stylesheet" />
 </head>
 
 <body>
