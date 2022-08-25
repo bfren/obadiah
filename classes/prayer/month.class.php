@@ -2,6 +2,7 @@
 
 namespace Feeds\Prayer;
 
+use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Config\Config as C;
@@ -31,6 +32,38 @@ class Month
         public readonly array $people
     ) {
     }
+
+    /**
+     * Get a date time object for the first day of this month.
+     *
+     * @return null|DateTimeImmutable
+     */
+    public function get_first_day_of_month(): ?DateTimeImmutable
+    {
+        // return empty if ID is not set
+        if (!$this->id) {
+            return null;
+        }
+
+        // parse month ID as date
+        return new DateTimeImmutable(sprintf("%s-01", $this->id));
+    }
+
+    /**
+     * Return a formatted date string of this month.
+     *
+     * @return null|string              This month e.g. 'January 2022'.
+     */
+    public function get_display_month(): ?string
+    {
+        $dt = $this->get_first_day_of_month();
+        if ($dt) {
+            return $dt->format(C::$formats->display_month);
+        } else {
+            return null;
+        }
+    }
+
 
     /**
      * Create a Month object from $data and save it to the data store.
@@ -73,21 +106,21 @@ class Month
     /**
      * Load the days for a specific month from a data store, if it exists.
      *
-     * @param string $id                Month ID, format YYYY-MM.
+     * @param null|string $id           Month ID, format YYYY-MM.
      * @return Month                    Month object containing deserialised days (if store file exists).
      */
-    public static function load(string $id): Month
+    public static function load(?string $id): Month
     {
         // get path to data file
         $path = sprintf("%s/%s.month", C::$dir->prayer, $id);
 
         // if the file exists, read and deserialise
-        if ($data = file_get_contents($path)) {
+        if (file_exists($path) && ($data = file_get_contents($path))) {
             return unserialize($data);
         }
 
         // return empty Month object
-        return new Month($id, array(), array());
+        return new Month($id ?: "", array(), array());
     }
 
     /**

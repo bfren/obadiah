@@ -4,6 +4,7 @@ namespace Feeds\Prayer;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
 
 App::check();
@@ -26,15 +27,48 @@ class Prayer_Calendar
     public function __construct()
     {
         // get adults and children
-        $adults = $this->get_people("adults", false);
-        $children = $this->get_people("children", true);
+        $adults = $this->read_file("adults", false);
+        $children = $this->read_file("children", true);
 
         // merge and sort array by last name and then first name
         $people = array_merge($adults, $children);
-        uasort($people, fn (Person $a, Person $b) => $a->last_name != $b->last_name ? strcmp($a->last_name, $b->last_name) : strcmp($a->first_name, $b->first_name));
+        self::sort_people($people);
 
         // store people
         $this->people = $people;
+    }
+
+    /**
+     * Get matching people objects from an array of hashes.
+     *
+     * @param string[] $hashes          Person hash.
+     * @return Person[]                 Array of person objects.
+     */
+    public function get_people(array $hashes): array
+    {
+        $people = Arr::map($hashes, fn(string $hash) => Arr::get($this->people, $hash));
+        self::sort_people($people);
+        return $people;
+    }
+
+    /**
+     * Sort an array of Person objects by last name and then first name.
+     *
+     * @param Person[] $people          Array of Person objects.
+     * @return void
+     */
+    public static function sort_people(array &$people): void
+    {
+        // use custom sort - maintaining array keys
+        uasort($people, function (Person $a, Person $b) {
+            // if last names match, compare first names
+            if ($a->last_name == $b->last_name) {
+                return strcmp($a->first_name, $b->first_name);
+            }
+
+            // compare last names
+            return strcmp($a->last_name, $b->last_name);
+        });
     }
 
     /**
@@ -44,7 +78,7 @@ class Prayer_Calendar
      * @param bool $is_child            Whether or not the person is a child.
      * @return Person[]
      */
-    private function get_people(string $filename, bool $is_child): array
+    private function read_file(string $filename, bool $is_child): array
     {
         // get csv files from path
         $file = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
