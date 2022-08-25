@@ -37,13 +37,13 @@ if (document.querySelector(".admin-prayer-calendar-column") != null) {
 function save_prayer_calendar_data() {
     // create month object to hold the data
     var month = {
-        id: month_id,
+        id: prayer_calendar_month_id,
         days: [],
         people: []
     };
 
     // loop through each day to create a JSON object of the month
-    for (let index = 1; index <= month_max_days; index++) {
+    for (let index = 1; index <= prayer_calendar_month_max_days; index++) {
         // get card for this day
         var card = document.querySelector("#day-" + index);
 
