@@ -58,6 +58,13 @@ class Config
     public static Config_Login $login;
 
     /**
+     * Prayer config object.
+     *
+     * @var Config_Prayer
+     */
+    public static Config_Prayer $prayer;
+
+    /**
      * Rota config object.
      *
      * @var Config_Rota
@@ -84,6 +91,7 @@ class Config
         self::$formats = new Config_Formats($config["formats"]);
         self::$general = new Config_General($config["general"]);
         self::$login = new Config_Login($config["login"]);
+        self::$prayer = new Config_Prayer($config["prayer"]);
         self::$rota = new Config_Rota($config["rota"]);
     }
 }

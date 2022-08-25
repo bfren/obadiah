@@ -40,4 +40,7 @@ rota:
     - { name: 'Service Leader', desc: 'Leader', abbv: 'L' }
 
 prayer:
+  day_29: [ '' ]
+  day_30: [ '' ]
+  day_31: [ '' ]
   include_surname: true
