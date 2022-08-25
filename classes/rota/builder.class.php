@@ -107,7 +107,9 @@ class Builder
      */
     public static function get_uid(Combined_Service $service): string
     {
-        return Hash::service($service);
+        $now = date(C::$formats->ics_datetime);
+        $hash = Hash::service($service);
+        return sprintf("%s-%s@feeds.ccsp.uk", $now, $hash);
     }
 
     /**

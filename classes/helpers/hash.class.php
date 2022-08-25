@@ -30,8 +30,6 @@ class Hash
      */
     public static function service(Combined_Service $service): string
     {
-        $now = date(C::$formats->ics_datetime);
-        $svc = md5(sprintf("%s%s", $service->start->format("c"), $service->name));
-        return sprintf("%s-%s@feeds.ccsp.uk", $now, $svc);
+        return md5(serialize($service));
     }
 }
