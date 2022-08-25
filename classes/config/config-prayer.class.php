@@ -31,11 +31,11 @@ class Config_Prayer
     public readonly array $day_31;
 
     /**
-     * Whether or not to show the full surname for everyone, or an initial.
+     * Whether or not to show the full last name for everyone, or an initial.
      *
      * @var bool
      */
-    public readonly bool $show_surname;
+    public readonly bool $show_last_name;
 
     /**
      * Get values from events configuration array.
@@ -48,6 +48,6 @@ class Config_Prayer
         $this->day_29 = $config["day_29"];
         $this->day_30 = $config["day_30"];
         $this->day_31 = $config["day_31"];
-        $this->show_surname = $config["show_surname"];
+        $this->show_last_name = $config["show_last_name"];
     }
 }

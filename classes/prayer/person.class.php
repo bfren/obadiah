@@ -26,10 +26,11 @@ class Person
     /**
      * Return the person's full name.
      *
+     * @param bool $show_last_name      If false the last name will be converted to be an initial.
      * @return string                   Full name.
      */
-    public function get_full_name(): string
+    public function get_full_name(bool $show_last_name = true): string
     {
-        return sprintf("%s %s", $this->first_name, $this->last_name);
+        return sprintf("%s %s", $this->first_name, $show_last_name ? $this->last_name : substr($this->last_name, 0, 1));
     }
 }

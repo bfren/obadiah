@@ -41,8 +41,8 @@ function output_day(DateTimeImmutable $date)
         $lectionary_day = $lectionary->get_day($date);
         $services = $lectionary_day?->services;
     } elseif ($hashes = Arr::get($month->days, $date->format(C::$formats->sortable_date))) {
-        $people = array_map(fn (Person $person) => $person->get_full_name(), $prayer_calendar->get_people($hashes));
-    } elseif (($num = $date->format("j")) && in_array($num, array(29,30,31))) {
+        $people = array_map(fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name), $prayer_calendar->get_people($hashes));
+    } elseif (($num = $date->format("j")) && in_array($num, array(29, 30, 31))) {
         $prop = sprintf("day_%s", $num);
         $people = C::$prayer->$prop;
     } else {
@@ -71,14 +71,12 @@ function output_day(DateTimeImmutable $date)
                         <div class="service d-flex">
                             <div class="time"><?php echo $service->time; ?></div>
                             <div class="teaching">
-                                <div>
-                                    <?php if ($service->main_reading) : ?>
-                                        <?php echo $service->main_reading; ?>
-                                        <?php if ($service->additional_reading) echo sprintf("&amp; %s", $service->additional_reading); ?>
-                                    <?php else : ?>
-                                        <?php echo $service->title; ?>
-                                    <?php endif; ?>
-                                </div>
+                                <?php if ($service->main_reading) : ?>
+                                    <?php echo $service->main_reading; ?>
+                                    <?php if ($service->additional_reading) echo sprintf("&amp; %s", $service->additional_reading); ?>
+                                <?php else : ?>
+                                    <?php echo $service->title; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
