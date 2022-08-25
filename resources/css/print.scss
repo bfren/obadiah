@@ -1,29 +1,18 @@
-.rota-services {
-    >div {
-        width: 25% !important;
-    }
-
-    .people {
-        >p {
-            margin-top: 3px !important;
-        }
-    }
-}
-
 @media print {
     @page {
         size: A4 landscape;
-        margin: 15mm 15mm 5mm;
+        margin: 10mm;
     }
 
     * {
         font-family: "Source Sans Pro";
+        line-height: 1.2;
     }
 
     html,
     body {
-        padding: 0;
         margin: 0;
-        line-height: initial;
+        padding: 0;
+        width: 297mm;
     }
 }

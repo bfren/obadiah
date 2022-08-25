@@ -1,0 +1,114 @@
+$margin: 5px;
+
+.prayer-calendar-title {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+
+.prayer-calendar-days {
+    .verse {
+        font-weight: bold;
+        margin: $margin 0;
+        text-align: center;
+
+        .ref {
+            color: grey;
+            font-size: 0.9rem;
+            font-style: italic;
+            font-weight: normal;
+            padding-left: $margin;
+        }
+    }
+
+    .day {
+        margin-top: $margin;
+
+        $size: 50px;
+
+        .date {
+            border: 1px solid #adb5bd;
+            float: left;
+            height: $size;
+            margin: 0;
+            padding: 0;
+            width: $size;
+
+            .month {
+                background-color: #dee2e6;
+                font-size: 0.8rem;
+                font-variant: small-caps;
+                font-weight: 500;
+                line-height: 1;
+                padding: 1px 0 2px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .dow {
+                font-size: 0.8rem;
+                font-variant: small-caps;
+                line-height: 1;
+                margin: 0 -3px 0 2px;
+                text-align: center;
+                text-orientation: sideways;
+                writing-mode: vertical-lr;
+            }
+
+            .num {
+                font-size: 1.3rem;
+                font-weight: 900;
+                line-height: 1;
+                text-align: center;
+            }
+        }
+
+        .content {
+            font-size: 0.8rem;
+            height: 100%;
+            line-height: 1rem;
+            margin-left: $size + $margin;
+
+            .services {
+                .service {
+                    .teaching {
+                        margin-left: calc($margin * 2);
+                    }
+                }
+            }
+        }
+
+        .clear {
+            border-bottom: 1px solid #dee2e6;
+            clear: both;
+            margin-left: $size + $margin;
+        }
+    }
+
+    .guidance {
+        background-color: #dee2e6;
+        margin-top: $margin;
+        padding: 2px 4px;
+
+        p {
+            font-size: 0.95rem;
+            margin: 4px 2px;
+            padding: 0;
+            text-align: center;
+        }
+    }
+}
+
+.footer-prayer {
+    p {
+        margin: 3px 0;
+        padding: 0;
+    }
+}
+
+.admin-prayer-calendar-column {
+    overflow-y: auto;
+
+    .people {
+        min-height: 50px;
+    }
+}

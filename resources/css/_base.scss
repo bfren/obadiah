@@ -1,0 +1,16 @@
+:root {
+    --bs-font-sans-serif: -apple-system, Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+img.logo {
+    max-height: 40px;
+}
+
+h2 {
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    margin-top: 2rem;
+}
+
+div > h2:first-child {
+    margin-top: 0.5rem;
+}
