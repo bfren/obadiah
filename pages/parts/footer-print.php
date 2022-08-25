@@ -8,7 +8,7 @@ use Feeds\Config\Config as C;
 
 App::check();
 
-$today = new DateTimeImmutable("now", C::$events->timezone);
+$today = new DateTimeImmutable("now", C::$general->timezone);
 
 ?>
 

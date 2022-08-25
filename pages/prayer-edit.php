@@ -12,9 +12,11 @@ use Feeds\Helpers\Hash;
 use Feeds\Prayer\Month;
 use Feeds\Prayer\Person;
 use Feeds\Prayer\Prayer_Calendar;
+use Feeds\Request\Request;
 use Throwable;
 
 App::check();
+Request::is_admin() || Request::redirect("/logout.php");
 
 // get prayer calendar
 $prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
@@ -73,7 +75,7 @@ function output_person_button(Person $person)
 }
 
 // output header
-$title = "Admin";
+$title = "Prayer";
 $subtitle = "Use this page to assign everyone to a day on the prayer calendar.";
 require_once("parts/header.php");
 
@@ -133,9 +135,9 @@ require_once("parts/alert.php"); ?>
 </div>
 
 <script type="text/javascript">
-    var month_max_days = <?php echo Month::MAX_DAYS; ?>;
-    var month_id = "<?php echo $for->format(C::$formats->prayer_month_id); ?>";
-    var prayer_calendar_save_url = "/ajax";
+    var prayer_calendar_month_max_days = <?php echo Month::MAX_DAYS; ?>;
+    var prayer_calendar_month_id = "<?php echo $for->format(C::$formats->prayer_month_id); ?>";
+    var prayer_calendar_save_url = "/ajax.php";
 </script>
 
 <?php require_once("parts/footer.php"); ?>

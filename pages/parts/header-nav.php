@@ -20,7 +20,7 @@ if (Request::$auth) {
     if (Request::is_admin()) {
         $links = array_merge(
             array_slice($links, 0, 1),
-            array("Admin" => "/admin"),
+            array("Upload" => "/upload"),
             array_slice($links, 1)
         );
     }

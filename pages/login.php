@@ -19,7 +19,7 @@ if (Request::$method == "POST") {
         Request::redirect("/");
     } elseif ($pass == C::$login->admin) {
         Request::authorise(true);
-        Request::redirect("/admin");
+        Request::redirect("/upload");
     } else {
         Request::deny();
     }
