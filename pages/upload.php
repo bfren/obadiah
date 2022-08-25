@@ -47,7 +47,7 @@ require_once("parts/alert.php"); ?>
 <!-- Rota file upload -->
 <h2>Rota</h2>
 <p>Upload a rota CSV file here. (For instructions click <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#rota-instructions">here</a>.)</p>
-<form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
+<form class="row row-cols-md-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12 position-relative">
         <label class="visually-hidden" for="name">Rota Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Name e.g. '22-2'" required />
@@ -76,7 +76,7 @@ require_once("parts/alert.php"); ?>
 <!-- Prayer Calendar file upload -->
 <h2>Prayer Calendar</h2>
 <p>Upload prayer calendar CSV files here. (For instructions click <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#prayer-calendar-instructions">here</a>.)</p>
-<form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
+<form class="row row-cols-sm-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12">
         <input type="text" readonly class="form-control-plaintext" value="Adults" />
     </div>
@@ -89,7 +89,7 @@ require_once("parts/alert.php"); ?>
         <button type="submit" class="btn btn-primary" name="submit" value="prayer-adults">Upload</button>
     </div>
 </form>
-<form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
+<form class="row row-cols-sm-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12">
         <input type="text" readonly class="form-control-plaintext" value="Children" />
     </div>
