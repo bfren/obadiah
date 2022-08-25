@@ -1,3 +1,4 @@
+$line-height: 1.2;
 $margin: 5px;
 
 .prayer-calendar-title {
@@ -49,7 +50,6 @@ $margin: 5px;
                 font-variant: small-caps;
                 line-height: 1;
                 margin: 0 -3px 0 2px;
-                text-align: center;
                 text-orientation: sideways;
                 writing-mode: vertical-lr;
             }
@@ -58,14 +58,13 @@ $margin: 5px;
                 font-size: 1.3rem;
                 font-weight: 900;
                 line-height: 1;
-                text-align: center;
             }
         }
 
         .content {
             font-size: 0.8rem;
             height: 100%;
-            line-height: 1rem;
+            line-height: $line-height;
             margin-left: $size + $margin;
 
             .services {
@@ -91,6 +90,7 @@ $margin: 5px;
 
         p {
             font-size: 0.95rem;
+            line-height: $line-height;
             margin: 4px 2px;
             padding: 0;
             text-align: center;
@@ -100,6 +100,7 @@ $margin: 5px;
 
 .footer-prayer {
     p {
+        line-height: $line-height;
         margin: 3px 0;
         padding: 0;
     }
