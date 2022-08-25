@@ -92,9 +92,7 @@ function output_day(DateTimeImmutable $date)
 <?php if ($month->people) : ?>
 
     <h2 class="prayer-calendar-title row">
-        <div class="col-4">
-            <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none"><?php echo Image::get_logo("logo me-4"); ?></a>
-        </div>
+        <div class="col-4"><a href="/"><?php echo Image::get_logo("logo me-4"); ?></a></div>
         <div class="col-4 text-center">Prayer Calendar</div>
         <div class="col-4 text-end"><?php echo $month->get_display_month(); ?></div>
     </h2>
