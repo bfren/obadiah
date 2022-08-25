@@ -109,7 +109,7 @@ class Builder
     {
         $date = date(C::$formats->ics_datetime, $rota_last_modified);
         $hash = Hash::service($service);
-        return sprintf("%s-%s@feeds.ccsp.uk", $date, $hash);
+        return sprintf("%s-%s@%s", $date, $hash, Arr::get($_SERVER, "REMOTE_ADDR"));
     }
 
     /**
