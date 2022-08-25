@@ -16,7 +16,7 @@ class Day
      *
      * @param string $date              String (sortable) representation of the date for this day in the lectionary.
      * @param null|string $name         The name of this day in the lectionary (e.g. 8th after Trinity).
-     * @param array $services           List of services on this particular day, sorted by start time.
+     * @param Service[] $services       List of services on this particular day, sorted by start time.
      * @return void
      */
     public function __construct(
