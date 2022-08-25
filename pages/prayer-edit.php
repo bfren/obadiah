@@ -117,8 +117,7 @@ require_once("parts/alert.php"); ?>
                 }
 
                 // get the names of those people
-                $people = array();
-                foreach ($people_hashes as $hash) ($person = Arr::get($prayer_calendar->people, $hash)) && $people[] = $person;
+                $people = $prayer_calendar->get_people($people_hashes);
                 ?>
                 <div class="col-12 col-lg-6 col-xxl-4">
                     <div class="card mt-2 mb-2" id="day-<?php echo $i; ?>" data-date="<?php echo $date; ?>">
