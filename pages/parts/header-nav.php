@@ -15,7 +15,7 @@ if (Request::$auth) {
     $links = array(
         "Home" => "/",
         "Rota" => "/rota",
-        "Prayer" => "/prayer",
+        "Prayer Calendar" => "/prayer",
         "Log Out" => "/logout.php"
     );
     if (Request::is_admin()) {
@@ -45,7 +45,7 @@ if (Request::$auth) {
             <div class="collapse navbar-collapse text-end" id="navbar">
                 <ul class="navbar-nav ms-5 mb-0">
                     <?php foreach ($links as $link_title => $link) : ?>
-                        <li class="nav-item ms-5">
+                        <li class="nav-item ms-2">
                             <?php if ($title == $link_title) : ?>
                                 <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
                             <?php else : ?>

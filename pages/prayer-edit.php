@@ -75,7 +75,7 @@ function output_person_button(Person $person)
 }
 
 // output header
-$title = "Prayer";
+$title = "Prayer Calendar";
 $subtitle = "Use this page to assign everyone to a day on the prayer calendar.";
 require_once("parts/header.php");
 
