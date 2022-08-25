@@ -60,7 +60,7 @@ class Rota_File
         $result = File::delete($filename, sprintf("%s/%s", C::$dir->rota, $filename), "rota");
 
         // clear cache on success
-        if($result->success){
+        if ($result->success) {
             Cache::clear_rota();
         }
 

@@ -101,7 +101,7 @@ class Month
         $months = Prayer_Calendar::get_months();
 
         // create Month object from the most recent
-        if($most_recent = end($months)) {
+        if ($most_recent = end($months)) {
             return self::load($most_recent);
         }
 

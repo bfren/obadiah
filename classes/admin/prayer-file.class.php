@@ -27,7 +27,7 @@ class Prayer_File
      * @param string $filename          The filename to save - use one of the class constants.
      * @return Result
      */
-    private static function upload(string $type, string $filename):Result
+    private static function upload(string $type, string $filename): Result
     {
         // only allow CSV files
         in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
@@ -88,7 +88,7 @@ class Prayer_File
         $result = File::delete($filename, sprintf("%s/%s", C::$dir->prayer, $filename), "prayer");
 
         // clear cache on success
-        if($result->success){
+        if ($result->success) {
             Cache::clear_prayer_calendar();
         }
 

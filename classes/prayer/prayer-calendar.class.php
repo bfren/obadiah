@@ -76,7 +76,7 @@ class Prayer_Calendar
         return $people;
     }
 
-    public static function get_months() : array
+    public static function get_months(): array
     {
         // get saved month files
         $files = glob(sprintf("%s/*.month", C::$dir->prayer));
