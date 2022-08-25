@@ -107,12 +107,12 @@ class Lectionary
     }
 
     /**
-     * Get service information from the Lectionary for the specified date and time.
+     * Get day information from the Lectionary for the specified date.
      *
-     * @param DateTimeImmutable $dt     Service date and time.
-     * @return null|Service             Lectionary service.
+     * @param DateTimeImmutable $dt     Date.
+     * @return null|Day                 Lectionary day.
      */
-    public function get_service(DateTimeImmutable $dt): ?Service
+    public function get_day(DateTimeImmutable $dt): ?Day
     {
         // get the Lectionary day
         $date = $dt->format(C::$formats->sortable_date);
@@ -125,7 +125,22 @@ class Lectionary
             return null;
         }
 
-        // get the service at the specified time on this day
-        return $days[0]->get_service($dt);
+        // return the day
+        return $days[0];
+    }
+
+    /**
+     * Get service information from the Lectionary for the specified date and time.
+     *
+     * @param DateTimeImmutable $dt     Service date and time.
+     * @return null|Service             Lectionary service.
+     */
+    public function get_service(DateTimeImmutable $dt): ?Service
+    {
+        if($day = $this->get_day($dt)) {
+            return $day->get_service($dt);
+        }
+
+        return null;
     }
 }
