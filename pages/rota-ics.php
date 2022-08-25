@@ -20,7 +20,7 @@ $events = array();
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
         $events[] = new VEvent(
-            Builder::get_uid($c_service),
+            Builder::get_uid($rota->last_modified_timestamp, $c_service),
             $c_service->start,
             $c_service->end,
             Builder::get_summary($c_service, Arr::get($filters, "person", "")),
@@ -30,6 +30,6 @@ foreach ($combined_days as $c_day) {
 }
 
 // create and output calendar
-$vcal = new VCal($events, $rota->last_modified_timestamp);
+$vcal = new VCal($events, time());
 $vcal->send_headers("rota", Request::$debug);
 $vcal->print_output();

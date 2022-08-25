@@ -105,11 +105,11 @@ class Builder
      * @param Combined_Service $service     Service object.
      * @return string                       Unique hashed ID.
      */
-    public static function get_uid(Combined_Service $service): string
+    public static function get_uid(int $rota_last_modified, Combined_Service $service): string
     {
-        $now = date(C::$formats->ics_datetime);
+        $date = date(C::$formats->ics_datetime, $rota_last_modified);
         $hash = Hash::service($service);
-        return sprintf("%s-%s@feeds.ccsp.uk", $now, $hash);
+        return sprintf("%s-%s@feeds.ccsp.uk", $date, $hash);
     }
 
     /**
