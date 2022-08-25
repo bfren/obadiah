@@ -44,6 +44,13 @@ class Config
     public static Config_Formats $formats;
 
     /**
+     * General config object.
+     *
+     * @var Config_General
+     */
+    public static Config_General $general;
+
+    /**
      * Login config object.
      *
      * @var Config_Login
@@ -75,6 +82,7 @@ class Config
         self::$dir = new Config_Dir($cwd);
         self::$events = new Config_Events($config["events"]);
         self::$formats = new Config_Formats($config["formats"]);
+        self::$general = new Config_General($config["general"]);
         self::$login = new Config_Login($config["login"]);
         self::$rota = new Config_Rota($config["rota"]);
     }

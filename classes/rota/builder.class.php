@@ -78,7 +78,7 @@ class Builder
 
             // add the day to the rota
             $rota[$day->date] = new Combined_Day(
-                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$events->timezone)->setTime(0, 0),
+                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$general->timezone)->setTime(0, 0),
                 name: $day->name,
                 services: $c_services
             );

@@ -23,6 +23,8 @@ if (Request::$method == "POST") {
     $result = match($json->action) {
         "month" => Month::save($json->data)
     };
+} else {
+    die("Nice try.");
 }
 
 // output result as JSON

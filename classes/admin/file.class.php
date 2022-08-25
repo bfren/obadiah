@@ -19,7 +19,7 @@ class File
     public static function get_last_modified($path): string
     {
         $modified = new DateTimeImmutable(sprintf("@%s", filemtime($path)));
-        return $modified->setTimezone(C::$events->timezone)->format(C::$formats->sortable_datetime);
+        return $modified->setTimezone(C::$general->timezone)->format(C::$formats->sortable_datetime);
     }
 
     /**

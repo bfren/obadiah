@@ -17,13 +17,6 @@ class Config_Events
     public readonly int $length_in_minutes;
 
     /**
-     * Default timezone.
-     *
-     * @var DateTimeZone
-     */
-    public readonly DateTimeZone $timezone;
-
-    /**
      * Get values from events configuration array.
      *
      * @param array $config             Events configuration array.
@@ -32,6 +25,5 @@ class Config_Events
     public function __construct(array $config)
     {
         $this->length_in_minutes = $config["length_in_minutes"];
-        $this->timezone = new DateTimeZone($config["timezone"]);
     }
 }
