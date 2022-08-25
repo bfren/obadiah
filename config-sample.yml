@@ -43,4 +43,4 @@ prayer:
   day_29: [ '' ]
   day_30: [ '' ]
   day_31: [ '' ]
-  include_surname: true
+  include_last_name: true
