@@ -37,4 +37,16 @@ class Arr
     {
         return array_values(array_filter($array, $callback));
     }
+
+    /**
+     * Transform each element in $array using $callback.
+     *
+     * @param array $array              Array to map.
+     * @param null|callable $callback   Callback function (should return a transformed value).
+     * @return array                    Array of transformed elements.
+     */
+    public static function map(array $array, ?callable $callback = null)
+    {
+        return array_filter(array_map($callback, $array));
+    }
 }
