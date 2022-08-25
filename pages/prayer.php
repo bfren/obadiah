@@ -18,7 +18,7 @@ if ($delete_month = Arr::get($_GET, "delete_month")) {
 // get action page
 $action_page = match($action) {
     "edit" => "prayer-edit.php",
-    "view" => "prayer-view.php",
+    "print" => "prayer-print.php",
     default => "prayer-list.php"
 };
 

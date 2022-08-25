@@ -29,7 +29,7 @@ require_once("parts/alert.php"); ?>
             $delete_query = array("delete_month" => sprintf("%s.month", $month));
             ?>
             <li>
-                <a href="/prayer/view/?<?php echo http_build_query($view_query); ?>"><?php echo $month; ?></a>
+                <a href="/prayer/print/?<?php echo http_build_query($view_query); ?>" target="_blank"><?php echo $month; ?></a>
                 <?php if (Request::is_admin()) : ?>
                     <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php echo http_build_query($edit_query); ?>">edit</a>
                     <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/?<?php echo http_build_query($delete_query); ?>">delete</a>
