@@ -53,9 +53,9 @@ function output_day(DateTimeImmutable $date)
         <div class="date rounded-3 d-flex flex-column">
             <div class="month rounded-top"><?php echo strtolower($date->format("M")); ?></div>
             <div class="d-flex justify-content-center flex-row flex-grow-1">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-start mt-1">
+                    <span class="dow"><?php echo substr(strtolower($date->format("D")), 0, 2); ?></span>
                     <span class="num"><?php echo $date->format("j"); ?></span>
-                    <span class="dow"><?php echo strtolower($date->format("D")); ?></span>
                 </div>
             </div>
         </div>
