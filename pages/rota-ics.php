@@ -6,7 +6,6 @@ use Feeds\App;
 use Feeds\Helpers\Arr;
 use Feeds\ICal\VCal;
 use Feeds\ICal\VEvent;
-use Feeds\Request\Request;
 use Feeds\Rota\Builder;
 
 App::check();
@@ -30,6 +29,6 @@ foreach ($combined_days as $c_day) {
 }
 
 // create and output calendar
-$vcal = new VCal($events, time());
-$vcal->send_headers("rota", Request::$debug);
+$vcal = new VCal($events);
+$vcal->send_headers("rota");
 $vcal->print_output();

@@ -6,11 +6,19 @@ use DateTimeZone;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\ICal\TZ\Europe_London;
+use Feeds\Request\Request;
 
 App::check();
 
 class VCal
 {
+    /**
+     * Timestamp when the calendar was last modified.
+     *
+     * @var int
+     */
+    public readonly int $last_modified;
+
     /**
      * Holds each line of the calendar output.
      *
@@ -22,13 +30,14 @@ class VCal
      * Add calendar headers and timezone settings for Europe/London.
      *
      * @param VEvent[] $events          Array of events in this calendar.
-     * @param int $last_modified        Timestamp when the calendar was last modified.
      * @return void
      */
     public function __construct(
-        public readonly array $events,
-        public readonly int $last_modified
+        public readonly array $events
     ) {
+        // use current date time as last modified
+        $this->last_modified = time();
+
         // begin calendar definition
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
@@ -60,12 +69,11 @@ class VCal
      * Send headers (use before printing the output).
      *
      * @param string $filename          Added to 'ccsp-' to give the name of the downloaded calendar file.
-     * @param bool $debug               If true, a text/plain header will be used so the calendar is displayed not downloaded.
      * @return void
      */
-    public function send_headers(string $filename, bool $debug = false): void
+    public function send_headers(string $filename): void
     {
-        if ($debug) {
+        if (Request::$debug) {
             header("Content-Type: text/plain");
         } else {
             header("Content-Type: text/calendar; charset=utf-8");
