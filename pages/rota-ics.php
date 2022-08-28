@@ -29,6 +29,6 @@ foreach ($combined_days as $c_day) {
 }
 
 // create and output calendar
-$vcal = new VCal($events);
+$vcal = new VCal($events, $rota->last_modified_timestamp);
 $vcal->send_headers("rota");
 $vcal->print_output();

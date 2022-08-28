@@ -13,13 +13,6 @@ App::check();
 class VCal
 {
     /**
-     * Timestamp when the calendar was last modified.
-     *
-     * @var int
-     */
-    public readonly int $last_modified;
-
-    /**
      * Holds each line of the calendar output.
      *
      * @var string[]
@@ -30,10 +23,12 @@ class VCal
      * Add calendar headers and timezone settings for Europe/London.
      *
      * @param VEvent[] $events          Array of events in this calendar.
+     * @param int $last_modified        Timestamp when the calendar was last modified.
      * @return void
      */
     public function __construct(
-        public readonly array $events
+        public readonly array $events,
+        public readonly int $last_modified
     ) {
         // use current date time as last modified
         $this->last_modified = time();

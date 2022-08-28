@@ -14,17 +14,17 @@ class Cache
     /**
      * Lectionary cache name.
      */
-    private const LECTIONARY = "lectionary";
+    public const LECTIONARY = "lectionary";
 
     /**
      * Prayer Calendar cache name.
      */
-    private const PRAYER = "prayer";
+    public const PRAYER = "prayer";
 
     /**
      * Rota cache name.
      */
-    private const ROTA = "rota";
+    public const ROTA = "rota";
 
     /**
      * Absolute path to cache data directory.
@@ -122,7 +122,7 @@ class Cache
      * @param string $id                Cache ID.
      * @return string                   Absolute path to cache file.
      */
-    private static function get_cache_file_path(string $id):string
+    public static function get_cache_file_path(string $id):string
     {
         return sprintf("%s/%s.cache", self::$dir_path, $id);
     }
