@@ -3,6 +3,7 @@
 namespace Feeds\Rota;
 
 use Feeds\App;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
@@ -91,6 +92,13 @@ class Rota
 
         // sort services by timestamp
         usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
+
+        // check lectionary cache last modified
+        $file = Cache::get_cache_file_path(Cache::LECTIONARY);
+        $last_modified = filemtime($file);
+        if ($last_modified > $last_modified_timestamp) {
+            $last_modified_timestamp = $last_modified;
+        }
 
         // set values
         $this->last_modified_timestamp = $last_modified_timestamp;
