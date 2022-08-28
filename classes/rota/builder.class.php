@@ -108,9 +108,10 @@ class Builder
      */
     public static function get_uid(int $rota_last_modified, Combined_Service $service): string
     {
+        static $count = 0;
         $date = date(C::$formats->ics_datetime, $rota_last_modified);
-        $hash = Hash::service($service);
-        return sprintf("%s-%s@%s", $date, $hash, Arr::get($_SERVER, "REMOTE_ADDR"));
+        $ip = Arr::get($_SERVER, "REMOTE_ADDR");
+        return sprintf("%06d-%s@%s", $count++, $date, $ip);
     }
 
     /**
@@ -132,7 +133,7 @@ class Builder
 
         // look for certain roles
         $roles = array();
-        foreach ($service->roles as $role => $service_role) {
+        foreach ($service->roles as $service_role) {
             foreach ($service_role->people as $p) {
                 if (str_starts_with($p, $person)) {
                     $roles[] = $service_role->abbreviation;
