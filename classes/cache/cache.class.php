@@ -122,7 +122,7 @@ class Cache
      * @param string $id                Cache ID.
      * @return string                   Absolute path to cache file.
      */
-    public static function get_cache_file_path(string $id):string
+    public static function get_cache_file_path(string $id): string
     {
         return sprintf("%s/%s.cache", self::$dir_path, $id);
     }
