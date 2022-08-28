@@ -30,9 +30,6 @@ class VCal
         public readonly array $events,
         public readonly int $last_modified
     ) {
-        // use current date time as last modified
-        $this->last_modified = time();
-
         // begin calendar definition
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
