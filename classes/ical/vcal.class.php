@@ -38,8 +38,8 @@ class VCal
         $this->lines[] = "X-PUBLISHED-TTL:PT1H";
 
         // add timezone definition
-        $ical_timezone = $this->get_ical_timezone(C::$general->timezone);
-        $this->lines = array_merge($this->lines, $ical_timezone?->get_definition() ?: array());
+        $tz = $this->get_ical_timezone(C::$general->timezone)?->get_definition();
+        $this->lines = array_merge($this->lines, $tz ?: array());
     }
 
     /**
