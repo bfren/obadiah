@@ -94,10 +94,10 @@ class Rota
         usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
-        $lectionary_cache_file = Cache::get_cache_file_path(Cache::LECTIONARY);
-        $lectionary_cache_last_modified = filemtime($lectionary_cache_file);
-        if ($lectionary_cache_last_modified > $last_modified_timestamp) {
-            $last_modified_timestamp = $lectionary_cache_last_modified;
+        $lectionary_file = Cache::get_cache_file_path(Cache::LECTIONARY);
+        $lectionary_last_modified = file_exists($lectionary_file) ? filemtime($lectionary_file) : 0;
+        if ($lectionary_last_modified > $last_modified_timestamp) {
+            $last_modified_timestamp = $lectionary_last_modified;
         }
 
         // set values
