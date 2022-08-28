@@ -77,6 +77,7 @@ function output_person_button(Person $person)
 // output header
 $title = "Prayer Calendar";
 $subtitle = "Use this page to assign everyone to a day on the prayer calendar.";
+$overflow_scroll = true;
 require_once("parts/header.php");
 
 // output alert

@@ -27,5 +27,14 @@ App::check();
 
     <?php require_once("header-title.php"); ?>
 
-    <main class="flex-grow-1 h-100" style="overflow-y: auto">
-        <div class="container-fluid h-100">
+    <?php if (isset($overflow_scroll)) : ?>
+
+        <main class="flex-grow-1 h-100" style="overflow-y: auto">
+            <div class="container-fluid h-100">
+
+        <?php else : ?>
+
+        <main class="flex-grow-1">
+            <div class="container-fluid">
+
+        <?php endif; ?>
