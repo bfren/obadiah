@@ -33,7 +33,7 @@ class Rota
     public readonly array $people;
 
     /**
-     * The time the rota csv file was last modified.
+     * The time the rota csv file or lectionary was last updated.
      *
      * @var int
      */
@@ -94,10 +94,10 @@ class Rota
         usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
-        $file = Cache::get_cache_file_path(Cache::LECTIONARY);
-        $last_modified = filemtime($file);
-        if ($last_modified > $last_modified_timestamp) {
-            $last_modified_timestamp = $last_modified;
+        $lectionary_cache_file = Cache::get_cache_file_path(Cache::LECTIONARY);
+        $lectionary_cache_last_modified = filemtime($lectionary_cache_file);
+        if ($lectionary_cache_last_modified > $last_modified_timestamp) {
+            $last_modified_timestamp = $lectionary_cache_last_modified;
         }
 
         // set values
