@@ -3,7 +3,6 @@
 namespace Feeds\Config;
 
 use Feeds\App;
-use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -37,34 +36,5 @@ class Config_Rota
             $roles[] = new Config_Rota_Role($role);
         }
         $this->roles = $roles;
-    }
-
-    /**
-     * Get the abbreviation for a role if it is set.
-     *
-     * @param string $role_name         Role name.
-     * @return null|string              Abbreviation or null if not set.
-     */
-    public function get_abbreviation(string $role_name): ?string
-    {
-        // get matching roles
-        $match = Arr::match($this->roles, function (Config_Rota_Role $role) use ($role_name) {
-            return ($role->name == $role_name || $role->description == $role_name) && $role->abbreviation;
-        });
-
-
-        // TODO: store roles as role object not name to avoid clashes with multiple roles (e.g. 'Service Leader' and 'Wednesday Morning Prayer')
-        // or store abbreviations separately, by role description?
-
-
-        print_r($match);
-
-        // return abbreviation if there is a match
-        if (count($match) == 1) {
-            return $match[0]->abbreviation;
-        }
-
-        // return null if no abbreviation found
-        return null;
     }
 }
