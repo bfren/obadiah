@@ -46,10 +46,10 @@ class Builder
         // create an empty array to hold the combined rota
         $rota = array();
 
-        foreach ($lectionary->days as $day) {
+        foreach ($lectionary->days as $lectionary_day) {
             // look for any services on this day
-            $rota_services = array_filter($services, function (Service $service) use ($day) {
-                return $service->start->format(C::$formats->sortable_date) == $day->date;
+            $rota_services = array_filter($services, function (Service $service) use ($lectionary_day) {
+                return $service->start->format(C::$formats->sortable_date) == $lectionary_day->date;
             });
 
             // if there are no services, continue
@@ -61,7 +61,7 @@ class Builder
             $c_services = array();
             foreach ($rota_services as $rota_service) {
                 // get lectionary information and create combined service
-                $lectionary_service = $day->get_service($rota_service->start);
+                $lectionary_service = $lectionary_day->get_service($rota_service->start);
                 $c_services[] = new Combined_Service(
                     start: $rota_service->start,
                     end: $rota_service->start->add($rota_service->length),
@@ -72,14 +72,15 @@ class Builder
                     sermon_num: $lectionary_service?->num,
                     sermon_title: $lectionary_service?->title,
                     main_reading: $lectionary_service?->main_reading,
-                    additional_reading: $lectionary_service?->additional_reading
+                    additional_reading: $lectionary_service?->additional_reading,
+                    collect: $lectionary_day->collect
                 );
             }
 
             // add the day to the rota
-            $rota[$day->date] = new Combined_Day(
-                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $day->date, C::$general->timezone)->setTime(0, 0),
-                name: $day->name,
+            $rota[$lectionary_day->date] = new Combined_Day(
+                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$general->timezone)->setTime(0, 0),
+                name: $lectionary_day->name,
                 services: $c_services
             );
         }
@@ -210,6 +211,13 @@ class Builder
             foreach ($service->roles as $name => $service_role) {
                 $description[] = sprintf("%s: %s", $name, join(", ", $service_role->people));
             }
+            $description[] = "";
+        }
+
+        // add Collect
+        if ($service->collect) {
+            $description[] = "= Collect =";
+            array_push($description, ...explode("\n", $service->collect));
             $description[] = "";
         }
 
