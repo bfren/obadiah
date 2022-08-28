@@ -184,7 +184,7 @@ class Builder
             if ($service->series_title) {
                 $title = $service->series_title;
                 if ($service->sermon_num) {
-                    $title = sprintf("%s (%s)", $title, $service->sermon_num);
+                    $title = sprintf("%s (%d)", $title, $service->sermon_num);
                 }
                 $description[] = $title;
             }
