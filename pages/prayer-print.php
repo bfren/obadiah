@@ -17,8 +17,8 @@ use Feeds\Prayer\Prayer_Calendar;
 App::check();
 
 // get prayer calendar and lectionary
-$prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
 $lectionary = Cache::get_lectionary(fn () => new Lectionary());
+$prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
 
 // get requested month
 $month_id = Arr::get($_GET, "month");
