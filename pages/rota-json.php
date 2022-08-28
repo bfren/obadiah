@@ -22,7 +22,7 @@ $services = [];
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
         $services[] = array(
-            "id" =>             Builder::get_uid($c_service),
+            "id" =>             Builder::get_uid($rota->last_modified_timestamp, $c_service),
             "start" =>          $c_service->start->format(C::$formats->json_datetime),
             "end" =>            $c_service->end->format(C::$formats->json_datetime),
             "title" =>          Builder::get_summary($c_service, Arr::get($filters, "person", "")),
