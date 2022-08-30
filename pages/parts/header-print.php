@@ -10,7 +10,7 @@ App::check();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html class="print" lang="en">
 
 <head>
     <meta charset="utf-8" />

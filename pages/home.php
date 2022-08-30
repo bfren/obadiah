@@ -45,10 +45,9 @@ require_once("parts/header.php");
     $wednesday_eight_oclock = array(
         "day" => 3, // Wednesday
         "start" => "08:00",
-        "from" => $wednesday_eight_oclock_from->format(C::$formats->sortable_date),
-        "to" => $wednesday_eight_oclock_from->add(new DateInterval("P4M"))->format(C::$formats->sortable_date)
+        "max" => 12
     );
 ?>
-<p><a href="/rota/print/?<?php echo http_build_query($wednesday_eight_oclock); ?>">Wednesday Morning Prayer for the next four months</a></p>
+<p><a href="/rota/print/?<?php echo http_build_query($wednesday_eight_oclock); ?>">Wednesday Morning Prayer for the next three months</a></p>
 
 <?php require_once("parts/footer.php"); ?>

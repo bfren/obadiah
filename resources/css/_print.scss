@@ -3,15 +3,23 @@
         size: A4 landscape;
         margin: 10mm;
     }
+}
 
-    * {
-        font-family: "Source Sans Pro";
-    }
+html.print,
+html.print>body {
+    margin: 0;
+    padding: 0;
+    width: 297mm;
+}
 
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-        width: 297mm;
+html.print {
+    .rota-services.row {
+        >div {
+            width: calc(100% / 4);
+        }
+
+        .teaching.bible>a {
+            white-space: nowrap;
+        }
     }
 }

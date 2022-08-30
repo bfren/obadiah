@@ -15,7 +15,7 @@ $today = new DateTimeImmutable("now", C::$general->timezone);
 </div><!-- primary container -->
 </main>
 
-<footer class="footer mt-auto py-3 bg-light">
+<footer class="footer mt-auto py-1 bg-light">
     <div class="container-fluid">
         <small class="text-muted">
             Generated on <?php echo $today->format("r"); ?>

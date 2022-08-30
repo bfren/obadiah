@@ -53,12 +53,12 @@ function get_bible_reading(string $passage): string
                         <div class="small">
 
                             <!-- Teaching Details -->
-                            <p class="mb-0">
+                            <p class="teaching series mb-0">
                                 <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
                                 <?php if ($combined_service->sermon_num) echo sprintf("(%d)", $combined_service->sermon_num); ?>
                                 <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
                             </p>
-                            <p class="mb-0">
+                            <p class="teaching bible mb-0">
                                 <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
                                 <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
                             </p>
