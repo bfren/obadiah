@@ -2,14 +2,19 @@ $line-height: 1.2;
 $margin: 5px;
 
 .prayer-calendar-title {
+    margin-top: 0 !important;
     margin-bottom: 0;
-    padding-bottom: 10px;
+    padding-bottom: $margin;
 }
 
 .prayer-calendar-days {
+    >div {
+        padding: 0 0.25rem;
+    }
+
     .verse {
         font-weight: bold;
-        margin: $margin 0;
+        margin: calc($margin * 0.5) 0;
         text-align: center;
 
         .ref {
@@ -24,7 +29,7 @@ $margin: 5px;
     .day {
         margin-top: $margin;
 
-        $size: 50px;
+        $size: 48px;
 
         .date {
             border: 1px solid #adb5bd;
@@ -92,6 +97,10 @@ $margin: 5px;
             margin: 4px 2px;
             padding: 0;
             text-align: center;
+
+            &.prayer {
+                font-weight: 600;
+            }
         }
     }
 }

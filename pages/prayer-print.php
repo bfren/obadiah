@@ -129,7 +129,7 @@ function output_day(DateTimeImmutable $date)
             }
             ?>
             <div class="guidance rounded">
-                <p class="fw-bold">&lsquo;Father, may <em>N</em> know your presence today, and as you bless them may they be a blessing to others.&rsquo;</p>
+                <p class="prayer">&lsquo;Father, may <em>N</em> know your presence today, and as you bless us may we be a blessing to others.&rsquo;</p>
             </div>
         </div>
 
