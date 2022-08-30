@@ -1,7 +1,9 @@
+$margin: 10mm;
+
 @media print {
     @page {
         size: A4 landscape;
-        margin: 10mm;
+        margin: $margin;
     }
 }
 
@@ -9,7 +11,7 @@ html.print,
 html.print>body {
     margin: 0;
     padding: 0;
-    width: 277mm;
+    width: calc(297mm - calc($margin * 2));
 }
 
 html.print {
