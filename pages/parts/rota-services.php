@@ -59,6 +59,7 @@ function get_bible_reading(string $passage): string
                                 <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
                             </p>
                             <p class="teaching bible mb-0">
+                                <?php if (count($combined_service->psalms)) echo sprintf("%s, ", get_bible_reading(sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)))); ?>
                                 <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
                                 <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
                             </p>

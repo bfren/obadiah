@@ -53,7 +53,8 @@ class Lectionary
             "Sermon Num",
             "Sermon Title",
             "Main Reading",
-            "Additional Reading"
+            "Additional Reading",
+            "Psalms"
         );
         $services_records = $services->make_request(array("view" => "Feed", "fields" => $services_fields));
 
@@ -86,12 +87,13 @@ class Lectionary
                 $service_fields = $service_record["fields"];
                 $series[] = Arr::get($service_fields, "Series Title");
                 $l_services[] = new Service(
-                    Arr::get($service_fields, "Time"),
-                    Arr::get($service_fields, "Series Title"),
-                    Arr::get($service_fields, "Sermon Num"),
-                    Arr::get($service_fields, "Sermon Title"),
-                    Arr::get($service_fields, "Main Reading"),
-                    Arr::get($service_fields, "Additional Reading")
+                    time: Arr::get($service_fields, "Time"),
+                    series: Arr::get($service_fields, "Series Title"),
+                    num: Arr::get($service_fields, "Sermon Num"),
+                    title: Arr::get($service_fields, "Sermon Title"),
+                    main_reading: Arr::get($service_fields, "Main Reading"),
+                    additional_reading: Arr::get($service_fields, "Additional Reading"),
+                    psalms: Arr::map(explode(";", Arr::get($service_fields, "Psalms")), "trim")
                 );
             }
 

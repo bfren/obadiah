@@ -17,6 +17,7 @@ class Service
      * @param null|string $title                Optional sermon title.
      * @param null|string $main_reading         Optional main reading.
      * @param null|string $additional_reading   Optional additional reading.
+     * @param array $psalms                     Optional psalms.
      * @return void
      */
     public function __construct(
@@ -25,7 +26,8 @@ class Service
         public readonly ?int $num,
         public readonly ?string $title,
         public readonly ?string $main_reading,
-        public readonly ?string $additional_reading
+        public readonly ?string $additional_reading,
+        public readonly array $psalms
     ) {
     }
 }

@@ -73,6 +73,7 @@ class Builder
                     sermon_title: $lectionary_service?->title,
                     main_reading: $lectionary_service?->main_reading,
                     additional_reading: $lectionary_service?->additional_reading,
+                    psalms: $lectionary_service?->psalms,
                     collect: $lectionary_day->collect
                 );
             }
@@ -177,7 +178,7 @@ class Builder
         }
 
         // add teaching
-        if ($service->series_title || $service->sermon_title || $service->main_reading) {
+        if ($service->series_title || $service->sermon_title || $service->psalm || $service->main_reading) {
             $description[] = "= Teaching =";
 
             // series title
@@ -195,6 +196,10 @@ class Builder
             }
 
             // readings
+            if(count($service->psalms)) {
+                $description[] = sprintf("Psalm%s: %s", count($service->psalms) > 1 ? "s" : "", join("; ", $service->psalms));
+            }
+
             if ($service->main_reading) {
                 if ($service->additional_reading) {
                     $description[] = sprintf("Readings: %s and %s", $service->main_reading, $service->additional_reading);
