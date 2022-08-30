@@ -17,11 +17,16 @@ html.print>body {
 html.print {
     .rota-services.row {
         >div {
+            padding: 0.25rem;
             width: calc(100% / 4);
         }
 
-        .teaching.bible>a {
-            white-space: nowrap;
+        .card {
+            margin: 0 !important;
+
+            .teaching.bible>a {
+                white-space: nowrap;
+            }
         }
     }
 }
