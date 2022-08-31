@@ -30,12 +30,12 @@ if (Request::$method == "POST") {
 Request::get_login_attempts() < C::$login->max_attempts || die("You're done - try again later.");
 
 // output header
-$title = "Login";
+$title = "Security";
 require_once("parts/header.php");
 
 ?>
 
-<p class="mt-2">Please log in to access.</p>
+<p class="mt-2">Please log in to access feeds.</p>
 
 <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" method="POST" novalidate>
     <div class="col-12 position-relative">
