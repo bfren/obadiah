@@ -6,7 +6,6 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
-use Feeds\Config\Config_Cache;
 use Feeds\Helpers\Arr;
 use Feeds\Helpers\Image;
 use Feeds\Lectionary\Lectionary;
