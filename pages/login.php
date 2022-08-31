@@ -40,7 +40,7 @@ require_once("parts/header.php");
 <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" method="POST" novalidate>
     <div class="col-12 position-relative">
         <label class="visually-hidden" for="username">Username</label>
-        <input type="text" class="form-control" name="username" id="usernam" placeholder="Username" required />
+        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required />
         <div class="invalid-tooltip">Please enter the username.</div>
     </div>
     <div class="col-12 position-relative">
