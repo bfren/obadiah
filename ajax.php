@@ -21,19 +21,19 @@ if (!Request::is_admin()) {
 // get input
 $input = file_get_contents("php://input");
 if (!$input) {
-    Json::output(Result::failure("No input."));
+    Json::output(Result::failure("No input."), 400);
 }
 
 // decode action
 $action = Action::decode($input);
 if ($action == null) {
-    Json::output(Result::failure("Invalid request."));
+    Json::output(Result::failure("Invalid request."), 400);
 }
 
 // dispatch action
 $result = match ($action->name) {
     "month" => Month::save($action->data),
-    default => Result::failure("Unknown action.")
+    default => Result::failure("Unknown action.", 400)
 };
 
 // output result as JSON

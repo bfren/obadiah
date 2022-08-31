@@ -5,7 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
+use Feeds\Json\Json;
 use Feeds\Rota\Builder;
 use stdClass;
 
@@ -32,17 +32,13 @@ foreach ($combined_days as $c_day) {
     }
 }
 
-// output JSON headers
-if (Request::$debug) {
-    header("Content-Type: text/plain");
-} else {
-    header("Content-Type: text/json; charset=utf-8");
-    header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $rota->last_modified_timestamp)));
-}
+// Remove api key so it is not included in the response
+unset($filters["api"]);
+
+// Build JSON response
+$response = new stdClass();
+$response->filters = $filters;
+$response->events = $services;
 
 // Output JSON
-unset($filters["api"]);
-$json = new stdClass();
-$json->filters = $filters;
-$json->events = $services;
-exit(json_encode($json));
+Json::output($response, last_modified: $rota->last_modified_timestamp);
