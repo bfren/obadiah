@@ -46,7 +46,7 @@ class Prayer_Calendar
      */
     public function get_people(array $hashes): array
     {
-        $people = Arr::map($hashes, fn(string $hash) => Arr::get($this->people, $hash));
+        $people = Arr::map($hashes, fn (string $hash) => Arr::get($this->people, $hash));
         self::sort_people($people);
         return $people;
     }
@@ -82,6 +82,9 @@ class Prayer_Calendar
     {
         // get csv files from path
         $file = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
+        if (!file_exists($file)) {
+            return array();
+        }
 
         // read file into array
         $people = array();
