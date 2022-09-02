@@ -87,33 +87,36 @@ class Cache
      * Get lectionary from the cache (or generate a fresh copy).
      *
      * @param callable $callable        Callable function to generate a Lectionary if not set / expired.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Lectionary               Lectionary value.
      */
-    public static function get_lectionary(callable $callable): Lectionary
+    public static function get_lectionary(callable $callable, bool $force = false): Lectionary
     {
-        return self::get_or_set(self::LECTIONARY, $callable);
+        return self::get_or_set(self::LECTIONARY, $callable, $force);
     }
 
     /**
      * Get prayer calendar from the cache (or generate a fresh copy).
      *
      * @param callable $callable        Callable function to generate a Prayer Calendar if not set / expired.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Prayer_Calendar          Prayer Calendar value.
      */
-    public static function get_prayer_calendar(callable $callable): Prayer_Calendar
+    public static function get_prayer_calendar(callable $callable, bool $force = false): Prayer_Calendar
     {
-        return self::get_or_set(self::PRAYER, $callable);
+        return self::get_or_set(self::PRAYER, $callable, $force);
     }
 
     /**
      * Get rota from the cache (or generate a fresh copy).
      *
      * @param callable $callable        Callable function to generate a Rota if not set / expired.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Rota                     Rota value.
      */
-    public static function get_rota(callable $callable): Rota
+    public static function get_rota(callable $callable, bool $force = false): Rota
     {
-        return self::get_or_set(self::ROTA, $callable);
+        return self::get_or_set(self::ROTA, $callable, $force);
     }
 
     /**
@@ -147,10 +150,16 @@ class Cache
      *
      * @param string $id                Cache file name.
      * @param callable $callable        Callable function to get cache value if expired or not set.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return mixed                    Value (cached or generated).
      */
-    private static function get_or_set(string $id, callable $callable): mixed
+    private static function get_or_set(string $id, callable $callable, bool $force = false): mixed
     {
+        // clear cache if $force is set
+        if ($force) {
+            self::clear($id);
+        }
+
         // get path to cache file
         $file = self::get_cache_file_path($id);
 
