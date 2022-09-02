@@ -28,8 +28,8 @@ class App
         define(self::CHECK, true);
 
         // automatically load class definitions from classes directory
-        spl_autoload_register(function ($class) {
-            $path = sprintf("%s.class.php", str_replace(array("\\", "_", "feeds"), array("/", "-", "classes"), strtolower($class)));
+        spl_autoload_register(function ($class) use ($cwd) {
+            $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "feeds"), array("/", "-", "classes"), strtolower($class)));
             require_once($path);
         });
 

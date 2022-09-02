@@ -1,3 +1,3 @@
 #!/usr/local/bin/fish
 
-docker run -p "127.0.0.1:3000:80" -e PHP_EXT="curl pecl-yaml session" -v (pwd):/www bfren/nginx-php:php8.1
+docker run -p "127.0.0.1:3000:80" -e PHP_EXT="curl pecl-yaml session" -v (pwd)/src:/www -v (pwd)/data:/data bfren/nginx-php:php8.1

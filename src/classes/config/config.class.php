@@ -79,14 +79,21 @@ class Config
      */
     public static function init(string $cwd): void
     {
+        // get path to data directory
+        $data_dir = trim(file_get_contents(sprintf("%s/_path_to_data_dir_", $cwd)));
+        if(!file_exists($data_dir) && !is_dir($data_dir)) {
+            echo sprintf("Unable to find data directory at '%s'.", $data_dir);
+            exit;
+        }
+
         // read configuration file
-        $config_file = sprintf("%s/config.yml", $cwd);
+        $config_file = sprintf("%s/config.yml", $data_dir);
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
         self::$airtable = new Config_Airtable($config["airtable"]);
         self::$cache = new Config_Cache($config["cache"]);
-        self::$dir = new Config_Dir($cwd);
+        self::$dir = new Config_Dir($cwd, $data_dir);
         self::$events = new Config_Events($config["events"]);
         self::$formats = new Config_Formats($config["formats"]);
         self::$general = new Config_General($config["general"]);

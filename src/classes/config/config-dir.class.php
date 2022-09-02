@@ -9,13 +9,6 @@ App::check();
 class Config_Dir
 {
     /**
-     * Path to data directory.
-     *
-     * @var string
-     */
-    public readonly string $data;
-
-    /**
      * Path to cache data directory.
      *
      * @var string
@@ -40,18 +33,17 @@ class Config_Dir
      * Ensure data directories exist.
      *
      * @param array $cwd                Current working directory.
+     * @param array $data_dir           Absolute path to data directory.
      * @return void
      */
-    public function __construct(public readonly string $cwd)
+    public function __construct(public readonly string $cwd, public readonly string $data_dir)
     {
         // build paths to data directories
-        $this->data = sprintf("%s/data", $this->cwd);
-        $this->cache = sprintf("%s/cache", $this->data);
-        $this->rota = sprintf("%s/rota", $this->data);
-        $this->prayer = sprintf("%s/prayer", $this->data);
+        $this->cache = sprintf("%s/cache", $this->data_dir);
+        $this->rota = sprintf("%s/rota", $this->data_dir);
+        $this->prayer = sprintf("%s/prayer", $this->data_dir);
 
         // ensure data directories exist
-        self::ensure_directory_exists($this->data);
         self::ensure_directory_exists($this->cache);
         self::ensure_directory_exists($this->rota);
         self::ensure_directory_exists($this->prayer);
