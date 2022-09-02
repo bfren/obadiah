@@ -86,8 +86,14 @@ class Config
             exit;
         }
 
-        // read configuration file
+        // ensure config file exists
         $config_file = sprintf("%s/config.yml", $data_dir);
+        if(!file_exists($config_file)) {
+            echo sprintf("Unable to find configuration file - see installation instructions.");
+            exit;
+        }
+
+        // read configuration file
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
