@@ -31,10 +31,38 @@ sort($rota_files);
 $prayer_files = array_map("basename", glob(sprintf("%s/*.csv", C::$dir->prayer), 2));
 sort($prayer_files);
 
-// store Church Suite links
-$rota_export_href = sprintf("https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?_module=ChurchSuite%5CRotas&_report_name=rotas_overview&_report_view_module=rotas&_report_view_file=rotas_overview&date_start=&date_end=&order_by=name&group_by=service&break_page_on_section=off&show_empty_dates=off&show_members_table=off&page=1", C::$general->church_suite_org);
-$prayer_calendar_adults_export_href = sprintf("https://%s.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CAddressBook&_report_name=contact_table_generator&_report_view_module=addressbook&_report_view_file=contact_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=2022-05-23&date_end=2022-08-23&tags_match=any&tags%5B%5D=30&status=active", C::$general->church_suite_org);
-$prayer_calendar_children_export_href = sprintf("https://%s.churchsuite.com/modules/children/reports/child_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CChildren&_report_name=child_table_generator&_report_view_module=children&_report_view_file=child_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=&date_end=&group=&tags_match=any&tags%5B%5D=31&status=active", C::$general->church_suite_org);
+// build Church Suite links
+$rota_export = array(
+    "_module" => "ChurchSuite\Rotas",
+    "_report_name" => "rotas_overview",
+    "_report_view_module" => "rotas",
+    "_report_view_file" => "rotas_overview",
+    "order_by" => "name",
+    "group_by" => "service"
+);
+$rota_export_href = sprintf("https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?%s", C::$general->church_suite_org, http_build_query($rota_export));
+
+$prayer_calendar_adults_export = array(
+    "_module" => "ChurchSuite\AddressBook",
+    "_report_name" => "contact_table_generator",
+    "_report_view_module" => "addressbook",
+    "_report_view_file" => "contact_table_generator",
+    "columns" => array("first_name", "last_name"),
+    "status" => "active",
+    "tags" => array(30)
+);
+$prayer_calendar_adults_export_href = sprintf("https://%s.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?%s", C::$general->church_suite_org, http_build_query($prayer_calendar_adults_export));
+
+$prayer_calendar_children_export = array(
+    "_module" => "ChurchSuite\Children",
+    "_report_name" => "child_table_generator",
+    "_report_view_module" => "children",
+    "_report_view_file" => "child_table_generator",
+    "columns" => array("first_name", "last_name"),
+    "status" => "active",
+    "tags" => array(31)
+);
+$prayer_calendar_children_export_href = sprintf("https://%s.churchsuite.com/modules/children/reports/child_table_generator.php?%s", C::$general->church_suite_org, http_build_query($prayer_calendar_children_export));
 
 // output header
 $title = "Upload";
