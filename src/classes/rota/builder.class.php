@@ -178,7 +178,7 @@ class Builder
         }
 
         // add teaching
-        if ($service->series_title || $service->sermon_title || $service->psalm || $service->main_reading) {
+        if ($service->series_title || $service->sermon_title || $service->psalms || $service->main_reading) {
             $description[] = "= Teaching =";
 
             // series title
