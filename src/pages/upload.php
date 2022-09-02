@@ -32,9 +32,9 @@ $prayer_files = array_map("basename", glob(sprintf("%s/*.csv", C::$dir->prayer),
 sort($prayer_files);
 
 // store Church Suite links
-$rota_export_href = "https://ccsp.churchsuite.com/modules/rotas/reports/rotas_overview.php?_module=ChurchSuite%5CRotas&_report_name=rotas_overview&_report_view_module=rotas&_report_view_file=rotas_overview&date_start=&date_end=&order_by=name&group_by=service&break_page_on_section=off&show_empty_dates=off&show_members_table=off&page=1";
-$prayer_calendar_adults_export_href = "https://ccsp.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CAddressBook&_report_name=contact_table_generator&_report_view_module=addressbook&_report_view_file=contact_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=2022-05-23&date_end=2022-08-23&tags_match=any&tags%5B%5D=30&status=active";
-$prayer_calendar_children_export_href = "https://ccsp.churchsuite.com/modules/children/reports/child_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CChildren&_report_name=child_table_generator&_report_view_module=children&_report_view_file=child_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=&date_end=&group=&tags_match=any&tags%5B%5D=31&status=active";
+$rota_export_href = sprintf("https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?_module=ChurchSuite%5CRotas&_report_name=rotas_overview&_report_view_module=rotas&_report_view_file=rotas_overview&date_start=&date_end=&order_by=name&group_by=service&break_page_on_section=off&show_empty_dates=off&show_members_table=off&page=1", C::$general->church_suite_org);
+$prayer_calendar_adults_export_href = sprintf("https://%s.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CAddressBook&_report_name=contact_table_generator&_report_view_module=addressbook&_report_view_file=contact_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=2022-05-23&date_end=2022-08-23&tags_match=any&tags%5B%5D=30&status=active", C::$general->church_suite_org);
+$prayer_calendar_children_export_href = sprintf("https://%s.churchsuite.com/modules/children/reports/child_table_generator.php?key_dates%5B%5D=&order=name&order_direction=asc&page=1&_module=ChurchSuite%5CChildren&_report_name=child_table_generator&_report_view_module=children&_report_view_file=child_table_generator&columns%5B%5D=first_name&columns%5B%5D=last_name&date_start=&date_end=&group=&tags_match=any&tags%5B%5D=31&status=active", C::$general->church_suite_org);
 
 // output header
 $title = "Upload";
@@ -125,7 +125,7 @@ require_once("parts/alert.php"); ?>
             </div>
             <div class="modal-body">
                 <h5>Step One</h5>
-                <p>Log in to <a href="https://ccsp.churchsuite.com" target="_blank">Church Suite</a>.</p>
+                <p>Log in to <a href="<?php echo sprintf("https://%s.churchsuite.com", C::$general->church_suite_org); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
                 <p>Click <a href="<?php echo $rota_export_href; ?>" target="_blank">here</a> to open the export page for the rota.</p>
                 <h5>Step Three</h5>
@@ -154,7 +154,7 @@ require_once("parts/alert.php"); ?>
             </div>
             <div class="modal-body">
                 <h5>Step One</h5>
-                <p>Log in to <a href="https://ccsp.churchsuite.com" target="_blank">Church Suite</a>.</p>
+                <p>Log in to <a href="<?php echo sprintf("https://%s.churchsuite.com", C::$general->church_suite_org); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
                 <p>Click <a href="<?php echo $prayer_calendar_adults_export_href; ?>" target="_blank">here</a> to open the export page for adults.<br />
                     Click <a href="<?php echo $prayer_calendar_children_export_href; ?>" target="_blank">here</a> to open the export page for children.</p>

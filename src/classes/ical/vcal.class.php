@@ -33,7 +33,7 @@ class VCal
         // begin calendar definition
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
-        $this->lines[] = "PRODID:-//bfren.dev//NONSGML CCSP//EN";
+        $this->lines[] = "PRODID:-//bfren.dev//NONSGML//EN";
         $this->lines[] = "CALSCALE:GREGORIAN";
         $this->lines[] = "X-PUBLISHED-TTL:PT1H";
 
@@ -60,7 +60,7 @@ class VCal
     /**
      * Send headers (use before printing the output).
      *
-     * @param string $filename          Added to 'ccsp-' to give the name of the downloaded calendar file.
+     * @param string $filename          Added to Church Suite org to give the name of the downloaded calendar file.
      * @return void
      */
     public function send_headers(string $filename): void
@@ -69,7 +69,7 @@ class VCal
             header("Content-Type: text/plain");
         } else {
             header("Content-Type: text/calendar; charset=utf-8");
-            header(sprintf("Content-Disposition: attachment; filename=ccsp-%s.ics", $filename));
+            header(sprintf("Content-Disposition: attachment; filename=%s-%s.ics", C::$general->church_suite_org, $filename));
             header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $this->last_modified)));
         }
     }
