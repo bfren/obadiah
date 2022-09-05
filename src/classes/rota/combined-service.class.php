@@ -23,7 +23,6 @@ class Combined_Service
      * @param null|string $additional_reading   Optional additional reading.
      * @param array $psalms                     Optional psalms.
      * @param Service_Role[] $roles             Roles from the rota.
-     * @param null|string $collect              Optional Collect.
      * @return void
      */
     public function __construct(
@@ -37,8 +36,7 @@ class Combined_Service
         public readonly ?string $main_reading,
         public readonly ?string $additional_reading,
         public readonly array $psalms,
-        public readonly array $roles,
-        public readonly ?string $collect
+        public readonly array $roles
     ) {
     }
 }

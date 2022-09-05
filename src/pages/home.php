@@ -45,7 +45,8 @@ require_once("parts/header.php");
     $wednesday_eight_oclock = array(
         "day" => 3, // Wednesday
         "start" => "08:00",
-        "max" => 12
+        "max" => 12,
+        "collect" => "yes"
     );
 ?>
 <p><a href="/rota/print/?<?php echo http_build_query($wednesday_eight_oclock); ?>">Wednesday Morning Prayer for the next three months</a></p>

@@ -45,8 +45,15 @@ class Builder
     {
         // create an empty array to hold the combined rota
         $rota = array();
+        $sunday_collect = "";
 
         foreach ($lectionary->days as $lectionary_day) {
+            // update the Sunday collect
+            $date = new DateTimeImmutable($lectionary_day->date);
+            if ($date->format("N") == "7") {
+                $sunday_collect = $lectionary_day->collect;
+            }
+
             // look for any services on this day
             $rota_services = array_filter($services, function (Service $service) use ($lectionary_day) {
                 return $service->start->format(C::$formats->sortable_date) == $lectionary_day->date;
@@ -73,8 +80,7 @@ class Builder
                     sermon_title: $lectionary_service?->title,
                     main_reading: $lectionary_service?->main_reading,
                     additional_reading: $lectionary_service?->additional_reading,
-                    psalms: $lectionary_service?->psalms,
-                    collect: $lectionary_day->collect
+                    psalms: $lectionary_service?->psalms
                 );
             }
 
@@ -82,6 +88,7 @@ class Builder
             $rota[$lectionary_day->date] = new Combined_Day(
                 date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$general->timezone)->setTime(0, 0),
                 name: $lectionary_day->name,
+                collect: $lectionary_day->collect ?: $sunday_collect,
                 services: $c_services
             );
         }
@@ -221,9 +228,9 @@ class Builder
         }
 
         // add Collect
-        if ($service->collect) {
+        if ($day->collect) {
             $description[] = "= Collect =";
-            array_push($description, ...explode("\n", $service->collect));
+            array_push($description, ...explode("\n", $day->collect));
             $description[] = "";
         }
 

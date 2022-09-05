@@ -32,9 +32,9 @@ function get_bible_reading(string $passage): string
 ?>
 
 <div class="row rota-services">
-    <?php foreach ($combined_days as $date => $combined_day) : ?>
+    <?php foreach ($combined_days as $combined_day) : ?>
 
-        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
+        <div class="col-12 col-lg-6">
             <div class="card mb-3">
                 <div class="card-body">
 
@@ -76,6 +76,11 @@ function get_bible_reading(string $passage): string
                                     </p>
                                 <?php endforeach; ?>
                             </div>
+
+                            <?php if (Arr::get($_GET, "collect") == "yes") : ?>
+                                <!-- Collect -->
+                                <p class="mt-2 mb-0"><?php echo str_replace("\n", "<br/>", $combined_day->collect); ?></p>
+                            <?php endif; ?>
 
                         </div>
 
