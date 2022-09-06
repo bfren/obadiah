@@ -12,7 +12,7 @@ ENV \
     CCF_GENERATE_EMPTY_CONFIG=1
 
 COPY ./docker/overlay /
-COPY ./VERSION /tmp
+COPY ./src /www/
 
 RUN bf-install
 
