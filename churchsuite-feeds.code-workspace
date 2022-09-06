@@ -6,7 +6,6 @@
 	],
 	"settings": {
 		"editor.renderWhitespace": "boundary",
-		"files.insertFinalNewline": true,
 		"files.trimTrailingWhitespace": true,
 		"liveSassCompile.settings.formats": [
 			{
