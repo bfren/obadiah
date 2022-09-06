@@ -2,6 +2,9 @@ FROM bfren/nginx-php:php8.1
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/churchsuite-feeds"
 
+ARG BF_IMAGE
+ARG BF_VERSION
+
 ENV \
     # disable container debug output
     BF_DEBUG=0 \
