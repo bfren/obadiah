@@ -13,6 +13,7 @@ ENV \
 
 COPY ./docker/overlay /
 COPY ./src /www/
+COPY ./config-sample.yml /www/
 
 RUN bf-install
 

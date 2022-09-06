@@ -9,5 +9,5 @@ export BF_E=`basename ${0}`
 #======================================================================================================================
 
 if [ "${CCF_GENERATE_EMPTY_CONFIG}" = "1" ] && [ ! -f "${CCF_CONFIG}" ] ; then
-    cp ${CCF_SRC}/config-sample.yml ${CCF_CONFIG}
+    cp ${NGINX_WWW}/config-sample.yml ${CCF_CONFIG}
 fi
