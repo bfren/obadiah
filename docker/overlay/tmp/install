@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Get PHP version.
+#======================================================================================================================
+
+cd /tmp
+
+PHP_VERSION=$(cat PHP_BUILD)
+bf-echo "PHP version ${PHP_VERSION}."
+
+
+#======================================================================================================================
+# Install dependencies.
+#======================================================================================================================
+
+bf-echo "Installing installation dependencies..."
+apk add --no-cache --virtual .install \
+    git
+bf-done
+
+bf-echo "Installing PHP v${PHP_VERSION}..."
+apk add --no-cache \
+    php81-curl=${PHP_VERSION} \
+    php81-session=${PHP_VERSION} \
+    php81-pecl-yaml
+bf-done
+
+
+#======================================================================================================================
+# Download source.
+#======================================================================================================================
+
+SRC=/etc/bf/src
+bf-echo "Source directory: ${SRC}."
+
+FEEDS=ccf
+FEEDS_SRC=${SRC}/${FEEDS}
+bf-echo "Feeds source directory: ${FEEDS_SRC}."
+
+VERSION=`cat VERSION`
+bf-echo "Feeds version ${VERSION}."
+
+bf-echo "Cloning Feeds v${VERSION} into ${FEEDS_SRC}"
+git clone --depth 1 --branch v${VERSION} https://github.com/bfren/churchsuite-feeds ${FEEDS_SRC}
+bf-done
+
+
+#======================================================================================================================
+# Set permissions on source files.
+#======================================================================================================================
+
+bf-echo "Setting permissions on ${FEEDS_SRC}..."
+bf-ch -o www:www -m 0755 -t d ${FEEDS_SRC}
+bf-ch -o www:www -m 0644 -t f ${FEEDS_SRC}
+bf-done
+
+
+#======================================================================================================================
+# Cleanup.
+#======================================================================================================================
+
+bf-echo "Removing /www files."
+rm -f /www/*
+
+bf-echo "Removing installation dependencies."
+apk del .install
