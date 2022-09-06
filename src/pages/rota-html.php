@@ -7,6 +7,7 @@ use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 use Feeds\Rota\Builder;
+use Feeds\Rota\Rota;
 
 App::check();
 
@@ -20,7 +21,11 @@ $subtitle = "Use the filters to create a personalised rota.";
 require_once("parts/header.php"); ?>
 
 <!-- Filters -->
-<h2>Filters</h2>
+<h2>
+    Filters
+    <a class="ps-3 fs-6" href="/rota/?<?php echo http_build_query(Rota::upcoming_ten_thirty()); ?>">Sunday 10:30</a>
+    <a class="ps-3 fs-6" href="/rota/?<?php echo http_build_query(Rota::wednesday_morning_prayer()); ?>">Wednesday Morning</a>
+</h2>
 <form method="GET" action="/rota/">
     <div class="row mb-2">
         <div class="col-8 col-sm-6">
@@ -101,7 +106,7 @@ require_once("parts/header.php"); ?>
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-end align-items-center">
-            <?php if(Request::is_admin()):?>
+            <?php if (Request::is_admin()) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Arr::get($filters, "debug") ? "checked" : ""; ?>
                     <input class="form-check-input" type="checkbox" value="true" name="debug" id="debug" <?php echo $checked; ?> />

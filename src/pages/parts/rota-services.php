@@ -31,10 +31,10 @@ function get_bible_reading(string $passage): string
 
 ?>
 
-<div class="row rota-services">
+<div class="row rota-services d-print-block">
     <?php foreach ($combined_days as $combined_day) : ?>
 
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
             <div class="card mb-3">
                 <div class="card-body">
 
@@ -50,19 +50,21 @@ function get_bible_reading(string $passage): string
                             <?php echo $combined_service->time; ?> <?php echo $combined_service->name ?>
                         </p>
 
-                        <div class="small">
+                        <div class="details small">
 
                             <!-- Teaching Details -->
-                            <p class="teaching series mb-0">
-                                <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
-                                <?php if ($combined_service->sermon_num) echo sprintf("(%d)", $combined_service->sermon_num); ?>
-                                <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
-                            </p>
-                            <p class="teaching bible mb-0">
-                                <?php if (count($combined_service->psalms)) echo sprintf("%s, ", get_bible_reading(sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)))); ?>
-                                <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
-                                <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
-                            </p>
+                            <div class="teaching">
+                                <p class="series mb-0">
+                                    <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
+                                    <?php if ($combined_service->sermon_num) echo sprintf("(%d)", $combined_service->sermon_num); ?>
+                                    <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
+                                </p>
+                                <p class="bible mb-0">
+                                    <?php if (count($combined_service->psalms)) echo sprintf("%s, ", get_bible_reading(sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)))); ?>
+                                    <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
+                                    <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
+                                </p>
+                            </div>
 
                             <!-- Rota Roles -->
                             <div class="people collapse show mt-2">
@@ -79,7 +81,9 @@ function get_bible_reading(string $passage): string
 
                             <?php if (Arr::get($_GET, "collect") == "yes") : ?>
                                 <!-- Collect -->
-                                <p class="mt-2 mb-0"><?php echo str_replace("\n", "<br/>", $combined_day->collect); ?></p>
+                                <div class="collect">
+                                    <p class="mt-2 mb-0"><?php echo str_replace("\n", "<br/>", $combined_day->collect); ?></p>
+                                </div>
                             <?php endif; ?>
 
                         </div>

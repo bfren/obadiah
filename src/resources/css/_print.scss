@@ -2,7 +2,6 @@ $margin: 8mm;
 
 @media print {
     @page {
-        size: A4 landscape;
         margin: $margin;
     }
 }
@@ -11,21 +10,42 @@ html.print,
 html.print>body {
     margin: 0;
     padding: 0;
-    width: calc(297mm - calc($margin * 2));
+    //width: calc(297mm - calc($margin * 2));
 }
 
 html.print {
     .rota-services.row {
+        display: block;
+
         >div {
-            padding: 0.25rem;
-            width: calc(100% / 4);
+            width: 100%;
         }
 
         .card {
-            margin: 0 !important;
+            break-inside: avoid-page;
+            margin: 1rem 0 !important;
 
-            .teaching.bible>a {
-                white-space: nowrap;
+            .card-title,
+            .card-subtitle {
+                display: inline;
+            }
+
+            .card-title {
+                margin-right: $margin;
+            }
+
+            .details {
+                display: flex;
+
+                .teaching {
+                    p {
+                        margin: 0;
+                    }
+
+                    .bible>a {
+                        white-space: nowrap;
+                    }
+                }
             }
         }
     }

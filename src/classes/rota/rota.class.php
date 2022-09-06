@@ -2,6 +2,8 @@
 
 namespace Feeds\Rota;
 
+use DateInterval;
+use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
@@ -164,5 +166,37 @@ class Rota
 
         // return all matched services
         return $services;
+    }
+
+    /**
+     * Return filters to show upcoming Sunday 10:30 services.
+     *
+     * @return array                    Filter values for use on rota page.
+     */
+    public static function upcoming_ten_thirty(): array
+    {
+        $start = new DateTimeImmutable("next Sunday");
+        return array(
+            "day" => 7, // Sunday
+            "start" => "10:30",
+            "from" => $start->format(C::$formats->sortable_date),
+            "to" => $start->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
+        );
+    }
+
+    /**
+     * Return filters to show Wednesday Morning Prayer services (with collect).
+     *
+     * @return array                    Filter values for use on rota page.
+     */
+    public static function wednesday_morning_prayer(): array
+    {
+        $start = new DateTimeImmutable("next Wednesday");
+        return array(
+            "day" => 3, // Wednesday
+            "start" => "08:00",
+            "from" => $start->format(C::$formats->sortable_date),
+            "collect" => "yes"
+        );
     }
 }

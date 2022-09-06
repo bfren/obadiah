@@ -25,8 +25,7 @@ require_once("parts/header-print.php"); ?>
     <?php if ($start) echo sprintf(" - %s", $start); ?>
     <?php if ($day) echo $day; ?>
     <?php if ($person) echo sprintf(" - %s", $person); ?>
-    <a class="ps-3 fs-6 d-print-none" data-bs-toggle="collapse" data-bs-target=".people" href="#collapsePeople" role="button" aria-expanded="true">show / hide people</a>
 </h2>
-<?php require_once("parts/rota-services.php"); ?>
+<?php require_once("parts/rota-services-print.php"); ?>
 
 <?php require_once("parts/footer-print.php"); ?>
