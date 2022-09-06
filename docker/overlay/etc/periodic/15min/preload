@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Call preload script.
+#======================================================================================================================
+
+bf-debug "Calling preload script."
+CODE=$(bf-http-status "http://localhost/preload.php")
+[[ "${CODE}" = "200" ]] && exit 0 \
+    || bf-error "Error executing preload (HTTP status ${CODE})."

@@ -1,0 +1,13 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Generate empty config.
+#======================================================================================================================
+
+if [ "${CCF_GENERATE_EMPTY_CONFIG}" = "1" ] && [ ! -f "${CCF_CONFIG}" ] ; then
+    cp ${CCF_SRC}/config-sample.yml ${CCF_CONFIG}
+fi
