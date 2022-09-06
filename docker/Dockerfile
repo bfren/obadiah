@@ -8,8 +8,8 @@ ENV \
     # generate empty config.yml if one does not already exist
     CCF_GENERATE_EMPTY_CONFIG=1
 
-COPY ./overlay /
-COPY ../VERSION /tmp
+COPY ./docker/overlay /
+COPY ./VERSION /tmp
 
 RUN bf-install
 
