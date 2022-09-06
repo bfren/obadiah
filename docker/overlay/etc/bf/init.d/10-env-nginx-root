@@ -10,4 +10,4 @@ export BF_E=`basename ${0}`
 
 CCF_SRC=${BF_SRC}/ccf
 bf-env "CCF_SRC" "${CCF_SRC}"
-bf-env "NGINX_ROOT" "${CCF_SRC}"
+bf-env "NGINX_ROOT" "${CCF_SRC}/src"
