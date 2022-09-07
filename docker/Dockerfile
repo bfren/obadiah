@@ -13,10 +13,17 @@ ENV \
     # set nginx root to public directory
     NGINX_ROOT_OVERRIDE=/www/public
 
+# clear base nginx files
+RUN rm -f /www/*
+
+# copy image overlay
 COPY ./docker/overlay /
+
+# copy source files
 COPY ./src /www/
 COPY ./config-sample.yml /www/
 
+# run installation
 RUN bf-install
 
 VOLUME [ "/data" ]
