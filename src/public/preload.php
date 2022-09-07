@@ -9,8 +9,8 @@ use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Rota\Rota;
 
 // initialise app
-require_once("classes/app.class.php");
-App::init(__DIR__);
+require_once("../app.class.php");
+App::init();
 
 // preload caches
 Cache::get_lectionary(fn () => new Lectionary(), true);

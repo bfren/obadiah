@@ -10,8 +10,8 @@ use Feeds\Prayer\Month;
 use Feeds\Request\Request;
 
 // initialise app
-require_once("classes/app.class.php");
-App::init(__DIR__);
+require_once("../app.class.php");
+App::init();
 
 // check auth
 if (!Request::is_admin()) {

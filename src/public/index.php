@@ -7,8 +7,8 @@ use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 
 // initialise app
-require_once("classes/app.class.php");
-App::init(__DIR__);
+require_once("../app.class.php");
+App::init();
 
 // check auth
 Request::$auth || Request::redirect("/login.php");
