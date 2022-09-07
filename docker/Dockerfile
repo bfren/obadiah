@@ -10,7 +10,7 @@ ENV \
     BF_DEBUG=0 \
     # generate empty config.yml if one does not already exist
     CCF_GENERATE_EMPTY_CONFIG=1 \
-    # override nginx root
+    # set nginx root to public directory
     NGINX_ROOT_OVERRIDE=/www/public
 
 COPY ./docker/overlay /
