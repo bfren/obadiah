@@ -9,7 +9,9 @@ ENV \
     # disable container debug output
     BF_DEBUG=0 \
     # generate empty config.yml if one does not already exist
-    CCF_GENERATE_EMPTY_CONFIG=1
+    CCF_GENERATE_EMPTY_CONFIG=1 \
+    # override nginx root
+    NGINX_ROOT_OVERRIDE=/www/public
 
 COPY ./docker/overlay /
 COPY ./src /www/
