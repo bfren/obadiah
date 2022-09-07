@@ -16,11 +16,13 @@ class App
     /**
      * Initialise application - register autoloader - setup Request, etc.
      *
-     * @param string $cwd               Main script working directory.
      * @return void
      */
-    public static function init(string $cwd): void
+    public static function init(): void
     {
+        // get current working directory
+        $cwd = __DIR__;
+
         // start session
         session_start();
 
