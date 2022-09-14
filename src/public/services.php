@@ -6,7 +6,6 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Lectionary\Lectionary;
-use Feeds\Request\Request;
 use Feeds\Rota\Builder;
 use Feeds\Rota\Rota;
 

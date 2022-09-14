@@ -3,7 +3,6 @@
 namespace Feeds\Pages;
 
 use Feeds\App;
-use Feeds\Helpers\Arr;
 use Feeds\ICal\VCal;
 use Feeds\ICal\VEvent;
 use Feeds\Rota\Builder;
