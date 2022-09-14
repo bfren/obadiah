@@ -5,12 +5,18 @@ namespace Feeds\Cache;
 use Feeds\App;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
+use Feeds\Refresh\Bible_Plan;
 use Feeds\Rota\Rota;
 
 App::check();
 
 class Cache
 {
+    /**
+     * Bible Plan cache name.
+     */
+    public const BIBLE_PLAN = "bible";
+
     /**
      * Lectionary cache name.
      */
@@ -54,6 +60,16 @@ class Cache
     }
 
     /**
+     * Clear the Bible Plan cache.
+     *
+     * @return void
+     */
+    public static function clear_bible_plan(): void
+    {
+        self::clear(self::BIBLE_PLAN);
+    }
+
+    /**
      * Clear the lectionary cache.
      *
      * @return void
@@ -84,11 +100,23 @@ class Cache
     }
 
     /**
+     * Get Bible Plan from the cache (or generate a fresh copy).
+     *
+     * @param callable $callable        Callable function to generate a Bible Plan if not set / expired.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
+     * @return Bible_Plan               Bible Plan object.
+     */
+    public static function get_bible_plan(callable $callable, bool $force = false): Bible_Plan
+    {
+        return self::get_or_set(self::BIBLE_PLAN, $callable, $force);
+    }
+
+    /**
      * Get lectionary from the cache (or generate a fresh copy).
      *
      * @param callable $callable        Callable function to generate a Lectionary if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return Lectionary               Lectionary value.
+     * @return Lectionary               Lectionary object.
      */
     public static function get_lectionary(callable $callable, bool $force = false): Lectionary
     {
@@ -100,7 +128,7 @@ class Cache
      *
      * @param callable $callable        Callable function to generate a Prayer Calendar if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return Prayer_Calendar          Prayer Calendar value.
+     * @return Prayer_Calendar          Prayer Calendar object.
      */
     public static function get_prayer_calendar(callable $callable, bool $force = false): Prayer_Calendar
     {
@@ -112,7 +140,7 @@ class Cache
      *
      * @param callable $callable        Callable function to generate a Rota if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return Rota                     Rota value.
+     * @return Rota                     Rota object.
      */
     public static function get_rota(callable $callable, bool $force = false): Rota
     {

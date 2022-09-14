@@ -9,6 +9,13 @@ App::check();
 class Config_Dir
 {
     /**
+     * Path to Bible Plan data directory.
+     *
+     * @var string
+     */
+    public readonly string $bible;
+
+    /**
      * Path to cache data directory.
      *
      * @var string
@@ -39,11 +46,13 @@ class Config_Dir
     public function __construct(public readonly string $cwd, public readonly string $data_dir)
     {
         // build paths to data directories
+        $this->bible = sprintf("%s/bible", $this->data_dir);
         $this->cache = sprintf("%s/cache", $this->data_dir);
         $this->rota = sprintf("%s/rota", $this->data_dir);
         $this->prayer = sprintf("%s/prayer", $this->data_dir);
 
         // ensure data directories exist
+        self::ensure_directory_exists($this->bible);
         self::ensure_directory_exists($this->cache);
         self::ensure_directory_exists($this->rota);
         self::ensure_directory_exists($this->prayer);
