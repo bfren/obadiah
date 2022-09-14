@@ -175,7 +175,7 @@ class Rota
      */
     public static function upcoming_ten_thirty(): array
     {
-        $start = new DateTimeImmutable("next Sunday");
+        $start = new DateTimeImmutable("today");
         return array(
             "day" => 7, // Sunday
             "start" => "10:30",
@@ -191,7 +191,7 @@ class Rota
      */
     public static function wednesday_morning_prayer(): array
     {
-        $start = new DateTimeImmutable("next Wednesday");
+        $start = new DateTimeImmutable("today");
         return array(
             "day" => 3, // Wednesday
             "start" => "08:00",
