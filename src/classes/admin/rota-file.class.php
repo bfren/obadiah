@@ -30,7 +30,7 @@ class Rota_File
 
         // move file to the correct location, overwriting whatever is already there
         if (move_uploaded_file($tmp_path, $csv_path)) {
-            unlink(sprintf("%s/rota.cache", C::$dir->cache));
+            Cache::clear_rota();
             return Result::success(sprintf("The rota file '%s' was uploaded successfully.", $name));
         } else {
             return Result::failure("Something went wrong uploading the rota file, please try again.");
@@ -57,7 +57,7 @@ class Rota_File
     public static function delete(string $filename): Result
     {
         // delete the file
-        $result = File::delete($filename, sprintf("%s/%s", C::$dir->rota, $filename), "rota");
+        $result = File::delete($filename, sprintf("%s/%s", C::$dir->rota, $filename));
 
         // clear cache on success
         if ($result->success) {

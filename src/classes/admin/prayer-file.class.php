@@ -85,7 +85,7 @@ class Prayer_File
     public static function delete(string $filename): Result
     {
         // delete the file
-        $result = File::delete($filename, sprintf("%s/%s", C::$dir->prayer, $filename), "prayer");
+        $result = File::delete($filename, sprintf("%s/%s", C::$dir->prayer, $filename));
 
         // clear cache on success
         if ($result->success) {
