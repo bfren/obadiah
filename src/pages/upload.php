@@ -155,7 +155,7 @@ require_once("parts/alert.php"); ?>
 
 <!-- Bible plan upload -->
 <h2>Bible Plan</h2>
-<p>Upload a Bible Plan CSV file here.</p>
+<p>Upload the Bible Plan text file here.</p>
 <form class="row row-cols-md-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12 position-relative">
         <label class="visually-hidden" for="file-bible">Rota File</label>

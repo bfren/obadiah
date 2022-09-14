@@ -23,11 +23,11 @@ class Bible_File
     public static function upload(): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
+        in_array($_FILES["file"]["type"], array("text/plain")) || die("You may only upload text files.");
 
         // get paths
         $tmp_path = $_FILES["file"]["tmp_name"];
-        $csv_path = sprintf("%s/%s.csv", C::$dir->bible, self::NAME);
+        $csv_path = sprintf("%s/%s.txt", C::$dir->bible, self::NAME);
 
         // move file to the correct location, overwriting whatever is already there
         if (move_uploaded_file($tmp_path, $csv_path)) {
@@ -45,7 +45,7 @@ class Bible_File
      */
     public static function get_last_modified(): string
     {
-        return File::get_last_modified(sprintf("%s/%s.csv", C::$dir->bible, self::NAME));
+        return File::get_last_modified(sprintf("%s/%s.txt", C::$dir->bible, self::NAME));
     }
 
     /**
@@ -56,7 +56,7 @@ class Bible_File
     public static function delete(): Result
     {
         // delete the file
-        $result = File::delete(sprintf("%s.csv", self::NAME), sprintf("%s/%s.csv", C::$dir->bible, self::NAME));
+        $result = File::delete(sprintf("%s.txt", self::NAME), sprintf("%s/%s.txt", C::$dir->bible, self::NAME));
 
         // clear cache on success
         if ($result->success) {
