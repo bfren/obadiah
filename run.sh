@@ -1,5 +1,6 @@
 #!/usr/local/bin/fish
 
+docker pull bfren/nginx-php:php8.1
 docker run -p "127.0.0.1:3000:80" \
     -e NGINX_ROOT_OVERRIDE="/www/public" \
     -e PHP_EXT="curl pecl-yaml session" \
