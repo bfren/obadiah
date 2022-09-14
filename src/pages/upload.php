@@ -99,15 +99,17 @@ require_once("parts/alert.php"); ?>
     </div>
 </form>
 
-<p>The following files are currently uploaded:</p>
-<ul>
-    <?php foreach ($rota_files as $file) : ?>
-        <li>
-            <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
-            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_rota=<?php echo $file; ?>">delete</a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<?php if ($rota_files) : ?>
+    <p>The following files are currently uploaded:</p>
+    <ul>
+        <?php foreach ($rota_files as $file) : ?>
+            <li>
+                <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_rota=<?php echo $file; ?>">delete</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
 
 <!-- Prayer Calendar file upload -->
 <h2>Prayer Calendar</h2>
@@ -165,15 +167,17 @@ require_once("parts/alert.php"); ?>
     </div>
 </form>
 
-<p>The following files are currently uploaded:</p>
-<ul>
-    <?php foreach ($bible_files as $file) : ?>
-        <li>
-            <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
-            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_bible">delete</a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<?php if ($bible_files) : ?>
+    <p>The following files are currently uploaded:</p>
+    <ul>
+        <?php foreach ($bible_files as $file) : ?>
+            <li>
+                <?php echo $file; ?> (last modified <?php echo Bible_File::get_last_modified($file); ?>)
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_bible">delete</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
 
 <!-- Generate Church Suite rota feed instructions modal -->
 <div class="modal fade" id="rota-instructions" tabindex="-1" aria-labelledby="rota-instructions-label" aria-hidden="true">
