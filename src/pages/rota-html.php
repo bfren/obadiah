@@ -50,14 +50,14 @@ require_once("parts/header.php"); ?>
     <div class="row mb-2">
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="from">From</span>
-                <input type="date" class="form-control" name="from" id="from" placeholder="From" value="<?php echo Arr::get($filters, "from"); ?>" />
+                <span class="input-group-text" for="start">From</span>
+                <input type="date" class="form-control" name="start" id="start" placeholder="From" value="<?php echo Arr::get($filters, "start"); ?>" />
             </div>
         </div>
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="to">To</span>
-                <input type="date" class="form-control" name="to" id="to" placeholder="To" value="<?php echo Arr::get($filters, "to"); ?>" />
+                <span class="input-group-text" for="end">To</span>
+                <input type="date" class="form-control" name="end" id="end" placeholder="To" value="<?php echo Arr::get($filters, "end"); ?>" />
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@ require_once("parts/header.php"); ?>
         <div class="col-6">
             <div class="input-group">
                 <span class="input-group-text" for="time">Time</span>
-                <input type="time" class="form-control" name="start" placeholder="Start" value="<?php echo Arr::get($filters, "start"); ?>" />
+                <input type="time" class="form-control" name="time" placeholder="Start" value="<?php echo Arr::get($filters, "time"); ?>" />
             </div>
         </div>
     </div>

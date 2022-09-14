@@ -141,11 +141,11 @@ class Rota
             $include = $include && $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
 
             // apply date filters
-            $include = $include && $after_filter->apply($lectionary, $service, Arr::get($filters, "from", ""));
-            $include = $include && $before_filter->apply($lectionary, $service, Arr::get($filters, "to", ""));
+            $include = $include && $after_filter->apply($lectionary, $service, Arr::get($filters, "start", ""));
+            $include = $include && $before_filter->apply($lectionary, $service, Arr::get($filters, "end", ""));
 
             // apply start time filter
-            $include = $include && $start_filter->apply($lectionary, $service, Arr::get($filters, "start", ""));
+            $include = $include && $start_filter->apply($lectionary, $service, Arr::get($filters, "time", ""));
 
             // apply day of the week filter
             $include = $include && $day_filter->apply($lectionary, $service, Arr::get($filters, "day", ""));
@@ -178,9 +178,9 @@ class Rota
         $start = new DateTimeImmutable("today");
         return array(
             "day" => 7, // Sunday
-            "start" => "10:30",
-            "from" => $start->format(C::$formats->sortable_date),
-            "to" => $start->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
+            "time" => "10:30",
+            "start" => $start->format(C::$formats->sortable_date),
+            "end" => $start->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
         );
     }
 
@@ -194,8 +194,8 @@ class Rota
         $start = new DateTimeImmutable("today");
         return array(
             "day" => 3, // Wednesday
-            "start" => "08:00",
-            "from" => $start->format(C::$formats->sortable_date),
+            "time" => "08:00",
+            "start" => $start->format(C::$formats->sortable_date),
             "collect" => "yes"
         );
     }
