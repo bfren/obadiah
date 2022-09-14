@@ -25,7 +25,7 @@ require_once("parts/header.php");
         "to" => $this_week_from->add(new DateInterval("P7D"))->format(C::$formats->sortable_date)
     );
 ?>
-<p>To view this week's services, please click <a href="/rota/?<?php echo http_build_query($this_week); ?>">here</a>.</p>
+<p>To view this week&rsquo;s services, please click <a href="/rota/?<?php echo http_build_query($this_week); ?>">here</a>.</p>
 
 <h3>Printable</h3>
 <p>The following links will give you quick and printable rotas for upcoming services.</p>
