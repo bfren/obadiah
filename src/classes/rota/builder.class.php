@@ -171,9 +171,10 @@ class Builder
      *
      * @param Combined_Day $day             Lectionary day information.
      * @param Combined_Service $service     Service object.
+     * @param bool $include_people          If true, people and roles will be added to the description.
      * @return string                       Event description.
      */
-    public static function get_description(Combined_Day $day, Combined_Service $service): string
+    public static function get_description(Combined_Day $day, Combined_Service $service, bool $include_people = true): string
     {
         // create empty array for description lines
         $description = array();
@@ -219,7 +220,7 @@ class Builder
         }
 
         // add roles
-        if ($service->roles) {
+        if ($include_people && $service->roles) {
             $description[] = "= Roles =";
             foreach ($service->roles as $name => $service_role) {
                 $description[] = sprintf("%s: %s", $name, join(", ", $service_role->people));
