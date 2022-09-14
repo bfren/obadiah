@@ -105,7 +105,14 @@ require_once("parts/header.php"); ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 d-flex justify-content-end align-items-center">
+        <div class="col-6 d-flex align-items-center">
+            <div class="form-check">
+                <?php $checked = Arr::get($filters, "collect") == "yes" ? "checked" : ""; ?>
+                <input class="form-check-input" type="checkbox" value="yes" name="collect" id="collect" <?php echo $checked; ?> />
+                <label class="form-check-label" for="collect">Show Collects</label>
+            </div>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center">
             <?php if (Request::is_admin()) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Arr::get($filters, "debug") ? "checked" : ""; ?>
