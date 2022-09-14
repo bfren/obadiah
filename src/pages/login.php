@@ -17,7 +17,8 @@ if (Request::$method == "POST") {
     // if it is not unset auth variable and increment count
     if ($user == "user" && $pass == C::$login->pass) {
         Request::authorise();
-        Request::redirect("/");
+        $redirect = Arr::get($_GET, "requested", "/");
+        Request::redirect($redirect);
     } elseif ($user == "admin" && $pass == C::$login->admin) {
         Request::authorise(true);
         Request::redirect("/upload");

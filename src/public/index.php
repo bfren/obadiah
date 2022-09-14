@@ -11,7 +11,7 @@ require_once("../app.class.php");
 App::init();
 
 // check auth
-Request::$auth || Request::redirect("/login.php");
+Request::$auth || Request::redirect("/login.php", true);
 
 // get requested page
 $uri = explode("/", Request::$uri);
