@@ -2,6 +2,7 @@
 
 namespace Feeds\Pages;
 
+use Feeds\Admin\Bible_File;
 use Feeds\Admin\Prayer_File;
 use Feeds\Admin\Rota_File;
 use Feeds\App;
@@ -15,21 +16,28 @@ Request::is_admin() || Request::redirect("/logout.php");
 // handle actions
 if (Request::$method == "POST") {
     $result = match (Arr::get($_POST, "submit")) {
+        "bible" => Bible_File::upload(),
         "prayer-adults" => Prayer_File::upload_adults(),
         "prayer-children" => Prayer_File::upload_children(),
         "rota" => Rota_File::upload()
     };
 } elseif ($delete_rota = Arr::get($_GET, "delete_rota")) {
     $result = Rota_File::delete($delete_rota);
+} elseif ($delete_prayer = Arr::get($_GET, "delete_prayer")) {
+    $result = Prayer_File::delete($delete_prayer);
+} elseif (Arr::get($_GET, "delete_bible") != null) {
+    $result = Bible_File::delete();
 }
 
-// get uploaded rota files and sort by name
+// get uploaded files and sort by name
 $rota_files = array_slice(scandir(C::$dir->rota), 2);
 sort($rota_files);
 
-// get uploaded prayer calendar files and sort by name
 $prayer_files = array_map("basename", glob(sprintf("%s/*.csv", C::$dir->prayer), 2));
 sort($prayer_files);
+
+$bible_files = array_slice(scandir(C::$dir->bible), 2);
+sort($bible_files);
 
 // build Church Suite links
 $rota_export = array(
@@ -143,6 +151,30 @@ require_once("parts/alert.php"); ?>
     </ul>
 <?php endif; ?>
 
+<!-- Bible plan upload -->
+<h2>Bible Plan</h2>
+<p>Upload a Bible Plan CSV file here.</p>
+<form class="row row-cols-md-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
+    <div class="col-12 position-relative">
+        <label class="visually-hidden" for="file-bible">Rota File</label>
+        <input class="form-control" type="file" id="file-bible" name="file" required />
+        <div class="invalid-tooltip">Please select a Bible Plan CSV file.</div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" name="submit" value="bible">Upload</button>
+    </div>
+</form>
+
+<p>The following files are currently uploaded:</p>
+<ul>
+    <?php foreach ($bible_files as $file) : ?>
+        <li>
+            <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
+            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_bible">delete</a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
 <!-- Generate Church Suite rota feed instructions modal -->
 <div class="modal fade" id="rota-instructions" tabindex="-1" aria-labelledby="rota-instructions-label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -199,4 +231,3 @@ require_once("parts/alert.php"); ?>
 </div>
 
 <?php require_once("parts/footer.php"); ?>
-
