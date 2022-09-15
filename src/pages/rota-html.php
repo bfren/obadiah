@@ -110,10 +110,13 @@ require_once("parts/header.php"); ?>
     </div>
     <div class="row">
         <div class="col-6 d-flex align-items-center">
-            <div class="form-check">
-                <?php $checked = Arr::get($filters, "collect") == "yes" ? "checked" : ""; ?>
-                <input class="form-check-input" type="checkbox" value="yes" name="collect" id="collect" <?php echo $checked; ?> />
-                <label class="form-check-label" for="collect">Show Collects</label>
+            <div class="input-group">
+                <span class="input-group-text" for="max">Collects</span>
+                <select class="form-control" name="max">
+                    <?php $show = Arr::get($filters, "collect"); ?>
+                    <option value="" <?php if ($show != "yes") echo "selected"; ?>>Hide</option>
+                    <option value="yes" <?php if ($show == "yes") echo "selected"; ?>>Show</option>
+                </select>
             </div>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center">
