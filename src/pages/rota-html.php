@@ -111,8 +111,8 @@ require_once("parts/header.php"); ?>
     <div class="row">
         <div class="col-6 d-flex align-items-center">
             <div class="input-group">
-                <span class="input-group-text" for="max">Collects</span>
-                <select class="form-control" name="max">
+                <span class="input-group-text" for="collect">Collects</span>
+                <select class="form-control" name="collect">
                     <?php $show = Arr::get($filters, "collect"); ?>
                     <option value="" <?php if ($show != "yes") echo "selected"; ?>>Hide</option>
                     <option value="yes" <?php if ($show == "yes") echo "selected"; ?>>Show</option>
