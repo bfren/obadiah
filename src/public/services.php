@@ -14,18 +14,17 @@ require_once("../app.class.php");
 App::init();
 
 // get lectionary and rota
-$lectionary = Cache::get_lectionary(fn() => new Lectionary());
-$rota = Cache::get_rota(fn() => new Rota());
+$lectionary = Cache::get_lectionary(fn () => new Lectionary());
+$rota = Cache::get_rota(fn () => new Rota());
 
-// apply filters
-$filters = $_GET;
-$services = $rota->apply_filters($filters, $lectionary);
+// apply get string as filters
+$services = $rota->apply_filters($_GET, $lectionary);
 
 // build rota
 $combined_days = Builder::build_combined_rota($lectionary, $services);
 
 // get format script
-$format = match($_GET["format"]) {
+$format = match ($_GET["format"]) {
     "ics" => "services-ics.php",
     "json" => "services-json.php",
     default => "login.php"
