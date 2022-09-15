@@ -3,9 +3,9 @@
 namespace Feeds\Pages;
 
 use Feeds\App;
+use Feeds\Calendar\VCal;
+use Feeds\Calendar\VEvent;
 use Feeds\Helpers\Arr;
-use Feeds\ICal\VCal;
-use Feeds\ICal\VEvent;
 use Feeds\Rota\Builder;
 
 App::check();

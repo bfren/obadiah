@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\ICal;
+namespace Feeds\Calendar;
 
 use DateTimeZone;
 use Feeds\App;
+use Feeds\Calendar\TZ\Europe_London;
 use Feeds\Config\Config as C;
-use Feeds\ICal\TZ\Europe_London;
 use Feeds\Request\Request;
 
 App::check();

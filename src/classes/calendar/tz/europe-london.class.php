@@ -1,6 +1,6 @@
 <?php
 
-namespace Feeds\ICal\TZ;
+namespace Feeds\Calendar\TZ;
 
 use Feeds\App;
 use Feeds\Calendar\Timezone;
