@@ -14,7 +14,7 @@ class JEvent
      * @param string $start             Start date and time.
      * @param string $end               End date and time.
      * @param string $title             Title.
-     * @param string $description       Extended description.
+     * @param null|string $description  Extended description.
      * @return void
      */
     public function __construct(
@@ -22,7 +22,7 @@ class JEvent
         public readonly string $start,
         public readonly string $end,
         public readonly string $title,
-        public readonly string $description
+        public readonly ?string $description
     ) {
     }
 }
