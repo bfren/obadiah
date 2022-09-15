@@ -3,7 +3,7 @@
 namespace Feeds\ICal\TZ;
 
 use Feeds\App;
-use Feeds\ICal\Timezone;
+use Feeds\Calendar\Timezone;
 
 App::check();
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace Feeds\Wp;
+namespace Feeds\Calendar;
 
 use Feeds\App;
 
 App::check();
 
-class Service
+class JEvent
 {
     /**
      *
-     * @param string $id                Service ID.
+     * @param string $id                Event ID.
      * @param string $start             Start date and time.
      * @param string $end               End date and time.
      * @param string $title             Title.

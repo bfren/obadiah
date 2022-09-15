@@ -3,10 +3,10 @@
 namespace Feeds\Pages;
 
 use Feeds\App;
+use Feeds\Calendar\JEvent;
 use Feeds\Config\Config as C;
 use Feeds\Json\Json;
 use Feeds\Rota\Builder;
-use Feeds\Wp\Service;
 
 App::check();
 
@@ -19,7 +19,7 @@ $services = [];
 // add each service
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
-        $services[] = new Service(
+        $services[] = new JEvent(
             id: Builder::get_uid($rota->last_modified_timestamp, $c_service),
             start: $c_service->start->format(C::$formats->json_datetime),
             end: $c_service->end->format(C::$formats->json_datetime),
@@ -32,5 +32,5 @@ foreach ($combined_days as $c_day) {
 // Remove api key so it is not included in the response
 unset($filters["api"]);
 
-// Output JSON
+// output JSON
 Json::output($services, last_modified: $rota->last_modified_timestamp);

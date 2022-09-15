@@ -1,6 +1,6 @@
 <?php
 
-namespace Feeds\ICal;
+namespace Feeds\Calendar;
 
 use Feeds\App;
 
