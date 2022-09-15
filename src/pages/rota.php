@@ -19,7 +19,7 @@ $rota = Cache::get_rota(fn() => new Rota());
 
 // get and apply filters
 $default_filters = array(
-    "from" => date(C::$formats->sortable_date)
+    "start" => date(C::$formats->sortable_date)
 );
 $filters = array_merge($default_filters, $_GET);
 $services = $rota->apply_filters($filters, $lectionary);
