@@ -126,10 +126,10 @@ class Builder
      * Generate an event summary for a service, including role indicators for the specified person.
      *
      * @param Combined_Service $service     Service object.
-     * @param string $person                Selected person.
+     * @param null|string $person           Selected person.
      * @return string                       Service name with role indicators.
      */
-    public static function get_summary(Combined_Service $service, string $person): string
+    public static function get_summary(Combined_Service $service, ?string $person = null): string
     {
         // use the name as the basic summary
         $summary = $service->name;
