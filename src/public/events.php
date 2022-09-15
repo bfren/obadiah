@@ -14,13 +14,14 @@ App::init();
 
 // get query options
 $query = array(
-    "date_start" => $_GET["start"],
-    "date_end" => $_GET["end"]
+    "date_start" => Arr::get($_GET, "start"),
+    "date_end" => Arr::get($_GET, "end")
 );
 
 // setup curl
 $url = sprintf("https://%s.churchsuite.com/embed/calendar/json?%s", C::$general->church_suite_org, http_build_query($query));
 $ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 // get calendar JSON
 $json = curl_exec($ch);
