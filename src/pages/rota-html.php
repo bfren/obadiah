@@ -128,7 +128,7 @@ require_once("parts/header.php"); ?>
             <a href="/rota/" class="btn btn-danger me-3">Reset</a>
             <a href="/rota/ics/?<?php echo $query ?>" class="btn btn-secondary me-1" target="_blank">ICS</a>
             <a href="/rota/json/?<?php echo $query ?>" class="btn btn-secondary d-none d-sm-inline-block me-1" target="_blank">JSON</a>
-            <a href="/rota/print/?<?php echo http_build_query($filters) ?>" class="btn btn-secondary d-none d-sm-inline-block" target="_blank">Print</a>
+            <a href="/rota/print/?<?php echo $query ?>" class="btn btn-secondary d-none d-sm-inline-block" target="_blank">Print</a>
         </div>
     </div>
 </form>
