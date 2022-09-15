@@ -25,6 +25,11 @@ if (Request::$method == "POST") {
     } else {
         Request::deny();
     }
+// if already authorised that means an api key has been used so redirect
+} else if(Request::$auth) {
+    Request::authorise();
+    $redirect = Arr::get($_GET, "requested", "/");
+    Request::redirect($redirect);
 }
 
 // check login attempts to stop people trying over and over to guess the password
