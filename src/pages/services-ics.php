@@ -11,7 +11,6 @@ App::check();
 
 /** @var \Feeds\Rota\Combined_Day[] $combined_days */
 /** @var \Feeds\Rota\Rota $rota */
-/** @var array $filters */
 
 // add each service
 $events = array();
@@ -21,7 +20,7 @@ foreach ($combined_days as $c_day) {
             Builder::get_uid($rota->last_modified_timestamp, $c_service),
             $c_service->start,
             $c_service->end,
-            Builder::get_summary($c_service, ""),
+            Builder::get_summary($c_service),
             Builder::get_description($c_day, $c_service, false)
         );
     }
