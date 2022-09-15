@@ -19,8 +19,7 @@ $rota = Cache::get_rota(fn() => new Rota());
 
 // get and apply filters
 $default_filters = array(
-    "start" => date(C::$formats->sortable_date),    // show rota from 'today' by default
-    "max" => 10                                     // show a maximum number of services by default
+    "start" => date(C::$formats->sortable_date) // show rota from 'today' by default
 );
 $filters = array_merge($default_filters, $_GET);
 $services = $rota->apply_filters($filters, $lectionary);
