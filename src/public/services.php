@@ -32,5 +32,4 @@ $format = match ($_GET["format"]) {
 $path = sprintf("%s/pages/%s", C::$dir->cwd, $format);
 
 // load format
-header("Access-Control-Allow-Origin: *");
 require_once($path);

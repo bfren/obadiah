@@ -32,6 +32,7 @@ class Json
         if (Request::$debug) {
             header("Content-Type: text/plain", response_code: $response_code ?: 200);
         } else {
+            header("Access-Control-Allow-Origin: *");
             header("Content-Type: text/json; charset=utf-8", response_code: $response_code ?: 200);
             header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $last_modified ?: time())));
         }
