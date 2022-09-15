@@ -29,8 +29,5 @@ foreach ($combined_days as $c_day) {
     }
 }
 
-// Remove api key so it is not included in the response
-unset($filters["api"]);
-
 // output JSON
 Json::output($services, last_modified: $rota->last_modified_timestamp);
