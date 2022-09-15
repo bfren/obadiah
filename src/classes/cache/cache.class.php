@@ -3,6 +3,8 @@
 namespace Feeds\Cache;
 
 use Feeds\App;
+use Feeds\Calendar\JEvent;
+use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Bible_Plan;
@@ -16,6 +18,11 @@ class Cache
      * Bible Plan cache name.
      */
     public const BIBLE_PLAN = "bible";
+
+    /**
+     * Church Suite events cache.
+     */
+    public const EVENTS = "events";
 
     /**
      * Lectionary cache name.
@@ -70,6 +77,16 @@ class Cache
     }
 
     /**
+     * Clear the Events cache.
+     *
+     * @return void
+     */
+    public static function clear_events(): void
+    {
+        self::clear(self::EVENTS);
+    }
+
+    /**
      * Clear the lectionary cache.
      *
      * @return void
@@ -109,6 +126,18 @@ class Cache
     public static function get_bible_plan(callable $callable, bool $force = false): Bible_Plan
     {
         return self::get_or_set(self::BIBLE_PLAN, $callable, $force);
+    }
+
+    /**
+     * Get Events from the cache (or generate a fresh copy).
+     *
+     * @param callable $callable        Callable function to generate an array of events if not set / expired.
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
+     * @return JEvent[]                 Event objects.
+     */
+    public static function get_events(callable $callable, bool $force = false): array
+    {
+        return self::get_or_set(self::EVENTS, $callable, $force);
     }
 
     /**
