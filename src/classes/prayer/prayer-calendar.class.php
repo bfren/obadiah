@@ -113,6 +113,11 @@ class Prayer_Calendar
         return $people;
     }
 
+    /**
+     * Get filenames of months that have been created for the prayer calendar.
+     *
+     * @return string[]                 Array of months.
+     */
     public static function get_months(): array
     {
         // get saved month files
