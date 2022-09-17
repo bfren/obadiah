@@ -13,7 +13,7 @@ class Bible_File
     /**
      * The name of the Bible plan file.
      */
-    private const NAME = "plan";
+    public const NAME = "plan";
 
     /**
      * Handle a Bible plan CSV file upload.
