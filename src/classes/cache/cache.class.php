@@ -3,11 +3,10 @@
 namespace Feeds\Cache;
 
 use Feeds\App;
+use Feeds\Bible\Bible_Plan;
 use Feeds\Calendar\JEvent;
-use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Refresh\Bible_Plan;
 use Feeds\Rota\Rota;
 
 App::check();
@@ -119,13 +118,12 @@ class Cache
     /**
      * Get Bible Plan from the cache (or generate a fresh copy).
      *
-     * @param callable $callable        Callable function to generate a Bible Plan if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Bible_Plan               Bible Plan object.
      */
-    public static function get_bible_plan(callable $callable, bool $force = false): Bible_Plan
+    public static function get_bible_plan(bool $force = false): Bible_Plan
     {
-        return self::get_or_set(self::BIBLE_PLAN, $callable, $force);
+        return self::get_or_set(self::BIBLE_PLAN, fn () => new Bible_Plan(), $force);
     }
 
     /**
@@ -143,37 +141,34 @@ class Cache
     /**
      * Get lectionary from the cache (or generate a fresh copy).
      *
-     * @param callable $callable        Callable function to generate a Lectionary if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Lectionary               Lectionary object.
      */
-    public static function get_lectionary(callable $callable, bool $force = false): Lectionary
+    public static function get_lectionary(bool $force = false): Lectionary
     {
-        return self::get_or_set(self::LECTIONARY, $callable, $force);
+        return self::get_or_set(self::LECTIONARY, fn () => new Lectionary(), $force);
     }
 
     /**
      * Get prayer calendar from the cache (or generate a fresh copy).
      *
-     * @param callable $callable        Callable function to generate a Prayer Calendar if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Prayer_Calendar          Prayer Calendar object.
      */
-    public static function get_prayer_calendar(callable $callable, bool $force = false): Prayer_Calendar
+    public static function get_prayer_calendar(bool $force = false): Prayer_Calendar
     {
-        return self::get_or_set(self::PRAYER, $callable, $force);
+        return self::get_or_set(self::PRAYER, fn () => new Prayer_Calendar(), $force);
     }
 
     /**
      * Get rota from the cache (or generate a fresh copy).
      *
-     * @param callable $callable        Callable function to generate a Rota if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Rota                     Rota object.
      */
-    public static function get_rota(callable $callable, bool $force = false): Rota
+    public static function get_rota(bool $force = false): Rota
     {
-        return self::get_or_set(self::ROTA, $callable, $force);
+        return self::get_or_set(self::ROTA, fn () => new Rota(), $force);
     }
 
     /**

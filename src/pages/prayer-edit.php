@@ -19,7 +19,7 @@ App::check();
 Request::is_admin() || Request::redirect("/logout.php");
 
 // get prayer calendar
-$prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
+$prayer_calendar = Cache::get_prayer_calendar();
 
 // define variables
 $people_per_day = round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
@@ -64,7 +64,7 @@ function output_person_button(Person $person)
     $hash = Hash::person($person);
 
     // if this person is not in the prayer calendar, highlight them in red
-    $prayer_calendar = Cache::get_prayer_calendar(fn () => new Prayer_Calendar());
+    $prayer_calendar = Cache::get_prayer_calendar();
     if (!in_array($hash, array_keys($prayer_calendar->people))) {
         $colour = "danger";
     }

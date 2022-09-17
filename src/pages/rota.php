@@ -5,17 +5,15 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
-use Feeds\Lectionary\Lectionary;
 use Feeds\Rota\Builder;
-use Feeds\Rota\Rota;
 
 App::check();
 
 /** @var string $action */
 
 // get lectionary and rota
-$lectionary = Cache::get_lectionary(fn() => new Lectionary());
-$rota = Cache::get_rota(fn() => new Rota());
+$lectionary = Cache::get_lectionary();
+$rota = Cache::get_rota();
 
 // get and apply filters
 $default_filters = array(
