@@ -8,13 +8,27 @@ App::check();
 
 class Image
 {
-    public static function get_image(string $src, string $alt, ?string $class = null): string
+    /**
+     * Output an HTML image tag.
+     *
+     * @param string $src               Image source (within resources/img/ directory).
+     * @param string $alt               Image alternative text (will be used for title as well).
+     * @param null|string $class        Optional CSS class.
+     * @return void
+     */
+    public static function echo_image(string $src, string $alt, ?string $class = null): void
     {
-        return sprintf("<img src=\"/resources/img/%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", $src, $alt, $class);
+        printf("<img src=\"/resources/img/%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", $src, $alt, $class);
     }
 
-    public static function get_logo(string $class = "logo"): string
+    /**
+     * Output the logo.
+     *
+     * @param string $class             CSS class.
+     * @return void
+     */
+    public static function echo_logo(string $class = "logo"): void
     {
-        return self::get_image("logo-small.png", "Christ Church Selly Park Logo", $class);
+        self::echo_image("logo-small.png", "Christ Church Selly Park Logo", $class);
     }
 }

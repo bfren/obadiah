@@ -104,8 +104,8 @@ require_once("parts/alert.php"); ?>
     <ul>
         <?php foreach ($rota_files as $file) : ?>
             <li>
-                <?php echo $file; ?> (last modified <?php echo Rota_File::get_last_modified($file); ?>)
-                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_rota=<?php echo $file; ?>">delete</a>
+                <?php _e($file); ?> (last modified <?php _e(Rota_File::get_last_modified($file)); ?>)
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_rota=<?php _e($file); ?>">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -146,8 +146,8 @@ require_once("parts/alert.php"); ?>
     <ul>
         <?php foreach ($prayer_files as $file) : ?>
             <li>
-                <?php echo $file; ?> (last modified <?php echo Prayer_File::get_last_modified($file); ?>)
-                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_prayer=<?php echo $file; ?>">delete</a>
+                <?php _e($file); ?> (last modified <?php _e(Prayer_File::get_last_modified($file)); ?>)
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_prayer=<?php _e($file); ?>">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -172,7 +172,7 @@ require_once("parts/alert.php"); ?>
     <ul>
         <?php foreach ($bible_files as $file) : ?>
             <li>
-                <?php echo $file; ?> (last modified <?php echo Bible_File::get_last_modified($file); ?>)
+                <?php _e($file); ?> (last modified <?php _e(Bible_File::get_last_modified($file)); ?>)
                 <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/?delete_bible">delete</a>
             </li>
         <?php endforeach; ?>
@@ -189,9 +189,9 @@ require_once("parts/alert.php"); ?>
             </div>
             <div class="modal-body">
                 <h5>Step One</h5>
-                <p>Log in to <a href="<?php echo sprintf("https://%s.churchsuite.com", C::$general->church_suite_org); ?>" target="_blank">Church Suite</a>.</p>
+                <p>Log in to <a href="<?php _e(sprintf("https://%s.churchsuite.com", C::$general->church_suite_org)); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php echo $rota_export_href; ?>" target="_blank">here</a> to open the export page for the rota.</p>
+                <p>Click <a href="<?php _e($rota_export_href); ?>" target="_blank">here</a> to open the export page for the rota.</p>
                 <h5>Step Three</h5>
                 <p>Select the dates you wish to export - this should cover the entire period of the rota.</p>
                 <h5>Step Four</h5>
@@ -218,10 +218,10 @@ require_once("parts/alert.php"); ?>
             </div>
             <div class="modal-body">
                 <h5>Step One</h5>
-                <p>Log in to <a href="<?php echo sprintf("https://%s.churchsuite.com", C::$general->church_suite_org); ?>" target="_blank">Church Suite</a>.</p>
+                <p>Log in to <a href="<?php _e(sprintf("https://%s.churchsuite.com", C::$general->church_suite_org)); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php echo $prayer_calendar_adults_export_href; ?>" target="_blank">here</a> to open the export page for adults.<br />
-                    Click <a href="<?php echo $prayer_calendar_children_export_href; ?>" target="_blank">here</a> to open the export page for children.</p>
+                <p>Click <a href="<?php _e($prayer_calendar_adults_export_href); ?>" target="_blank">here</a> to open the export page for adults.<br />
+                    Click <a href="<?php _e($prayer_calendar_children_export_href); ?>" target="_blank">here</a> to open the export page for children.</p>
                 <h5>Step Three</h5>
                 <p>Hover your mouse over the 'More' button and select 'Download CSV'.</p>
                 <h5>Step Four</h5>

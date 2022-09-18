@@ -35,7 +35,7 @@ if (Request::$auth) {
     <nav class="navbar navbar-expand-md navbar-light bg-light py-3 border-bottom">
         <div class="container-fluid d-flex justify-content-between">
             <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none">
-                <?php echo Image::get_logo("logo me-4"); ?>
+                <?php Image::echo_logo("logo me-4"); ?>
                 <span class="fs-4">Church Feeds</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,9 +47,9 @@ if (Request::$auth) {
                     <?php foreach ($links as $link_title => $link) : ?>
                         <li class="nav-item ms-2">
                             <?php if ($title == $link_title) : ?>
-                                <a href="<?php echo $link; ?>" class="nav-link active" aria-current="page"><?php echo $link_title; ?></a>
+                                <a href="<?php _e($link); ?>" class="nav-link active" aria-current="page"><?php _e($link_title); ?></a>
                             <?php else : ?>
-                                <a href="<?php echo $link; ?>" class="nav-link"><?php echo $link_title; ?></a>
+                                <a href="<?php _e($link); ?>" class="nav-link"><?php _e($link_title); ?></a>
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>

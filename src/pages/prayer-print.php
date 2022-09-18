@@ -48,31 +48,31 @@ function output_day(DateTimeImmutable $date)
 ?>
     <div class="day">
         <div class="date rounded-3 d-flex flex-column">
-            <div class="month rounded-top"><?php echo strtolower($date->format("M")); ?></div>
+            <div class="month rounded-top"><?php _e(strtolower($date->format("M"))); ?></div>
             <div class="d-flex justify-content-center flex-row flex-grow-1">
                 <div class="d-flex align-items-start mt-1">
-                    <span class="dow"><?php echo substr(strtolower($date->format("D")), 0, 2); ?></span>
-                    <span class="num"><?php echo $date->format("j"); ?></span>
+                    <span class="dow"><?php _e(substr(strtolower($date->format("D")), 0, 2)); ?></span>
+                    <span class="num"><?php _e($date->format("j")); ?></span>
                 </div>
             </div>
         </div>
         <div class="content">
             <?php if (isset($people)) : ?>
                 <div class="people">
-                    <?php echo join(", ", $people); ?>
+                    <?php _e(join(", ", $people)); ?>
                 </div>
             <?php elseif (isset($lectionary_day)) : ?>
                 <div class="services">
-                    <div class="fw-bold"><?php echo $lectionary_day->name; ?></div>
+                    <div class="fw-bold"><?php _e($lectionary_day->name); ?></div>
                     <?php foreach ($services as $service) : ?>
                         <div class="service d-flex">
-                            <div class="time"><?php echo $service->time; ?></div>
+                            <div class="time"><?php _e($service->time); ?></div>
                             <div class="teaching">
                                 <?php if ($service->main_reading) : ?>
-                                    <?php echo $service->main_reading; ?>
+                                    <?php _e($service->main_reading); ?>
                                     <?php if ($service->additional_reading) echo sprintf("&amp; %s", $service->additional_reading); ?>
                                 <?php else : ?>
-                                    <?php echo $service->title; ?>
+                                    <?php _e($service->title); ?>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -89,9 +89,9 @@ function output_day(DateTimeImmutable $date)
 <?php if ($month->people) : ?>
 
     <h2 class="prayer-calendar-title row">
-        <div class="col-4"><a href="/prayer"><?php echo Image::get_logo("logo me-4"); ?></a></div>
+        <div class="col-4"><a href="/prayer"><?php _e(Image::echo_logo("logo me-4")); ?></a></div>
         <div class="col-4 text-center">Prayer Calendar</div>
-        <div class="col-4 text-end"><?php echo $month->get_display_month(); ?></div>
+        <div class="col-4 text-end"><?php _e($month->get_display_month()); ?></div>
     </h2>
 
     <div class="row prayer-calendar-days">

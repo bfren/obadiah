@@ -23,8 +23,8 @@ $person = Arr::get($filters, "person");
                 <div class="card-body">
 
                     <!-- Date -->
-                    <h5 class="card-title"><?php echo $combined_day->date->format(C::$formats->display_date); ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $combined_day->name; ?></h6>
+                    <h5 class="card-title"><?php _e($combined_day->date->format(C::$formats->display_date)); ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php _e($combined_day->name); ?></h6>
 
                     <!-- Services -->
                     <?php foreach ($combined_day->services as $combined_service) : ?>
@@ -33,7 +33,7 @@ $person = Arr::get($filters, "person");
                         <div class="details">
                             <div class="col">
                                 <p class="fw-bold mb-0">
-                                    <?php echo $combined_service->time; ?> <?php echo $combined_service->name ?>
+                                    <?php _e($combined_service->time); ?> <?php _e($combined_service->name); ?>
                                 </p>
                                 <!-- Teaching Details -->
                                 <div class="teaching small">
@@ -53,7 +53,7 @@ $person = Arr::get($filters, "person");
                                 <?php if (Arr::get($_GET, "collect") == "yes") : ?>
                                     <!-- Collect -->
                                     <div class="collect small">
-                                        <p class="mt-2 mb-0"><?php echo str_replace("\n", "<br/>", $combined_day->collect); ?></p>
+                                        <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -66,7 +66,7 @@ $person = Arr::get($filters, "person");
                                             $names = join(", ", $service_role->people);
                                             $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                             ?>
-                                            <?php echo $role; ?>: <span class="text-muted"><?php echo $highlighted; ?></span>
+                                            <?php _e($role); ?>: <span class="text-muted"><?php _e($highlighted); ?></span>
                                         </p>
                                     <?php endforeach; ?>
                                 </div>

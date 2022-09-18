@@ -31,6 +31,10 @@ function get_bible_reading(string $passage): string
 
 ?>
 
+<?php if(count($combined_days) == 0): ?>
+    <p>No services were found matching the current filters.</p>
+<?php endif; ?>
+
 <div class="row rota-services d-print-block">
     <?php foreach ($combined_days as $combined_day) : ?>
 
@@ -39,15 +43,15 @@ function get_bible_reading(string $passage): string
                 <div class="card-body">
 
                     <!-- Date -->
-                    <h5 class="card-title"><?php echo $combined_day->date->format(C::$formats->display_date); ?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $combined_day->name; ?></h6>
+                    <h5 class="card-title"><?php _e($combined_day->date->format(C::$formats->display_date)); ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?php _e($combined_day->name); ?></h6>
 
                     <!-- Services -->
                     <?php foreach ($combined_day->services as $combined_service) : ?>
 
                         <hr class="mt-3 mb-3" />
                         <p class="fw-bold mb-0">
-                            <?php echo $combined_service->time; ?> <?php echo $combined_service->name ?>
+                            <?php _e($combined_service->time); ?> <?php _e($combined_service->name); ?>
                         </p>
 
                         <div class="details small">
@@ -74,7 +78,7 @@ function get_bible_reading(string $passage): string
                                         $names = join(", ", $service_role->people);
                                         $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                         ?>
-                                        <?php echo $role; ?>: <span class="text-muted"><?php echo $highlighted; ?></span>
+                                        <?php _e($role); ?>: <span class="text-muted"><?php _h($highlighted); ?></span>
                                     </p>
                                 <?php endforeach; ?>
                             </div>
@@ -82,7 +86,7 @@ function get_bible_reading(string $passage): string
                             <?php if (Arr::get($_GET, "collect") == "yes") : ?>
                                 <!-- Collect -->
                                 <div class="collect">
-                                    <p class="mt-2 mb-0"><?php echo str_replace("\n", "<br/>", $combined_day->collect); ?></p>
+                                    <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>
                                 </div>
                             <?php endif; ?>
 

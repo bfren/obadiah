@@ -90,7 +90,7 @@ require_once("parts/alert.php"); ?>
         </div>
         <p class="mt-1">
             <span class="text-warning">Adults</span> and <span class="text-info">children</span> are in different colours.
-            There need to be an average of <?php echo $people_per_day; ?> people assigned to each day.
+            There need to be an average of <?php _e($people_per_day); ?> people assigned to each day.
         </p>
         <div class="people">
             <?php foreach ($prayer_calendar->people as $person) in_array(Hash::person($person), $from_people) || output_person_button($person); ?>
@@ -100,7 +100,7 @@ require_once("parts/alert.php"); ?>
         <div class="row">
             <div class="col-12">
                 <h5 class="mt-2">
-                    <?php echo $for->format(C::$formats->display_month); ?>
+                    <?php _e($for->format(C::$formats->display_month)); ?>
                     <span class="ps-3 fs-6" id="save"></span>
                 </h5>
             </div>
@@ -121,8 +121,8 @@ require_once("parts/alert.php"); ?>
                 $people = $prayer_calendar->get_people($people_hashes);
                 ?>
                 <div class="col-12 col-lg-6 col-xxl-4">
-                    <div class="card mt-2 mb-2" id="day-<?php echo $i; ?>" data-date="<?php echo $date; ?>">
-                        <div class="card-header">Day <?php echo $i; ?> (<?php echo $for_date->format(C::$formats->display_day); ?>)</div>
+                    <div class="card mt-2 mb-2" id="day-<?php _e($i); ?>" data-date="<?php _e($date); ?>">
+                        <div class="card-header">Day <?php _e($i); ?> (<?php _e($for_date->format(C::$formats->display_day)); ?>)</div>
                         <div class="card-body day">
                             <?php foreach ($people as $person) output_person_button($person); ?>
                         </div>
@@ -135,8 +135,8 @@ require_once("parts/alert.php"); ?>
 </div>
 
 <script type="text/javascript">
-    var prayer_calendar_month_max_days = <?php echo Month::MAX_DAYS; ?>;
-    var prayer_calendar_month_id = "<?php echo $for->format(C::$formats->prayer_month_id); ?>";
+    var prayer_calendar_month_max_days = <?php _e(Month::MAX_DAYS); ?>;
+    var prayer_calendar_month_id = "<?php _e($for->format(C::$formats->prayer_month_id)); ?>";
     var prayer_calendar_save_url = "/ajax.php";
 </script>
 

@@ -25,11 +25,11 @@ require_once("parts/header.php");
         "to" => $this_week_from->add(new DateInterval("P7D"))->format(C::$formats->sortable_date)
     );
 ?>
-<p>To view this week&rsquo;s services, please click <a href="/rota/?<?php echo http_build_query($this_week); ?>">here</a>.</p>
+<p>To view this week&rsquo;s services, please click <a href="/rota/?<?php _e(http_build_query($this_week)); ?>">here</a>.</p>
 
 <h3>Printable</h3>
 <p>The following links will give you quick and printable rotas for upcoming services.</p>
-<p><a href="/rota/print/?<?php echo http_build_query(Rota::upcoming_ten_thirty()); ?>">Sunday 10:30 services for the next four weeks</a></p>
-<p><a href="/rota/print/?<?php echo http_build_query(Rota::wednesday_morning_prayer()); ?>">Wednesday Morning Prayer for the next three months</a></p>
+<p><a href="/rota/print/?<?php _e(http_build_query(Rota::upcoming_ten_thirty())); ?>">Sunday 10:30 services for the next four weeks</a></p>
+<p><a href="/rota/print/?<?php _e(http_build_query(Rota::wednesday_morning_prayer())); ?>">Wednesday Morning Prayer for the next three months</a></p>
 
 <?php require_once("parts/footer.php"); ?>

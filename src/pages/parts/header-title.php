@@ -11,8 +11,8 @@ App::check();
 
 ?>
 <div class="container-fluid mt-2 border-bottom">
-    <h1><?php echo $title; ?></h1>
+    <h1><?php _e($title); ?></h1>
     <?php if (isset($subtitle)) : ?>
-        <h6><?php echo $subtitle; ?></h6>
+        <h6><?php _e($subtitle); ?></h6>
     <?php endif; ?>
 </div>
