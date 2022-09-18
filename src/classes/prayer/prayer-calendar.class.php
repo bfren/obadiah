@@ -7,6 +7,7 @@ use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
 use SplFileInfo;
+use Throwable;
 
 App::check();
 
@@ -94,16 +95,24 @@ class Prayer_Calendar
         // open the file for reading
         try {
             $file_obj = $file_info->openFile("r");
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             App::die("Unable to open the file: %s.", $file_info);
         }
 
         // read each line of the csv file
         $first = true;
-        while (($row = $file_obj->fgetcsv()) !== false) {
+        while (!$file_obj->eof()) {
+            // get row
+            $row = $file_obj->fgetcsv();
+
             // skip the first row
             if ($first) {
                 $first = false;
+                continue;
+            }
+
+            // skip empty rows
+            if(count($row) != 2){
                 continue;
             }
 

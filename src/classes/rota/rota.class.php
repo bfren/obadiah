@@ -17,6 +17,7 @@ use Feeds\Rota\Filters\Series_Filter;
 use Feeds\Rota\Filters\Start_Filter;
 use SplFileInfo;
 use SplFileObject;
+use Throwable;
 
 App::check();
 
@@ -67,16 +68,19 @@ class Rota
             // open the file for reading
             try {
                 $file_obj = new SplFileObject($file, "r");
-            } catch (\Throwable $th) {
+            } catch (Throwable $th) {
                 App::die("Unable to open the file: %s.", $file_obj->getRealPath());
             }
 
             // read each line of the csv file
             $include = false;
             $header_row = array();
-            while (($row = $file_obj->fgetcsv()) !== false) {
-                // include the service
-                if ($include && $row[1] != "No service") {
+            while (!$file_obj->eof()) {
+                // read the next row
+                $row = $file_obj->fgetcsv();
+
+                // include the service if the row counts match and there is a service assigned
+                if ($include && count($header_row) == count($row) && $row[1] != "No service") {
                     // create service
                     $service = new Service($header_row, $row);
                     $services[] = $service;
