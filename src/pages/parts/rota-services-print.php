@@ -67,7 +67,8 @@ $person = Arr::get($filters, "person");
                                             $names = join(", ", $service_role->people);
                                             $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                             ?>
-                                            <?php _e($role); ?>: <span class="text-muted"><?php _h($highlighted); ?></span>
+                                            <span class="role-name"><?php _e($role); ?></span>:
+                                            <span class="role-people text-muted"><?php _h($highlighted); ?></span>
                                         </p>
                                     <?php endforeach; ?>
                                 </div>

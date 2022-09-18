@@ -60,6 +60,10 @@ html.notices {
                     font-size: 0.8rem;
                     padding-left: $space;
                     text-indent: calc($space * -1);
+
+                    .role-name {
+                        font-weight: 500;
+                    }
                 }
             }
         }
