@@ -1,0 +1,60 @@
+$margin: 8mm;
+
+@media print {
+    @page {
+        margin: $margin;
+        size: A4 landscape;
+    }
+}
+
+html.notices,
+html.notices>body {
+    margin: 0;
+    padding: 0;
+    width: 297mm - calc($margin * 2);
+}
+
+html.notices {
+    .rota-services.row {
+
+        >div {
+            width: 25%;
+        }
+
+        .card {
+            margin: 1rem 0 !important;
+
+            .card-title,
+            .card-subtitle {
+                display: block;
+            }
+
+            .card-title {
+                margin-right: $margin;
+            }
+
+            .details {
+                .teaching {
+                    margin-bottom: 0.6rem;
+
+                    p {
+                        line-height: 1.2em;
+                        margin: 0;
+                    }
+
+                    .bible>a {
+                        white-space: nowrap;
+                    }
+                }
+
+                $indent: 0.6rem;
+                .people {
+                    font-size: 0.8rem;
+                    line-height: 1.1em;
+                    padding-left: $indent;
+                    text-indent: calc($indent * -1);
+                }
+            }
+        }
+    }
+}

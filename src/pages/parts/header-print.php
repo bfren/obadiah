@@ -10,7 +10,7 @@ App::check();
 
 ?>
 <!DOCTYPE html>
-<html class="print" lang="en">
+<html class="<?php _e($class ?: "print") ?>" lang="en">
 
 <head>
     <meta charset="utf-8" />

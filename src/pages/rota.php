@@ -30,6 +30,7 @@ $combined_days = Builder::build_combined_rota($lectionary, $services);
 $action_page = match($action) {
     "ics" => "rota-ics.php",
     "json" => "rota-json.php",
+    "notices" => "rota-notices.php",
     "print" => "rota-print.php",
     default => "rota-html.php"
 };
