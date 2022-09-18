@@ -5,6 +5,7 @@ namespace Feeds\Admin;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -30,10 +31,11 @@ class Prayer_File
     private static function upload(string $type, string $filename): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
+        $info = Arr::get($_FILES, "file");
+        in_array(Arr::get($info, "type"), array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // get paths
-        $tmp_path = $_FILES["file"]["tmp_name"];
+        $tmp_path = Arr::get($info, "tmp_name");
         $csv_path = sprintf("%s/%s", C::$dir->prayer, $filename);
 
         // move file to the correct location, overwriting whatever is already there

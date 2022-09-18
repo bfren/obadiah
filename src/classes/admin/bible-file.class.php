@@ -5,6 +5,7 @@ namespace Feeds\Admin;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -23,10 +24,11 @@ class Bible_File
     public static function upload(): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/plain")) || App::die("You may only upload text files.");
+        $info = Arr::get($_FILES, "file");
+        in_array(Arr::get($info, "type"), array("text/plain")) || App::die("You may only upload text files.");
 
         // get paths
-        $tmp_path = $_FILES["file"]["tmp_name"];
+        $tmp_path = Arr::get($info, "tmp_name");
         $csv_path = sprintf("%s/%s.txt", C::$dir->bible, self::NAME);
 
         // move file to the correct location, overwriting whatever is already there

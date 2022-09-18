@@ -19,7 +19,7 @@ $rota = Cache::get_rota();
 $default_filters = array(
     "start" => date(C::$formats->sortable_date) // show rota from 'today' by default
 );
-$filters = array_merge($default_filters, $_GET);
+$filters = array_merge($default_filters, filter_input_array(INPUT_GET));
 $services = $rota->apply_filters($filters, $lectionary);
 
 // build rota

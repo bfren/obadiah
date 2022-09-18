@@ -61,7 +61,7 @@ class Request
      */
     public static function init(): void
     {
-        self::$auth = Arr::get($_SESSION, self::AUTH) === true || Input::get_string("api") == C::$login->api;
+        self::$auth = Arr::get($_SESSION, self::AUTH, false) || Input::get_string("api") == C::$login->api;
         self::$debug = Input::get_bool("debug");
         self::$method = Input::server_string("REQUEST_METHOD");
         self::$uri = Input::server_string("REQUEST_URI");
