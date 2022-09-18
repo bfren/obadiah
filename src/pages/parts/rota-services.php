@@ -59,14 +59,14 @@ function get_bible_reading(string $passage): string
                             <!-- Teaching Details -->
                             <div class="teaching">
                                 <p class="series mb-0">
-                                    <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
-                                    <?php if ($combined_service->sermon_num) echo sprintf("(%d)", $combined_service->sermon_num); ?>
-                                    <?php if ($combined_service->sermon_title) echo sprintf(" - &ldquo;%s&rdquo;", $combined_service->sermon_title); ?>
+                                    <?php if ($combined_service->series_title) _e($combined_service->series_title); ?>
+                                    <?php if ($combined_service->sermon_num) _e("(%d)", $combined_service->sermon_num); ?>
+                                    <?php if ($combined_service->sermon_title) _e(" - “%s”", $combined_service->sermon_title); ?>
                                 </p>
                                 <p class="bible mb-0">
-                                    <?php if (count($combined_service->psalms)) echo sprintf("%s, ", get_bible_reading(sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)))); ?>
-                                    <?php if ($combined_service->main_reading) echo get_bible_reading($combined_service->main_reading); ?>
-                                    <?php if ($combined_service->additional_reading) echo sprintf("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
+                                    <?php if (count($combined_service->psalms)) _h("%s, ", get_bible_reading(sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)))); ?>
+                                    <?php if ($combined_service->main_reading) _h(get_bible_reading($combined_service->main_reading)); ?>
+                                    <?php if ($combined_service->additional_reading) _h("&amp; %s", get_bible_reading($combined_service->additional_reading)); ?>
                                 </p>
                             </div>
 

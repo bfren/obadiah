@@ -27,12 +27,13 @@ function _e(?string $text, mixed ...$args): void
 }
 
 /**
- * Safely echo $html.
+ * Safely echo $html - using sprintf if $args are defined.
  *
- * @param null|string $html             HTML to be printed.
+ * @param null|string $html             HTML (or sprintf format) to be printed.
+ * @param array $args                   Optional arguments to use for sprintf.
  * @return void
  */
-function _h(?string $html): void
+function _h(?string $html, mixed ...$args): void
 {
-    Escape::echo_html($html);
+    Escape::echo_html($html, ...$args);
 }

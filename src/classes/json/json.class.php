@@ -38,7 +38,7 @@ class Json
         }
 
         // output JSON and exit
-        echo json_encode($obj_to_encode);
+        print_r(json_encode($obj_to_encode));
         exit;
     }
 }

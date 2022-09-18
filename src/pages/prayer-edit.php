@@ -71,7 +71,7 @@ function output_person_button(Person $person)
 
     // output button HTML
     $html = "<button type=\"button\" class=\"btn btn-sm btn-%s m-1\" data-name=\"%s\" data-hash=\"%s\">%s</button>";
-    echo sprintf($html, $colour, $name, $hash, $person->get_full_name());
+    _e($html, $colour, $name, $hash, $person->get_full_name());
 }
 
 // output header

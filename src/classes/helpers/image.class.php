@@ -18,7 +18,7 @@ class Image
      */
     public static function echo_image(string $src, string $alt, ?string $class = null): void
     {
-        printf("<img src=\"/resources/img/%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", $src, $alt, $class);
+        Escape::echo_html("<img src=\"/resources/img/%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", $src, $alt, $class);
     }
 
     /**

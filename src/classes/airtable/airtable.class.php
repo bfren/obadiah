@@ -39,14 +39,14 @@ class Airtable
         $query = http_build_query($data);
 
         // create curl request
-        $ch = curl_init(sprintf("%s?%s", $this->url, $query));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Bearer %s", C::$airtable->api_key)));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $handle = curl_init(sprintf("%s?%s", $this->url, $query));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Bearer %s", C::$airtable->api_key)));
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
         // make request and output on error
-        $json = curl_exec($ch);
+        $json = curl_exec($handle);
         if (!$json) {
-            echo curl_error($ch);
+            print_r(curl_error($handle));
             return null;
         }
 

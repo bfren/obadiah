@@ -114,8 +114,8 @@ require_once("parts/header.php"); ?>
                 <span class="input-group-text" for="collect">Collects</span>
                 <select class="form-control" name="collect">
                     <?php $show = Arr::get($filters, "collect"); ?>
-                    <option value="" <?php if ($show != "yes") echo "selected"; ?>>Hide</option>
-                    <option value="yes" <?php if ($show == "yes") echo "selected"; ?>>Show</option>
+                    <option value="" <?php if ($show != "yes") _e("selected"); ?>>Hide</option>
+                    <option value="yes" <?php if ($show == "yes") _e("selected"); ?>>Show</option>
                 </select>
             </div>
         </div>

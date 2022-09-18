@@ -39,15 +39,15 @@ $person = Arr::get($filters, "person");
                                 <div class="teaching small">
                                     <div class="series">
                                         <p>
-                                            <?php if ($combined_service->series_title) echo $combined_service->series_title; ?>
-                                            <?php if ($combined_service->sermon_num) echo sprintf("(%d)", $combined_service->sermon_num); ?>
+                                            <?php if ($combined_service->series_title) _e($combined_service->series_title); ?>
+                                            <?php if ($combined_service->sermon_num) _e("(%d)", $combined_service->sermon_num); ?>
                                         </p>
-                                        <?php if ($combined_service->sermon_title) echo sprintf("<p>%s</p>", $combined_service->sermon_title); ?>
+                                        <?php if ($combined_service->sermon_title) _h("<p>%s</p>", $combined_service->sermon_title); ?>
                                     </div>
                                     <div class="bible">
-                                        <?php if (count($combined_service->psalms)) echo sprintf("<p>%s</p>", sprintf("Psalm%s %s", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms))); ?>
-                                        <?php if ($combined_service->main_reading) echo sprintf("<p>%s</p>", $combined_service->main_reading); ?>
-                                        <?php if ($combined_service->additional_reading) echo sprintf("<p>%s</p>", $combined_service->additional_reading); ?>
+                                        <?php if (count($combined_service->psalms)) _h("<p>Psalm%s %s</p>", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)); ?>
+                                        <?php if ($combined_service->main_reading) _h("<p>%s</p>", $combined_service->main_reading); ?>
+                                        <?php if ($combined_service->additional_reading) _h("<p>%s</p>", $combined_service->additional_reading); ?>
                                     </div>
                                 </div>
                                 <?php if (Arr::get_sanitised($_GET, "collect") == "yes") : ?>
@@ -66,7 +66,7 @@ $person = Arr::get($filters, "person");
                                             $names = join(", ", $service_role->people);
                                             $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                             ?>
-                                            <?php _e($role); ?>: <span class="text-muted"><?php _e($highlighted); ?></span>
+                                            <?php _e($role); ?>: <span class="text-muted"><?php _h($highlighted); ?></span>
                                         </p>
                                     <?php endforeach; ?>
                                 </div>

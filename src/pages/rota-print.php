@@ -22,9 +22,9 @@ require_once("parts/header-print.php"); ?>
 
 <h2>
     Christ Church Rota
-    <?php if ($time) echo sprintf(" - %s", $time); ?>
-    <?php if ($day) echo $day; ?>
-    <?php if ($person) echo sprintf(" - %s", $person); ?>
+    <?php if ($time) _e(" - %s", $time); ?>
+    <?php if ($day) _e($day); ?>
+    <?php if ($person) _e(" - %s", $person); ?>
 </h2>
 <?php require_once("parts/rota-services-print.php"); ?>
 

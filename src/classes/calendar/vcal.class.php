@@ -117,6 +117,6 @@ class VCal
         }
 
         // output text
-        echo $ics;
+        print_r($ics);
     }
 }

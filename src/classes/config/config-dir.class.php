@@ -2,6 +2,7 @@
 
 namespace Feeds\Config;
 
+use Directory;
 use Feeds\App;
 
 App::check();
