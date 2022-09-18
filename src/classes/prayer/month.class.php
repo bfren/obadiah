@@ -65,7 +65,6 @@ class Month
         return null;
     }
 
-
     /**
      * Create a Month object from $data and save it to the data store.
      *

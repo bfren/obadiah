@@ -2,6 +2,7 @@
 
 namespace Feeds\Prayer;
 
+use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
@@ -48,9 +49,36 @@ class Prayer_Calendar
      */
     public function get_people(array $hashes): array
     {
-        $people = Arr::map($hashes, fn (string $hash) => Arr::get($this->people, $hash));
+        // get matching people
+        $people = Arr::map($hashes, fn (string $hash) => Arr::get($this->people, $hash, array()));
+
+        // sort and return
         self::sort_people($people);
         return $people;
+    }
+
+    /**
+     * Get the names of people on a particular day from the prayer calendar.
+     *
+     * @param DateTimeImmutable $dt     Date.
+     * @return Person[]                 Array of people.
+     */
+    public function get_day(DateTimeImmutable $dt): array
+    {
+        // get month
+        $id = $dt->format(C::$formats->prayer_month_id);
+        $month = Month::load($id);
+
+        // return empty array if the month does not exist
+        if ($month === null) {
+            return array();
+        }
+
+        // get the people hashes for the day
+        $hashes = Arr::get($month->days, $dt->format(C::$formats->sortable_date), array());
+
+        // return people
+        return $this->get_people($hashes);
     }
 
     /**
@@ -112,7 +140,7 @@ class Prayer_Calendar
             }
 
             // skip empty rows
-            if(count($row) != 2){
+            if (count($row) != 2) {
                 continue;
             }
 
