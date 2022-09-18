@@ -59,9 +59,9 @@ class Month
         $dt = $this->get_first_day_of_month();
         if ($dt) {
             return $dt->format(C::$formats->display_month);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
 

@@ -35,9 +35,9 @@ class Rota_File
         if (move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_rota();
             return Result::success(sprintf("The rota file '%s' was uploaded successfully.", $name));
-        } else {
-            return Result::failure("Something went wrong uploading the rota file, please try again.");
         }
+
+        return Result::failure("Something went wrong uploading the rota file, please try again.");
     }
 
     /**

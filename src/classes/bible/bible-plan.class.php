@@ -81,11 +81,7 @@ class Bible_Plan
 
         // get week number for this date - starts with Monday so subtract 1 to get the number of Sundays to this point
         $week = intval($dt->format("W"));
-        if ($week > $days) {
-            $sundays = 0;
-        } else {
-            $sundays = $week;
-        }
+        $sundays = $week > $days ? 0 : $week;
 
         // get the plan day number:
         // we skip Sundays so subtract the number of weeks from the number of days

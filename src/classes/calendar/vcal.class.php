@@ -67,11 +67,12 @@ class VCal
     {
         if (Request::$debug) {
             header("Content-Type: text/plain");
-        } else {
-            header("Content-Type: text/calendar; charset=utf-8");
-            header(sprintf("Content-Disposition: attachment; filename=%s-%s.ics", C::$general->church_suite_org, $filename));
-            header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $this->last_modified)));
+            return;
         }
+
+        header("Content-Type: text/calendar; charset=utf-8");
+        header(sprintf("Content-Disposition: attachment; filename=%s-%s.ics", C::$general->church_suite_org, $filename));
+        header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $this->last_modified)));
     }
 
     /**

@@ -33,8 +33,8 @@ class File
     {
         if (file_exists($path) && unlink($path)) {
             return Result::success(sprintf("File '%s' was deleted.", $filename));
-        } else {
-            return  Result::failure(sprintf("Unable to delete file '%s'.", $filename));
         }
+
+        return Result::failure(sprintf("Unable to delete file '%s'.", $filename));
     }
 }

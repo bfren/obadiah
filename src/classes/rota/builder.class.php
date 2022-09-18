@@ -205,16 +205,14 @@ class Builder
             }
 
             // readings
-            if(count($service->psalms)) {
+            if (count($service->psalms)) {
                 $description[] = sprintf("Psalm%s: %s", count($service->psalms) > 1 ? "s" : "", join("; ", $service->psalms));
             }
 
             if ($service->main_reading) {
-                if ($service->additional_reading) {
-                    $description[] = sprintf("Readings: %s and %s", $service->main_reading, $service->additional_reading);
-                } else {
-                    $description[] = sprintf("Reading: %s", $service->main_reading);
-                }
+                $description[] = $service->additional_reading
+                    ? sprintf("Readings: %s and %s", $service->main_reading, $service->additional_reading)
+                    : sprintf("Reading: %s", $service->main_reading);
             }
 
             $description[] = "";

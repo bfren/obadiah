@@ -35,9 +35,9 @@ class Bible_File
         if (move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_bible_plan();
             return Result::success("The Bible plan file was uploaded successfully.");
-        } else {
-            return Result::failure("Something went wrong uploading the Bible plan file, please try again.");
         }
+
+        return Result::failure("Something went wrong uploading the Bible plan file, please try again.");
     }
 
     /**

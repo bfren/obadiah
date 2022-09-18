@@ -42,9 +42,9 @@ class Prayer_File
         if (move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_prayer_calendar();
             return Result::success(sprintf("The %s prayer calendar file was uploaded successfully.", $type));
-        } else {
-            return Result::failure(sprintf("Something went wrong uploading the %s prayer calendar file, please try again.", $type));
         }
+
+        return Result::failure(sprintf("Something went wrong uploading the %s prayer calendar file, please try again.", $type));
     }
 
     /**

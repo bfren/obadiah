@@ -99,11 +99,7 @@ class Request
         unset($_SESSION[self::ADMIN]);
 
         // keep track of failed login attempts
-        if ($count = Arr::get($_SESSION, self::COUNT, 0)) {
-            $_SESSION[self::COUNT] = $count + 1;
-        } else {
-            $_SESSION[self::COUNT] = 1;
-        }
+        $_SESSION[self::COUNT] = Arr::get($_SESSION, self::COUNT, 0) + 1;
     }
 
     /**
