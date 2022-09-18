@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Feeds\Admin\Bible_File;
 use Feeds\App;
 use Feeds\Config\Config as C;
+use SplFileInfo;
 
 App::check();
 
@@ -26,15 +27,16 @@ class Bible_Plan
     public function __construct()
     {
         // get path to Bible plan file
-        $file = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
-        if (!file_exists($file)) {
+        $path = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
+        $file = new SplFileInfo($path);
+        if (!$file->isFile()) {
             return;
         }
 
         // read file contents
-        $rows = file($file);
+        $rows = file($file->getRealPath());
         if ($rows === false) {
-            App::die("Unable to read the file: %s.", $file);
+            App::die("Unable to read the file: %s.", $file->getRealPath());
         }
 
         // read each row

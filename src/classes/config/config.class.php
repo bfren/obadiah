@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use SplFileInfo;
 
 App::check();
 
@@ -80,16 +81,17 @@ class Config
     public static function init(string $cwd): void
     {
         // get path to data directory
-        $data_dir = trim(file_get_contents(sprintf("%s/_path_to_data_dir_", $cwd)));
-        if(!file_exists($data_dir) && !is_dir($data_dir)) {
-            _e("Unable to find data directory at '%s'.", $data_dir);
-            exit;
+        $data_dir_path = trim(file_get_contents(sprintf("%s/_path_to_data_dir_", $cwd)));
+        $data_dir = new SplFileInfo($data_dir_path);
+        if(!$data_dir->isDir()) {
+            App::die("Unable to find data directory at '%s'.", $data_dir->getRealPath());
         }
 
         // ensure config file exists
-        $config_file = sprintf("%s/config.yml", $data_dir);
-        if(!file_exists($config_file)) {
-            App::die("Unable to find configuration file - see installation instructions.");
+        $config_file_path = sprintf("%s/config.yml", $data_dir);
+        $config_file = new SplFileInfo($config_file_path);
+        if(!$config_file->isFile()) {
+            App::die("Unable to find configuration file at '%s' - see installation instructions.", $config_file->getRealPath());
         }
 
         // read configuration file

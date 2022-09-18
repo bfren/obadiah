@@ -5,6 +5,7 @@ namespace Feeds\Admin;
 use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Config\Config as C;
+use SplFileInfo;
 
 App::check();
 
@@ -31,7 +32,8 @@ class File
      */
     public static function delete(string $filename, string $path): Result
     {
-        if (file_exists($path) && unlink($path)) {
+        $file = new SplFileInfo($path);
+        if ($file->isFile() && unlink($file->getRealPath())) {
             return Result::success(sprintf("File '%s' was deleted.", $filename));
         }
 

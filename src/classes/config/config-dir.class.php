@@ -4,6 +4,7 @@ namespace Feeds\Config;
 
 use Directory;
 use Feeds\App;
+use SplFileInfo;
 
 App::check();
 
@@ -67,8 +68,9 @@ class Config_Dir
      */
     private static function ensure_directory_exists(string $path): void
     {
-        if (!file_exists($path)) {
-            mkdir($path);
+        $dir = new SplFileInfo($path);
+        if (!$dir->isDir()) {
+            mkdir($dir->getRealPath());
         }
     }
 }

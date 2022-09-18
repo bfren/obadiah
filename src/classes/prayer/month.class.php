@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Config\Config as C;
+use SplFileInfo;
 use Throwable;
 
 App::check();
@@ -115,7 +116,8 @@ class Month
         $path = sprintf("%s/%s.month", C::$dir->prayer, $id);
 
         // if the file exists, read and deserialise
-        if (file_exists($path) && ($data = file_get_contents($path))) {
+        $file = new SplFileInfo($path);
+        if ($file->isReadable() && ($data = file_get_contents($file->getRealPath()))) {
             return unserialize($data);
         }
 

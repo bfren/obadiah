@@ -8,6 +8,7 @@ use Feeds\Calendar\JEvent;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Rota\Rota;
+use SplFileInfo;
 
 App::check();
 
@@ -191,10 +192,11 @@ class Cache
     private static function clear(string $id): void
     {
         // get path to cache file
-        $file = self::get_cache_file_path($id);
+        $path = self::get_cache_file_path($id);
 
         // delete the file if it exists
-        file_exists($file) && unlink($file);
+        $file = new SplFileInfo($path);
+        $file->isFile() && unlink($file->getRealPath());
     }
 
     /**
@@ -213,10 +215,11 @@ class Cache
         }
 
         // get path to cache file
-        $file = self::get_cache_file_path($id);
+        $path = self::get_cache_file_path($id);
 
         // if the file exists, and the cache file has not expired, read and unserialise the value
-        if (file_exists($file) && time() - filemtime($file) < self::$duration_in_seconds) {
+        $file = new SplFileInfo($path);
+        if ($file->isFile() && time() - $file->getMTime() < self::$duration_in_seconds) {
             return unserialize(file_get_contents($file));
         }
 

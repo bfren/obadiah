@@ -6,6 +6,7 @@ use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
+use SplFileInfo;
 
 App::check();
 
@@ -81,8 +82,9 @@ class Prayer_Calendar
     private function read_file(string $filename, bool $is_child): array
     {
         // get csv files from path
-        $file = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
-        if (!file_exists($file)) {
+        $path = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
+        $file_info = new SplFileInfo($path);
+        if (!$file_info->isFile()) {
             return array();
         }
 
@@ -90,14 +92,15 @@ class Prayer_Calendar
         $people = array();
 
         // open the file for reading
-        $f = fopen($file, "r");
-        if ($f === false) {
-            App::die("Unable to open the file: %s.", $file);
+        try {
+            $file_obj = $file_info->openFile("r");
+        } catch (\Throwable $th) {
+            App::die("Unable to open the file: %s.", $file_info);
         }
 
         // read each line of the csv file
         $first = true;
-        while (($row = fgetcsv($f)) !== false) {
+        while (($row = $file_obj->fgetcsv()) !== false) {
             // skip the first row
             if ($first) {
                 $first = false;

@@ -5,6 +5,7 @@ namespace Feeds;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
+use SplFileInfo;
 
 // initialise app
 require_once "../app.class.php";
@@ -21,7 +22,8 @@ $action = Arr::get($parts, 1);
 
 // output requested page, or home by default
 $path = sprintf("%s/pages/%s.php", C::$dir->cwd, $page);
-if (!file_exists($path)) {
+$file = new SplFileInfo($path);
+if (!$file->isFile()) {
     $path = sprintf("%s/pages/home.php", C::$dir->cwd);
 }
 

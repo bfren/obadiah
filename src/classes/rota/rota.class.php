@@ -15,6 +15,8 @@ use Feeds\Rota\Filters\Day_Filter;
 use Feeds\Rota\Filters\Person_Filter;
 use Feeds\Rota\Filters\Series_Filter;
 use Feeds\Rota\Filters\Start_Filter;
+use SplFileInfo;
+use SplFileObject;
 
 App::check();
 
@@ -63,15 +65,16 @@ class Rota
             }
 
             // open the file for reading
-            $f = fopen($file, "r");
-            if ($f === false) {
-                App::die("Unable to open the file: %s.", $file);
+            try {
+                $file_obj = new SplFileObject($file, "r");
+            } catch (\Throwable $th) {
+                App::die("Unable to open the file: %s.", $file_obj->getRealPath());
             }
 
             // read each line of the csv file
             $include = false;
             $header_row = array();
-            while (($row = fgetcsv($f)) !== false) {
+            while (($row = $file_obj->fgetcsv()) !== false) {
                 // include the service
                 if ($include && $row[1] != "No service") {
                     // create service
@@ -96,8 +99,8 @@ class Rota
         usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
-        $lectionary_file = Cache::get_cache_file_path(Cache::LECTIONARY);
-        $lectionary_last_modified = file_exists($lectionary_file) ? filemtime($lectionary_file) : 0;
+        $lectionary_file = new SplFileInfo(Cache::get_cache_file_path(Cache::LECTIONARY));
+        $lectionary_last_modified = $lectionary_file->isFile() ? $lectionary_file->getMTime() : 0;
         if ($lectionary_last_modified > $last_modified_timestamp) {
             $last_modified_timestamp = $lectionary_last_modified;
         }
