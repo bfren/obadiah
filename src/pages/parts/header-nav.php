@@ -11,14 +11,14 @@ App::check();
 /** @var string $title */
 
 // build navigation links
-if (Request::$auth) {
+if (Request::$session->is_authorised) {
     $links = array(
         "Home" => "/",
         "Rota" => "/rota",
         "Prayer Calendar" => "/prayer",
         "Log Out" => "/logout.php"
     );
-    if (Request::is_admin()) {
+    if (Request::$session->is_admin) {
         $links = array_merge(
             array_slice($links, 0, 1),
             array("Upload" => "/upload"),

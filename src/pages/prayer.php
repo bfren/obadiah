@@ -5,13 +5,14 @@ namespace Feeds\Pages;
 use Feeds\Admin\Prayer_File;
 use Feeds\App;
 use Feeds\Request\Request;
+use Feeds\Response\Response;
 
 App::check();
 
 // handle actions
 if ($delete_month = Request::$get->string("delete_month")) {
     $result = Prayer_File::delete($delete_month);
-    Request::redirect("/prayer");
+    Response::redirect("/prayer");
 }
 
 // get action page

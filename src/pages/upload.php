@@ -8,9 +8,10 @@ use Feeds\Admin\Rota_File;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Request\Request;
+use Feeds\Response\Response;
 
 App::check();
-Request::is_admin() || Request::redirect("/logout.php");
+Request::$session->is_admin || Response::redirect("/logout.php");
 
 // handle actions
 if (Request::$method == "POST") {

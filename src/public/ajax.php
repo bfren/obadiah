@@ -14,7 +14,7 @@ require_once "../app.class.php";
 App::init();
 
 // check auth
-if (!Request::is_admin()) {
+if (!Request::$session->is_admin) {
     Json::output(Result::failure("Unauthorised."), 401);
 }
 

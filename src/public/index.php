@@ -5,6 +5,7 @@ namespace Feeds;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
+use Feeds\Response\Response;
 use SplFileInfo;
 
 // initialise app
@@ -12,7 +13,7 @@ require_once "../app.class.php";
 App::init();
 
 // check auth
-Request::$auth || Request::redirect("/login.php", true);
+Request::$session->is_authorised || Response::redirect("/login.php", true);
 
 // get requested page
 $uri = explode("/", Request::$uri);

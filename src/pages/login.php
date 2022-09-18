@@ -5,6 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Request\Request;
+use Feeds\Response\Response;
 
 App::check();
 
@@ -15,24 +16,24 @@ if (Request::$method == "POST") {
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
     if ($user == "user" && $pass == C::$login->pass) {
-        Request::authorise();
+        Request::$session->authorise();
         $redirect = Request::$get->string("requested", default:"/");
-        Request::redirect($redirect);
+        Response::redirect($redirect);
     } elseif ($user == "admin" && $pass == C::$login->admin) {
-        Request::authorise(true);
-        Request::redirect("/upload");
+        Request::$session->authorise(true);
+        Response::redirect("/upload");
     } else {
-        Request::deny();
+        Request::$session->deny();
     }
 // if already authorised that means an api key has been used so redirect
-} else if(Request::$auth) {
-    Request::authorise();
+} else if(Request::$session->is_authorised) {
+    Request::$session->authorise();
     $redirect = Request::$get->string("requested", default:"/");
-    Request::redirect($redirect);
+    Response::redirect($redirect);
 }
 
 // check login attempts to stop people trying over and over to guess the password
-Request::get_login_attempts() < C::$login->max_attempts || App::die("You're done - try again later.");
+Request::$session->login_attempts < C::$login->max_attempts || App::die("You're done - try again later.");
 
 // output header
 $title = "Security";
@@ -53,7 +54,7 @@ require_once "parts/header.php";
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
         <div class="invalid-tooltip">Please enter the password.</div>
     </div>
-    <input type="hidden" name="attempts" value="<?php _e(Request::get_login_attempts()); ?>" />
+    <input type="hidden" name="attempts" value="<?php _e(Request::$session->login_attempts); ?>" />
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

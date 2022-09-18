@@ -30,7 +30,7 @@ require_once "parts/alert.php"; ?>
             ?>
             <li>
                 <a href="/prayer/print/?<?php _e(http_build_query($view_query)); ?>"><?php _e($month); ?></a>
-                <?php if (Request::is_admin()) : ?>
+                <?php if (Request::$session->is_admin) : ?>
                     <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php _e(http_build_query($edit_query)); ?>">edit</a>
                     <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/?<?php _e(http_build_query($delete_query)); ?>">delete</a>
                 <?php endif; ?>
@@ -41,7 +41,7 @@ require_once "parts/alert.php"; ?>
     <p>Nothing to see here - please try again later!</p>
 <?php endif; ?>
 
-<?php if (Request::is_admin()) : ?>
+<?php if (Request::$session->is_admin) : ?>
     <h2>Create</h2>
     <p>Please enter the month to create a calendar for, and click 'Create'.</p>
     <form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="GET" action="/prayer/edit/" novalidate>

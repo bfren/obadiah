@@ -120,7 +120,7 @@ require_once "parts/header.php"; ?>
             </div>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center">
-            <?php if (Request::is_admin()) : ?>
+            <?php if (Request::$session->is_admin) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Arr::get($filters, "debug") ? "checked" : ""; ?>
                     <input class="form-check-input" type="checkbox" value="true" name="debug" id="debug" <?php _e($checked); ?> />

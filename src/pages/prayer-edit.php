@@ -11,10 +11,11 @@ use Feeds\Helpers\Hash;
 use Feeds\Prayer\Month;
 use Feeds\Prayer\Person;
 use Feeds\Request\Request;
+use Feeds\Response\Response;
 use Throwable;
 
 App::check();
-Request::is_admin() || Request::redirect("/logout.php");
+Request::$session->is_admin || Response::redirect("/logout.php");
 
 // get prayer calendar
 $prayer_calendar = Cache::get_prayer_calendar();
