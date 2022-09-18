@@ -43,6 +43,9 @@ class App
 
         // initialise cache
         Cache::init(C::$dir->cache, C::$cache->duration_in_seconds);
+
+        // require function scripts
+        require_once("functions/escape.php");
     }
 
     /**
