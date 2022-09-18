@@ -15,17 +15,17 @@ Request::is_admin() || Request::redirect("/logout.php");
 
 // handle actions
 if (Request::$method == "POST") {
-    $result = match (Arr::get($_POST, "submit")) {
+    $result = match (Arr::get_sanitised($_POST, "submit")) {
         "bible" => Bible_File::upload(),
         "prayer-adults" => Prayer_File::upload_adults(),
         "prayer-children" => Prayer_File::upload_children(),
         "rota" => Rota_File::upload()
     };
-} elseif ($delete_rota = Arr::get($_GET, "delete_rota")) {
+} elseif ($delete_rota = Arr::get_sanitised($_GET, "delete_rota")) {
     $result = Rota_File::delete($delete_rota);
-} elseif ($delete_prayer = Arr::get($_GET, "delete_prayer")) {
+} elseif ($delete_prayer = Arr::get_sanitised($_GET, "delete_prayer")) {
     $result = Prayer_File::delete($delete_prayer);
-} elseif (Arr::get($_GET, "delete_bible") != null) {
+} elseif (Arr::get_sanitised($_GET, "delete_bible") != null) {
     $result = Bible_File::delete();
 }
 

@@ -25,7 +25,7 @@ $prayer_calendar = Cache::get_prayer_calendar();
 $people_per_day = round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
 
 // get template month (will pre-populate the days with this month's data)
-$from_id = Arr::get($_GET, "from");
+$from_id = Arr::get_sanitised($_GET, "from");
 if ($from_id) {
     $from = Month::load($from_id);
 } else {
@@ -37,7 +37,7 @@ $from_days = array_merge(array(""), array_values($from->days));
 $from_people = $from->people;
 
 // get the month this calendar is for
-$for_id = Arr::get($_GET, "for");
+$for_id = Arr::get_sanitised($_GET, "for");
 if (!$for_id) {
     $result = Result::failure("You must set the month this calendar is for.");
 }

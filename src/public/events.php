@@ -17,8 +17,8 @@ App::init();
 $events = Cache::get_events(function () {
     // get query options
     $query = array(
-        "date_start" => Arr::get($_GET, "start"),
-        "date_end" => Arr::get($_GET, "end")
+        "date_start" => Arr::get_sanitised($_GET, "start"),
+        "date_end" => Arr::get_sanitised($_GET, "end")
     );
 
     // setup curl

@@ -83,7 +83,7 @@ function get_bible_reading(string $passage): string
                                 <?php endforeach; ?>
                             </div>
 
-                            <?php if (Arr::get($_GET, "collect") == "yes") : ?>
+                            <?php if (Arr::get_sanitised($_GET, "collect") == "yes") : ?>
                                 <!-- Collect -->
                                 <div class="collect">
                                     <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>

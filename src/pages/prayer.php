@@ -10,7 +10,7 @@ use Feeds\Request\Request;
 App::check();
 
 // handle actions
-if ($delete_month = Arr::get($_GET, "delete_month")) {
+if ($delete_month = Arr::get_sanitised($_GET, "delete_month")) {
     $result = Prayer_File::delete($delete_month);
     Request::redirect("/prayer");
 }

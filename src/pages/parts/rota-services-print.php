@@ -50,7 +50,7 @@ $person = Arr::get($filters, "person");
                                         <?php if ($combined_service->additional_reading) echo sprintf("<p>%s</p>", $combined_service->additional_reading); ?>
                                     </div>
                                 </div>
-                                <?php if (Arr::get($_GET, "collect") == "yes") : ?>
+                                <?php if (Arr::get_sanitised($_GET, "collect") == "yes") : ?>
                                     <!-- Collect -->
                                     <div class="collect small">
                                         <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>

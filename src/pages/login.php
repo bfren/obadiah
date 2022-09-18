@@ -11,13 +11,13 @@ App::check();
 
 // handle post requests
 if (Request::$method == "POST") {
-    $user = Arr::get($_POST, "username");
-    $pass = Arr::get($_POST, "password");
+    $user = Arr::get_sanitised($_POST, "username");
+    $pass = Arr::get_sanitised($_POST, "password");
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
     if ($user == "user" && $pass == C::$login->pass) {
         Request::authorise();
-        $redirect = Arr::get($_GET, "requested", "/");
+        $redirect = Arr::get_sanitised($_GET, "requested", "/");
         Request::redirect($redirect);
     } elseif ($user == "admin" && $pass == C::$login->admin) {
         Request::authorise(true);
@@ -28,7 +28,7 @@ if (Request::$method == "POST") {
 // if already authorised that means an api key has been used so redirect
 } else if(Request::$auth) {
     Request::authorise();
-    $redirect = Arr::get($_GET, "requested", "/");
+    $redirect = Arr::get_sanitised($_GET, "requested", "/");
     Request::redirect($redirect);
 }
 

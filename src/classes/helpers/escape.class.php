@@ -29,7 +29,7 @@ class Escape
         }
 
         // convert HTML characters so the text is safe
-        return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+        return trim(htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5));
     }
 
     /**
@@ -58,7 +58,7 @@ class Escape
         }
 
         // handle as HTML characters so the text is safe are safe
-        return $html;
+        return trim($html);
     }
 
     /**

@@ -18,7 +18,7 @@ $lectionary = Cache::get_lectionary();
 $prayer_calendar = Cache::get_prayer_calendar();
 
 // get requested month
-$month_id = Arr::get($_GET, "month");
+$month_id = Arr::get_sanitised($_GET, "month");
 $month = Month::load($month_id);
 
 // get the first day of this month
@@ -89,7 +89,7 @@ function output_day(DateTimeImmutable $date)
 <?php if ($month->people) : ?>
 
     <h2 class="prayer-calendar-title row">
-        <div class="col-4"><a href="/prayer"><?php _e(Image::echo_logo("logo me-4")); ?></a></div>
+        <div class="col-4"><a href="/prayer"><?php Image::echo_logo("logo me-4"); ?></a></div>
         <div class="col-4 text-center">Prayer Calendar</div>
         <div class="col-4 text-end"><?php _e($month->get_display_month()); ?></div>
     </h2>

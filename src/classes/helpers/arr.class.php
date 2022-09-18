@@ -26,6 +26,27 @@ class Arr
     }
 
     /**
+     * Safely get a value from an associative array, and then sanitise the input.
+     * If the value is not a string, an empty string will be returned.
+     *
+     * @param array $array              Array of values.
+     * @param mixed $key                The key to search for.
+     * @param mixed $default            Default value if key does not exist.
+     * @return mixed                    Key value, or $default if key does not exist.
+     */
+    public static function get_sanitised(array $array, mixed $key, mixed $default = null): string
+    {
+        // get value from the array
+        $value = self::get($array, $key, $default);
+        if (!is_string($value)) {
+            return "";
+        }
+
+        // return sanitised string value
+        return Sanitise::text_input((string) $value);
+    }
+
+    /**
      * Return matching elements of $array by using $callback. If $callback is null,
      * it will remove empty elements.
      *
