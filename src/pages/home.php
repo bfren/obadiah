@@ -33,3 +33,7 @@ require_once "parts/header.php";
 <p><a href="/rota/print/?<?php _e(http_build_query(Rota::wednesday_morning_prayer())); ?>">Wednesday Morning Prayer for the next three months</a></p>
 
 <?php require_once "parts/footer.php"; ?>
+
+<h2>Refresh</h2>
+
+<p>Use <a href="/refresh/ics/">this link</a> to subscribe to Refresh.</p>
