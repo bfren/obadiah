@@ -48,6 +48,7 @@ class VEvent
         if ($this->is_all_day) {
             $lines[] = sprintf("DTSTART;TZID=%s;VALUE=DATE:%s", $tzid, $this->start->format(C::$formats->ics_date));
             $lines[] = sprintf("DTEND;TZID=%s;VALUE=DATE:%s", $tzid, $this->end->format(C::$formats->ics_date));
+            $links[] = "TRANSP:TRANSPARENT";
         } else {
             $lines[] = sprintf("DTSTART;TZID=%s:%s", $tzid, $this->start->format(C::$formats->ics_datetime));
             $lines[] = sprintf("DTEND;TZID=%s:%s", $tzid, $this->end->format(C::$formats->ics_datetime));
