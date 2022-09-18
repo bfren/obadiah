@@ -31,6 +31,7 @@ class Bible_Plan
         $path = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
         $file_info = new SplFileInfo($path);
         if (!$file_info->isFile()) {
+            $this->days = array();
             return;
         }
 
@@ -55,11 +56,11 @@ class Bible_Plan
 
             // read values
             $days[$values[0]] = new Day(
-                ot_psalms: $values[1],
-                ot_1: $values[2],
-                ot_2: $values[3],
-                nt_gospels: $values[4],
-                nt_epistles: $values[5]
+                ot_psalms: trim($values[1]),
+                ot_1: trim($values[2]),
+                ot_2: trim($values[3]),
+                nt_gospels: trim($values[4]),
+                nt_epistles: trim($values[5])
             );
         }
 
