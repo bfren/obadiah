@@ -38,6 +38,6 @@ require_once "parts/header.php";
         "api" => C::$login->api
     );
 ?>
-<p>Use <a href="/refresh/ics/?<?php _e(http_build_query($refresh)); ?>">this link</a> to subscribe to Refresh.</p>
+<p>Use <a href="/refresh/ics/?<?php _e(http_build_query($refresh)); ?>">this link</a> to subscribe to the Refresh calendar feed.</p>
 
 <?php require_once "parts/footer.php"; ?>
