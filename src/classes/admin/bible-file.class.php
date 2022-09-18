@@ -6,6 +6,7 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Request\Request;
 
 App::check();
 
@@ -24,7 +25,7 @@ class Bible_File
     public static function upload(): Result
     {
         // only allow CSV files
-        $info = Arr::get($_FILES, "file");
+        $info = Arr::get(Request::$files, "file");
         in_array(Arr::get($info, "type"), array("text/plain")) || App::die("You may only upload text files.");
 
         // get paths

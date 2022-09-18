@@ -4,20 +4,19 @@ namespace Feeds\Pages;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Input;
 use Feeds\Request\Request;
 
 App::check();
 
 // handle post requests
 if (Request::$method == "POST") {
-    $user = Input::post_string("username");
-    $pass = Input::post_string("password");
+    $user = Request::$post->string("username");
+    $pass = Request::$post->string("password");
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
     if ($user == "user" && $pass == C::$login->pass) {
         Request::authorise();
-        $redirect = Input::get_string("requested", default:"/");
+        $redirect = Request::$get->string("requested", default:"/");
         Request::redirect($redirect);
     } elseif ($user == "admin" && $pass == C::$login->admin) {
         Request::authorise(true);
@@ -28,7 +27,7 @@ if (Request::$method == "POST") {
 // if already authorised that means an api key has been used so redirect
 } else if(Request::$auth) {
     Request::authorise();
-    $redirect = Input::get_string("requested", default:"/");
+    $redirect = Request::$get->string("requested", default:"/");
     Request::redirect($redirect);
 }
 

@@ -6,9 +6,8 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Helpers\Hash;
-use Feeds\Helpers\Input;
 use Feeds\Lectionary\Lectionary;
+use Feeds\Request\Request;
 use Feeds\Rota\Service;
 
 App::check();
@@ -119,7 +118,7 @@ class Builder
     {
         static $count = 0;
         $date = date(C::$formats->ics_datetime, $rota_last_modified);
-        $ip = Input::server_string("REMOTE_ADDR");
+        $ip = Request::$server->string("REMOTE_ADDR");
         return sprintf("%06d-%s@%s", $count++, $date, $ip);
     }
 

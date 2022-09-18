@@ -6,7 +6,7 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Helpers\Input;
+use Feeds\Request\Request;
 
 App::check();
 
@@ -20,11 +20,11 @@ class Rota_File
     public static function upload(): Result
     {
         // only allow CSV files
-        $info = Arr::get($_FILES, "file");
+        $info = Arr::get(Request::$files, "file");
         in_array(Arr::get($info, "type"), array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // make sure the name was set
-        $name = Input::post_string("name");
+        $name = Request::$post->string("name");
         if (!$name) App::die("You must enter the rota name, e.g. 22-2.");
 
         // get paths

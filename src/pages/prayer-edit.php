@@ -8,7 +8,6 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Hash;
-use Feeds\Helpers\Input;
 use Feeds\Prayer\Month;
 use Feeds\Prayer\Person;
 use Feeds\Request\Request;
@@ -24,7 +23,7 @@ $prayer_calendar = Cache::get_prayer_calendar();
 $people_per_day = round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
 
 // get template month (will pre-populate the days with this month's data)
-$from_id = Input::get_string("from");
+$from_id = Request::$get->string("from");
 if ($from_id) {
     $from = Month::load($from_id);
 } else {
@@ -36,7 +35,7 @@ $from_days = array_merge(array(""), array_values($from->days));
 $from_people = $from->people;
 
 // get the month this calendar is for
-$for_id = Input::get_string("for");
+$for_id = Request::$get->string("for");
 if (!$for_id) {
     $result = Result::failure("You must set the month this calendar is for.");
 }

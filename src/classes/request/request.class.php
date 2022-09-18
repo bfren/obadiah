@@ -5,7 +5,6 @@ namespace Feeds\Request;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Helpers\Input;
 
 App::check();
 
@@ -55,16 +54,65 @@ class Request
     public static string $uri;
 
     /**
+     * Encapsulates $_COOKIES.
+     *
+     * @var Super_Global
+     */
+    public static Super_Global $cookies;
+
+    /**
+     * Encapsulates $_ENV.
+     *
+     * @var Super_Global
+     */
+    public static Super_Global $env;
+
+    /**
+     * Encapsulates $_FILES.
+     *
+     * @var array
+     */
+    public static array $files;
+
+    /**
+     * Encapsulates $_GET.
+     *
+     * @var Super_Global
+     */
+    public static Super_Global $get;
+
+    /**
+     * Encapsulates $_POST.
+     *
+     * @var Super_Global
+     */
+    public static Super_Global $post;
+
+    /**
+     * Encapsulates $_SERVER.
+     *
+     * @var Super_Global
+     */
+    public static Super_Global $server;
+
+    /**
      * Set request values.
      *
      * @return void
      */
     public static function init(): void
     {
-        self::$auth = Arr::get($_SESSION, self::AUTH, false) || Input::get_string("api") == C::$login->api;
-        self::$debug = Input::get_bool("debug");
-        self::$method = Input::server_string("REQUEST_METHOD");
-        self::$uri = Input::server_string("REQUEST_URI");
+        self::$cookies = new Super_Global(INPUT_COOKIE);
+        self::$env = new Super_Global(INPUT_ENV);
+        self::$files = $_FILES ?: array();
+        self::$get = new Super_Global(INPUT_GET);
+        self::$post = new Super_Global(INPUT_POST);
+        self::$server = new Super_Global(INPUT_SERVER);
+
+        self::$auth = Arr::get($_SESSION, self::AUTH, false) || self::$get->string("api") == C::$login->api;
+        self::$debug = self::$get->bool("debug");
+        self::$method = self::$server->string("REQUEST_METHOD");
+        self::$uri = self::$server->string("REQUEST_URI");
     }
 
     /**

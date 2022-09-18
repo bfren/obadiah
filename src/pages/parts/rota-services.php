@@ -5,7 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Helpers\Input;
+use Feeds\Request\Request;
 
 App::check();
 
@@ -84,7 +84,7 @@ function get_bible_reading(string $passage): string
                                 <?php endforeach; ?>
                             </div>
 
-                            <?php if (Input::get_bool("collect")) : ?>
+                            <?php if (Request::$get->bool("collect")) : ?>
                                 <!-- Collect -->
                                 <div class="collect">
                                     <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>

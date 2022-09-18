@@ -5,6 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Request\Request;
 use Feeds\Rota\Builder;
 
 App::check();
@@ -19,7 +20,7 @@ $rota = Cache::get_rota();
 $default_filters = array(
     "start" => date(C::$formats->sortable_date) // show rota from 'today' by default
 );
-$filters = array_merge($default_filters, filter_input_array(INPUT_GET));
+$filters = array_merge($default_filters, Request::$get->all());
 $services = $rota->apply_filters($filters, $lectionary);
 
 // build rota

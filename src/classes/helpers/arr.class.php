@@ -47,6 +47,18 @@ class Arr
     }
 
     /**
+     * Transform each element in $array using $callback.
+     *
+     * @param array $array              Array to map.
+     * @param null|callable $callback   Callback function (should return a transformed value).
+     * @return array                    Array of transformed elements.
+     */
+    public static function map(array $array, ?callable $callback = null)
+    {
+        return array_filter(array_map($callback, $array));
+    }
+
+    /**
      * Return matching elements of $array by using $callback. If $callback is null,
      * it will remove empty elements.
      *
@@ -57,17 +69,5 @@ class Arr
     public static function match(array $array, ?callable $callback = null): array
     {
         return array_values(array_filter($array, $callback));
-    }
-
-    /**
-     * Transform each element in $array using $callback.
-     *
-     * @param array $array              Array to map.
-     * @param null|callable $callback   Callback function (should return a transformed value).
-     * @return array                    Array of transformed elements.
-     */
-    public static function map(array $array, ?callable $callback = null)
-    {
-        return array_filter(array_map($callback, $array));
     }
 }

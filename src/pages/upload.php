@@ -7,7 +7,6 @@ use Feeds\Admin\Prayer_File;
 use Feeds\Admin\Rota_File;
 use Feeds\App;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Input;
 use Feeds\Request\Request;
 
 App::check();
@@ -15,17 +14,17 @@ Request::is_admin() || Request::redirect("/logout.php");
 
 // handle actions
 if (Request::$method == "POST") {
-    $result = match (Input::post_string("submit")) {
+    $result = match (Request::$post->string("submit")) {
         "bible" => Bible_File::upload(),
         "prayer-adults" => Prayer_File::upload_adults(),
         "prayer-children" => Prayer_File::upload_children(),
         "rota" => Rota_File::upload()
     };
-} elseif ($delete_rota = Input::get_string("delete_rota")) {
+} elseif ($delete_rota = Request::$get->string("delete_rota")) {
     $result = Rota_File::delete($delete_rota);
-} elseif ($delete_prayer = Input::get_string("delete_prayer")) {
+} elseif ($delete_prayer = Request::$get->string("delete_prayer")) {
     $result = Prayer_File::delete($delete_prayer);
-} elseif (Input::get_string("delete_bible") != null) {
+} elseif (Request::$get->string("delete_bible") != null) {
     $result = Bible_File::delete();
 }
 

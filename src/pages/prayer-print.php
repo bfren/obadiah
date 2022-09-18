@@ -8,9 +8,9 @@ use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Helpers\Image;
-use Feeds\Helpers\Input;
 use Feeds\Prayer\Month;
 use Feeds\Prayer\Person;
+use Feeds\Request\Request;
 
 App::check();
 
@@ -19,7 +19,7 @@ $lectionary = Cache::get_lectionary();
 $prayer_calendar = Cache::get_prayer_calendar();
 
 // get requested month
-$month_id = Input::get_string("month");
+$month_id = Request::$get->string("month");
 $month = Month::load($month_id);
 
 // get the first day of this month
