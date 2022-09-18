@@ -7,6 +7,7 @@ use Feeds\Bible\Bible_Plan;
 use Feeds\Calendar\JEvent;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
+use Feeds\Refresh\Refresh;
 use Feeds\Rota\Rota;
 use SplFileInfo;
 
@@ -33,6 +34,11 @@ class Cache
      * Prayer Calendar cache name.
      */
     public const PRAYER = "prayer";
+
+    /**
+     * Refresh cache name.
+     */
+    public const REFRESH = "refresh";
 
     /**
      * Rota cache name.
@@ -87,7 +93,7 @@ class Cache
     }
 
     /**
-     * Clear the lectionary cache.
+     * Clear the Lectionary cache.
      *
      * @return void
      */
@@ -97,7 +103,7 @@ class Cache
     }
 
     /**
-     * Clear the prayer calendar cache.
+     * Clear the Prayer Calendar cache.
      *
      * @return void
      */
@@ -107,7 +113,17 @@ class Cache
     }
 
     /**
-     * Clear the rota cache.
+     * Clear the Refresh cache.
+     *
+     * @return void
+     */
+    public static function clear_refresh(): void
+    {
+        self::clear(self::REFRESH);
+    }
+
+    /**
+     * Clear the Rota cache.
      *
      * @return void
      */
@@ -140,7 +156,7 @@ class Cache
     }
 
     /**
-     * Get lectionary from the cache (or generate a fresh copy).
+     * Get Lectionary from the cache (or generate a fresh copy).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Lectionary               Lectionary object.
@@ -151,7 +167,7 @@ class Cache
     }
 
     /**
-     * Get prayer calendar from the cache (or generate a fresh copy).
+     * Get Prayer calendar from the cache (or generate a fresh copy).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Prayer_Calendar          Prayer Calendar object.
@@ -162,7 +178,18 @@ class Cache
     }
 
     /**
-     * Get rota from the cache (or generate a fresh copy).
+     * Get Refresh calendar from the cache (or generate a fresh copy).
+     *
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
+     * @return Refresh                  Refresh object.
+     */
+    public static function get_refresh(bool $force = false): Refresh
+    {
+        return self::get_or_set(self::REFRESH, fn () => new Refresh(), $force);
+    }
+
+    /**
+     * Get Rota from the cache (or generate a fresh copy).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return Rota                     Rota object.

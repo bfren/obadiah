@@ -13,6 +13,7 @@ App::init();
 Cache::get_bible_plan(true);
 Cache::get_lectionary(true);
 Cache::get_prayer_calendar(true);
+Cache::get_refresh(true);
 Cache::get_rota(true);
 
 // clear events cache
