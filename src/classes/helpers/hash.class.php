@@ -3,7 +3,6 @@
 namespace Feeds\Helpers;
 
 use Feeds\App;
-use Feeds\Config\Config as C;
 use Feeds\Prayer\Person;
 use Feeds\Rota\Combined_Service;
 
