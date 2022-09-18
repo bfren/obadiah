@@ -31,20 +31,15 @@ require_once "parts/header-print.php";
 
 function output_day(DateTimeImmutable $date)
 {
-    global $month, $prayer_calendar, $lectionary;
+    global $prayer_calendar, $lectionary;
 
     // if this is a Sunday, get the Bible passage from the lectionary, leader and preacher
     // otherwise, get the people on the prayer calendar for this day
     if ($date->format("N") == 7) {
         $lectionary_day = $lectionary->get_day($date);
         $services = $lectionary_day?->services;
-    } elseif ($hashes = Arr::get($month->days, $date->format(C::$formats->sortable_date))) {
-        $people = array_map(fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name), $prayer_calendar->get_people($hashes));
-    } elseif (($num = $date->format("j")) && in_array($num, array(29, 30, 31))) {
-        $prop = sprintf("day_%s", $num);
-        $people = C::$prayer->$prop;
     } else {
-        $people = array();
+        $people = $prayer_calendar->get_day($date);
     }
 ?>
     <div class="day">
@@ -83,9 +78,7 @@ function output_day(DateTimeImmutable $date)
         </div>
         <div class="clear"></div>
     </div>
-<?php }
-
-?>
+<?php } ?>
 
 <?php if ($month->people) : ?>
 

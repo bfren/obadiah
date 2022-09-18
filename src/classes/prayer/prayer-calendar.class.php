@@ -61,7 +61,7 @@ class Prayer_Calendar
      * Get the names of people on a particular day from the prayer calendar.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return Person[]                 Array of people.
+     * @return string[]                 Array of people.
      */
     public function get_day(DateTimeImmutable $dt): array
     {
@@ -74,11 +74,18 @@ class Prayer_Calendar
             return array();
         }
 
+        // if we are at the end of the month return the configured additional people
+        $day = (int)$dt->format("j");
+        if (in_array($day, array(29, 30, 31))) {
+            $day = sprintf("day_%s", $day);
+            return C::$prayer->$day;
+        }
+
         // get the people hashes for the day
         $hashes = Arr::get($month->days, $dt->format(C::$formats->sortable_date), array());
 
-        // return people
-        return $this->get_people($hashes);
+        // return people's names
+        return Arr::map($this->get_people($hashes), fn (Person $p) => $p->get_full_name(C::$prayer->show_last_name));
     }
 
     /**

@@ -4,8 +4,6 @@ namespace Feeds\Pages;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Prayer\Person;
 
 App::check();
 
@@ -36,7 +34,7 @@ require_once "parts/header.php"; ?>
 
 <?php if ($today->people) : ?>
     <h3>People</h3>
-    <p><?php _h(join("<br/>", Arr::map($today->people, fn (Person $p) => $p->get_full_name()))); ?></p>
+    <p><?php _h(join("<br/>", $today->people)); ?></p>
 <?php else : ?>
     <p>There are no people on the prayer calendar today.</p>
 <?php endif; ?>
