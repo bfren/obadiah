@@ -70,7 +70,7 @@ class Config_Dir
     {
         $dir = new SplFileInfo($path);
         if (!$dir->isDir()) {
-            mkdir($dir->getRealPath());
+            mkdir($path);
         }
     }
 }
