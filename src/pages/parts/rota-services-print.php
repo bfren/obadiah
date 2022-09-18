@@ -43,7 +43,7 @@ $person = Arr::get($filters, "person");
                                             <?php if ($combined_service->series_title) _e($combined_service->series_title); ?>
                                             <?php if ($combined_service->sermon_num) _e("(%d)", $combined_service->sermon_num); ?>
                                         </p>
-                                        <?php if ($combined_service->sermon_title) _h("<p>%s</p>", $combined_service->sermon_title); ?>
+                                        <?php if ($combined_service->sermon_title) _h("<p>&ldquo;%s&rdquo;</p>", $combined_service->sermon_title); ?>
                                     </div>
                                     <div class="bible">
                                         <?php if (count($combined_service->psalms)) _h("<p>Psalm%s %s</p>", count($combined_service->psalms) > 1 ? "s" : "", join("; ", $combined_service->psalms)); ?>

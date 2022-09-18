@@ -1,4 +1,5 @@
 $margin: 8mm;
+$space: 0.5rem;
 
 @media print {
     @page {
@@ -18,11 +19,12 @@ html.notices {
     .rota-services.row {
 
         >div {
+            padding: 0 $space;
             width: 25%;
         }
 
         .card {
-            margin: 1rem 0 !important;
+            margin: $space 0 !important;
 
             .card-title,
             .card-subtitle {
@@ -33,12 +35,19 @@ html.notices {
                 margin-right: $margin;
             }
 
+            .card-body {
+                padding: calc($space * 1.5);
+            }
+
             .details {
+                line-height: 1.1em;
+                margin-top: $space;
+
                 .teaching {
-                    margin-bottom: 0.6rem;
+                    margin: $space 0;
 
                     p {
-                        line-height: 1.2em;
+                        display: inline;
                         margin: 0;
                     }
 
@@ -47,12 +56,10 @@ html.notices {
                     }
                 }
 
-                $indent: 0.6rem;
                 .people {
                     font-size: 0.8rem;
-                    line-height: 1.1em;
-                    padding-left: $indent;
-                    text-indent: calc($indent * -1);
+                    padding-left: $space;
+                    text-indent: calc($space * -1);
                 }
             }
         }
