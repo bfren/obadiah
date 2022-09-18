@@ -5,6 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Helpers\Input;
 
 App::check();
 
@@ -50,7 +51,7 @@ $person = Arr::get($filters, "person");
                                         <?php if ($combined_service->additional_reading) _h("<p>%s</p>", $combined_service->additional_reading); ?>
                                     </div>
                                 </div>
-                                <?php if (Arr::get_sanitised($_GET, "collect") == "yes") : ?>
+                                <?php if (Input::get_bool("collect")) : ?>
                                     <!-- Collect -->
                                     <div class="collect small">
                                         <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $combined_day->collect)); ?></p>

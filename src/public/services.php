@@ -5,6 +5,7 @@ namespace Feeds\Pages;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Input;
 use Feeds\Rota\Builder;
 
 // initialise app
@@ -22,7 +23,7 @@ $services = $rota->apply_filters($_GET, $lectionary);
 $combined_days = Builder::build_combined_rota($lectionary, $services);
 
 // get format script
-$format = match ($_GET["format"]) {
+$format = match (Input::get_string("format")) {
     "ics" => "services-ics.php",
     "json" => "services-json.php",
     default => "login.php"

@@ -5,6 +5,7 @@ namespace Feeds\Request;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Helpers\Input;
 
 App::check();
 
@@ -60,10 +61,10 @@ class Request
      */
     public static function init(): void
     {
-        self::$auth = Arr::get($_SESSION, self::AUTH) === true || Arr::get_sanitised($_GET, "api") == C::$login->api;
-        self::$debug = isset($_GET["debug"]);
-        self::$method = Arr::get($_SERVER, "REQUEST_METHOD");
-        self::$uri = Arr::get($_SERVER, "REQUEST_URI");
+        self::$auth = Arr::get($_SESSION, self::AUTH) === true || Input::get_string("api") == C::$login->api;
+        self::$debug = Input::get_bool("debug");
+        self::$method = Input::server_string("REQUEST_METHOD");
+        self::$uri = Input::server_string("REQUEST_URI");
     }
 
     /**
@@ -98,8 +99,8 @@ class Request
         unset($_SESSION[self::ADMIN]);
 
         // keep track of failed login attempts
-        if (isset($_SESSION[self::COUNT])) {
-            $_SESSION[self::COUNT]++;
+        if ($count = Arr::get($_SESSION, self::COUNT, 0)) {
+            $_SESSION[self::COUNT] = $count + 1;
         } else {
             $_SESSION[self::COUNT] = 1;
         }
@@ -112,11 +113,7 @@ class Request
      */
     public static function get_login_attempts(): int
     {
-        if (isset($_SESSION[self::COUNT])) {
-            return $_SESSION[self::COUNT];
-        } else {
-            return 0;
-        }
+        return Arr::get($_SESSION, self::COUNT, 0);
     }
 
     /**
@@ -126,7 +123,7 @@ class Request
      */
     public static function is_admin(): bool
     {
-        return isset($_SESSION[self::ADMIN]) && $_SESSION[self::ADMIN];
+        return Arr::get($_SESSION, self::ADMIN, false);
     }
 
     /**

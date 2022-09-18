@@ -7,11 +7,10 @@ use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
+use Feeds\Helpers\Input;
 use Feeds\Prayer\Month;
 use Feeds\Prayer\Person;
-use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Request\Request;
 use Throwable;
 
@@ -25,7 +24,7 @@ $prayer_calendar = Cache::get_prayer_calendar();
 $people_per_day = round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
 
 // get template month (will pre-populate the days with this month's data)
-$from_id = Arr::get_sanitised($_GET, "from");
+$from_id = Input::get_string("from");
 if ($from_id) {
     $from = Month::load($from_id);
 } else {
@@ -37,7 +36,7 @@ $from_days = array_merge(array(""), array_values($from->days));
 $from_people = $from->people;
 
 // get the month this calendar is for
-$for_id = Arr::get_sanitised($_GET, "for");
+$for_id = Input::get_string("for");
 if (!$for_id) {
     $result = Result::failure("You must set the month this calendar is for.");
 }
@@ -71,7 +70,7 @@ function output_person_button(Person $person)
 
     // output button HTML
     $html = "<button type=\"button\" class=\"btn btn-sm btn-%s m-1\" data-name=\"%s\" data-hash=\"%s\">%s</button>";
-    _e($html, $colour, $name, $hash, $person->get_full_name());
+    _h($html, $colour, $name, $hash, $person->get_full_name());
 }
 
 // output header

@@ -5,6 +5,7 @@ namespace Feeds\Admin;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Input;
 
 App::check();
 
@@ -21,7 +22,7 @@ class Rota_File
         in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // make sure the name was set
-        $name = $_POST["name"];
+        $name = Input::post_string("name");
         if (!$name) App::die("You must enter the rota name, e.g. 22-2.");
 
         // get paths

@@ -7,6 +7,7 @@ use Feeds\Cache\Cache;
 use Feeds\Calendar\JEvent;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
+use Feeds\Helpers\Input;
 use Feeds\Json\Json;
 
 // initialise app
@@ -17,8 +18,8 @@ App::init();
 $events = Cache::get_events(function () {
     // get query options
     $query = array(
-        "date_start" => Arr::get_sanitised($_GET, "start"),
-        "date_end" => Arr::get_sanitised($_GET, "end")
+        "date_start" => Input::get_string("start"),
+        "date_end" => Input::get_string("end")
     );
 
     // setup curl

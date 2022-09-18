@@ -4,20 +4,20 @@ namespace Feeds\Pages;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Feeds\Helpers\Input;
 use Feeds\Request\Request;
 
 App::check();
 
 // handle post requests
 if (Request::$method == "POST") {
-    $user = Arr::get_sanitised($_POST, "username");
-    $pass = Arr::get_sanitised($_POST, "password");
+    $user = Input::post_string("username");
+    $pass = Input::post_string("password");
     // check password and redirect to home if it is correct
     // if it is not unset auth variable and increment count
     if ($user == "user" && $pass == C::$login->pass) {
         Request::authorise();
-        $redirect = Arr::get_sanitised($_GET, "requested", "/");
+        $redirect = Input::get_string("requested", default:"/");
         Request::redirect($redirect);
     } elseif ($user == "admin" && $pass == C::$login->admin) {
         Request::authorise(true);
@@ -28,7 +28,7 @@ if (Request::$method == "POST") {
 // if already authorised that means an api key has been used so redirect
 } else if(Request::$auth) {
     Request::authorise();
-    $redirect = Arr::get_sanitised($_GET, "requested", "/");
+    $redirect = Input::get_string("requested", default:"/");
     Request::redirect($redirect);
 }
 
@@ -54,6 +54,7 @@ require_once("parts/header.php");
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
         <div class="invalid-tooltip">Please enter the password.</div>
     </div>
+    <input type="hidden" name="attempts" value="<?php _e(Request::get_login_attempts()); ?>" />
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
