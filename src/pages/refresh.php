@@ -14,7 +14,7 @@ $refresh = Cache::get_refresh();
 $action_page = match($action) {
     "ics" => "refresh-ics.php",
     "json" => "refresh-json.php",
-    default => "login.php"
+    default => "refresh-html.php"
 };
 
 // load action page

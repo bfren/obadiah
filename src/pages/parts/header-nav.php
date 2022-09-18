@@ -16,6 +16,7 @@ if (Request::$session->is_authorised) {
         "Home" => "/",
         "Rota" => "/rota",
         "Prayer Calendar" => "/prayer",
+        "Refresh" => "/refresh",
         "Log Out" => "/logout.php"
     );
     if (Request::$session->is_admin) {

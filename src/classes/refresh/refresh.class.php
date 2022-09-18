@@ -21,6 +21,13 @@ class Refresh
     public readonly array $days;
 
     /**
+     * Today's refresh.
+     *
+     * @var Day
+     */
+    public readonly Day $today;
+
+    /**
      * Create Refresh calendar.
      *
      * @return void
@@ -29,6 +36,7 @@ class Refresh
     {
         // generate time period for the calendar
         $today = new DateTimeImmutable("now", C::$general->timezone);
+        //$this->today = new Day($today, null, array());
         $period = new DatePeriod(
             $today->modify("-1 week"),
             new DateInterval("P1D"),
@@ -47,12 +55,21 @@ class Refresh
                 continue;
             }
 
-            // create day
-            $days[] = new Day(
+            // create day object
+            $day = new Day(
                 date: $value,
                 readings: $bible->get_day($value),
                 people: $prayer->get_day($value)
             );
+
+            // set today
+            //if($value == $today) {
+            if (!isset($this->today)) {
+                $this->today = $day;
+            }
+
+            // add to days array
+            $days[] = $day;
         }
 
         // store days
