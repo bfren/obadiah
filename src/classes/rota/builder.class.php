@@ -7,7 +7,6 @@ use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Lectionary\Lectionary;
-use Feeds\Request\Request;
 use Feeds\Rota\Service;
 
 App::check();
@@ -106,20 +105,6 @@ class Builder
     public static function get_day(int $num): null|string
     {
         return Arr::get(self::$days_of_the_week, $num);
-    }
-
-    /**
-     * Generate a unique ID for a service.
-     *
-     * @param Combined_Service $service     Service object.
-     * @return string                       Unique hashed ID.
-     */
-    public static function get_uid(int $rota_last_modified, Combined_Service $service): string
-    {
-        static $count = 0;
-        $date = date(C::$formats->ics_datetime, $rota_last_modified);
-        $ip = Request::$server->string("REMOTE_ADDR");
-        return sprintf("%06d-%s@%s", $count++, $date, $ip);
     }
 
     /**

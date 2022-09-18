@@ -23,7 +23,7 @@ $services = [];
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
         $services[] = new JEvent(
-            id: Builder::get_uid($rota->last_modified_timestamp, $c_service),
+            id: JEvent::get_id($rota->last_modified_timestamp),
             start: $c_service->start->format(C::$formats->json_datetime),
             end: $c_service->end->format(C::$formats->json_datetime),
             title: Builder::get_summary($c_service, Arr::get($filters, "person")),

@@ -17,11 +17,11 @@ $events = array();
 foreach ($combined_days as $c_day) {
     foreach ($c_day->services as $c_service) {
         $events[] = new VEvent(
-            Builder::get_uid($rota->last_modified_timestamp, $c_service),
-            $c_service->start,
-            $c_service->end,
-            Builder::get_summary($c_service),
-            Builder::get_description($c_day, $c_service, false)
+            uid: VEvent::get_uid($rota->last_modified_timestamp),
+            start: $c_service->start,
+            end: $c_service->end,
+            summary: Builder::get_summary($c_service),
+            description: Builder::get_description($c_day, $c_service, false)
         );
     }
 }
