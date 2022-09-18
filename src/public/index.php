@@ -18,8 +18,8 @@ Request::$session->is_authorised || Response::redirect("/login.php", true);
 // get requested page
 $uri = explode("/", Request::$uri);
 $parts = Arr::match($uri);
-$page = Arr::get($parts, 0);
-$action = Arr::get($parts, 1);
+$page = Arr::get($parts, 0, "home");
+$action = Arr::get($parts, 1, "index");
 
 // output requested page, or home by default
 $path = sprintf("%s/pages/%s.php", C::$dir->cwd, $page);

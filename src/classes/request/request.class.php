@@ -72,6 +72,13 @@ class Request
     public static Session $session;
 
     /**
+     * Request query string.
+     *
+     * @var string
+     */
+    public static string $query_string;
+
+    /**
      * Request URI path.
      *
      * @var string
@@ -95,6 +102,7 @@ class Request
 
         self::$debug = self::$get->bool("debug");
         self::$method = self::$server->string("REQUEST_METHOD");
-        self::$uri = self::$server->string("REQUEST_URI");
+        self::$query_string = self::$server->string("QUERY_STRING");
+        self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
     }
 }
