@@ -44,6 +44,13 @@ class Config_Formats
     public readonly string $display_time;
 
     /**
+     * ICS date.
+     *
+     * @var string
+     */
+    public readonly string $ics_date;
+
+    /**
      * ICS date time.
      *
      * @var string
@@ -63,6 +70,13 @@ class Config_Formats
      * @var string
      */
     public readonly string $json_datetime;
+
+    /**
+     * Refresh event summary date.
+     *
+     * @var string
+     */
+    public readonly string $refresh_date;
 
     /**
      * Sortable date.
@@ -91,8 +105,10 @@ class Config_Formats
         $this->display_day = $config["display_day"];
         $this->display_month = $config["display_month"];
         $this->display_time = $config["display_time"];
+        $this->ics_date = $config["ics_date"];
         $this->ics_datetime = $config["ics_datetime"];
         $this->json_datetime = $config["json_datetime"];
+        $this->refresh_date = $config["refresh_date"];
         $this->prayer_month_id = $config["prayer_month_id"];
         $this->sortable_date = $config["sortable_date"];
         $this->sortable_datetime = $config["sortable_datetime"];
