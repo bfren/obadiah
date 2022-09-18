@@ -66,7 +66,7 @@ function output_day(DateTimeImmutable $date)
                             <div class="teaching">
                                 <?php if ($service->main_reading) : ?>
                                     <?php _e($service->main_reading); ?>
-                                    <?php if ($service->additional_reading) _e("&amp; %s", $service->additional_reading); ?>
+                                    <?php if ($service->additional_reading) _e("& %s", $service->additional_reading); ?>
                                 <?php else : ?>
                                     <?php _e($service->title); ?>
                                 <?php endif; ?>
