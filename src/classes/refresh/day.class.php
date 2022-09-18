@@ -51,7 +51,7 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $description[] = join(", ", Arr::map($this->people, fn (Person $p) => $p->get_full_name()));
+            $description[] = join("\\n", Arr::map($this->people, fn (Person $p) => $p->get_full_name()));
             $description[] = "";
         }
 
