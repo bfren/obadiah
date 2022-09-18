@@ -7,6 +7,7 @@ use Feeds\Admin\Bible_File;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use SplFileInfo;
+use Throwable;
 
 App::check();
 
@@ -28,27 +29,31 @@ class Bible_Plan
     {
         // get path to Bible plan file
         $path = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
-        $file = new SplFileInfo($path);
-        if (!$file->isFile()) {
+        $file_info = new SplFileInfo($path);
+        if (!$file_info->isFile()) {
             return;
         }
 
         // read file contents
-        $rows = file($file->getRealPath());
-        if ($rows === false) {
-            App::die("Unable to read the file: %s.", $file->getRealPath());
+        try {
+            $file_obj = $file_info->openFile("r");
+        } catch (Throwable $th) {
+            App::die("Unable to read the file: %s.", $file_info->getRealPath());
         }
 
         // read each row
         $days = array();
-        foreach ($rows as $row) {
-            // split row by tab
-            $values = explode("\t", $row);
+        while (!$file_obj->eof()) {
+            // read the next line
+            $line = $file_obj->fgets();
+
+            // split line by tab
+            $values = explode("\t", $line);
             if (count($values) != 6) {
                 continue;
             }
 
-            // read row values
+            // read values
             $days[$values[0]] = new Day(
                 ot_psalms: $values[1],
                 ot_1: $values[2],
