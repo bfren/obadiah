@@ -34,5 +34,5 @@ $format = match (Request::$get->string("format")) {
 };
 $path = sprintf("%s/pages/%s", C::$dir->cwd, $format);
 
-// load format
+// load format page
 require_once $path;
