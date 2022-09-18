@@ -1,6 +1,6 @@
 if (document.querySelector(".admin-prayer-calendar-column") != null) {
     // enable dragging between people and day containers
-    var drake = dragula({
+    let drake = dragula({
         isContainer: function (el) {
             return el.classList.contains("people") || el.classList.contains("day");
         },
@@ -15,13 +15,13 @@ if (document.querySelector(".admin-prayer-calendar-column") != null) {
     // (if they have typed two or more characters)
     document.querySelector(".people-search > input").addEventListener("keyup", (e) => {
         // get search string and force it to lower case
-        var search = new String(e.target.value).toLowerCase();
+        let search = new String(e.target.value).toLowerCase();
 
         // get all people buttons
         document.querySelectorAll(".people > button").forEach((e) => {
             // return true if search length is under two characters,
             // or if the data-name attribute contains the search string
-            var match = search.length < 2 || e.getAttribute("data-name").includes(search);
+            let match = search.length < 2 || e.getAttribute("data-name").includes(search);
 
             // set the display style to match
             if (match) {
@@ -36,7 +36,7 @@ if (document.querySelector(".admin-prayer-calendar-column") != null) {
 // save the month data
 function save_prayer_calendar_data() {
     // create month object to hold the data
-    var month = {
+    let month = {
         id: prayer_calendar_month_id,
         days: [],
         people: []
@@ -45,13 +45,13 @@ function save_prayer_calendar_data() {
     // loop through each day to create a JSON object of the month
     for (let index = 1; index <= prayer_calendar_month_max_days; index++) {
         // get card for this day
-        var card = document.querySelector("#day-" + index);
+        let card = document.querySelector("#day-" + index);
 
         // get date
-        var date = card.getAttribute("data-date");
+        let date = card.getAttribute("data-date");
 
         // get hashes for each person
-        var hashes = [];
+        let hashes = [];
         card.querySelectorAll(".btn").forEach((e) => hashes.push(e.getAttribute("data-hash")));
 
         // add to the month
@@ -66,7 +66,7 @@ function save_prayer_calendar_data() {
     }
 
     // create axios request object
-    var request = {
+    let request = {
         method: 'post',
         url: prayer_calendar_save_url,
         data: {
@@ -76,7 +76,7 @@ function save_prayer_calendar_data() {
     };
 
     // post request with feedback to user
-    var save = document.querySelector("#save");
+    let save = document.querySelector("#save");
     save.textContent = "Saving...";
     axios(request).catch((e) => console.log(e)).then((r) => {
         if (r.data.success) {
