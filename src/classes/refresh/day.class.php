@@ -18,7 +18,7 @@ class Day
      *
      * @param DateTimeImmutable $date   The date.
      * @param null|Readings $readings   Bible readings.
-     * @param Person[] $people          Array of people.
+     * @param string[] $people          Array of people.
      * @return void
      */
     public function __construct(
@@ -51,7 +51,7 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $description[] = join("\\n", Arr::map($this->people, fn (Person $p) => $p->get_full_name()));
+            $description[] = join("\\n", $this->people);
             $description[] = "";
         }
 

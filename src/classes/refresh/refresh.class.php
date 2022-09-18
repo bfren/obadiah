@@ -36,11 +36,11 @@ class Refresh
     {
         // generate time period for the calendar
         $today = new DateTimeImmutable("now", C::$general->timezone);
-        //$this->today = new Day($today, null, array());
+
         $period = new DatePeriod(
-            $today->modify("-1 week"),
+            $today->modify(sprintf("-%d days", C::$refresh->days_before)),
             new DateInterval("P1D"),
-            $today->modify("+2 days")
+            $today->modify(sprintf("+%d days", C::$refresh->days_after + 1))
         );
 
         // get data from caches
@@ -63,8 +63,7 @@ class Refresh
             );
 
             // set today
-            //if($value == $today) {
-            if (!isset($this->today)) {
+            if ($value == $today) {
                 $this->today = $day;
             }
 
@@ -74,5 +73,10 @@ class Refresh
 
         // store days
         $this->days = $days;
+
+        // if today has not been set, create an empty one for today
+        if (!isset($this->today)) {
+            $this->today = new Day($today, null, array());
+        }
     }
 }

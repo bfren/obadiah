@@ -32,6 +32,10 @@ login:
   max_attempts: 5
   pass: ''
 
+refresh:
+  days_before: 7
+  days_after: 2
+
 rota:
   default_days: 28
   roles:
