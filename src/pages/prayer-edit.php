@@ -45,7 +45,7 @@ if (!$for_id) {
 try {
     $for = new DateTimeImmutable(sprintf("%s-01", $for_id));
 } catch (Throwable $th) {
-    die("Unable to determine the month this calendar is for.");
+    App::die("Unable to determine the month this calendar is for.");
 }
 
 $for_date = $for->modify("first day of");

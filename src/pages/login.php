@@ -33,7 +33,7 @@ if (Request::$method == "POST") {
 }
 
 // check login attempts to stop people trying over and over to guess the password
-Request::get_login_attempts() < C::$login->max_attempts || die("You're done - try again later.");
+Request::get_login_attempts() < C::$login->max_attempts || App::die("You're done - try again later.");
 
 // output header
 $title = "Security";

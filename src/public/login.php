@@ -10,5 +10,5 @@ App::init();
 
 // output login page, or die
 $path = sprintf("%s/pages/login.php", C::$dir->cwd);
-file_exists($path) || die("Unable to find login page.");
+file_exists($path) || App::die("Unable to find login page.");
 require_once($path);

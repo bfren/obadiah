@@ -34,7 +34,7 @@ class Bible_Plan
         // read file contents
         $rows = file($file);
         if ($rows === false) {
-            die(sprintf("Unable to read the file: %s.", $file));
+            App::die("Unable to read the file: %s.", $file);
         }
 
         // read each row

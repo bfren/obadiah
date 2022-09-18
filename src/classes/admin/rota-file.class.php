@@ -18,11 +18,11 @@ class Rota_File
     public static function upload(): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
+        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // make sure the name was set
         $name = $_POST["name"];
-        if (!$name) die("You must enter the rota name, e.g. 22-2.");
+        if (!$name) App::die("You must enter the rota name, e.g. 22-2.");
 
         // get paths
         $tmp_path = $_FILES["file"]["tmp_name"];

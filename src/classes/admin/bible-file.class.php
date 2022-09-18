@@ -23,7 +23,7 @@ class Bible_File
     public static function upload(): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/plain")) || die("You may only upload text files.");
+        in_array($_FILES["file"]["type"], array("text/plain")) || App::die("You may only upload text files.");
 
         // get paths
         $tmp_path = $_FILES["file"]["tmp_name"];

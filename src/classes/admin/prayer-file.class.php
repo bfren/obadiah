@@ -30,7 +30,7 @@ class Prayer_File
     private static function upload(string $type, string $filename): Result
     {
         // only allow CSV files
-        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || die("You may only upload CSV files.");
+        in_array($_FILES["file"]["type"], array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // get paths
         $tmp_path = $_FILES["file"]["tmp_name"];

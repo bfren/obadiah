@@ -56,6 +56,24 @@ class App
      */
     public static function check(): void
     {
-        defined(self::CHECK) || die("Nice try.");
+        defined(self::CHECK) || self::die("Nice try.");
+    }
+
+    /**
+     * Ouput message and exit (equivalent of die).
+     *
+     * @param string $message           Output (error) message.
+     * @return void
+     */
+    public static function die(string $message, mixed ...$args): void
+    {
+        // if arguments have been provided, use sprintf
+        if (count($args) > 0) {
+            $message = sprintf($message, ...$args);
+        }
+
+        // output message and exit
+        print_r($message);
+        exit;
     }
 }
