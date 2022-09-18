@@ -37,7 +37,7 @@ Request::get_login_attempts() < C::$login->max_attempts || App::die("You're done
 
 // output header
 $title = "Security";
-require_once("parts/header.php");
+require_once "parts/header.php";
 
 ?>
 
@@ -64,4 +64,4 @@ require_once("parts/header.php");
     document.getElementById("username").focus();
 </script>
 
-<?php require_once("parts/footer.php"); ?>
+<?php require_once "parts/footer.php"; ?>

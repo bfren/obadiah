@@ -23,9 +23,9 @@ App::check();
 
 <body class="d-flex flex-column h-100">
 
-    <?php require_once("header-nav.php"); ?>
+    <?php require_once "header-nav.php"; ?>
 
-    <?php require_once("header-title.php"); ?>
+    <?php require_once "header-title.php"; ?>
 
     <?php if (isset($overflow_scroll)) : ?>
 

@@ -22,7 +22,7 @@ $query = http_build_query($filters);
 // output header
 $title = "Rota";
 $subtitle = "Use the filters to create a personalised rota.";
-require_once("parts/header.php"); ?>
+require_once "parts/header.php"; ?>
 
 <!-- Filters -->
 <h2>
@@ -141,6 +141,6 @@ require_once("parts/header.php"); ?>
     <?php _e($title); ?>
     <a class="ps-3 fs-6" data-bs-toggle="collapse" data-bs-target=".people" href="#collapsePeople" role="button" aria-expanded="true">show / hide people</a>
 </h2>
-<?php require_once("parts/rota-services.php"); ?>
+<?php require_once "parts/rota-services.php"; ?>
 
-<?php require_once("parts/footer.php"); ?>
+<?php require_once "parts/footer.php"; ?>

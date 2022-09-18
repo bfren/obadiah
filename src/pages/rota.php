@@ -34,4 +34,4 @@ $action_page = match($action) {
 };
 
 // load action page
-require_once($action_page);
+require_once $action_page;

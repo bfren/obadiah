@@ -10,7 +10,7 @@ use Feeds\Prayer\Month;
 use Feeds\Request\Request;
 
 // initialise app
-require_once("../app.class.php");
+require_once "../app.class.php";
 App::init();
 
 // check auth

@@ -32,7 +32,7 @@ class App
         // automatically load class definitions from classes directory
         spl_autoload_register(function ($class) use ($cwd) {
             $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "feeds"), array("/", "-", "classes"), strtolower($class)));
-            require_once($path);
+            require_once $path;
         });
 
         // load configuration
@@ -45,7 +45,7 @@ class App
         Cache::init(C::$dir->cache, C::$cache->duration_in_seconds);
 
         // require function scripts
-        require_once("functions/escape.php");
+        require_once "functions/escape.php";
     }
 
     /**

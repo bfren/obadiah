@@ -77,10 +77,10 @@ function output_person_button(Person $person)
 $title = "Prayer Calendar";
 $subtitle = "Use this page to assign everyone to a day on the prayer calendar.";
 $overflow_scroll = true;
-require_once("parts/header.php");
+require_once "parts/header.php";
 
 // output alert
-require_once("parts/alert.php"); ?>
+require_once "parts/alert.php"; ?>
 
 <div class="row d-flex flex-grow-1 h-100">
     <div class="col-6 col-lg-4 col-xxl-2 mh-100 admin-prayer-calendar-column">
@@ -139,4 +139,4 @@ require_once("parts/alert.php"); ?>
     var prayer_calendar_save_url = "/ajax.php";
 </script>
 
-<?php require_once("parts/footer.php"); ?>
+<?php require_once "parts/footer.php"; ?>

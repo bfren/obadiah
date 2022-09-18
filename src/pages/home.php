@@ -13,7 +13,7 @@ App::check();
 // output header
 $title = "Home";
 $subtitle = "These pages house the various feeds generated from Church Suite.";
-require_once("parts/header.php");
+require_once "parts/header.php";
 
 ?>
 
@@ -32,4 +32,4 @@ require_once("parts/header.php");
 <p><a href="/rota/print/?<?php _e(http_build_query(Rota::upcoming_ten_thirty())); ?>">Sunday 10:30 services for the next four weeks</a></p>
 <p><a href="/rota/print/?<?php _e(http_build_query(Rota::wednesday_morning_prayer())); ?>">Wednesday Morning Prayer for the next three months</a></p>
 
-<?php require_once("parts/footer.php"); ?>
+<?php require_once "parts/footer.php"; ?>

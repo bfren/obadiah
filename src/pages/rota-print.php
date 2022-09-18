@@ -18,7 +18,7 @@ $person = Arr::get($filters, "person");
 
 // output header
 $title = "Rota";
-require_once("parts/header-print.php"); ?>
+require_once "parts/header-print.php"; ?>
 
 <h2>
     Christ Church Rota
@@ -26,6 +26,6 @@ require_once("parts/header-print.php"); ?>
     <?php if ($day) _e($day); ?>
     <?php if ($person) _e(" - %s", $person); ?>
 </h2>
-<?php require_once("parts/rota-services-print.php"); ?>
+<?php require_once "parts/rota-services-print.php"; ?>
 
-<?php require_once("parts/footer-print.php"); ?>
+<?php require_once "parts/footer-print.php"; ?>

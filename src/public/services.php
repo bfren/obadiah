@@ -9,7 +9,7 @@ use Feeds\Helpers\Input;
 use Feeds\Rota\Builder;
 
 // initialise app
-require_once("../app.class.php");
+require_once "../app.class.php";
 App::init();
 
 // get lectionary and rota
@@ -35,4 +35,4 @@ $format = match (Input::get_string("format")) {
 $path = sprintf("%s/pages/%s", C::$dir->cwd, $format);
 
 // load format
-require_once($path);
+require_once $path;

@@ -7,7 +7,7 @@ use Feeds\Helpers\Arr;
 use Feeds\Request\Request;
 
 // initialise app
-require_once("../app.class.php");
+require_once "../app.class.php";
 App::init();
 
 // check auth
@@ -25,4 +25,4 @@ if (!file_exists($path)) {
     $path = sprintf("%s/pages/home.php", C::$dir->cwd);
 }
 
-require_once($path);
+require_once $path;

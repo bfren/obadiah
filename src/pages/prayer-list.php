@@ -13,10 +13,10 @@ $months = Prayer_Calendar::get_months();
 
 // output header
 $title = "Prayer Calendar";
-require_once("parts/header.php");
+require_once "parts/header.php";
 
 // output alert
-require_once("parts/alert.php"); ?>
+require_once "parts/alert.php"; ?>
 
 <h2>Months</h2>
 
@@ -56,4 +56,4 @@ require_once("parts/alert.php"); ?>
     </form>
 <?php endif; ?>
 
-<?php require_once("parts/footer.php"); ?>
+<?php require_once "parts/footer.php"; ?>

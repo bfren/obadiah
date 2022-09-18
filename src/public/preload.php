@@ -6,7 +6,7 @@ use Feeds\Cache\Cache;
 use Feeds\Json\Json;
 
 // initialise app
-require_once("../app.class.php");
+require_once "../app.class.php";
 App::init();
 
 // preload caches

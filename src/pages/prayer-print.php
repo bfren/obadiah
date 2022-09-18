@@ -27,7 +27,7 @@ $current = $month->get_first_day_of_month();
 
 // output header
 $title = "Prayer";
-require_once("parts/header-print.php");
+require_once "parts/header-print.php";
 
 function output_day(DateTimeImmutable $date)
 {
@@ -148,4 +148,4 @@ function output_day(DateTimeImmutable $date)
     <p class="mt-2">There is no-one on this prayer calendar yet.</p>
 <?php endif; ?>
 
-<?php require_once("parts/footer-prayer.php"); ?>
+<?php require_once "parts/footer-prayer.php"; ?>

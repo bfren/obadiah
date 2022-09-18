@@ -11,7 +11,7 @@ use Feeds\Helpers\Input;
 use Feeds\Json\Json;
 
 // initialise app
-require_once("../app.class.php");
+require_once "../app.class.php";
 App::init();
 
 // get events from the cache or fetch from Church Suite
