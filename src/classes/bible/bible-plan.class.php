@@ -66,10 +66,10 @@ class Bible_Plan
      * @param DateTimeImmutable $dt     Date to retrieve Bible readings for.
      * @return null|Day                 Day object (or null if $dt is a Sunday or towards the end of the year).
      */
-    public function get_day(DateTimeImmutable $dt) : ?Day
+    public function get_day(DateTimeImmutable $dt): ?Day
     {
         // if the day is a Sunday return null
-        if($dt->format("N") == 7) {
+        if ($dt->format("N") == 7) {
             return null;
         }
 
@@ -80,7 +80,7 @@ class Bible_Plan
         $days = $dt->diff($first_day, true)->days + 1;
 
         // get week number for this date - starts with Monday so subtract 1 to get the number of Sundays to this point
-        $week = intval($dt->format("W"));
+        $week = (int)$dt->format("W");
         $sundays = $week > $days ? 0 : $week;
 
         // get the plan day number:
@@ -89,7 +89,7 @@ class Bible_Plan
         $day = $days - $sundays;
 
         // return the day from the days array
-        if($day > count($this->days)) {
+        if ($day > count($this->days)) {
             return null;
         }
 

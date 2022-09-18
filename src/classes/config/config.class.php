@@ -89,8 +89,7 @@ class Config
         // ensure config file exists
         $config_file = sprintf("%s/config.yml", $data_dir);
         if(!file_exists($config_file)) {
-            _e("Unable to find configuration file - see installation instructions.");
-            exit;
+            App::die("Unable to find configuration file - see installation instructions.");
         }
 
         // read configuration file
