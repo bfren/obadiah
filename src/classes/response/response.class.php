@@ -28,6 +28,5 @@ class Response
 
         // redirect
         header(sprintf("Location: %s", $uri));
-        exit;
     }
 }

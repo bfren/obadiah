@@ -1,14 +1,16 @@
 <?php
 
-namespace Feeds\Pages;
+namespace Feeds\Pages\Parts\Header;
 
 use Feeds\App;
 use Feeds\Helpers\Image;
 use Feeds\Request\Request;
+use Feeds\Response\Html;
 
 App::check();
 
-/** @var string $title */
+/** @var Html $this */
+/** @var Header $model */
 
 // build navigation links
 if (Request::$session->is_authorised) {
