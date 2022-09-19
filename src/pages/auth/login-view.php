@@ -1,18 +1,18 @@
 <?php
 
-namespace Feeds\Pages;
+namespace Feeds\Pages\Auth;
 
 use Feeds\App;
-use Feeds\Pages\Parts\Header\Header;
+use Feeds\Pages\Parts\Header\Header_Model;
 use Feeds\Request\Request;
-use Feeds\Response\Html;
+use Feeds\Response\View;
 
 App::check();
 
-/** @var Html $this */
+/** @var View $this */
 
 // output header
-$this->header(new Header("Security"));
+$this->header(new Header_Model("Security"));
 
 ?>
 
@@ -39,4 +39,6 @@ $this->header(new Header("Security"));
     document.getElementById("username").focus();
 </script>
 
-<?php $this->footer();
+<?php
+
+$this->footer();
