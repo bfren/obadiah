@@ -133,7 +133,7 @@ $this->alert($model->result);
                 <h5>Step One</h5>
                 <p>Log in to <a href="<?php _e($model->church_suite_href); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php _e($rota_export_href); ?>" target="_blank">here</a> to open the export page for the rota.</p>
+                <p>Click <a href="<?php _e($model->rota_href); ?>" target="_blank">here</a> to open the export page for the rota.</p>
                 <h5>Step Three</h5>
                 <p>Select the dates you wish to export - this should cover the entire period of the rota.</p>
                 <h5>Step Four</h5>
