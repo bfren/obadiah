@@ -120,7 +120,7 @@ $this->header($header);
                 </select>
             </div>
         </div>
-        <div class="col-6 d-flex justify-content-end align-items-center">
+        <div class="col-12 col-lg-6 d-flex mt-2 justify-content-end align-items-center">
             <?php if (Request::$session->is_admin) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Request::$debug ? "checked" : ""; ?>
