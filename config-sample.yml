@@ -38,6 +38,7 @@ refresh:
   days_after: 2
 
 rota:
+  bible_version: 'NIVUK'
   default_days: 28
   roles:
     - { name: 'Intercessions', desc: 'Intercessor', abbv: 'I' }

@@ -3,6 +3,7 @@
 namespace Feeds\Pages\Rota;
 
 use Feeds\App;
+use Feeds\Config\Config as C;
 
 App::check();
 
@@ -11,7 +12,7 @@ App::check();
 
 $param = array(
     "search" => $model,
-    "version" => "NIVUK"
+    "version" => C::$rota->bible_version
 );
 
 $url = sprintf("https://www.biblegateway.com/passage/?%s", http_build_query($param));
