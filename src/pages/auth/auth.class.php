@@ -5,6 +5,7 @@ namespace Feeds\Pages\Auth;
 use Feeds\App;
 use Feeds\Config\Config as C;
 use Feeds\Request\Request;
+use Feeds\Response\Action;
 use Feeds\Response\View;
 use Feeds\Response\Redirect;
 
@@ -17,7 +18,7 @@ class Auth
      *
      * @return View
      */
-    public function login_get(): View
+    public function login_get(): Action
     {
         // if already authorised that means an api key has been used so redirect
         if (Request::$session->is_authorised) {
