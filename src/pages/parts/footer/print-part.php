@@ -1,6 +1,6 @@
 <?php
 
-namespace Feeds\Pages;
+namespace Feeds\Pages\Parts\Footer;
 
 use DateTimeImmutable;
 use Feeds\App;

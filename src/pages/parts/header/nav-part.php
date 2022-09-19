@@ -5,12 +5,12 @@ namespace Feeds\Pages\Parts\Header;
 use Feeds\App;
 use Feeds\Helpers\Image;
 use Feeds\Request\Request;
-use Feeds\Response\Html;
+use Feeds\Response\View;
 
 App::check();
 
-/** @var Html $this */
-/** @var Header $model */
+/** @var View $this */
+/** @var Header_Model $model */
 
 // build navigation links
 if (Request::$session->is_authorised) {
@@ -19,7 +19,7 @@ if (Request::$session->is_authorised) {
         "Rota" => "/rota",
         "Prayer Calendar" => "/prayer",
         "Refresh" => "/refresh",
-        "Log Out" => "/logout.php"
+        "Log Out" => "/auth/logout"
     );
     if (Request::$session->is_admin) {
         $links = array_merge(
@@ -49,7 +49,7 @@ if (Request::$session->is_authorised) {
                 <ul class="navbar-nav ms-5 mb-0">
                     <?php foreach ($links as $link_title => $link) : ?>
                         <li class="nav-item ms-2">
-                            <?php if ($title == $link_title) : ?>
+                            <?php if ($model->title == $link_title) : ?>
                                 <a href="<?php _e($link); ?>" class="nav-link active" aria-current="page"><?php _e($link_title); ?></a>
                             <?php else : ?>
                                 <a href="<?php _e($link); ?>" class="nav-link"><?php _e($link_title); ?></a>

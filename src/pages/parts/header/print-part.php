@@ -1,21 +1,22 @@
 <?php
 
-namespace Feeds\Pages;
+namespace Feeds\Pages\Parts\Header;
 
 use Feeds\App;
 
 App::check();
 
-/** @var string $title */
+/** @var View $this */
+/** @var Header_Model $model */
 
 ?>
 <!DOCTYPE html>
-<html class="<?php _e($class ?: "print") ?>" lang="en">
+<html class="<?php _e($model->class ?: "print") ?>" lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?php _e($title); ?> | Church Suite Feeds</title>
+    <title><?php _e($model->title); ?> | Church Suite Feeds</title>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/resources/css/feeds.min.css" rel="stylesheet" />
 </head>

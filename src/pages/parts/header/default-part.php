@@ -3,12 +3,12 @@
 namespace Feeds\Pages\Parts\Header;
 
 use Feeds\App;
-use Feeds\Response\Html;
+use Feeds\Response\View;
 
 App::check();
 
-/** @var Html $this */
-/** @var Header $model */
+/** @var View $this */
+/** @var Header_Model $model */
 
 ?>
 <!DOCTYPE html>
