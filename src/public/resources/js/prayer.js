@@ -69,10 +69,7 @@ function save_prayer_calendar_data() {
     let request = {
         method: 'post',
         url: prayer_calendar_save_url,
-        data: {
-            action: "month",
-            data: month
-        }
+        data: month
     };
 
     // post request with feedback to user

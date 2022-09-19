@@ -32,6 +32,13 @@ class Config_Dir
     public readonly string $rota;
 
     /**
+     * Page to pages directory.
+     *
+     * @var string
+     */
+    public readonly string $pages;
+
+    /**
      * Path to prayer calendar data directory.
      *
      * @var string
@@ -58,6 +65,9 @@ class Config_Dir
         self::ensure_directory_exists($this->cache);
         self::ensure_directory_exists($this->rota);
         self::ensure_directory_exists($this->prayer);
+
+        // additional directory paths
+        $this->pages = sprintf("%s/pages", $this->cwd);
     }
 
     /**

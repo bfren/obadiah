@@ -1,0 +1,27 @@
+<?php
+
+namespace Feeds\Pages\Parts\Header;
+
+use Feeds\App;
+
+App::check();
+
+/** @var View $this */
+/** @var Header_Model $model */
+
+?>
+<!DOCTYPE html>
+<html class="<?php _e($model->class ?: "print") ?>" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><?php _e($model->title); ?> | Church Suite Feeds</title>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/css/feeds.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <main>
+        <div class="container-fluid">

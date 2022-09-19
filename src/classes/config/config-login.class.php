@@ -37,7 +37,7 @@ class Config_Login
     public readonly string $pass;
 
     /**
-     * Get values from Login configuration array.
+     * Get values from login configuration array.
      *
      * @param array $config             Login configuration array.
      * @return void
