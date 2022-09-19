@@ -116,7 +116,7 @@ class Rota
                     uid: VEvent::get_uid(Cache::get_rota()->last_modified_timestamp),
                     start: $service->start,
                     end: $service->end,
-                    summary: Builder::get_summary($service),
+                    summary: Builder::get_summary($service, Arr::get(self::get_filters(), "person")),
                     description: Builder::get_description($day, $service)
                 );
             }
@@ -147,7 +147,7 @@ class Rota
                     id: JEvent::get_id(Cache::get_rota()->last_modified_timestamp),
                     start: $service->start->format(C::$formats->json_datetime),
                     end: $service->end->format(C::$formats->json_datetime),
-                    title: Builder::get_summary($service),
+                    title: Builder::get_summary($service, Arr::get(self::get_filters(), "person")),
                     description: Builder::get_description($day, $service, "\n")
                 );
             }
