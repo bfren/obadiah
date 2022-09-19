@@ -20,7 +20,7 @@ class Redirect extends Action
     public function __construct(
         public readonly string $uri,
         public readonly bool $include_path = false,
-        public readonly int $status = 307
+        public readonly int $status = 303
     ) {
         // build requested URI
         $uri = $this->include_path

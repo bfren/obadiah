@@ -51,7 +51,7 @@ class Auth
             return new Redirect($uri);
         } elseif ($user == "admin" && $pass == C::$login->admin) {
             Request::$session->authorise(true);
-            $uri = Request::$get->string("requested", default: "/upload");
+            $uri = Request::$get->string("requested", default: "/");
             return new Redirect($uri);
         }
 
