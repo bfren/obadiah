@@ -4,14 +4,31 @@ namespace Feeds\Pages\Error;
 
 use Feeds\App;
 use Feeds\Request\Request;
-use Feeds\Response\Html;
+use Feeds\Response\View;
+use Throwable;
 
 App::check();
 
 class Error
 {
-    public function not_found() : Html
+    /**
+     * Return 'Not Found' view.
+     *
+     * @return View
+     */
+    public function not_found(): View
     {
-        return new Html("error", "404", Request::$uri);
+        return new View("error", "404", model: Request::$uri, status: 404);
+    }
+
+    /**
+     * Return 'Server Error' view.
+     *
+     * @param Throwable $model          Error model.
+     * @return View
+     */
+    public function server_error(Throwable $model): View
+    {
+        return new View("error", "500", model: $model, status: 500);
     }
 }
