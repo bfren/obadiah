@@ -110,7 +110,7 @@ $this->header($header);
         </div>
     </div>
     <div class="row">
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-6 mb-2 d-flex align-items-center">
             <div class="input-group">
                 <span class="input-group-text" for="collect">Collects</span>
                 <select class="form-control" name="collect">
@@ -120,7 +120,7 @@ $this->header($header);
                 </select>
             </div>
         </div>
-        <div class="col-12 col-lg-6 d-flex mt-2 justify-content-end align-items-center">
+        <div class="col-12 col-lg-6 d-flex justify-content-end align-items-center">
             <?php if (Request::$session->is_admin) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Request::$debug ? "checked" : ""; ?>
