@@ -17,6 +17,13 @@ class Config_General
     public readonly string $church_suite_org;
 
     /**
+     * Whether or not the app is in production mode.
+     *
+     * @var bool
+     */
+    public readonly bool $production;
+
+    /**
      * Default timezone.
      *
      * @var DateTimeZone
@@ -24,14 +31,15 @@ class Config_General
     public readonly DateTimeZone $timezone;
 
     /**
-     * Get values from events configuration array.
+     * Get values from general configuration array.
      *
-     * @param array $config             Events configuration array.
+     * @param array $config             General configuration array.
      * @return void
      */
     public function __construct(array $config)
     {
         $this->church_suite_org = $config["church_suite_org"];
+        $this->production = $config["production"];
         $this->timezone = new DateTimeZone($config["timezone"]);
     }
 }

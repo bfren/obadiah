@@ -1,5 +1,6 @@
 general:
   church_suite_org: ''
+  production: true
   timezone: 'Europe/London'
 
 airtable:
