@@ -70,7 +70,6 @@ class Auth
     public function logout_get() : Redirect
     {
         // clear session
-        session_start();
         session_destroy();
 
         // redirect to home page
