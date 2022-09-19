@@ -6,8 +6,6 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Bible\Day as Readings;
 use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Prayer\Person;
 
 App::check();
 
@@ -28,12 +26,23 @@ class Day
     ) {
     }
 
+    /**
+     * Build event summary.
+     *
+     * @return string                   Event summary.
+     */
     public function get_summary(): string
     {
         return sprintf("Refresh %s", $this->date->format(C::$formats->refresh_date));
     }
 
-    public function get_description(): string
+    /**
+     * Build event description.
+     *
+     * @param string $separator         Line separator.
+     * @return string                   Event description.
+     */
+    public function get_description(string $separator = "\\n"): string
     {
         $description = array();
 
@@ -51,11 +60,11 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $description[] = join("\\n", $this->people);
+            $description[] = join($separator, $this->people);
             $description[] = "";
         }
 
         // return description
-        return join("\\n", $description);
+        return join($separator, $description);
     }
 }

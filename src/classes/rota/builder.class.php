@@ -154,13 +154,18 @@ class Builder
     /**
      * Generate an event description for a service, including lectionary / teaching info and roles.
      *
-     * @param Combined_Day $day             Lectionary day information.
-     * @param Combined_Service $service     Service object.
-     * @param bool $include_people          If true, people and roles will be added to the description.
-     * @return string                       Event description.
+     * @param Combined_Day $day         Lectionary day information.
+     * @param Combined_Service $service Service object.
+     * @param bool $include_people      If true, people and roles will be added to the description.
+     * @param string $separator         Line separator.
+     * @return string                   Event description.
      */
-    public static function get_description(Combined_Day $day, Combined_Service $service, bool $include_people = true): string
-    {
+    public static function get_description(
+        Combined_Day $day,
+        Combined_Service $service,
+        bool $include_people = true,
+        string $separator = "\\n"
+    ): string {
         // create empty array for description lines
         $description = array();
 
@@ -219,6 +224,6 @@ class Builder
         }
 
         // return description
-        return join("\\n", $description);
+        return join($separator, $description);
     }
 }
