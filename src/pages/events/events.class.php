@@ -26,20 +26,6 @@ class Events
      */
     public function json_get(): Json
     {
-        // load events
-        $events = Cache::get_events(fn () => $this->get_events());
-
-        // return JSON action
-        return new Json($events);
-    }
-
-    /**
-     * Load events from the Church Suite calendar feed.
-     *
-     * @return mixed                    Array of events or curl error.
-     */
-    private function get_events(): array
-    {
         // get query options
         $query = array(
             "date_start" => Request::$get->string("start"),
@@ -75,7 +61,7 @@ class Events
             );
         }
 
-        // return events
-        return $events;
+        // return JSON action
+        return new Json($events);
     }
 }
