@@ -59,8 +59,8 @@ class Auth
         // deny access
         Request::$session->deny();
 
-        // redirect to login GET page
-        return new Redirect(sprintf("/auth/login/%s", Request::$query_string));
+        // redirect to login page
+        return new Redirect(sprintf("/auth/login", true));
     }
 
     /**
@@ -73,7 +73,7 @@ class Auth
         // log the user out
         Request::$session->logout();
 
-        // redirect to home page
-        return new Redirect(sprintf("/?%s", Request::$query_string));
+        // redirect to login page
+        return new Redirect(sprintf("/auth/login", true));
     }
 }
