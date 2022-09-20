@@ -8,6 +8,7 @@ use Feeds\Calendar\JEvent;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Refresh;
+use Feeds\Request\Request;
 use Feeds\Rota\Rota;
 use SplFileInfo;
 
@@ -237,7 +238,7 @@ class Cache
     private static function get_or_set(string $id, callable $callable, bool $force = false): mixed
     {
         // clear cache if $force is set
-        if ($force) {
+        if ($force || Request::$get->bool("force")) {
             self::clear($id);
         }
 
