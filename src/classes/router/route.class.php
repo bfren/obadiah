@@ -11,13 +11,13 @@ class Route
     /**
      * Create route object.
      *
-     * @param string $class             Class name.
+     * @param string $page              Page class name (with full namespace).
      * @param bool $requires_auth       Whether or not the route requires authentication.
      * @param bool $requires_admin      Whether or not the route requires admin permissions.
      * @return void
      */
     public function __construct(
-        public readonly string $class,
+        public readonly string $page,
         public readonly bool $requires_auth = true,
         public readonly bool $requires_admin = true
     ) {

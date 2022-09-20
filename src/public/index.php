@@ -8,20 +8,18 @@ use Feeds\Router\Router;
 require_once "../app.class.php";
 App::init();
 
-// map routes
-Router::map("Ajax");
-Router::map("Auth", requires_auth: false);
-Router::map("Events", requires_auth: false);
-Router::map("Prayer");
-Router::map("Preload", requires_auth: false);
-Router::map("Refresh");
-Router::map("Rota");
-Router::map("Services", requires_auth: false);
-Router::map("Upload", requires_admin: true);
+// map pages
+Router::map_page("Ajax");
+Router::map_page("Auth", requires_auth: false);
+Router::map_page("Events", requires_auth: false);
+Router::map_page("Prayer");
+Router::map_page("Preload", requires_auth: false);
+Router::map_page("Refresh");
+Router::map_page("Rota");
+Router::map_page("Services", requires_auth: false);
+Router::map_page("Upload", requires_admin: true);
 
-// dispatch route
-$action = Router::dispatch();
-
-// execute action
+// get and execute page action
+$action = Router::get_action();
 $action->send_headers();
 $action->execute();

@@ -60,7 +60,7 @@ class Auth
         Request::$session->deny();
 
         // redirect to login GET page
-        return new Redirect("/auth/login");
+        return new Redirect(sprintf("/auth/login/%s", Request::$query_string));
     }
 
     /**
@@ -70,10 +70,10 @@ class Auth
      */
     public function logout_get() : Redirect
     {
-        // clear session
-        session_destroy();
+        // log the user out
+        Request::$session->logout();
 
         // redirect to home page
-        return new Redirect("/");
+        return new Redirect(sprintf("/?%s", Request::$query_string));
     }
 }

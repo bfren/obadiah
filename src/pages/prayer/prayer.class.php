@@ -4,13 +4,13 @@ namespace Feeds\Pages\Prayer;
 
 use DateTimeImmutable;
 use Feeds\Admin\Prayer_File;
+use Feeds\Admin\Require_Admin;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Prayer\Month;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
-use Feeds\Response\Redirect;
 use Feeds\Response\View;
 use Throwable;
 
@@ -43,13 +43,9 @@ class Prayer
      *
      * @return Action
      */
+    #[Require_Admin]
     public function edit_get(): Action
     {
-        // ensure the user has admin access
-        if (!Request::$session->is_admin) {
-            return new Redirect("/prayer");
-        }
-
         // get prayer calendar
         $prayer_calendar = Cache::get_prayer_calendar();
 
@@ -93,6 +89,11 @@ class Prayer
         ));
     }
 
+    /**
+     * GET: /prayer/delete
+     *
+     * @return View
+     */
     public function delete_get(): View
     {
         // get file and delete
@@ -104,6 +105,11 @@ class Prayer
         return $this->index_get();
     }
 
+    /**
+     * GET: /prayer/print
+     *
+     * @return View
+     */
     public function print_get(): View
     {
         // get requested month

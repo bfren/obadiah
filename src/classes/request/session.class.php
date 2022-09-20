@@ -26,6 +26,11 @@ class Session
     private const COUNT = "count";
 
     /**
+     * Access was denied.
+     */
+    private const DENIED = "denied";
+
+    /**
      * True if the current request is an authenticated administrator.
      *
      * @var bool
@@ -74,8 +79,23 @@ class Session
             $_SESSION[self::ADMIN] = true;
         }
 
-        // reset login attempts
+        // unset login attempts
         unset($_SESSION[self::COUNT]);
+
+        // unset denied
+        unset($_SESSION[self::DENIED]);
+    }
+
+    /**
+     * Log the user out of the current session.
+     *
+     * @return void
+     */
+    public function logout(): void
+    {
+        // unset auth values
+        unset($_SESSION[self::AUTH]);
+        unset($_SESSION[self::ADMIN]);
     }
 
     /**
@@ -85,11 +105,23 @@ class Session
      */
     public function deny(): void
     {
-        // unset auth session value
-        unset($_SESSION[self::AUTH]);
-        unset($_SESSION[self::ADMIN]);
+        // logout
+        $this->logout();
+
+        // set denied value
+        $_SESSION[self::DENIED] = true;
 
         // keep track of failed login attempts
         $_SESSION[self::COUNT] = $this->login_attempts + 1;
+    }
+
+    /**
+     * Returns true if the user was denied access to a resource.
+     *
+     * @return bool                     True if the user was denied access.
+     */
+    public function is_denied(): bool
+    {
+        return isset($_SESSION[self::DENIED]);
     }
 }

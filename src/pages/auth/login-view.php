@@ -2,6 +2,7 @@
 
 namespace Feeds\Pages\Auth;
 
+use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Pages\Parts\Header\Header_Model;
 use Feeds\Request\Request;
@@ -13,6 +14,11 @@ App::check();
 
 // output header
 $this->header(new Header_Model("Security"));
+
+// output denied alert
+if (Request::$session->is_denied()) {
+    $this->alert(Result::failure("Access denied, please try again."));
+}
 
 ?>
 
