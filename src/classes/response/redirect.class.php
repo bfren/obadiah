@@ -24,7 +24,7 @@ class Redirect extends Action
     ) {
         // build requested URI
         $uri = $this->include_path
-            ? sprintf("%s?requested=%s", $this->uri, Request::$uri)
+            ? sprintf("%s?requested=%s", $this->uri, Request::$get->string("requested") ?: Request::$uri)
             : $this->uri;
 
         // add redirect header
