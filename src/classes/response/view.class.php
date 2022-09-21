@@ -25,10 +25,18 @@ class View extends Action
         public readonly string $page,
         public readonly string $name = "index",
         public readonly mixed $model = null,
-        public readonly int $status = 200
+        int $status = 200
     ) {
-        parent::__construct();
-        $this->add_header("Content-Type", "text/html; charset=utf-8", $status);
+        // add default headers
+        parent::__construct($status);
+
+        // add debug headers
+        if ($this->add_debug_headers()) {
+            return;
+        }
+
+        // add standard HTML headers
+        $this->add_header("Content-Type", "text/html; charset=utf-8");
     }
 
     /**

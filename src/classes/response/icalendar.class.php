@@ -5,7 +5,6 @@ namespace Feeds\Response;
 use Feeds\App;
 use Feeds\Calendar\VCal;
 use Feeds\Config\Config as C;
-use Feeds\Request\Request;
 
 App::check();
 
@@ -20,14 +19,15 @@ class ICalendar extends Action
      */
     public function __construct(
         public readonly string $filename,
-        public readonly VCal $model
+        public readonly VCal $model,
+        int $status = 200,
     )
     {
-        parent::__construct();
+        // add default headers
+        parent::__construct($status);
 
-        // output as plain text on debug
-        if (Request::$debug) {
-            $this->add_header("Content-Type", "text/plain");
+        // add debug headers
+        if ($this->add_debug_headers()) {
             return;
         }
 
