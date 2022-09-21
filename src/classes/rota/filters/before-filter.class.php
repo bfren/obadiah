@@ -28,7 +28,7 @@ class Before_Filter implements Filter
         }
 
         // convert the date to a timestamp
-        $dt = new DateTimeImmutable($value, C::$general->timezone);
+        $dt = new DateTimeImmutable($value, C::$events->timezone);
         if ($dt) {
             return $service->start->format(C::$formats->sortable_date) <= $dt->format(C::$formats->sortable_date);
         }

@@ -85,7 +85,7 @@ class Builder
 
             // add the day to the rota
             $rota[$lectionary_day->date] = new Combined_Day(
-                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$general->timezone)->setTime(0, 0),
+                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$events->timezone)->setTime(0, 0),
                 name: $lectionary_day->name,
                 collect: $lectionary_day->collect ?: $sunday_collect,
                 services: $c_services
