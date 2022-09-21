@@ -7,7 +7,7 @@ airtable:
   base: ''
 
 cache:
-  duration_in_seconds: 10
+  duration_in_seconds: 3600
 
 events:
   default_location: 'Church'
