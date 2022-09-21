@@ -56,7 +56,7 @@ class Event implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return array(
-            "uid" => $this->uid,
+            "id" => $this->uid,
             "start" => $this->start->format(C::$formats->json_datetime),
             "end" => $this->end->format(C::$formats->json_datetime),
             "title" => $this->title,
