@@ -1,7 +1,6 @@
 general:
   church_suite_org: ''
   production: true
-  timezone: 'Europe/London'
 
 airtable:
   api_key: ''
@@ -11,7 +10,9 @@ cache:
   duration_in_seconds: 10
 
 events:
+  default_location: 'Church'
   length_in_minutes: 60
+  timezone: 'Europe/London'
 
 formats:
   csv_import_datetime: 'd-M-Yg:ia'

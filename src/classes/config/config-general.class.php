@@ -2,7 +2,6 @@
 
 namespace Feeds\Config;
 
-use DateTimeZone;
 use Feeds\App;
 
 App::check();
@@ -24,13 +23,6 @@ class Config_General
     public readonly bool $production;
 
     /**
-     * Default timezone.
-     *
-     * @var DateTimeZone
-     */
-    public readonly DateTimeZone $timezone;
-
-    /**
      * Get values from general configuration array.
      *
      * @param array $config             General configuration array.
@@ -40,6 +32,5 @@ class Config_General
     {
         $this->church_suite_org = $config["church_suite_org"];
         $this->production = $config["production"];
-        $this->timezone = new DateTimeZone($config["timezone"]);
     }
 }

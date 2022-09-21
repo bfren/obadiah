@@ -35,7 +35,7 @@ class Refresh
     public function __construct()
     {
         // generate time period for the calendar
-        $today = new DateTimeImmutable("now", C::$general->timezone);
+        $today = new DateTimeImmutable("now", C::$events->timezone);
 
         $period = new DatePeriod(
             $today->modify(sprintf("-%d days", C::$refresh->days_before)),
