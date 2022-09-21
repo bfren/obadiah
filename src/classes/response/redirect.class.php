@@ -20,15 +20,18 @@ class Redirect extends Action
     public function __construct(
         public readonly string $uri,
         public readonly bool $include_path = false,
-        public readonly int $status = 303
+        int $status = 303
     ) {
+        // add default headers
+        parent::__construct($status);
+
         // build requested URI
         $uri = $this->include_path
             ? sprintf("%s?requested=%s", $this->uri, Request::$get->string("requested") ?: Request::$uri)
             : $this->uri;
 
         // add redirect header
-        $this->add_header("Location", $uri, $status);
+        $this->add_header("Location", $uri);
     }
 
     /**
