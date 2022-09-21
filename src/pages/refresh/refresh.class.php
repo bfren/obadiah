@@ -4,9 +4,8 @@ namespace Feeds\Pages\Refresh;
 
 use Feeds\App;
 use Feeds\Cache\Cache;
-use Feeds\Calendar\JEvent;
+use Feeds\Calendar\Event;
 use Feeds\Calendar\VCal;
-use Feeds\Calendar\VEvent;
 use Feeds\Config\Config as C;
 use Feeds\Response\ICalendar;
 use Feeds\Response\Json;
@@ -45,11 +44,12 @@ class Refresh
         // build events array
         $events = array();
         foreach ($refresh->days as $day) {
-            $events[] = new VEvent(
-                uid: VEvent::get_uid(time()),
+            $events[] = new Event(
+                uid: Event::create_uid(Cache::get_refresh_last_modified()),
                 start: $day->date,
                 end: $day->date,
-                summary: $day->get_summary(),
+                title: $day->get_summary(),
+                location: C::$events->default_location,
                 description: $day->get_description(),
                 is_all_day: true
             );
@@ -75,11 +75,12 @@ class Refresh
         // build events array
         $events = array();
         foreach ($refresh->days as $day) {
-            $events[] = new JEvent(
-                id: JEvent::get_id(time()),
-                start: $day->date->format(C::$formats->json_datetime),
-                end: $day->date->format(C::$formats->json_datetime),
+            $events[] = new Event(
+                uid: Event::create_uid(Cache::get_refresh_last_modified()),
+                start: $day->date,
+                end: $day->date,
                 title: $day->get_summary(),
+                location: C::$events->default_location,
                 description: $day->get_description("\n"),
                 is_all_day: true
             );
