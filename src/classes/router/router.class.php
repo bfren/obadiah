@@ -6,13 +6,12 @@ use Feeds\Admin\Require_Admin;
 use Feeds\App;
 use Feeds\Helpers\Arr;
 use Feeds\Pages\Error\Error;
+use Feeds\Pages\Home\Home;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
 use Feeds\Response\Redirect;
 use Feeds\Response\View;
 use ReflectionClass;
-use ReflectionException;
-use ReflectionObject;
 use Throwable;
 
 App::check();
@@ -32,7 +31,7 @@ class Router
      */
     public static function init()
     {
-        self::map_page("Home");
+        self::map_page(Home::class);
     }
 
     /**
@@ -58,20 +57,20 @@ class Router
     ): void {
         // build route
         $route = new Route(
-            page: sprintf('\Feeds\Pages\%1$s\%1$s', $page_class),
+            page: $page_class,
             requires_auth: $requires_auth || $requires_admin,
             requires_admin: $requires_admin
         );
 
         // check class exists
         try {
-            class_exists($route->page);
+            $class = new ReflectionClass($page_class);
         } catch (Throwable $th) {
-            App::die("Unable to find class %s.", $route->page);
+            App::die("Unable to find class %s.", $page_class);
         }
 
         // add route
-        $key = $uri_path ?: strtolower($page_class);
+        $key = $uri_path ?: strtolower($class->getShortName());
         self::$routes[$key] = $route;
     }
 
@@ -100,7 +99,7 @@ class Router
 
         // get route
         $route = self::get_route($page_name);
-        if (!$route) {
+        if (!$route) {print_r($page_name);exit;
             return self::not_found();
         }
 
