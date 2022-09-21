@@ -30,8 +30,8 @@ class Events
     public function ics_get(): ICalendar
     {
         // get events
-        $query = $this->get_query();
-        $events = Cache::get_events($query, fn (string $q) => $this->get_events($q));
+        $query = self::get_query();
+        $events = Cache::get_events($query, fn (string $q) => self::get_events($q));
 
         // create calendar
         $vcal = new VCal($events, Cache::get_events_last_modified($query));
@@ -48,7 +48,7 @@ class Events
     public function json_get(): Json
     {
         // get events
-        $events = Cache::get_events($this->get_query(), fn (string $q) => $this->get_events($q));
+        $events = Cache::get_events(self::get_query(), fn (string $q) => self::get_events($q));
 
         // return JSON action
         return new Json($events);
@@ -59,7 +59,7 @@ class Events
      *
      * @return string                   URL-encoded query (using http_build_query()).
      */
-    private function get_query():string
+    private static function get_query():string
     {
         // get query options
         $query = array(
@@ -79,7 +79,7 @@ class Events
      * @param string $query             URL-encoded query (e.g. using http_build_query()).
      * @return Event[]                  Array of matching events.
      */
-    private function get_events(string $query): array
+    public static function get_events(string $query): array
     {
         // setup curl
         $url = sprintf(self::CALENDAR_HREF, C::$general->church_suite_org, $query);
