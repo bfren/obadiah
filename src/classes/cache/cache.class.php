@@ -4,7 +4,8 @@ namespace Feeds\Cache;
 
 use Feeds\App;
 use Feeds\Bible\Bible_Plan;
-use Feeds\Calendar\JEvent;
+use Feeds\Calendar\Event;
+use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Refresh;
@@ -90,7 +91,16 @@ class Cache
      */
     public static function clear_events(): void
     {
-        self::clear(self::EVENTS);
+        // get all events cache files
+        $files = glob(sprintf("%s/%s-*.cache", self::$dir_path, self::EVENTS));
+        if ($files === false) {
+            return;
+        }
+
+        // delete files
+        foreach ($files as $file) {
+            unlink($file);
+        }
     }
 
     /**
@@ -141,19 +151,55 @@ class Cache
      */
     public static function get_bible_plan(bool $force = false): Bible_Plan
     {
-        return self::get_or_set(self::BIBLE_PLAN, fn () => new Bible_Plan(), $force);
+        return self::get_or_set(self::BIBLE_PLAN, fn () => new Bible_Plan(), force: $force);
+    }
+
+    /**
+     * Get the Bible Plan last modified timestamp.
+     *
+     * @return int                      Bible Plan last modified timestamp.
+     */
+    public static function get_bible_plan_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::BIBLE_PLAN);
+        return self::get_last_modified($path);
     }
 
     /**
      * Get Events from the cache (or generate a fresh copy).
      *
+     * @param string $query             URL-encoded query (e.g. using http_build_query()).
      * @param callable $callable        Callable function to generate an array of events if not set / expired.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return JEvent[]                 Event objects.
+     * @return Event[]                  Event objects.
      */
-    public static function get_events(callable $callable, bool $force = false): array
+    public static function get_events(string $query, callable $callable, bool $force = false): array
     {
-        return self::get_or_set(self::EVENTS, $callable, $force);
+        return self::get_or_set(self::get_events_id($query), $callable, array($query), $force);
+    }
+
+    /**
+     * Get the last modified timestamp for the Events with the specified query.
+     *
+     * @param string $query             URL-encoded query (e.g. using http_build_query()).
+     * @return int                      Rota last modified timestamp.
+     */
+    public static function get_events_last_modified(string $query): int
+    {
+        $id = self::get_events_id($query);
+        $path = self::get_cache_file_path($id);
+        return self::get_last_modified($path);
+    }
+
+    /**
+     * Build Events Cache ID by hashing the query.
+     *
+     * @param string $query             URL-encoded query (e.g. using http_build_query()).
+     * @return string                   Events Cache ID.
+     */
+    private static function get_events_id(string $query): string
+    {
+        return sprintf("%s-%s", self::EVENTS, Hash::events_query($query));
     }
 
     /**
@@ -164,7 +210,18 @@ class Cache
      */
     public static function get_lectionary(bool $force = false): Lectionary
     {
-        return self::get_or_set(self::LECTIONARY, fn () => new Lectionary(), $force);
+        return self::get_or_set(self::LECTIONARY, fn () => new Lectionary(), force: $force);
+    }
+
+    /**
+     * Get the Lectionary last modified timestamp.
+     *
+     * @return int                      Lectionary last modified timestamp.
+     */
+    public static function get_lectionary_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::LECTIONARY);
+        return self::get_last_modified($path);
     }
 
     /**
@@ -175,7 +232,18 @@ class Cache
      */
     public static function get_prayer_calendar(bool $force = false): Prayer_Calendar
     {
-        return self::get_or_set(self::PRAYER, fn () => new Prayer_Calendar(), $force);
+        return self::get_or_set(self::PRAYER, fn () => new Prayer_Calendar(), force: $force);
+    }
+
+    /**
+     * Get the Prayer calendar last modified timestamp.
+     *
+     * @return int                      Prayer calendar last modified timestamp.
+     */
+    public static function get_prayer_calendar_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::PRAYER);
+        return self::get_last_modified($path);
     }
 
     /**
@@ -186,7 +254,18 @@ class Cache
      */
     public static function get_refresh(bool $force = false): Refresh
     {
-        return self::get_or_set(self::REFRESH, fn () => new Refresh(), $force);
+        return self::get_or_set(self::REFRESH, fn () => new Refresh(), force: $force);
+    }
+
+    /**
+     * Get the Refresh last modified timestamp.
+     *
+     * @return int                      Refresh last modified timestamp.
+     */
+    public static function get_refresh_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::REFRESH);
+        return self::get_last_modified($path);
     }
 
     /**
@@ -197,7 +276,18 @@ class Cache
      */
     public static function get_rota(bool $force = false): Rota
     {
-        return self::get_or_set(self::ROTA, fn () => new Rota(), $force);
+        return self::get_or_set(self::ROTA, fn () => new Rota(), force: $force);
+    }
+
+    /**
+     * Get the Rota last modified timestamp.
+     *
+     * @return int                      Rota last modified timestamp.
+     */
+    public static function get_rota_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::ROTA);
+        return self::get_last_modified($path);
     }
 
     /**
@@ -206,7 +296,7 @@ class Cache
      * @param string $id                Cache ID.
      * @return string                   Absolute path to cache file.
      */
-    public static function get_cache_file_path(string $id): string
+    private static function get_cache_file_path(string $id): string
     {
         return sprintf("%s/%s.cache", self::$dir_path, $id);
     }
@@ -232,10 +322,11 @@ class Cache
      *
      * @param string $id                Cache file name.
      * @param callable $callable        Callable function to get cache value if expired or not set.
+     * @param array $args               Optional args to pass to $callable.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return mixed                    Value (cached or generated).
      */
-    private static function get_or_set(string $id, callable $callable, bool $force = false): mixed
+    private static function get_or_set(string $id, callable $callable, array $args = array(), bool $force = false): mixed
     {
         // clear cache if $force is set
         if ($force || Request::$get->bool("force")) {
@@ -246,16 +337,34 @@ class Cache
         $path = self::get_cache_file_path($id);
 
         // if the file exists, and the cache file has not expired, read and unserialise the value
-        $file = new SplFileInfo($path);
-        if ($file->isFile() && time() - $file->getMTime() < self::$duration_in_seconds) {
-            return unserialize(file_get_contents($file));
+        $last_modified = self::get_last_modified($path);
+        if (time() - $last_modified < self::$duration_in_seconds) {
+            return unserialize(file_get_contents($path));
         }
 
         // get a fresh value and serialise it to the cache
-        $value = call_user_func($callable);
-        file_put_contents($file, serialize($value));
+        $value = call_user_func($callable, ...$args);
+        file_put_contents($path, serialize($value));
 
         // return value
         return $value;
+    }
+
+    /**
+     * Return the last modified time of the specified file, or zero if the file does not exist.
+     *
+     * @param string $path              Absolute path to file.
+     * @return int                      Last modified timestamp (or zero if $file does not exist).
+     */
+    public static function get_last_modified(string $path): int
+    {
+        // if the file does not exist return zero
+        $file = new SplFileInfo($path);
+        if (!$file->isFile()) {
+            return 0;
+        }
+
+        // return file modified timestamp or zero on failure
+        return $file->getMTime() ?: 0;
     }
 }
