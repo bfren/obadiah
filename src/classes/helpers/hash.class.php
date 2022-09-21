@@ -11,6 +11,17 @@ App::check();
 class Hash
 {
     /**
+     * Generate a hash of an events query.
+     *
+     * @param string $query             URL-encoded query (e.g. using http_build_query()).
+     * @return string                   MD5 hash.
+     */
+    public static function events_query(string $query):string
+    {
+        return md5($query);
+    }
+
+    /**
      * Generate a hash of a person.
      *
      * @param Person $person            Person object.
