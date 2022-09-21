@@ -15,7 +15,6 @@ use Feeds\Rota\Filters\Day_Filter;
 use Feeds\Rota\Filters\Person_Filter;
 use Feeds\Rota\Filters\Series_Filter;
 use Feeds\Rota\Filters\Start_Filter;
-use SplFileInfo;
 use SplFileObject;
 use Throwable;
 
@@ -103,8 +102,7 @@ class Rota
         usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
-        $lectionary_file = new SplFileInfo(Cache::get_cache_file_path(Cache::LECTIONARY));
-        $lectionary_last_modified = $lectionary_file->isFile() ? $lectionary_file->getMTime() : 0;
+        $lectionary_last_modified = Cache::get_lectionary_last_modified();
         if ($lectionary_last_modified > $last_modified_timestamp) {
             $last_modified_timestamp = $lectionary_last_modified;
         }
