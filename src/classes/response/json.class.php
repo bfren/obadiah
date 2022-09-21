@@ -19,20 +19,20 @@ class Json extends Action
      */
     public function __construct(
         public readonly mixed $model,
-        public readonly int $status = 200,
+        int $status = 200,
         ?int $last_modified = null
     ) {
-        parent::__construct();
+        // add default headers
+        parent::__construct($status);
 
-        // output as plain text on debug
-        if (Request::$debug) {
-            $this->add_header("Content-Type", "text/plain");
+        // add debug headers
+        if ($this->add_debug_headers()) {
             return;
         }
 
         // add standard JSON headers
         $this->add_header("Access-Control-Allow-Origin", "*");
-        $this->add_header("Content-Type", "text/json; charset=utf-8", $status);
+        $this->add_header("Content-Type", "text/json; charset=utf-8");
         $this->add_header("Last-Modified", gmdate("D, d M Y H:i:s", $last_modified ?: time()));
     }
 
@@ -43,6 +43,12 @@ class Json extends Action
      */
     public function execute(): void
     {
-        print_r(json_encode($this->model));
+        // on debug output pretty printed JSON
+        $json = Request::$debug
+            ? json_encode($this->model, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
+            : json_encode($this->model);
+
+        // print JSON
+        print_r($json);
     }
 }
