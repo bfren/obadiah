@@ -6,7 +6,6 @@ use DateTimeZone;
 use Feeds\App;
 use Feeds\Calendar\TZ\Europe_London;
 use Feeds\Config\Config as C;
-use Feeds\Request\Request;
 
 App::check();
 
@@ -20,9 +19,9 @@ class VCal
     private array $lines = array();
 
     /**
-     * Add calendar headers and timezone settings for Europe/London.
+     * Create VCal object.
      *
-     * @param VEvent[] $events          Array of events in this calendar.
+     * @param Event[] $events           Array of events in this calendar.
      * @param int $last_modified        Timestamp when the calendar was last modified.
      * @return void
      */
@@ -30,16 +29,6 @@ class VCal
         public readonly array $events,
         public readonly int $last_modified
     ) {
-        // begin calendar definition
-        $this->lines[] = "BEGIN:VCALENDAR";
-        $this->lines[] = "VERSION:2.0";
-        $this->lines[] = "PRODID:-//bfren.dev//NONSGML//EN";
-        $this->lines[] = "CALSCALE:GREGORIAN";
-        $this->lines[] = "X-PUBLISHED-TTL:PT1H";
-
-        // add timezone definition
-        $tz = $this->get_ical_timezone(C::$general->timezone)?->get_definition();
-        $this->lines = array_merge($this->lines, $tz ?: array());
     }
 
     /**
@@ -48,7 +37,7 @@ class VCal
      * @param DateTimeZone $timezone    Config timezone.
      * @return null|Timezone            ICal timezone.
      */
-    private function get_ical_timezone(DateTimeZone $timezone): ?Timezone
+    private static function get_ical_timezone(DateTimeZone $timezone): ?Timezone
     {
         $name = $timezone->getName();
         return match ($name) {
@@ -58,33 +47,28 @@ class VCal
     }
 
     /**
-     * Send headers (use before printing the output).
-     *
-     * @param string $filename          Added to Church Suite org to give the name of the downloaded calendar file.
-     * @return void
-     */
-    public function send_headers(string $filename): void
-    {
-        if (Request::$debug) {
-            header("Content-Type: text/plain");
-            return;
-        }
-
-        header("Content-Type: text/calendar; charset=utf-8");
-        header(sprintf("Content-Disposition: attachment; filename=%s-%s.ics", C::$general->church_suite_org, $filename));
-        header(sprintf("Last-Modified: %s", gmdate("D, d M Y H:i:s", $this->last_modified)));
-    }
-
-    /**
      * Generate output, ensure no lines are longer than 75 characters, and print to output.
      *
      * @return void
      */
     public function print_output(): void
     {
+        // begin calendar definition
+        $this->lines[] = "BEGIN:VCALENDAR";
+        $this->lines[] = "VERSION:2.0";
+        $this->lines[] = "PRODID:-//bfren.dev//NONSGML//EN";
+        $this->lines[] = "CALSCALE:GREGORIAN";
+        $this->lines[] = "X-PUBLISHED-TTL:PT1H";
+
+        // add timezone definition
+        $tz = self::get_ical_timezone(C::$events->timezone)?->get_definition();
+        if($tz) {
+            $this->lines = array_merge($this->lines, $tz);
+        }
+
         // add each event to $lines
         foreach ($this->events as $event) {
-            $event->add_to_array($this->lines, $this->last_modified);
+            $this->add_event($event);
         }
 
         // end calendar
@@ -119,5 +103,35 @@ class VCal
 
         // output text
         print_r($ics);
+    }
+
+    /**
+     * Add event to $lines array.
+     *
+     * @param Event $event              The event to add.
+     * @return void
+     */
+    private function add_event(Event $event):void
+    {
+        $tzid = $event->start->getTimezone()->getName();
+
+        $this->lines[] = "BEGIN:VEVENT";
+        $this->lines[] = sprintf("UID:%s", $event->uid);
+
+        if ($event->is_all_day) {
+            $this->lines[] = sprintf("DTSTART;TZID=%s;VALUE=DATE:%s", $tzid, $event->start->format(C::$formats->ics_date));
+            $this->lines[] = "TRANSP:TRANSPARENT";
+        } else {
+            $this->lines[] = sprintf("DTSTART;TZID=%s:%s", $tzid, $event->start->format(C::$formats->ics_datetime));
+            $this->lines[] = sprintf("DTEND;TZID=%s:%s", $tzid, $event->end->format(C::$formats->ics_datetime));
+        }
+
+        $this->lines[] = sprintf("SUMMARY:%s", $event->title);
+        $this->lines[] = sprintf("LOCATION:%s", $event->location);
+        $this->lines[] = sprintf("DESCRIPTION:%s", $event->description);
+        $this->lines[] = sprintf("CREATED:%s", date(C::$formats->ics_datetime, $this->last_modified));
+        $this->lines[] = sprintf("LAST-MODIFIED:%s", date(C::$formats->ics_datetime, $this->last_modified));
+        $this->lines[] = sprintf("DTSTAMP:%s", date(C::$formats->ics_datetime, $this->last_modified));
+        $this->lines[] = "END:VEVENT";
     }
 }
