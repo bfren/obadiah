@@ -13,8 +13,18 @@ App::check();
 
 class Ajax
 {
+    /**
+     * Holds an optional JSON result.
+     *
+     * @var null|Json
+     */
     private ?Json $result = null;
 
+    /**
+     * Get and validate JSON input from php://input.
+     *
+     * @return mixed
+     */
     private function get_input(): mixed
     {
         // check auth
@@ -42,6 +52,11 @@ class Ajax
         return $json;
     }
 
+    /**
+     * POST: /ajax/month (called from Prayer Calendar edit page).
+     *
+     * @return Json                     JSON result.
+     */
     public function month_post(): Json
     {
         // get data
