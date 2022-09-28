@@ -24,7 +24,10 @@ App::check();
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/validate.js?v=<?php _e(App::$version); ?>"></script>
-<script src="/resources/js/general.js?v=<?php _e(App::$version); ?>"></script>
+
+<!-- Copy -->
+<script src="/resources/js/clipboard.min.js"></script>
+<script src="/resources/js/copy.js?v=<?php _e(App::$version); ?>"></script>
 
 <!-- Prayer Calendar -->
 <script src="/resources/js/axios.min.js"></script>
