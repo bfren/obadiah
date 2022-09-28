@@ -1,6 +1,7 @@
 var clipboard = new ClipboardJS(".copy");
 
 clipboard.on("success", function(e) {
+    alert("Copied!");
     console.info("Text copied:", e.text);
     e.clearSelection();
 });
