@@ -46,9 +46,12 @@ class App
         });
 
         // read application version
-        $version_file = new SplFileInfo(sprintf("%s/VERSION", $cwd));
-        if($version_file->isFile()) {
-            self::$version = file_get_contents($version_file->getRealPath());
+        $image_version = new SplFileInfo("/BF_VERSION");
+        $source_version = new SplFileInfo(sprintf("%s/../VERSION", $cwd));
+        if ($image_version->isFile()) {
+            self::$version = file_get_contents($image_version->getRealPath());
+        } else if ($source_version->isFile()) {
+            self::$version = file_get_contents($source_version->getRealPath());
         }
 
         // load configuration
