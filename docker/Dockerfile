@@ -22,6 +22,7 @@ COPY ./docker/overlay /
 # copy source files
 COPY ./src /www/
 COPY ./config-sample.yml /www/
+COPY ./VERSION /www/
 
 # run installation
 RUN bf-install
