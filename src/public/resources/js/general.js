@@ -4,8 +4,8 @@
  * @param {string} text                 The text to copy
  * @returns
  */
-function copy(text) {
-    navigator.clipboard.writeText(text)
+async function copy(text) {
+    await navigator.clipboard.writeText(text)
         .then(() => {
             alert("Copied!");
         })
