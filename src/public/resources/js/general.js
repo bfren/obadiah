@@ -5,12 +5,14 @@
  * @returns
  */
 async function copy(text) {
-    await navigator.clipboard.writeText(text)
-        .then(() => {
-            alert("Copied!");
-        })
-        .catch(() => {
-            alert("Something went wrong - try copying this: " + text);
-        });
+    await navigator.clipboard
+        .writeText(text)
+        .then(
+            () => {
+                alert("Copied!");
+            }, () => {
+                alert("Something went wrong - try copying this: " + text);
+            }
+        );
     return false;
 }
