@@ -109,7 +109,7 @@ class Request
 
         self::$debug = self::$get->bool("debug");
         self::$method = self::$server->string("REQUEST_METHOD");
-        self::$host = self::$server->string("REMOTE_HOST");
+        self::$host = self::$server->string("SERVER_NAME");
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
     }
