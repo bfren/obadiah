@@ -44,6 +44,13 @@ class Request
     public static Super_Global $get;
 
     /**
+     * Current requesth host.
+     *
+     * @var string
+     */
+    public static string $host;
+
+    /**
      * Request method (e.g. POST).
      *
      * @var string
@@ -102,6 +109,7 @@ class Request
 
         self::$debug = self::$get->bool("debug");
         self::$method = self::$server->string("REQUEST_METHOD");
+        self::$host = self::$server->string("REMOTE_HOST");
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
     }
