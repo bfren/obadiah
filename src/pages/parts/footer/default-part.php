@@ -23,13 +23,13 @@ App::check();
 <!-- Bootstrap -->
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/validate.js"></script>
-<script src="/resources/js/general.js"></script>
+<script src="/resources/js/validate.js?v=<?php _e(App::$version); ?>"></script>
+<script src="/resources/js/general.js?v=<?php _e(App::$version); ?>"></script>
 
 <!-- Prayer Calendar -->
 <script src="/resources/js/axios.min.js"></script>
 <script src="/resources/js/dragula.min.js"></script>
-<script src="/resources/js/prayer.js"></script>
+<script src="/resources/js/prayer.js?v=<?php _e(App::$version); ?>"></script>
 
 </body>
 
