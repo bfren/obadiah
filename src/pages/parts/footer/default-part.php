@@ -24,6 +24,7 @@ App::check();
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/validate.js"></script>
+<script src="/resources/js/general.js"></script>
 
 <!-- Prayer Calendar -->
 <script src="/resources/js/axios.min.js"></script>

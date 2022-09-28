@@ -133,7 +133,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
             <?php endif; ?>
             <button type="submit" class="btn btn-primary me-1">Apply</button>
             <a href="/rota/" class="btn btn-danger me-3">Reset</a>
-            <a href="javascript:navigator.clipboard.writeText('<?php _e($ics_link); ?>');alert('Copied!');" class="btn btn-secondary me-1" target="_blank">ICS</a>
+            <a href="javascript:copy('<?php _e($ics_link); ?>');" class="btn btn-secondary me-1" target="_blank">ICS</a>
             <a href="/rota/json/?<?php _e($query_with_api); ?>" class="btn btn-secondary d-none d-sm-inline-block me-1" target="_blank">JSON</a>
             <a href="/rota/print/?<?php _e($query); ?>" class="btn btn-secondary d-none d-sm-inline-block" target="_blank">Print</a>
         </div>
