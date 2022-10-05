@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -23,6 +24,6 @@ class Config_Cache
      */
     public function __construct(array $config)
     {
-        $this->duration_in_seconds = $config["duration_in_seconds"];
+        $this->duration_in_seconds = Arr::get($config, "duration_in_seconds");
     }
 }

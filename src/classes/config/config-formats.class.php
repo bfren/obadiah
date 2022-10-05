@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -100,17 +101,17 @@ class Config_Formats
      */
     public function __construct(array $config)
     {
-        $this->csv_import_datetime = $config["csv_import_datetime"];
-        $this->display_date = $config["display_date"];
-        $this->display_day = $config["display_day"];
-        $this->display_month = $config["display_month"];
-        $this->display_time = $config["display_time"];
-        $this->ics_date = $config["ics_date"];
-        $this->ics_datetime = $config["ics_datetime"];
-        $this->json_datetime = $config["json_datetime"];
-        $this->refresh_date = $config["refresh_date"];
-        $this->prayer_month_id = $config["prayer_month_id"];
-        $this->sortable_date = $config["sortable_date"];
-        $this->sortable_datetime = $config["sortable_datetime"];
+        $this->csv_import_datetime = Arr::get($config, "csv_import_datetime");
+        $this->display_date = Arr::get($config, "display_date");
+        $this->display_day = Arr::get($config, "display_day");
+        $this->display_month = Arr::get($config, "display_month");
+        $this->display_time = Arr::get($config, "display_time");
+        $this->ics_date = Arr::get($config, "ics_date");
+        $this->ics_datetime = Arr::get($config, "ics_datetime");
+        $this->json_datetime = Arr::get($config, "json_datetime");
+        $this->refresh_date = Arr::get($config, "refresh_date");
+        $this->prayer_month_id = Arr::get($config, "prayer_month_id");
+        $this->sortable_date = Arr::get($config, "sortable_date");
+        $this->sortable_datetime = Arr::get($config, "sortable_datetime");
     }
 }

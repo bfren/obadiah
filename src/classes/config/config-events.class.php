@@ -4,6 +4,7 @@ namespace Feeds\Config;
 
 use DateTimeZone;
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -38,8 +39,8 @@ class Config_Events
      */
     public function __construct(array $config)
     {
-        $this->default_location = $config["default_location"];
-        $this->length_in_minutes = $config["length_in_minutes"];
-        $this->timezone = new DateTimeZone($config["timezone"]);
+        $this->default_location = Arr::get($config, "default_location");
+        $this->length_in_minutes = Arr::get($config, "length_in_minutes");
+        $this->timezone = new DateTimeZone(Arr::get($config, "timezone"));
     }
 }

@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -44,9 +45,9 @@ class Config_Login
      */
     public function __construct(array $config)
     {
-        $this->admin = $config["admin"];
-        $this->api = $config["api"];
-        $this->max_attempts = $config["max_attempts"];
-        $this->pass = $config["pass"];
+        $this->admin = Arr::get($config, "admin");
+        $this->api = Arr::get($config, "api");
+        $this->max_attempts = Arr::get($config, "max_attempts");
+        $this->pass = Arr::get($config, "pass");
     }
 }

@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -30,7 +31,7 @@ class Config_Airtable
      */
     public function __construct(array $config)
     {
-        $this->api_key = $config["api_key"];
-        $this->base = $config["base"];
+        $this->api_key = Arr::get($config, "api_key");
+        $this->base = Arr::get($config, "base");
     }
 }

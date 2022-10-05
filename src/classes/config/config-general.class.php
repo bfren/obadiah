@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -37,8 +38,8 @@ class Config_General
      */
     public function __construct(array $config)
     {
-        $this->church_suite_api = $config["church_suite_org"];
-        $this->church_suite_org = $config["church_suite_org"];
-        $this->production = $config["production"];
+        $this->church_suite_api = Arr::get($config, "church_suite_api");
+        $this->church_suite_org = Arr::get($config, "church_suite_org");
+        $this->production = Arr::get($config, "production");
     }
 }

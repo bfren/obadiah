@@ -2,8 +2,8 @@
 
 namespace Feeds\Config;
 
-use DateTimeZone;
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -45,9 +45,9 @@ class Config_Prayer
      */
     public function __construct(array $config)
     {
-        $this->day_29 = $config["day_29"];
-        $this->day_30 = $config["day_30"];
-        $this->day_31 = $config["day_31"];
-        $this->show_last_name = $config["show_last_name"];
+        $this->day_29 = Arr::get($config, "day_29");
+        $this->day_30 = Arr::get($config, "day_30");
+        $this->day_31 = Arr::get($config, "day_31");
+        $this->show_last_name = Arr::get($config, "show_last_name");
     }
 }

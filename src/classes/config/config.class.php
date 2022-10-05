@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 use SplFileInfo;
 
 App::check();
@@ -105,15 +106,15 @@ class Config
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
-        self::$airtable = new Config_Airtable($config["airtable"]);
-        self::$cache = new Config_Cache($config["cache"]);
+        self::$airtable = new Config_Airtable(Arr::get($config, "airtable"));
+        self::$cache = new Config_Cache(Arr::get($config, "cache"));
         self::$dir = new Config_Dir($cwd, $data_dir);
-        self::$events = new Config_Events($config["events"]);
-        self::$formats = new Config_Formats($config["formats"]);
-        self::$general = new Config_General($config["general"]);
-        self::$login = new Config_Login($config["login"]);
-        self::$prayer = new Config_Prayer($config["prayer"]);
-        self::$refresh = new Config_Refresh($config["refresh"]);
-        self::$rota = new Config_Rota($config["rota"]);
+        self::$events = new Config_Events(Arr::get($config, "events"));
+        self::$formats = new Config_Formats(Arr::get($config, "formats"));
+        self::$general = new Config_General(Arr::get($config, "general"));
+        self::$login = new Config_Login(Arr::get($config, "login"));
+        self::$prayer = new Config_Prayer(Arr::get($config, "prayer"));
+        self::$refresh = new Config_Refresh(Arr::get($config, "refresh"));
+        self::$rota = new Config_Rota(Arr::get($config, "rota"));
     }
 }

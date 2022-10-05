@@ -2,7 +2,6 @@
 
 namespace Feeds\Config;
 
-use Directory;
 use Feeds\App;
 use SplFileInfo;
 

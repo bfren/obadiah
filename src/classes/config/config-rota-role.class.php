@@ -38,7 +38,7 @@ class Config_Rota_Role
      */
     public function __construct(array $config)
     {
-        $this->name = $config["name"];
+        $this->name = Arr::get($config, "name");
         $this->description = Arr::get($config, "desc");
         $this->abbreviation = Arr::get($config, "abbv");
     }

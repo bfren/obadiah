@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -37,10 +38,10 @@ class Config_Rota
      */
     public function __construct(array $config)
     {
-        $this->bible_version = $config["bible_version"];
-        $this->default_days = $config["default_days"];
+        $this->bible_version = Arr::get($config, "bible_version");
+        $this->default_days = Arr::get($config, "default_days");
         $roles = array();
-        foreach ($config["roles"] as $role) {
+        foreach (Arr::get($config, "roles") as $role) {
             $roles[] = new Config_Rota_Role($role);
         }
         $this->roles = $roles;

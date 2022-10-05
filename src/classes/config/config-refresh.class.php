@@ -3,6 +3,7 @@
 namespace Feeds\Config;
 
 use Feeds\App;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -30,7 +31,7 @@ class Config_Refresh
      */
     public function __construct(array $config)
     {
-        $this->days_before = $config["days_before"];
-        $this->days_after = $config["days_after"];
+        $this->days_before = Arr::get($config, "days_before");
+        $this->days_after = Arr::get($config, "days_after");
     }
 }
