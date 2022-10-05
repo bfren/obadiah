@@ -14,7 +14,7 @@ App::check();
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container-fluid">
         <small class="text-muted">
-            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://christchurchb29.org">Christ Church Selly Park</a>.
+            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://christchurchb29.org">Christ Church Selly Park</a> (v<?php _e(App::$version) ?>).
             <span class="d-none d-sm-inline">Source on <a href="https://github.com/bfren/churchsuite-feeds" target="_blank">GitHub</a>.</span>
         </small>
     </div>
@@ -23,12 +23,16 @@ App::check();
 <!-- Bootstrap -->
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/validate.js"></script>
+<script src="/resources/js/validate.js?v=<?php _e(App::$version); ?>"></script>
+
+<!-- Copy -->
+<script src="/resources/js/clipboard.min.js"></script>
+<script src="/resources/js/copy.js?v=<?php _e(App::$version); ?>"></script>
 
 <!-- Prayer Calendar -->
 <script src="/resources/js/axios.min.js"></script>
 <script src="/resources/js/dragula.min.js"></script>
-<script src="/resources/js/prayer.js"></script>
+<script src="/resources/js/prayer.js?v=<?php _e(App::$version); ?>"></script>
 
 </body>
 

@@ -6,6 +6,8 @@ use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Request\Request;
 use Feeds\Router\Router;
+use SplFileInfo;
+use SplFileObject;
 
 class App
 {
@@ -13,6 +15,13 @@ class App
      * Check constant.
      */
     private const CHECK = "CHECK";
+
+    /**
+     * Application version.
+     *
+     * @var string
+     */
+    public static string $version = "0.1";
 
     /**
      * Initialise application - register autoloader - setup Request, etc.
@@ -35,6 +44,15 @@ class App
             $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "feeds/pages", "feeds"), array("/", "-", "pages", "classes"), strtolower($class)));
             require_once $path;
         });
+
+        // read application version
+        $image_version = new SplFileInfo("/BF_VERSION");
+        $source_version = new SplFileInfo(sprintf("%s/../VERSION", $cwd));
+        if ($image_version->isFile()) {
+            self::$version = file_get_contents($image_version->getRealPath());
+        } else if ($source_version->isFile()) {
+            self::$version = file_get_contents($source_version->getRealPath());
+        }
 
         // load configuration
         C::init($cwd);
