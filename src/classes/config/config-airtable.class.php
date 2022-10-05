@@ -31,7 +31,7 @@ class Config_Airtable
      */
     public function __construct(array $config)
     {
-        $this->api_key = Arr::get($config, "api_key");
-        $this->base = Arr::get($config, "base");
+        $this->api_key = Arr::get($config, "api_key", "");
+        $this->base = Arr::get($config, "base", "");
     }
 }

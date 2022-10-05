@@ -31,7 +31,7 @@ class Config_Refresh
      */
     public function __construct(array $config)
     {
-        $this->days_before = Arr::get($config, "days_before");
-        $this->days_after = Arr::get($config, "days_after");
+        $this->days_before = Arr::get($config, "days_before", 7);
+        $this->days_after = Arr::get($config, "days_after", 2);
     }
 }

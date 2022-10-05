@@ -101,17 +101,17 @@ class Config_Formats
      */
     public function __construct(array $config)
     {
-        $this->csv_import_datetime = Arr::get($config, "csv_import_datetime");
-        $this->display_date = Arr::get($config, "display_date");
-        $this->display_day = Arr::get($config, "display_day");
-        $this->display_month = Arr::get($config, "display_month");
-        $this->display_time = Arr::get($config, "display_time");
-        $this->ics_date = Arr::get($config, "ics_date");
-        $this->ics_datetime = Arr::get($config, "ics_datetime");
-        $this->json_datetime = Arr::get($config, "json_datetime");
-        $this->refresh_date = Arr::get($config, "refresh_date");
-        $this->prayer_month_id = Arr::get($config, "prayer_month_id");
-        $this->sortable_date = Arr::get($config, "sortable_date");
-        $this->sortable_datetime = Arr::get($config, "sortable_datetime");
+        $this->csv_import_datetime = Arr::get($config, "csv_import_datetime", "d-M-Yg:ia");
+        $this->display_date = Arr::get($config, "display_date", "D j M Y");
+        $this->display_day = Arr::get($config, "display_day", "D jS");
+        $this->display_month = Arr::get($config, "display_month", "F Y");
+        $this->display_time = Arr::get($config, "display_time", "H:i");
+        $this->ics_date = Arr::get($config, "ics_date", "Ymd");
+        $this->ics_datetime = Arr::get($config, "ics_datetime", "Ymd\THis");
+        $this->json_datetime = Arr::get($config, "json_datetime", "Y-m-d\TH:i:sO");
+        $this->refresh_date = Arr::get($config, "refresh_date", "d/n");
+        $this->prayer_month_id = Arr::get($config, "prayer_month_id", "Y-m");
+        $this->sortable_date = Arr::get($config, "sortable_date", "Y-m-d");
+        $this->sortable_datetime = Arr::get($config, "sortable_datetime", "Y-m-d H:i");
     }
 }

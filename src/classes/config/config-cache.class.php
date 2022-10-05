@@ -24,6 +24,6 @@ class Config_Cache
      */
     public function __construct(array $config)
     {
-        $this->duration_in_seconds = Arr::get($config, "duration_in_seconds");
+        $this->duration_in_seconds = Arr::get($config, "duration_in_seconds", 3600);
     }
 }

@@ -38,8 +38,8 @@ class Config_Rota
      */
     public function __construct(array $config)
     {
-        $this->bible_version = Arr::get($config, "bible_version");
-        $this->default_days = Arr::get($config, "default_days");
+        $this->bible_version = Arr::get($config, "bible_version", "NIVUK");
+        $this->default_days = Arr::get($config, "default_days", 28);
         $roles = array();
         foreach (Arr::get($config, "roles") as $role) {
             $roles[] = new Config_Rota_Role($role);

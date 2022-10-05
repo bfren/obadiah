@@ -39,8 +39,8 @@ class Config_Events
      */
     public function __construct(array $config)
     {
-        $this->default_location = Arr::get($config, "default_location");
-        $this->length_in_minutes = Arr::get($config, "length_in_minutes");
-        $this->timezone = new DateTimeZone(Arr::get($config, "timezone"));
+        $this->default_location = Arr::get($config, "default_location", "Church");
+        $this->length_in_minutes = Arr::get($config, "length_in_minutes", 60);
+        $this->timezone = new DateTimeZone(Arr::get($config, "timezone", "Europe/London"));
     }
 }
