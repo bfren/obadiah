@@ -106,15 +106,15 @@ class Config
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
-        self::$airtable = new Config_Airtable(Arr::get($config, "airtable"));
-        self::$cache = new Config_Cache(Arr::get($config, "cache"));
+        self::$airtable = new Config_Airtable(Arr::get($config, "airtable", array()));
+        self::$cache = new Config_Cache(Arr::get($config, "cache", array()));
         self::$dir = new Config_Dir($cwd, $data_dir);
-        self::$events = new Config_Events(Arr::get($config, "events"));
-        self::$formats = new Config_Formats(Arr::get($config, "formats"));
-        self::$general = new Config_General(Arr::get($config, "general"));
-        self::$login = new Config_Login(Arr::get($config, "login"));
-        self::$prayer = new Config_Prayer(Arr::get($config, "prayer"));
-        self::$refresh = new Config_Refresh(Arr::get($config, "refresh"));
-        self::$rota = new Config_Rota(Arr::get($config, "rota"));
+        self::$events = new Config_Events(Arr::get($config, "events", array()));
+        self::$formats = new Config_Formats(Arr::get($config, "formats", array()));
+        self::$general = new Config_General(Arr::get($config, "general", array()));
+        self::$login = new Config_Login(Arr::get($config, "login", array()));
+        self::$prayer = new Config_Prayer(Arr::get($config, "prayer", array()));
+        self::$refresh = new Config_Refresh(Arr::get($config, "refresh", array()));
+        self::$rota = new Config_Rota(Arr::get($config, "rota", array()));
     }
 }
