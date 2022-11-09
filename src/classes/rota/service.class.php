@@ -67,7 +67,7 @@ class Service
             "Sunday Morning Service 10:00am" => array("10:00am", "PT90M"),
             "Sunday Morning Service 10:30am" => array("10:30am", "PT90M"),
             "Wednesday Morning Prayer 8:00am" => array("8:00am", "PT30M"),
-            default => "0:00am"
+            default => array("0:00am", "PT60M")
         };
 
         // get the date as a timestamp
