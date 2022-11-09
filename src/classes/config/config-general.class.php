@@ -40,6 +40,6 @@ class Config_General
     {
         $this->church_suite_api = Arr::get($config, "church_suite_api", "");
         $this->church_suite_org = Arr::get($config, "church_suite_org", "");
-        $this->production = Arr::get($config, "production", true);
+        $this->production = Arr::get_boolean($config, "production", true);
     }
 }

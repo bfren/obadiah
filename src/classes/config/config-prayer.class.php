@@ -48,6 +48,6 @@ class Config_Prayer
         $this->day_29 = Arr::get($config, "day_29", array());
         $this->day_30 = Arr::get($config, "day_30", array());
         $this->day_31 = Arr::get($config, "day_31", array());
-        $this->show_last_name = Arr::get($config, "show_last_name", true);
+        $this->show_last_name = Arr::get_boolean($config, "show_last_name", false);
     }
 }

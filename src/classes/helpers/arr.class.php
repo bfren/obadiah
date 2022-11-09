@@ -26,6 +26,23 @@ class Arr
     }
 
     /**
+     * Safely get a boolean value from an associative array.
+     *
+     * @param array $array              Array of values.
+     * @param string $key               The key to search for.
+     * @param boolean $default          Default value if key does not exist.
+     * @return boolean                  Key value, or $default if key does not exist.
+     */
+    public static function get_boolean(array $array, string $key, bool $default = false): bool
+    {
+        if (array_key_exists($key, $array) && $array[$key]) {
+            return in_array($array[$key], array(true, "true", "yes", 1, "1"));
+        }
+
+        return $default;
+    }
+
+    /**
      * Safely get a value from an associative array, and then sanitise the input.
      * If the value is not a string, an empty string will be returned.
      *
