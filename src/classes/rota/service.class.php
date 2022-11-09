@@ -64,6 +64,7 @@ class Service
         // get the service time and length (as a DateInterval string)
         $time = match ($data["Service"]) {
             "Socially Distanced Service 9:00am" => array("9:00am", "PT30M"),
+            "Sunday Morning Service 10:00am" => array("10:00am", "PT90M"),
             "Sunday Morning Service 10:30am" => array("10:30am", "PT90M"),
             "Wednesday Morning Prayer 8:00am" => array("8:00am", "PT30M"),
             default => "0:00am"
