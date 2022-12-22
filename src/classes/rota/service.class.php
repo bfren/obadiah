@@ -113,7 +113,7 @@ class Service
 
         // Look for any role notes
         $role_notes = Arr::match($data, fn ($v) => preg_match("/Notes:(.+)/s", $v));
-        $last_note = array_pop($role_notes);print_r($last_note);
+        $last_note = array_pop($role_notes);
         if ($last_note) {
             return trim(preg_replace("/Notes:\n([\w ]+)\n.*/s", "$1",  $last_note));
         }
