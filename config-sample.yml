@@ -42,12 +42,17 @@ refresh:
 rota:
   bible_version: 'NIVUK'
   default_days: 28
+  default_length: 'PT90M'
   roles:
     - { name: 'Intercessions', desc: 'Intercessor', abbv: 'I' }
     - { name: 'Preacher', abbv: 'Pr' }
     - { name: 'President', abbv: 'Ps' }
     - { name: 'Readings', desc: 'Reader', abbv: 'R' }
     - { name: 'Service Leader', desc: 'Leader', abbv: 'L' }
+  services:
+    - { name: "Socially Distanced Service", length: "PT30M" }
+    - { name: "Sunday Morning Service", length: "PT90M" }
+    - { name: "Wednesday Morning Prayer", length: "PT30M" }
 
 prayer:
   day_29: [ '' ]

@@ -93,7 +93,7 @@ class Lectionary
                     title: Arr::get($service_fields, "Sermon Title"),
                     main_reading: Arr::get($service_fields, "Main Reading"),
                     additional_reading: Arr::get($service_fields, "Additional Reading"),
-                    psalms: Arr::map(explode(";", Arr::get($service_fields, "Psalms")), "trim")
+                    psalms: Arr::map(explode(";", Arr::get($service_fields, "Psalms", "")), "trim")
                 );
             }
 

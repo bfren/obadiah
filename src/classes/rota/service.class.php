@@ -6,6 +6,7 @@ use DateInterval;
 use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 
 App::check();
 
@@ -61,21 +62,25 @@ class Service
             $data[$header_row[$i]] = $row[$i];
         }
 
-        // get the service time and length (as a DateInterval string)
-        $time = match ($data["Service"]) {
-            "Socially Distanced Service 9:00am" => array("9:00am", "PT30M"),
-            "Sunday Morning Service 10:00am" => array("10:00am", "PT90M"),
-            "Sunday Morning Service 10:30am" => array("10:30am", "PT90M"),
-            "Wednesday Morning Prayer 8:00am" => array("8:00am", "PT30M"),
-            default => array("0:00am", "PT60M")
-        };
+        // get the service name, time and length
+        $pattern = "/([^\d]+)(\d{1,2}:\d{2}[a|p]m)/";
+        $matches = array();
+        if (preg_match_all($pattern, $data["Service"], $matches) && count($matches) == 3) {
+            $name = trim($matches[1][0]);
+            $time = trim($matches[2][0]);
+        } else {
+            $name = "Unrecognised Service";
+            $time = "0:00am";
+        }
+
+        $length = Arr::get(C::$rota->services, $name, C::$rota->default_length);
 
         // get the date as a timestamp
-        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $time[0]), C::$events->timezone);
-        $this->length = new DateInterval($time[1]);
+        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $time), C::$events->timezone);
+        $this->length = $length;
 
         // get the service description
-        $this->description = $this->get_description($data);
+        $this->description = $this->get_description($this->get_note($data), $name);
 
         // get the roles
         $this->roles = $this->get_roles($data);
@@ -93,20 +98,45 @@ class Service
     }
 
     /**
+     * Get the service note, or the last role note if any roles have one.
+     *
+     * @param array $data               Service data.
+     * @return ?string                  Service or role note, if any can be found.
+     */
+    private function get_note($data): ?string
+    {
+        // Service Note takes precedence
+        $service_note = $data["Service Note"];
+        if ($service_note) {
+            return $service_note;
+        }
+
+        // Look for any role notes
+        $role_notes = Arr::match($data, fn ($v) => preg_match("/Notes:(.+)/s", $v));
+        $last_note = array_pop($role_notes);
+        if ($last_note) {
+            return trim(preg_replace("/Notes:\n([\w ]+)\n.*/s", "$1",  $last_note));
+        }
+
+        return null;
+    }
+
+    /**
      * Get the service description from the note, or use the rota service name if not set.
      *
-     * @param array $data               Associative array of service data.
+     * @param string|null $note         A note can be added to a service to provide more information.
+     * @param string $name              The rota service name (e.g. 'Sunday Morning Service').
      * @return string                   Service description.
      */
-    private function get_description(array $data): string
+    private function get_description(?string $note, string $name): string
     {
-        // use Service Note as description, or the rota service name if it's not set
-        $description = $data["Service Note"] ?: $data["Service"];
+        // use note as description, or the rota service name if it's not set
+        $description = $note ?: $name;
 
         // sanitise names to remove unnecessary information
         return match ($description) {
             "HC" => "Holy Communion",
-            "Wednesday Morning Prayer 8:00am" => "Morning Prayer",
+            "Wednesday Morning Prayer" => "Morning Prayer",
             default => $description
         };
     }
