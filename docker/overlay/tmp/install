@@ -20,7 +20,7 @@ bf-echo "PHP version ${PHP_VERSION}."
 
 bf-echo "Installing PHP v${PHP_VERSION}..."
 apk add --no-cache \
-    php81-curl=${PHP_VERSION} \
-    php81-session=${PHP_VERSION} \
-    php81-pecl-yaml
+    php82-curl=${PHP_VERSION} \
+    php82-session=${PHP_VERSION} \
+    php82-pecl-yaml
 bf-done
