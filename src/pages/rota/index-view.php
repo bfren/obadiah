@@ -32,7 +32,6 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
 <h2>
     Filters
     <a class="ps-3 fs-6" href="/rota/?<?php _e(http_build_query($model->ten_thirty)); ?>">Sunday 10:30</a>
-    <a class="ps-3 fs-6" href="/rota/?<?php _e(http_build_query($model->wednesday)); ?>">Wednesday Morning</a>
 </h2>
 <form method="GET" action="/rota/">
     <div class="row mb-2">

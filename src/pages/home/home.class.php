@@ -23,8 +23,8 @@ class Home
     {
         $today = new DateTimeImmutable();
         $this_week = array(
-            "from" => $today->format(C::$formats->sortable_date),
-            "to" => $today->add(new DateInterval("P7D"))->format(C::$formats->sortable_date)
+            "start" => $today->format(C::$formats->sortable_date),
+            "end" => $today->add(new DateInterval("P7D"))->format(C::$formats->sortable_date)
         );
 
         $refresh = array(
@@ -34,7 +34,6 @@ class Home
         return new View("home", model: new Index_Model(
             this_week: $this_week,
             ten_thirty: Rota::upcoming_ten_thirty(),
-            wednesday: Rota::wednesday_morning_prayer(),
             refresh: $refresh
         ));
     }
