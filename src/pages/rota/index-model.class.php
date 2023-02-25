@@ -14,7 +14,6 @@ class Index_Model
      *
      * @param array $filters                Array of rota filters.
      * @param array $ten_thirty             Sunday 10:30 service filter preset.
-     * @param array $wednesday              Wednesday Morning Prayer service filter preset.
      * @param string[] $days_of_the_week    Array of the days of the week, starting with Sunday.
      * @param array $people                 All the people in the rota.
      * @param array $series                 All the series in the rota.
@@ -24,7 +23,6 @@ class Index_Model
     public function __construct(
         public readonly array $filters,
         public readonly array $ten_thirty,
-        public readonly array $wednesday,
         public readonly array $days_of_the_week,
         public readonly array $people,
         public readonly array $series,

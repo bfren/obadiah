@@ -188,20 +188,4 @@ class Rota
             "end" => $start->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
         );
     }
-
-    /**
-     * Return filters to show Wednesday Morning Prayer services (with collect).
-     *
-     * @return array                    Filter values for use on rota page.
-     */
-    public static function wednesday_morning_prayer(): array
-    {
-        $start = new DateTimeImmutable("today");
-        return array(
-            "day" => 3, // Wednesday
-            "time" => "08:00",
-            "start" => $start->format(C::$formats->sortable_date),
-            "collect" => "yes"
-        );
-    }
 }
