@@ -66,7 +66,7 @@ class Upload
             "_report_view_module" => "rotas",
             "_report_view_file" => "rotas_overview",
             "order_by" => "name",
-            "group_by" => "service"
+            "group_by" => "time"
         ));
 
         $prayer_adults_query = http_build_query(array(
