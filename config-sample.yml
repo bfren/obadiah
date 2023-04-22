@@ -49,10 +49,6 @@ rota:
     - { name: 'President', abbv: 'Ps' }
     - { name: 'Readings', desc: 'Reader', abbv: 'R' }
     - { name: 'Service Leader', desc: 'Leader', abbv: 'L' }
-  services:
-    - { name: "Socially Distanced Service", length: "PT30M" }
-    - { name: "Sunday Morning Service", length: "PT90M" }
-    - { name: "Wednesday Morning Prayer", length: "PT30M" }
 
 prayer:
   day_29: [ '' ]

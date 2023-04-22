@@ -2,6 +2,7 @@
 
 namespace Feeds\Lectionary;
 
+use DateInterval;
 use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Airtable\Airtable;
@@ -49,6 +50,8 @@ class Lectionary
         $services_fields = array(
             "Date",
             "Time",
+            "Length (Minutes)",
+            "Name",
             "Series Title",
             "Sermon Num",
             "Sermon Title",
@@ -88,6 +91,8 @@ class Lectionary
                 $series[] = Arr::get($service_fields, "Series Title");
                 $l_services[] = new Service(
                     time: Arr::get($service_fields, "Time"),
+                    length: new DateInterval(sprintf("PT%sM", Arr::get($service_fields, "Length (Minutes)", 60))),
+                    name: Arr::get($service_fields, "Name", "Service"),
                     series: Arr::get($service_fields, "Series Title"),
                     num: Arr::get($service_fields, "Sermon Num"),
                     title: Arr::get($service_fields, "Sermon Title"),
