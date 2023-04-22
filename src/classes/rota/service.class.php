@@ -62,21 +62,19 @@ class Service
             $data[$header_row[$i]] = $row[$i];
         }
 
-        // get the service name, time and length
-        $pattern = "/([^\d]+)(\d{1,2}:\d{2}[a|p]m)/";
+        // get the service name and length
+        $pattern = "/([^\d]+)/";
         $matches = array();
-        if (preg_match_all($pattern, $data["Service"], $matches) && count($matches) == 3) {
+        if (preg_match_all($pattern, $data["Service"], $matches) && count($matches) == 2) {
             $name = trim($matches[1][0]);
-            $time = trim($matches[2][0]);
         } else {
             $name = "Unrecognised Service";
-            $time = "0:00am";
         }
 
         $length = Arr::get(C::$rota->services, $name, C::$rota->default_length);
 
-        // get the date as a timestamp
-        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $time), C::$events->timezone);
+        // get the date and time as a timestamp
+        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), C::$events->timezone);
         $this->length = $length;
 
         // get the service description
