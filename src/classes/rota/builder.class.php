@@ -68,8 +68,9 @@ class Builder
             foreach ($rota_services as $rota_service) {
                 // get lectionary information and create combined service
                 $lectionary_service = $lectionary_day->get_service($rota_service->start);
-
-                // get service name and length
+                if ($lectionary_service === null) {
+                    continue;
+                }
 
                 // create Combined Service object
                 $c_services[] = new Combined_Service(
