@@ -1,4 +1,4 @@
-#!/usr/local/bin/fish
+#!/usr/bin/fish
 
 docker pull bfren/ccf
 docker run -p "127.0.0.1:3000:80" \

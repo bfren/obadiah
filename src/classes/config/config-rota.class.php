@@ -39,13 +39,6 @@ class Config_Rota
     public readonly array $roles;
 
     /**
-     * Array of services with custom lengths as DateInterval strings.
-     *
-     * @var DateInterval[]
-     */
-    public readonly array $services;
-
-    /**
      * Get values from rota configuration array.
      *
      * @param array $config             Rota configuration array.
@@ -62,13 +55,5 @@ class Config_Rota
             $roles[] = new Config_Rota_Role($role);
         }
         $this->roles = $roles;
-
-        $services = array();
-        foreach (Arr::get($config, "services") as $service) {
-            $name = Arr::get($service, "name");
-            $length = new DateInterval(Arr::get($service, "length"));
-            $services[$name] = $length;
-        }
-        $this->services = $services;
     }
 }
