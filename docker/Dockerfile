@@ -6,12 +6,8 @@ ARG BF_IMAGE
 ARG BF_VERSION
 
 ENV \
-    # disable container debug output
-    BF_DEBUG=0 \
     # generate empty config.yml if one does not already exist
-    CCF_GENERATE_EMPTY_CONFIG=1 \
-    # set nginx root to public directory
-    NGINX_ROOT_OVERRIDE=/www/public
+    CCF_GENERATE_EMPTY_CONFIG=1
 
 # clear base nginx files
 RUN rm -f /www/*
