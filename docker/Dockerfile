@@ -10,7 +10,7 @@ ENV \
     CCF_GENERATE_EMPTY_CONFIG=1
 
 # clear base nginx files
-RUN rm -f /www/*
+RUN rm -rf /www/*
 
 # copy image overlay
 COPY ./docker/overlay /
