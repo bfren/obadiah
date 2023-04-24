@@ -68,7 +68,7 @@ class Rota
         // create and return View
         return new View("rota", model: new Index_Model(
             filters: self::get_filters(),
-            ten_thirty: R::upcoming_ten_thirty(),
+            ten_thirty: R::upcoming_sundays(ten_thirty_only: true),
             days_of_the_week: Builder::$days_of_the_week,
             people: $rota->people,
             series: $lectionary->series,

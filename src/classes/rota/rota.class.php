@@ -174,16 +174,17 @@ class Rota
     }
 
     /**
-     * Return filters to show upcoming Sunday 10:30 services.
+     * Return filters to show upcoming Sunday services.
      *
+     * @param bool                      If true, only 10:30 services will be shown.
      * @return array                    Filter values for use on rota page.
      */
-    public static function upcoming_ten_thirty(): array
+    public static function upcoming_sundays(bool $ten_thirty_only = false): array
     {
         $start = new DateTimeImmutable("today");
         return array(
-            "day" => 7, // Sunday
-            "time" => "10:30",
+            "day" => 7, // Sunday,
+            "time" => $ten_thirty_only ? "10:30" : "",
             "start" => $start->format(C::$formats->sortable_date),
             "end" => $start->add(new DateInterval("P27D"))->format(C::$formats->sortable_date)
         );
