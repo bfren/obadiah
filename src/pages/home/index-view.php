@@ -3,7 +3,7 @@
 namespace Feeds\Pages\Home;
 
 use Feeds\App;
-use Feeds\Pages\Home\Models\Index_Model;
+use Feeds\Pages\Home\Index_Model;
 use Feeds\Pages\Parts\Header\Header_Model;
 use Feeds\Response\View;
 
@@ -22,7 +22,7 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <h3>Printable</h3>
 <p>The following links will give you quick and printable rotas for upcoming services.</p>
-<p><a href="/rota/notices/?<?php _e(http_build_query($model->ten_thirty)); ?>">Sunday services for the next four weeks</a></p>
+<p><a href="/rota/notices/?<?php _e(http_build_query($model->upcoming)); ?>">Sunday services for the next four weeks</a></p>
 
 <h2>Refresh</h2>
 <p>Use <a href="/refresh/ics/?<?php _e(http_build_query($model->refresh)); ?>">this link</a> to subscribe to the Refresh calendar feed.</p>
