@@ -45,7 +45,7 @@ App::check();
                                 <p class="series mb-0">
                                     <?php if ($combined_service->series_title) _e($combined_service->series_title); ?>
                                     <?php if ($combined_service->sermon_num) _e("(%d)", $combined_service->sermon_num); ?>
-                                    <?php if ($combined_service->sermon_title) _e("“%s”", $combined_service->sermon_title); ?>
+                                    <?php if ($combined_service->sermon_title) _e("‘%s’", $combined_service->sermon_title); ?>
                                 </p>
                                 <p class="bible mb-0">
                                     <?php

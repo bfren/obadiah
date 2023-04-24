@@ -33,7 +33,7 @@ class Home
 
         return new View("home", model: new Index_Model(
             this_week: $this_week,
-            ten_thirty: Rota::upcoming_ten_thirty(),
+            upcoming: Rota::upcoming_sundays(),
             refresh: $refresh
         ));
     }
