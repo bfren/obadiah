@@ -167,8 +167,8 @@ class Rota
         // sort services by start date and time
         uasort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() <=> $b->start->getTimestamp());
 
-        // if max is set return that number of services
-        if ($max = Arr::get($filters, "max")) {
+        // if max is set, return that number of services
+        if ($max = Arr::get_integer($filters, "max")) {
             return array_slice($services, 0, $max, true);
         }
 
