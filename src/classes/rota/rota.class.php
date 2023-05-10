@@ -139,8 +139,8 @@ class Rota
         $series_filter = new Series_Filter();
 
         foreach ($this->services as $service) {
-            // include by default
-            $include = true;
+            // only include services that have roles with assigned people
+            $include = count($service->roles) > 0;
 
             // apply person filter
             $include = $include && $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
