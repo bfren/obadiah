@@ -107,7 +107,7 @@ class Lectionary
         }
 
         // store days
-        uasort($days, fn(Day $a, Day $b) => strcmp($a->date, $b->date));
+        uasort($days, fn(Day $a, Day $b) => $a->date <=> $b->date);
         $this->days = $days;
 
         // store series

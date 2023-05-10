@@ -139,8 +139,8 @@ class Rota
         $series_filter = new Series_Filter();
 
         foreach ($this->services as $service) {
-            // include by default
-            $include = true;
+            // only include services that have roles with assigned people
+            $include = count($service->roles) > 0;
 
             // apply person filter
             $include = $include && $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
@@ -164,8 +164,11 @@ class Rota
             }
         }
 
-        // if max is set return that number of services
-        if ($max = Arr::get($filters, "max")) {
+        // sort services by start date and time
+        uasort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() <=> $b->start->getTimestamp());
+
+        // if max is set, return that number of services
+        if ($max = Arr::get_integer($filters, "max")) {
             return array_slice($services, 0, $max, true);
         }
 

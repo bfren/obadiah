@@ -100,11 +100,11 @@ class Prayer_Calendar
         uasort($people, function (Person $a, Person $b) {
             // if last names match, compare first names
             if ($a->last_name == $b->last_name) {
-                return strcmp($a->first_name, $b->first_name);
+                return $a->first_name <=> $b->first_name;
             }
 
             // compare last names
-            return strcmp($a->last_name, $b->last_name);
+            return $a->last_name <=> $b->last_name;
         });
     }
 

@@ -43,6 +43,23 @@ class Arr
     }
 
     /**
+     * Safely get an integer value from an associative array.
+     *
+     * @param array $array              Array of values.
+     * @param string $key               The key to search for.
+     * @param boolean $default          Default value if key does not exist.
+     * @return boolean                  Key value, or $default if key does not exist.
+     */
+    public static function get_integer(array $array, string $key, int $default = 0): int
+    {
+        if (array_key_exists($key, $array) && $array[$key] && is_numeric($array[$key])) {
+            return intval($array[$key]);
+        }
+
+        return $default;
+    }
+
+    /**
      * Safely get a value from an associative array, and then sanitise the input.
      * If the value is not a string, an empty string will be returned.
      *
