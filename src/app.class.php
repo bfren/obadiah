@@ -30,6 +30,9 @@ class App
      */
     public static function init(): void
     {
+        // ensure we are running on PHP 8.2
+        version_compare(PHP_VERSION, "8.2.0", ">=") || self::die("This application requires at least PHP 8.2.");
+
         // get current working directory
         $cwd = __DIR__;
 
