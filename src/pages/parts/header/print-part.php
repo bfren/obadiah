@@ -17,8 +17,9 @@ App::check();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php _e($model->title); ?> | Church Suite Feeds</title>
+	<link href="https://static.bcg.xyz/fonts/source-sans.css" rel="stylesheet" />
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/resources/css/feeds.min.css" rel="stylesheet" />
+    <link href="/resources/css/feeds.css" rel="stylesheet" />
 </head>
 
 <body>
