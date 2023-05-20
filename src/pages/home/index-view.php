@@ -5,6 +5,7 @@ namespace Feeds\Pages\Home;
 use Feeds\App;
 use Feeds\Pages\Home\Index_Model;
 use Feeds\Pages\Parts\Header\Header_Model;
+use Feeds\Request\Request;
 use Feeds\Response\View;
 
 App::check();
@@ -26,6 +27,11 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <h2>Refresh</h2>
 <p>Use <a href="/refresh/ics/?<?php _e(http_build_query($model->refresh)); ?>">this link</a> to subscribe to the Refresh calendar feed.</p>
+
+<?php if (Request::$session->is_admin) : ?>
+    <h2>Caches</h2>
+    <p><a href="/preload">Refresh</a> Bible reading plan, prayer calendar, lectionary and rota caches.</p>
+<?php endif; ?>
 
 <?php
 
