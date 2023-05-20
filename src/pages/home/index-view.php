@@ -29,8 +29,8 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 <p>Use <a href="/refresh/ics/?<?php _e(http_build_query($model->refresh)); ?>">this link</a> to subscribe to the Refresh calendar feed.</p>
 
 <?php if (Request::$session->is_admin) : ?>
-    <h2>Cache</h2>
-    <p><a href="/preload">Refresh</a> caches.</p>
+    <h2>Caches</h2>
+    <p><a href="/preload">Refresh</a> Bible reading plan, prayer calendar, lectionary and rota caches.</p>
 <?php endif; ?>
 
 <?php
