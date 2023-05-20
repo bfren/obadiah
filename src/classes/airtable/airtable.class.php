@@ -63,8 +63,8 @@ class Airtable
         // and keep going recursively until all the records have been retrieved
         if (!isset($query["maxrecords"]) && isset($result["offset"])) {
             // use the offset value to get the next batch of records
-            $query["offset"] = $result["offset"];
-            $next_records = $this->make_request($query);
+            $next_data = array_merge($data, array("offset" => $result["offset"]));
+            $next_records = $this->make_request($next_data);
 
             // if $next_records is a string that means an error has occured so return it
             if (is_string($next_records)) {
