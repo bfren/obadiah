@@ -2,6 +2,7 @@
 
 namespace Feeds\Pages\Upload;
 
+use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
 
@@ -24,6 +25,9 @@ class Index_Model
      */
     public function __construct(
         public readonly ?Result $result,
+        public readonly string $rota_period,
+        public readonly DateTimeImmutable $rota_period_first_day,
+        public readonly DateTimeImmutable $rota_period_last_day,
         public readonly array $rota_files,
         public readonly array $prayer_files,
         public readonly array $bible_files,
