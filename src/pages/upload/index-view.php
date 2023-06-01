@@ -29,7 +29,7 @@ $this->alert($model->result);
 <form class="row row-cols-md-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12 position-relative">
         <label class="visually-hidden" for="name">Rota Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Name e.g. '22-2'" required />
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name e.g. '<?php echo $model->rota_period; ?>'" required />
         <div class="invalid-tooltip">Please enter the rota name.</div>
     </div>
     <div class="col-12 position-relative">
@@ -134,7 +134,7 @@ $this->alert($model->result);
                 <h5>Step One</h5>
                 <p>Log in to <a href="<?php _e($model->church_suite_href); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php _e($model->rota_href); ?>" target="_blank">here</a> to open the export page for the rota. (The dates will be set automatically to the current rota period - '<?php echo $model->rota_period; ?>', <?php echo $model->rota_period_first_day->format(C::$formats->display_day_and_month); ?> to <?php echo $model->rota_period_last_day->format(C::$formats->display_day_and_month); ?>.)</p>
+                <p>Click <a href="<?php _e($model->rota_href); ?>" target="_blank">here</a> to open the export page for the rota. (The dates will be set automatically to the current rota period: <?php echo $model->rota_period_first_day->format(C::$formats->display_day_and_month); ?> to <?php echo $model->rota_period_last_day->format(C::$formats->display_day_and_month); ?>.)</p>
                 <h5>Step Three</h5>
                 <p>Select the dates you wish to export - this should cover the entire period of the rota.</p>
                 <h5>Step Four</h5>
