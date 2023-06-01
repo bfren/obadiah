@@ -19,6 +19,7 @@ formats:
   csv_import_datetime: 'd-M-Yg:ia'
   display_date: 'D j M Y'
   display_day: 'D jS'
+  display_day_and_month: 'j F'
   display_month: 'F Y'
   display_time: 'H:i'
   ics_date: 'Ymd'

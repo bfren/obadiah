@@ -31,6 +31,13 @@ class Config_Formats
     public readonly string $display_day;
 
     /**
+     * Display day and month.
+     *
+     * @var string
+     */
+    public readonly string $display_day_and_month;
+
+    /**
      * Display month.
      *
      * @var string
@@ -104,6 +111,7 @@ class Config_Formats
         $this->csv_import_datetime = Arr::get($config, "csv_import_datetime", "d-M-Yg:ia");
         $this->display_date = Arr::get($config, "display_date", "D j M Y");
         $this->display_day = Arr::get($config, "display_day", "D jS");
+        $this->display_day_and_month = Arr::get($config, "display_day_and_month", "j F");
         $this->display_month = Arr::get($config, "display_month", "F Y");
         $this->display_time = Arr::get($config, "display_time", "H:i");
         $this->ics_date = Arr::get($config, "ics_date", "Ymd");

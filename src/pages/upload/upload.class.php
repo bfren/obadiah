@@ -2,6 +2,7 @@
 
 namespace Feeds\Pages\Upload;
 
+use DateTimeImmutable;
 use Feeds\Admin\Bible_File;
 use Feeds\Admin\Prayer_File;
 use Feeds\Admin\Result;
@@ -59,6 +60,15 @@ class Upload
         $bible_files = array_slice(scandir(C::$dir->bible), 2);
         sort($bible_files);
 
+        // calculate the current four-month period of the year
+        $month = date("n"); // month number without leading zeroes
+        $rota_period = ceil($month / 4);
+        $last_month = $rota_period * 4;
+        $first_month = $last_month - 3;
+
+        $rota_period_first_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $first_month, 1));
+        $rota_period_last_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $last_month, 1))->modify("last day of this month");
+
         // build Church Suite queries
         $rota_query = http_build_query(array(
             "_module" => "ChurchSuite\Rotas",
@@ -66,7 +76,9 @@ class Upload
             "_report_view_module" => "rotas",
             "_report_view_file" => "rotas_overview",
             "order_by" => "name",
-            "group_by" => "time"
+            "group_by" => "time",
+            "date_start" => $rota_period_first_day->format("Y-m-d"),
+            "date_end" => $rota_period_last_day->format("Y-m-d")
         ));
 
         $prayer_adults_query = http_build_query(array(
@@ -89,8 +101,12 @@ class Upload
             "tags" => array(31)
         ));
 
+        // return View
         return new View("upload", model: new Index_Model(
             result: $this->result,
+            rota_period: sprintf("%s-%s", date("y"), $rota_period),
+            rota_period_first_day: $rota_period_first_day,
+            rota_period_last_day: $rota_period_last_day,
             rota_files: $rota_files,
             prayer_files: $prayer_files,
             bible_files: $bible_files,
