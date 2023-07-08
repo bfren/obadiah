@@ -4,8 +4,8 @@ general:
   production: true
 
 airtable:
-  api_key: ''
   base: ''
+  personal_access_token: ''
 
 cache:
   duration_in_seconds: 3600

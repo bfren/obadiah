@@ -40,7 +40,7 @@ class Airtable
 
         // create curl request
         $handle = curl_init(sprintf("%s?%s", $this->url, $query));
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Bearer %s", C::$airtable->api_key)));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Bearer %s", C::$airtable->personal_access_token)));
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
         // make request and output on error

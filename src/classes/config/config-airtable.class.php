@@ -10,18 +10,18 @@ App::check();
 class Config_Airtable
 {
     /**
-     * API Key.
-     *
-     * @var string
-     */
-    public readonly string $api_key;
-
-    /**
      * Base reference.
      *
      * @var string
      */
     public readonly string $base;
+
+    /**
+     * Personal Access Token.
+     *
+     * @var string
+     */
+    public readonly string $personal_access_token;
 
     /**
      * Get values from Airtable configuration array.
@@ -31,7 +31,7 @@ class Config_Airtable
      */
     public function __construct(array $config)
     {
-        $this->api_key = Arr::get($config, "api_key", "");
         $this->base = Arr::get($config, "base", "");
+        $this->personal_access_token = Arr::get($config, "personal_access_token", "");
     }
 }
