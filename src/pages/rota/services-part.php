@@ -68,15 +68,15 @@ App::check();
 
                             <!-- Rota Roles -->
                             <div class="people collapse show mt-2">
-                                <?php foreach ($combined_service->roles as $role => $service_role) : ?>
+                                <?php foreach ($combined_service->ministries as $ministry => $service_ministry) : ?>
                                     <p class="mb-0">
                                         <?php
-                                        $names = join(", ", $service_role->people);
+                                        $names = join(", ", $service_ministry->people);
                                         $person = Request::$get->string("person");
                                         $highlighted = str_replace($person, sprintf("<span class=\"bg-warning\" style=\"--bs-bg-opacity: .5;\">%s</span>", $person), $names);
                                         ?>
-                                        <span class="role-name"><?php _e($role); ?></span>:
-                                        <span class="role-people text-muted"><?php _h($highlighted); ?></span>
+                                        <span class="ministry-name"><?php _e($ministry); ?></span>:
+                                        <span class="ministry-people text-muted"><?php _h($highlighted); ?></span>
                                     </p>
                                 <?php endforeach; ?>
                             </div>

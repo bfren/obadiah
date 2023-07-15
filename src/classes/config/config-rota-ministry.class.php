@@ -7,33 +7,33 @@ use Feeds\Helpers\Arr;
 
 App::check();
 
-class Config_Rota_Role
+class Config_Rota_Ministry
 {
     /**
-     * The Church Suite role name (e.g. 'Readings').
+     * The Church Suite ministry name (e.g. 'Readings').
      *
      * @var string
      */
     public readonly string $name;
 
     /**
-     * Optional role name override (e.g. 'Reader').
+     * Optional ministry name override (e.g. 'Reader').
      *
      * @var string
      */
     public readonly ?string $description;
 
     /**
-     * Optional role name abbreviation (e.g. 'R').
+     * Optional ministry name abbreviation (e.g. 'R').
      *
      * @var string
      */
     public readonly ?string $abbreviation;
 
     /**
-     * Get values from a rota configuration role array.
+     * Get values from a rota configuration ministries array.
      *
-     * @param array $config             Rota configuration roles array.
+     * @param array $config             Rota configuration ministries array.
      * @return void
      */
     public function __construct(array $config)

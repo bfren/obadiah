@@ -32,11 +32,11 @@ class Config_Rota
     public readonly DateInterval $default_length;
 
     /**
-     * Array of roles on this rota, with override descriptions and abbreviations.
+     * Array of ministries on this rota, with override descriptions and abbreviations.
      *
-     * @var Config_Rota_Role[]
+     * @var Config_Rota_Ministry[]
      */
-    public readonly array $roles;
+    public readonly array $ministries;
 
     /**
      * Get values from rota configuration array.
@@ -50,10 +50,10 @@ class Config_Rota
         $this->default_days = Arr::get($config, "default_days", 28);
         $this->default_length = new DateInterval(Arr::get($config, "default_length", "PT60M"));
 
-        $roles = array();
-        foreach (Arr::get($config, "roles") as $role) {
-            $roles[] = new Config_Rota_Role($role);
+        $ministries = array();
+        foreach (Arr::get($config, "ministries") as $ministry) {
+            $ministries[] = new Config_Rota_Ministry($ministry);
         }
-        $this->roles = $roles;
+        $this->ministries = $ministries;
     }
 }

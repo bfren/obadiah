@@ -25,9 +25,9 @@ class Person_Filter implements Filter
             return true;
         }
 
-        // loop through each role - the first time the person is matched, return true
-        foreach ($service->roles as $service_role) {
-            foreach ($service_role->people as $person) {
+        // loop through each ministry - the first time the person is matched, return true
+        foreach ($service->ministries as $service_ministry) {
+            foreach ($service_ministry->people as $person) {
                 if (str_starts_with($person, $value)) {
                     return true;
                 }
