@@ -14,9 +14,9 @@ App::check();
 class Builder
 {
     /**
-     * Character used to join roles in service summary descriptions.
+     * Character used to join ministries in service summary descriptions.
      */
-    private const ROLE_JOIN = "/";
+    private const MINISTRY_JOIN = "/";
 
     /**
      * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
@@ -84,7 +84,7 @@ class Builder
                     main_reading: $lectionary_service?->main_reading,
                     additional_reading: $lectionary_service?->additional_reading,
                     psalms: $lectionary_service?->psalms ?: array(),
-                    roles: $rota_service->roles
+                    ministries: $rota_service->ministries
                 );
             }
 
@@ -113,11 +113,11 @@ class Builder
     }
 
     /**
-     * Generate an event summary for a service, including role indicators for the specified person.
+     * Generate an event summary for a service, including ministry indicators for the specified person.
      *
      * @param Combined_Service $service     Service object.
      * @param null|string $person           Selected person.
-     * @return string                       Service name with role indicators.
+     * @return string                       Service name with ministry indicators.
      */
     public static function get_summary(Combined_Service $service, ?string $person = null): string
     {
@@ -129,39 +129,39 @@ class Builder
             return $summary;
         }
 
-        // look for certain roles
-        $roles = array();
-        foreach ($service->roles as $service_role) {
-            foreach ($service_role->people as $p) {
+        // look for certain ministries
+        $ministries = array();
+        foreach ($service->ministries as $service_ministry) {
+            foreach ($service_ministry->people as $p) {
                 if (str_starts_with($p, $person)) {
-                    $roles[] = $service_role->abbreviation;
+                    $ministries[] = $service_ministry->abbreviation;
                 }
             }
         }
 
-        // filter out blank roles
-        $filtered = array_filter($roles);
+        // filter out blank ministries
+        $filtered = array_filter($ministries);
 
-        // if there are no roles, return the summary
-        // if there are roles, but filtered is empty, that means there are roles
+        // if there are no ministries, return the summary
+        // if there are ministries, but filtered is empty, that means there are ministries
         // but they don't have abbreviations defined so add an asterisk instead
-        if (count($roles) == 0) {
+        if (count($ministries) == 0) {
             return $summary;
         } elseif (count($filtered) == 0) {
             return sprintf("%s (*)", $summary);
         }
 
-        // sort filtered roles and add to summary
+        // sort filtered ministries and add to summary
         sort($filtered);
-        return sprintf("%s (%s)", $summary, join(self::ROLE_JOIN, $filtered));
+        return sprintf("%s (%s)", $summary, join(self::MINISTRY_JOIN, $filtered));
     }
 
     /**
-     * Generate an event description for a service, including lectionary / teaching info and roles.
+     * Generate an event description for a service, including lectionary / teaching info and ministries.
      *
      * @param Combined_Day $day         Lectionary day information.
      * @param Combined_Service $service Service object.
-     * @param bool $include_people      If true, people and roles will be added to the description.
+     * @param bool $include_people      If true, people and ministries will be added to the description.
      * @param string $separator         Line separator.
      * @return string                   Event description.
      */
@@ -212,11 +212,11 @@ class Builder
             $description[] = "";
         }
 
-        // add roles
-        if ($include_people && $service->roles) {
-            $description[] = "= Roles =";
-            foreach ($service->roles as $name => $service_role) {
-                $description[] = sprintf("%s: %s", $name, join(", ", $service_role->people));
+        // add ministries
+        if ($include_people && $service->ministries) {
+            $description[] = "= Ministries =";
+            foreach ($service->ministries as $name => $service_ministry) {
+                $description[] = sprintf("%s: %s", $name, join(", ", $service_ministry->people));
             }
             $description[] = "";
         }

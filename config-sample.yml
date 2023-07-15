@@ -44,7 +44,7 @@ rota:
   bible_version: 'NIVUK'
   default_days: 28
   default_length: 'PT90M'
-  roles:
+  ministries:
     - { name: 'Intercessions', desc: 'Intercessor', abbv: 'I' }
     - { name: 'Preacher', abbv: 'Pr' }
     - { name: 'President', abbv: 'Ps' }
