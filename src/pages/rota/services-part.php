@@ -66,7 +66,7 @@ App::check();
                                 </p>
                             </div>
 
-                            <!-- Rota Roles -->
+                            <!-- Rota Ministries -->
                             <div class="people collapse show mt-2">
                                 <?php foreach ($combined_service->ministries as $ministry => $service_ministry) : ?>
                                     <p class="mb-0">

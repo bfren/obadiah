@@ -49,13 +49,13 @@ class Service
         $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), C::$events->timezone);
 
         // get the ministries
-        $this->ministries = $this->get_roles($data);
+        $this->ministries = $this->get_ministries($data);
 
         // get all the people involved in this service
         $people = array();
-        foreach ($this->ministries as $service_roles) {
+        foreach ($this->ministries as $service_ministries) {
             // remove extra information and merge arrays
-            $people = array_merge(preg_replace("/ \(.*\)/", "", $service_roles->people), $people);
+            $people = array_merge(preg_replace("/ \(.*\)/", "", $service_ministries->people), $people);
         }
 
         // sort alphabetically and remove duplicates
@@ -69,7 +69,7 @@ class Service
      * @param array $data               Associative array of service data.
      * @return Service_Ministry[]       Associative array of ministries.
      */
-    private function get_roles(array $data): array
+    private function get_ministries(array $data): array
     {
         // create empty ministries array
         $ministries = array();

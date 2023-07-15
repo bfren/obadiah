@@ -16,7 +16,7 @@ class Builder
     /**
      * Character used to join ministries in service summary descriptions.
      */
-    private const ROLE_JOIN = "/";
+    private const MINISTRY_JOIN = "/";
 
     /**
      * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
@@ -131,10 +131,10 @@ class Builder
 
         // look for certain ministries
         $ministries = array();
-        foreach ($service->ministries as $service_role) {
-            foreach ($service_role->people as $p) {
+        foreach ($service->ministries as $service_ministry) {
+            foreach ($service_ministry->people as $p) {
                 if (str_starts_with($p, $person)) {
-                    $ministries[] = $service_role->abbreviation;
+                    $ministries[] = $service_ministry->abbreviation;
                 }
             }
         }
@@ -153,7 +153,7 @@ class Builder
 
         // sort filtered ministries and add to summary
         sort($filtered);
-        return sprintf("%s (%s)", $summary, join(self::ROLE_JOIN, $filtered));
+        return sprintf("%s (%s)", $summary, join(self::MINISTRY_JOIN, $filtered));
     }
 
     /**
@@ -214,9 +214,9 @@ class Builder
 
         // add ministries
         if ($include_people && $service->ministries) {
-            $description[] = "= Roles =";
-            foreach ($service->ministries as $name => $service_role) {
-                $description[] = sprintf("%s: %s", $name, join(", ", $service_role->people));
+            $description[] = "= Ministries =";
+            foreach ($service->ministries as $name => $service_ministry) {
+                $description[] = sprintf("%s: %s", $name, join(", ", $service_ministry->people));
             }
             $description[] = "";
         }

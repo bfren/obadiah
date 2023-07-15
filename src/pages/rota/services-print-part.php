@@ -58,7 +58,7 @@ App::check();
                                 <?php endif; ?>
                             </div>
                             <div class="col">
-                                <!-- Rota Roles -->
+                                <!-- Rota Ministries -->
                                 <div class="people small">
                                     <?php foreach ($combined_service->ministries as $ministry => $service_ministry) : ?>
                                         <p class="mb-0">
