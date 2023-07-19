@@ -42,6 +42,7 @@ class Lectionary
         $days_fields = array(
             "Date",
             "Name",
+            "Colour",
             "Collect"
         );
         $days_records = $days->make_request(array("view" => "Feed", "fields" => $days_fields));
@@ -103,7 +104,13 @@ class Lectionary
             }
 
             // add Day to Lectionary
-            $days[] = new Day($date, Arr::get($day_fields, "Name"), Arr::get($day_fields, "Collect"), $l_services);
+            $days[] = new Day(
+                date: $date,
+                name: Arr::get($day_fields, "Name"),
+                colour: Arr::get($day_fields, "Colour"),
+                collect: Arr::get($day_fields, "Collect"),
+                services: $l_services
+            );
         }
 
         // store days

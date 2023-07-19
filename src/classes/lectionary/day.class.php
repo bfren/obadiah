@@ -16,13 +16,15 @@ class Day
      *
      * @param string $date              String (sortable) representation of the date for this day in the lectionary.
      * @param null|string $name         The name of this day in the lectionary (e.g. 8th after Trinity).
+     * @param null|string $colour       The liturgical colour of the day (e.g. White/Gold).
      * @param null|string $collect      The Collect for today.
-     * @param Service[] $services       List of services on this particular day, sorted by start time.
+     * @param Service[] $services       Array of services on this particular day, sorted by start time.
      * @return void
      */
     public function __construct(
         public readonly string $date,
         public readonly ?string $name,
+        public readonly ?string $colour,
         public readonly ?string $collect,
         public readonly array $services
     ) {
