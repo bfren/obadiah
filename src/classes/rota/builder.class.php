@@ -92,6 +92,7 @@ class Builder
             $rota[$lectionary_day->date] = new Combined_Day(
                 date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$events->timezone)->setTime(0, 0),
                 name: $lectionary_day->name,
+                colour: $lectionary_day->colour,
                 collect: $lectionary_day->collect ?: $sunday_collect,
                 services: $c_services
             );
@@ -175,8 +176,8 @@ class Builder
         $description = array();
 
         // add lectionary info
-        if ($day->name) {
-            $description[] = $day->name;
+        if ($day->name && $day->colour) {
+            $description[] = sprintf("%s (%s)", $day->name, $day->colour);
             $description[] = "";
         }
 
