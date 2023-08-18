@@ -103,9 +103,10 @@ class Events
         foreach ($calendar as $event) {
             // get location
             $location_data = Arr::get($event, "location", array());
-            $location = Arr::get($location_data, "name", C::$events->default_location);
             if(($address = Arr::get($location_data, "address")) !== null) {
-                $location = sprintf("%s (%s)", $location, $address);
+                $location = $address;
+            } else {
+                $location = Arr::get($location_data, "name", C::$events->default_location);
             }
 
             // build and event to the array
