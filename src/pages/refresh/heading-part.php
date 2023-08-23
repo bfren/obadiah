@@ -15,7 +15,7 @@ App::check();
 
 <h2 class="prayer-calendar-title row">
     <div class="col-3"><a href="/prayer"><?php Image::echo_logo("logo me-4"); ?></a></div>
-    <div class="col-6 text-center">re<strong>fresh</strong> Calendar</div>
+    <div class="col-6 text-center">Refresh Calendar</div>
     <div class="col-3 text-end"><?php _e($model); ?></div>
 </h2>
 
