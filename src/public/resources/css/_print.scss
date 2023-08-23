@@ -55,4 +55,13 @@ html.print {
             }
         }
     }
+
+    .prayer-calendar-days {
+        .readings {
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    }
 }
