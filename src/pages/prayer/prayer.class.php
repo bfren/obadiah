@@ -8,6 +8,7 @@ use Feeds\Admin\Require_Admin;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;
+use Feeds\Config\Config as C;
 use Feeds\Prayer\Month;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
@@ -32,9 +33,11 @@ class Prayer
      */
     public function index_get(): View
     {
+        $next_month = new DateTimeImmutable("next month");
         return new View("prayer", model: new Index_Model(
             result: $this->result,
-            months: Cache::get_prayer_calendar()->get_months()
+            months: Cache::get_prayer_calendar()->get_months(),
+            next_month: $next_month->format(C::$formats->prayer_month_id)
         ));
     }
 

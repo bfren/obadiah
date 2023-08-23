@@ -49,7 +49,7 @@ $this->alert($model->result);
     <form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="GET" action="/prayer/edit/" novalidate>
         <div class="col-12 position-relative">
             <label class="visually-hidden" for="for">Month</label>
-            <input type="text" class="form-control" id="for" name="for" placeholder="Month e.g. '2022-12'" required />
+            <input type="text" class="form-control" id="for" name="for" placeholder="Month e.g. '<?php _e($model->next_month); ?>'" required />
             <div class="invalid-tooltip">Please enter the month to create a prayer calendar for.</div>
         </div>
         <div class="col-12">
