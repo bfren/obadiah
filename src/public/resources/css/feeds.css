@@ -134,7 +134,7 @@ form input[type=time] {
 
 @media print {
   @page {
-    margin: 8mm;
+    margin: 7mm;
   }
 }
 html.print,
@@ -158,7 +158,7 @@ html.print .rota-services.row .card .card-subtitle {
   display: inline;
 }
 html.print .rota-services.row .card .card-title {
-  margin-right: 8mm;
+  margin-right: 7mm;
 }
 html.print .rota-services.row .card .details {
   display: flex;
