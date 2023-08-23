@@ -24,7 +24,7 @@ $this->header(new Header_Model("Refresh"));
 ?>
 
 <h2><?php _e($model->today->date->format(C::$formats->display_date)); ?></h2>
-<p>Today’s entry on the Refresh calendar.</p>
+<p>Today&rsquo;s entry on the Refresh calendar.</p>
 
 <?php if ($model->today->people) : ?>
     <h3>People</h3>
@@ -47,7 +47,7 @@ $this->header(new Header_Model("Refresh"));
 <?php endif; ?>
 
 <h2><?php _e($this_month_text); ?></h2>
-<p>View a printable version of this month’s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>" target="_blank">here</a>.</p>
+<p>View a printable version of this month&rsquo;s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>" target="_blank">here</a>.</p>
 
 <?php
 

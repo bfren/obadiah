@@ -24,7 +24,7 @@ $lectionary = Cache::get_lectionary();
 $prayer_calendar = Cache::get_prayer_calendar();
 
 // output header
-$this->header(new Header_Model("Prayer"), variant: "print");
+$this->header(new Header_Model("Refresh Calendar"), variant: "print");
 
 // output two pages
 for ($i=0; $i<2; $i++) {
