@@ -47,7 +47,7 @@ $this->header(new Header_Model("Refresh"));
 <?php endif; ?>
 
 <h2><?php _e($this_month_text); ?></h2>
-<p>View a printable version of this month’s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>">here</a>.</p>
+<p>View a printable version of this month’s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>" target="_blank">here</a>.</p>
 
 <?php
 
