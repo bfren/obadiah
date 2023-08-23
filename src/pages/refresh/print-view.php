@@ -17,8 +17,11 @@ App::check();
 // during the loop 'current' is modified by adding one day until it reaches the last day
 $current = $model->first_day;
 
-// get the Bible reading plan
-$bible = Cache::get_bible_plan();
+// get Bible plan, prayer calendar and lectionary from the cache
+// we do this here so they can be reused instead of reloaded for each day
+$bible_plan = Cache::get_bible_plan();
+$lectionary = Cache::get_lectionary();
+$prayer_calendar = Cache::get_prayer_calendar();
 
 // output header
 $this->header(new Header_Model("Prayer"), variant: "print");
@@ -26,10 +29,7 @@ $this->header(new Header_Model("Prayer"), variant: "print");
 // output two pages
 for ($i=0; $i<2; $i++) {
 
-    // heading
     $this->part("heading", model: $model->month);
-
-    // days
 ?>
 
 <div class="row prayer-calendar-days">
@@ -38,7 +38,7 @@ for ($i=0; $i<2; $i++) {
     <div class="col-4">
         <?php
         for ($j=0; $j<7; $j++) {
-            $this->part("day", model: $current);
+            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
             $current = $current->modify("+1 day");
         }
         ?>
@@ -54,7 +54,7 @@ for ($i=0; $i<2; $i++) {
     <div class="col-4">
         <?php
         for ($j=0; $j<7; $j++) {
-            $this->part("day", model: $current);
+            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
             $current = $current->modify("+1 day");
         }
         ?>
@@ -67,7 +67,7 @@ for ($i=0; $i<2; $i++) {
     <div class="col-4">
         <?php
         for ($j=0; $j<7; $j++) {
-            $this->part("day", model: $current);
+            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
             $current = $current->modify("+1 day");
         }
         ?>
