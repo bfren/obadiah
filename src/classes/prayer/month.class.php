@@ -84,7 +84,7 @@ class Month
      *
      * @return null|string              This month e.g. 'January 2022'.
      */
-    public function get_display_month(): ?string
+    public function get_display_text(): ?string
     {
         $dt = $this->get_first_day_of_month();
         if ($dt) {
