@@ -113,11 +113,11 @@ class Prayer
     public function print_get(): View
     {
         // get requested month
-        $month_id = Request::$get->string("month");
-        $month = Month::load($month_id);
+        $this_month_id = Request::$get->string("month");
+        $this_month = Month::load($this_month_id);
 
         return new View("prayer", name: "print", model: new Print_Model(
-            month: $month
+            this_month: $this_month
         ));
     }
 }

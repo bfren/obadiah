@@ -14,19 +14,19 @@ App::check();
 /** @var Print_Model $model */
 
 // get the first day of this month
-$current = $model->month->get_first_day_of_month();
+$current = $model->this_month->get_first_day_of_month();
 
 // output header
 $this->header(new Header_Model("Prayer"), variant: "print");
 
 ?>
 
-<?php if ($model->month->people) : ?>
+<?php if ($model->this_month->people) : ?>
 
     <h2 class="prayer-calendar-title row">
         <div class="col-4"><a href="/prayer"><?php Image::echo_logo("logo me-4"); ?></a></div>
         <div class="col-4 text-center">Prayer Calendar</div>
-        <div class="col-4 text-end"><?php _e($model->month->get_display_month()); ?></div>
+        <div class="col-4 text-end"><?php _e($model->this_month->get_display_month()); ?></div>
     </h2>
 
     <div class="row prayer-calendar-days">

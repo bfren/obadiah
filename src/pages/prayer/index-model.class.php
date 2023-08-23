@@ -10,10 +10,10 @@ App::check();
 class Index_Model
 {
     /**
+     * Create Index model.
      *
-     * @param null|Result $result
-     * @param string[] $months
-     * @return void
+     * @param null|Result $result       Operation result.
+     * @param string[] $months          Array of months in the cache.
      */
     public function __construct(
         public readonly ?Result $result,

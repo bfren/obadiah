@@ -15,7 +15,6 @@ class Header_Model
      * @param null|string $subtitle     Optional page subtitle.
      * @param null|string $class        Optional class for HTML tag.
      * @param bool $overflow_scroll     Enable overflow scroll for this page.
-     * @return void
      */
     public function __construct(
         public readonly string $title,

@@ -14,7 +14,6 @@ class Index_Model
      * @param array $this_week          Rota filter values to show this week's services.
      * @param array $upcoming           Rota filter values to show upcoming Sunday services.
      * @param array $refresh            Query values to enable refresh ICS feed.
-     * @return void
      */
     public function __construct(
         public readonly array $this_week,

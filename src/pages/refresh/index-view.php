@@ -11,7 +11,7 @@ use Feeds\Response\View;
 App::check();
 
 /** @var View $this */
-/** @var Day $model */
+/** @var Index_Model $model */
 
 // output header
 $this->header(new Header_Model("Refresh", "View today’s entry on the Refresh calendar."));
