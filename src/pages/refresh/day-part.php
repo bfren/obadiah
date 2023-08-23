@@ -1,10 +1,11 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Feeds\Pages\Refresh;
 
 use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Cache\Cache;
+use Feeds\Response\View;
 
 App::check();
 
@@ -12,6 +13,7 @@ App::check();
 /** @var DateTimeImmutable $model */
 
 // get prayer calendar and lectionary
+$bible_plan = Cache::get_bible_plan();
 $lectionary = Cache::get_lectionary();
 $prayer_calendar = Cache::get_prayer_calendar();
 
@@ -22,6 +24,8 @@ if ($model->format("N") == 7) {
     $services = $lectionary_day?->services;
 } else {
     $people = $prayer_calendar->get_day($model);
+    $readings = $bible_plan->get_day($model);
+    $services = array();
 }
 
 ?>
@@ -37,11 +41,7 @@ if ($model->format("N") == 7) {
         </div>
     </div>
     <div class="content">
-        <?php if (isset($people)) : ?>
-            <div class="people">
-                <?php _e(join(", ", $people)); ?>
-            </div>
-        <?php elseif (isset($lectionary_day) && isset($services)) : ?>
+        <?php if (isset($lectionary_day)) : ?>
             <div class="services">
                 <div class="fw-bold"><?php _e($lectionary_day->name); ?></div>
                 <?php foreach ($services as $service) : ?>
@@ -51,13 +51,30 @@ if ($model->format("N") == 7) {
                             <?php if ($service->main_reading) : ?>
                                 <?php _e($service->main_reading); ?>
                                 <?php if ($service->additional_reading) _e("& %s", $service->additional_reading); ?>
-                            <?php else : ?>
-                                <?php _e($service->title); ?>
+                                <br/>
                             <?php endif; ?>
+                            <?php _e($service->title); ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+        <?php else : ?>
+            <?php if (isset($people)) : ?>
+                <div class="people">
+                    <?php _h(join(", ", array_map(function ($name) { return str_replace(" ", "&nbsp;", $name); }, $people))); ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($readings)) : ?>
+                <div class="readings text-body-secondary">
+                    <?php
+                        $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms));
+                        $this->part("reading", model: $readings->ot_1);
+                        $this->part("reading", model: $readings->ot_2);
+                        $this->part("reading", model: $readings->nt_gospels);
+                        $this->part("reading", model: $readings->nt_epistles);
+                    ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
     <div class="clear"></div>

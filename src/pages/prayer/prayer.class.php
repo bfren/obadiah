@@ -79,6 +79,7 @@ class Prayer
             return $this->index_get();
         }
 
+        // create edit view
         return new View("prayer", name: "edit", model: new Edit_Model(
             result: $this->result,
             prayer: $prayer_calendar,
@@ -103,21 +104,5 @@ class Prayer
 
         // return index page
         return $this->index_get();
-    }
-
-    /**
-     * GET: /prayer/print
-     *
-     * @return View
-     */
-    public function print_get(): View
-    {
-        // get requested month
-        $this_month_id = Request::$get->string("month");
-        $this_month = Month::load($this_month_id);
-
-        return new View("prayer", name: "print", model: new Print_Model(
-            this_month: $this_month
-        ));
     }
 }
