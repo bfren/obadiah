@@ -42,8 +42,10 @@ class Bible_Plan
             App::die("Unable to read the file: %s.", $file_info->getRealPath());
         }
 
-        // read each row
+        // build array of days
         $days = array();
+        $trim = fn ($input) => trim(str_replace("\"", "", $input));
+
         while (!$file_obj->eof()) {
             // read the next line
             $line = $file_obj->fgets();
@@ -56,11 +58,11 @@ class Bible_Plan
 
             // read values
             $days[$values[0]] = new Day(
-                ot_psalms: trim($values[1]),
-                ot_1: trim($values[2]),
-                ot_2: trim($values[3]),
-                nt_gospels: trim($values[4]),
-                nt_epistles: trim($values[5])
+                ot_psalms: $trim($values[1]),
+                ot_1: $trim($values[2]),
+                ot_2: $trim($values[3]),
+                nt_gospels: $trim($values[4]),
+                nt_epistles: $trim($values[5])
             );
         }
 
