@@ -1,6 +1,6 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Feeds\Pages\Parts\Reading;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
