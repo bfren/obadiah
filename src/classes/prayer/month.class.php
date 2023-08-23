@@ -2,6 +2,7 @@
 
 namespace Feeds\Prayer;
 
+use DateInterval;
 use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
@@ -48,6 +49,34 @@ class Month
 
         // parse month ID as date
         return new DateTimeImmutable(sprintf("%s-01", $this->id));
+    }
+
+    /**
+     * Get last Month's prayer calendar.
+     *
+     * Returns blank if the calendar does not exist.
+     *
+     * @return Month                    Last month's prayer calendar.
+     */
+    public function get_last_month(): Month
+    {
+        $first_day = $this->get_first_day_of_month();
+        $last_month = $first_day->sub(new DateInterval("P1M"));
+        return Month::load($last_month->format(C::$formats->prayer_month_id));
+    }
+
+    /**
+     * Get next Month's prayer calendar.
+     *
+     * Returns blank if the calendar does not exist.
+     *
+     * @return Month                    Next month's prayer calendar.
+     */
+    public function get_next_month(): Month
+    {
+        $first_day = $this->get_first_day_of_month();
+        $next_month = $first_day->add(new DateInterval("P1M"));
+        return Month::load($next_month->format(C::$formats->prayer_month_id));
     }
 
     /**
