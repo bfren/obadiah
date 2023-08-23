@@ -24,8 +24,6 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <h2>Rota</h2>
 <p>To view this week&rsquo;s services, please click <a href="/rota/?<?php _e(http_build_query($model->this_week)); ?>">here</a>.</p>
-
-<h3>Printable</h3>
 <p>The following links will give you quick and printable rotas for upcoming services.</p>
 <p><a href="/rota/notices/?<?php _e(http_build_query($model->upcoming)); ?>">Sunday services for the next four weeks</a></p>
 
