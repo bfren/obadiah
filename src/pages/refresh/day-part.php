@@ -67,7 +67,7 @@ if ($model->format("N") == 7) {
             <?php if (isset($readings)) : ?>
                 <div class="readings text-body-secondary">
                     <?php
-                        $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms));
+                        $this->part("reading", model: sprintf("Ps. %s", $readings->ot_psalms));
                         $this->part("reading", model: $readings->ot_1);
                         $this->part("reading", model: $readings->ot_2);
                         $this->part("reading", model: $readings->nt_gospels);
