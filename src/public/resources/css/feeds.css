@@ -93,6 +93,7 @@ form input[type=time] {
   margin-left: 10px;
 }
 .prayer-calendar-days .day .content .readings {
+  font-size: 0.7rem;
   margin-top: 2px;
 }
 .prayer-calendar-days .day .content .readings a {
