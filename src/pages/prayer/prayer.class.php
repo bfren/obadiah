@@ -8,6 +8,7 @@ use Feeds\Admin\Require_Admin;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;
+use Feeds\Config\Config as C;
 use Feeds\Prayer\Month;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
@@ -32,9 +33,11 @@ class Prayer
      */
     public function index_get(): View
     {
+        $next_month = new DateTimeImmutable("next month");
         return new View("prayer", model: new Index_Model(
             result: $this->result,
-            months: Cache::get_prayer_calendar()->get_months()
+            months: Cache::get_prayer_calendar()->get_months(),
+            next_month: $next_month->format(C::$formats->prayer_month_id)
         ));
     }
 
@@ -79,6 +82,7 @@ class Prayer
             return $this->index_get();
         }
 
+        // create edit view
         return new View("prayer", name: "edit", model: new Edit_Model(
             result: $this->result,
             prayer: $prayer_calendar,
@@ -103,21 +107,5 @@ class Prayer
 
         // return index page
         return $this->index_get();
-    }
-
-    /**
-     * GET: /prayer/print
-     *
-     * @return View
-     */
-    public function print_get(): View
-    {
-        // get requested month
-        $month_id = Request::$get->string("month");
-        $month = Month::load($month_id);
-
-        return new View("prayer", name: "print", model: new Print_Model(
-            month: $month
-        ));
     }
 }

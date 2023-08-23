@@ -21,7 +21,6 @@ class Index_Model
      * @param string $rota_href             Church Suite rota download URI.
      * @param string $prayer_adults_href    Church Suite address book download URI.
      * @param string $prayer_children_href  Church Suite children download URI.
-     * @return void
      */
     public function __construct(
         public readonly ?Result $result,

@@ -13,7 +13,6 @@ class Index_Model
      * Create Index model.
      *
      * @param Day $today                Today's refresh calendar values.
-     * @return void
      */
     public function __construct(
         public readonly Day $today

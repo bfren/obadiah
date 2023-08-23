@@ -18,7 +18,6 @@ class Index_Model
      * @param array $people                 All the people in the rota.
      * @param array $series                 All the series in the rota.
      * @param Combined_Day[] $days          The days containing service information.
-     * @return void
      */
     public function __construct(
         public readonly array $filters,

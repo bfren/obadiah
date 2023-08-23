@@ -1,6 +1,6 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Feeds\Pages\Parts\Reading;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
@@ -19,4 +19,4 @@ $url = sprintf("https://www.biblegateway.com/passage/?%s", http_build_query($par
 
 ?>
 
-<a href="<?php _e($url) ?>" target="_blank"><?php _e($model) ?></a>
+<a href="<?php _e($url) ?>" target="_blank"><?php _h(str_replace(" ", "&nbsp;", $model)) ?></a>

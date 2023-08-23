@@ -3,8 +3,22 @@ $margin: 5px;
 
 .prayer-calendar-title {
     margin-top: 0 !important;
-    margin-bottom: 0;
-    padding-bottom: $margin;
+    margin-bottom: $margin;
+    padding-bottom: 4px;
+}
+
+.prayer-calendar-verse {
+    font-weight: bold;
+    margin: calc($margin * 0.5) 0;
+    text-align: center;
+
+    .ref {
+        color: grey;
+        font-size: 0.9rem;
+        font-style: italic;
+        font-weight: normal;
+        padding-left: $margin;
+    }
 }
 
 .prayer-calendar-days {
@@ -12,22 +26,9 @@ $margin: 5px;
         padding: 0 0.25rem;
     }
 
-    .verse {
-        font-weight: bold;
-        margin: calc($margin * 0.5) 0;
-        text-align: center;
-
-        .ref {
-            color: grey;
-            font-size: 0.9rem;
-            font-style: italic;
-            font-weight: normal;
-            padding-left: $margin;
-        }
-    }
-
     .day {
         margin-top: $margin;
+        min-height: 80px;
 
         $size: 48px;
 
@@ -77,10 +78,18 @@ $margin: 5px;
                     }
                 }
             }
+
+            .readings {
+                font-size: 0.7rem;
+                margin-top: 2px;
+
+                a {
+                    margin: 0 0.5rem 0 0;
+                }
+            }
         }
 
         .clear {
-            border-bottom: 1px solid #dee2e6;
             clear: both;
             margin-left: $size + $margin;
         }
@@ -88,7 +97,7 @@ $margin: 5px;
 
     .guidance {
         background-color: #dee2e6;
-        margin-top: $margin;
+        margin-top: calc($margin * 1.4);
         padding: 2px 4px;
 
         p {
@@ -108,7 +117,7 @@ $margin: 5px;
 .footer-prayer {
     p {
         line-height: $line-height;
-        margin: 3px 0;
+        margin: 0;
         padding: 0;
     }
 }
