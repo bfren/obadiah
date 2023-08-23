@@ -58,8 +58,8 @@ class Refresh
             // create day object
             $day = new Day(
                 date: $value,
-                readings: $bible->get_day($value),
-                people: $prayer->get_day($value)
+                people: $prayer->get_day($value),
+                readings: $bible->get_day($value)
             );
 
             // set today
@@ -76,7 +76,7 @@ class Refresh
 
         // if today has not been set, create an empty one for today
         if (!isset($this->today)) {
-            $this->today = new Day($today, null, array());
+            $this->today = new Day($today, people: array(), readings: null);
         }
     }
 }

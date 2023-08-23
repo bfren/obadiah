@@ -15,14 +15,14 @@ class Day
      * Create Day object.
      *
      * @param DateTimeImmutable $date   The date.
-     * @param null|Readings $readings   Bible readings.
      * @param string[] $people          Array of people.
+     * @param null|Readings $readings   Bible readings.
      * @return void
      */
     public function __construct(
         public readonly DateTimeImmutable $date,
-        public readonly ?Readings $readings,
-        public readonly array $people
+        public readonly array $people,
+        public readonly ?Readings $readings
     ) {
     }
 
@@ -46,6 +46,13 @@ class Day
     {
         $description = array();
 
+        // add people
+        if (!empty($this->people)) {
+            $description[] = "= People =";
+            $description[] = join($separator, $this->people);
+            $description[] = "";
+        }
+
         // add readings
         if ($this->readings) {
             $description[] = "= Readings =";
@@ -54,13 +61,6 @@ class Day
             $description[] = $this->readings->ot_2;
             $description[] = $this->readings->nt_gospels;
             $description[] = $this->readings->nt_epistles;
-            $description[] = "";
-        }
-
-        // add people
-        if (!empty($this->people)) {
-            $description[] = "= People =";
-            $description[] = join($separator, $this->people);
             $description[] = "";
         }
 
