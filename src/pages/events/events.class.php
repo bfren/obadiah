@@ -101,6 +101,18 @@ class Events
         // build events array
         $events = array();
         foreach ($calendar as $event) {
+            // get title
+            $title = Arr::get($event, "name");
+
+            // get status - can be 'confirmed', 'pending' or 'cancelled'
+            // add flag to title if necessary
+            $status = Arr::get($event, "status");
+            if ($status == "cancelled") {
+                $title = sprintf("%s %s", C::$events->cancelled_flag, $title);
+            } else if ($status == "pending") {
+                $title = sprintf("%s %s", C::$events->pending_flag, $title);
+            }
+
             // get location
             $location_data = Arr::get($event, "location", array());
             if(($address = Arr::get($location_data, "address")) !== null) {
@@ -114,7 +126,7 @@ class Events
                 uid: Arr::get($event, "id"),
                 start: new DateTimeImmutable(Arr::get($event, "datetime_start"), C::$events->timezone),
                 end: new DateTimeImmutable(Arr::get($event, "datetime_end"), C::$events->timezone),
-                title: Arr::get($event, "name"),
+                title: $title,
                 location: $location,
                 description: Arr::get($event, "description")
             );

@@ -11,8 +11,10 @@ cache:
   duration_in_seconds: 3600
 
 events:
+  cancelled_flag: '[Cancelled]'
   default_location: 'Church'
   length_in_minutes: 60
+  pending_flag: '[tbc]'
   timezone: 'Europe/London'
 
 formats:
