@@ -11,6 +11,13 @@ App::check();
 class Config_Events
 {
     /**
+     * Prepended to events that have a status of 'cancelled'.
+     *
+     * @var string
+     */
+    public readonly string $cancelled_flag;
+
+    /**
      * Location to use in case it is not set for a service or event.
      *
      * @var string
@@ -23,6 +30,13 @@ class Config_Events
      * @var int
      */
     public readonly int $length_in_minutes;
+
+    /**
+     * Prepended to events that have a status of 'pending'.
+     *
+     * @var string
+     */
+    public readonly string $pending_flag;
 
     /**
      * Default timezone.
@@ -39,8 +53,10 @@ class Config_Events
      */
     public function __construct(array $config)
     {
+        $this->cancelled_flag = Arr::get($config, "cancelled_flag", "[Cancelled]");
         $this->default_location = Arr::get($config, "default_location", "Church");
         $this->length_in_minutes = Arr::get($config, "length_in_minutes", 60);
+        $this->pending_flag = Arr::get($config, "pending_flag", "[tbc]");
         $this->timezone = new DateTimeZone(Arr::get($config, "timezone", "Europe/London"));
     }
 }
