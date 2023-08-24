@@ -109,6 +109,18 @@ class Events
                 $location = Arr::get($location_data, "name", C::$events->default_location);
             }
 
+            // get description
+            $description = Arr::get($event, "description");
+
+            // get status - can be 'confirmed', 'pending' or 'cancelled'
+            // add flag to description if necessary
+            $status = Arr::get($event, "status");
+            if ($status == "cancelled") {
+                $description = sprintf("%s %s", C::$events->cancelled_flag, $description);
+            } else if ($status == "pending") {
+                $description = sprintf("%s %s", C::$events->pending_flag, $description);
+            }
+
             // build and event to the array
             $events[] = new Event(
                 uid: Arr::get($event, "id"),
@@ -116,7 +128,7 @@ class Events
                 end: new DateTimeImmutable(Arr::get($event, "datetime_end"), C::$events->timezone),
                 title: Arr::get($event, "name"),
                 location: $location,
-                description: Arr::get($event, "description")
+                description: $description
             );
         }
 
