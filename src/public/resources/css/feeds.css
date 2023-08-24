@@ -29,6 +29,7 @@ form input[type=time] {
 }
 
 .prayer-calendar-title {
+  border: 0;
   margin-top: 0 !important;
   margin-bottom: 5px;
   padding-bottom: 4px;
@@ -52,7 +53,7 @@ form input[type=time] {
 }
 .prayer-calendar-days .day {
   margin-top: 5px;
-  min-height: 80px;
+  min-height: 88px;
 }
 .prayer-calendar-days .day .date {
   border: 1px solid #adb5bd;
@@ -84,10 +85,12 @@ form input[type=time] {
   line-height: 1;
 }
 .prayer-calendar-days .day .content {
+  border-top: 1px solid #adb5bd;
   font-size: 0.8rem;
   height: 100%;
   line-height: 1.2;
   margin-left: 53px;
+  padding-top: 1px;
 }
 .prayer-calendar-days .day .content .services .service .teaching {
   margin-left: 10px;
@@ -119,7 +122,7 @@ form input[type=time] {
   font-weight: 600;
 }
 
-.footer-prayer p {
+.prayer-page-footer p {
   line-height: 1.2;
   margin: 0;
   padding: 0;
