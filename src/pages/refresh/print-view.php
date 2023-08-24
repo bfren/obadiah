@@ -34,53 +34,24 @@ for ($i=0; $i<2; $i++) {
 
 <div class="row prayer-calendar-days">
 
-    <!-- Left-hand column -->
+<?php for ($j=0; $j<3; $j++) : ?>
+
     <div class="col-4">
         <?php
-        for ($j=0; $j<7; $j++) {
+        for ($k=0; $k<7; $k++) {
             $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
             $current = $current->modify("+1 day");
         }
         ?>
-        <div class="guidance rounded">
-            <p>
-                If you don&rsquo;t know someone you can still pray...<br />
-                And then, why not try to find out who they are?
-            </p>
-        </div>
     </div>
 
-    <!-- Middle column -->
-    <div class="col-4">
-        <?php
-        for ($j=0; $j<7; $j++) {
-            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
-            $current = $current->modify("+1 day");
-        }
-        ?>
-        <div class="guidance rounded">
-            <p class="prayer">&lsquo;Father, may <em>N</em> know your love, be filled with your Spirit, and share Jesus in all they do and say.&rsquo;</p>
-        </div>
-    </div>
-
-    <!-- Right-hand column -->
-    <div class="col-4">
-        <?php
-        for ($j=0; $j<7; $j++) {
-            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
-            $current = $current->modify("+1 day");
-        }
-        ?>
-        <div class="guidance rounded">
-            <p>
-                If you don&rsquo;t wish to be included, you can remove yourself in Church Suite or by contacting the office.
-            </p>
-        </div>
-    </div>
+<?php endfor; ?>
 
 </div>
 
 <?php
+    $this->part(sprintf("page-%s-footer", $i));
+
 }
 
-$this->footer("prayer");
+$this->footer("blank");
