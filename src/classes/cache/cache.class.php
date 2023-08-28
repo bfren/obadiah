@@ -5,6 +5,7 @@ namespace Feeds\Cache;
 use Feeds\App;
 use Feeds\Bible\Bible_Plan;
 use Feeds\Calendar\Event;
+use Feeds\ChurchSuite\Api;
 use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Prayer_Calendar;
@@ -31,6 +32,11 @@ class Cache
      * Lectionary cache name.
      */
     public const LECTIONARY = "lectionary";
+
+    /**
+     * People cache name.
+     */
+    public const PEOPLE = "people";
 
     /**
      * Prayer Calendar cache name.
@@ -111,6 +117,16 @@ class Cache
     public static function clear_lectionary(): void
     {
         self::clear(self::LECTIONARY);
+    }
+
+    /**
+     * Clear the People cache.
+     *
+     * @return void
+     */
+    public static function clear_people(): void
+    {
+        self::clear(self::PEOPLE);
     }
 
     /**
@@ -221,6 +237,28 @@ class Cache
     public static function get_lectionary_last_modified(): int
     {
         $path = self::get_cache_file_path(self::LECTIONARY);
+        return self::get_last_modified($path);
+    }
+
+    /**
+     * Get People from the cache (or retrieve from ChurchSuite).
+     *
+     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
+     * @return People[]                 Array of People.
+     */
+    public static function get_people(bool $force = false): array
+    {
+        return self::get_or_set(self::PEOPLE, fn () => Api::get_prayer_calendar_people(), force: $force);
+    }
+
+    /**
+     * Get the People last modified timestamp.
+     *
+     * @return int                      People last modified timestamp.
+     */
+    public static function get_people_last_modified(): int
+    {
+        $path = self::get_cache_file_path(self::PEOPLE);
         return self::get_last_modified($path);
     }
 

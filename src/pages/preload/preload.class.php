@@ -42,6 +42,9 @@ class Preload
             // Airtable lectionary
             "lectionary" => self::load(fn () => Cache::get_lectionary(true)),
 
+            // People
+            "people" => self::load(fn () => Cache::get_people(true)),
+
             // Prayer Calendar
             "prayer" => self::load(fn () => Cache::get_prayer_calendar(true)),
 
