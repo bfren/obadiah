@@ -50,15 +50,15 @@ prayer:
   day_29: [ '' ]
   day_30: [ '' ]
   day_31: [ '' ]
-  footer_page_1_left: 'If you don&rsquo;t know someone, or don&rsquo;t know what to say, you could pray...'
-  footer_page_1_right: '<strong>&lsquo;Father, may <em>N</em> know your love, be filled with your Spirit, and share Jesus in all they do and say.&rsquo;</strong>'
-  footer_page_2_left: 'Privacy Policy'
-  footer_page_2_right: 'If you don&rsquo;t wish to be included, you can remove yourself in Church Suite or by contacting the office.'
   show_last_name: true
 
 refresh:
   days_before: 7
   days_after: 2
+  footer_page_1_left: 'If you don&rsquo;t know someone, or don&rsquo;t know what to say, you could pray...'
+  footer_page_1_right: '<strong>&lsquo;Father, may <em>N</em> know your love, be filled with your Spirit, and share Jesus in all they do and say.&rsquo;</strong>'
+  footer_page_2_left: 'Privacy Policy'
+  footer_page_2_right: 'If you don&rsquo;t wish to be included, you can remove yourself in Church Suite or by contacting the office.'
 
 rota:
   bible_version: 'NIVUK'
