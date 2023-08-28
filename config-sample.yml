@@ -1,6 +1,7 @@
 general:
-  church_suite_org: ''
-  church_suite_api: ''
+  church_name: ''
+  church_name_full: ''
+  church_domain: ''
   production: true
 
 airtable:
