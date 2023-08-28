@@ -62,7 +62,7 @@ class VCal
 
         // add timezone definition
         $tz = self::get_ical_timezone(C::$events->timezone)?->get_definition();
-        if($tz) {
+        if ($tz) {
             $this->lines = array_merge($this->lines, $tz);
         }
 
@@ -111,7 +111,7 @@ class VCal
      * @param Event $event              The event to add.
      * @return void
      */
-    private function add_event(Event $event):void
+    private function add_event(Event $event): void
     {
         $tzid = $event->start->getTimezone()->getName();
 
