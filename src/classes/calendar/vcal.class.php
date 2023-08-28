@@ -56,7 +56,7 @@ class VCal
         // begin calendar definition
         $this->lines[] = "BEGIN:VCALENDAR";
         $this->lines[] = "VERSION:2.0";
-        $this->lines[] = "PRODID:-//bfren.dev//NONSGML//EN";
+        $this->lines[] = sprintf("PRODID:-//%s//NONSGML//EN", C::$general->church_domain);
         $this->lines[] = "CALSCALE:GREGORIAN";
         $this->lines[] = "X-PUBLISHED-TTL:PT1H";
 

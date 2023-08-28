@@ -3,6 +3,7 @@
 namespace Feeds\Helpers;
 
 use Feeds\App;
+use Feeds\Config\Config as C;
 
 App::check();
 
@@ -29,6 +30,6 @@ class Image
      */
     public static function echo_logo(string $class = "logo"): void
     {
-        self::echo_image("logo-small.png", "Christ Church Selly Park Logo", $class);
+        self::echo_image("logo-small.png", sprintf("%s Logo", C::$general->church_name_full), $class);
     }
 }
