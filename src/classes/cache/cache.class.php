@@ -8,6 +8,7 @@ use Feeds\Calendar\Event;
 use Feeds\ChurchSuite\Api;
 use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
+use Feeds\Prayer\Person;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Refresh;
 use Feeds\Request\Request;
@@ -244,7 +245,7 @@ class Cache
      * Get People from the cache (or retrieve from ChurchSuite).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return People[]                 Array of People.
+     * @return Person[]                 Array of People.
      */
     public static function get_people(bool $force = false): array
     {
