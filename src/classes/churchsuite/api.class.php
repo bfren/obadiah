@@ -4,6 +4,7 @@ namespace Feeds\ChurchSuite;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
 use Feeds\Prayer\Person;
 use Feeds\Prayer\Prayer_Calendar;
@@ -89,7 +90,13 @@ class Api
         // build array of People from the response
         $people = array();
         foreach ($response[$kind] as $person) {
-            $person = new Person($person["first_name"], $person["last_name"], $are_children);
+            $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", array()), "thumb", array()), "url");
+            $person = new Person(
+                first_name: $person["first_name"],
+                last_name: $person["last_name"],
+                is_child: $are_children,
+                image_url: $thumb_url
+            );
             $people[Hash::person($person)] = $person;
         }
 
