@@ -4,6 +4,7 @@ namespace Feeds\Prayer;
 
 use DateTimeImmutable;
 use Feeds\App;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Helpers\Hash;
@@ -15,46 +16,20 @@ App::check();
 class Prayer_Calendar
 {
     /**
-     * The array of people in the Prayer Calendar, stored by hash.
-     *
-     * @var Person[]
-     *      array(string $hash => Person $person)
-     */
-    public readonly array $people;
-
-    /**
-     * Get people from CSV files.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // get adults and children
-        $adults = $this->read_file("adults", false);
-        $children = $this->read_file("children", true);
-
-        // merge and sort array by last name and then first name
-        $people = array_merge($adults, $children);
-        self::sort_people($people);
-
-        // store people
-        $this->people = $people;
-    }
-
-    /**
      * Get matching people objects from an array of hashes.
      *
-     * @param string[] $hashes          Person hash.
-     * @return Person[]                 Array of person objects.
+     * @param string[] $hashes          Array of hashes.
+     * @return Person[]                 Array of matching Person objects.
      */
     public function get_people(array $hashes): array
     {
         // get matching people
-        $people = Arr::map($hashes, fn (string $hash) => Arr::get($this->people, $hash, array()));
+        $all_people = Cache::get_people();
+        $matching_people = Arr::map($hashes, fn (string $hash) => Arr::get($all_people, $hash, array()));
 
         // sort and return
-        self::sort_people($people);
-        return $people;
+        self::sort_people($matching_people);
+        return $matching_people;
     }
 
     /**
