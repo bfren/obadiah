@@ -55,7 +55,7 @@ class Config_ChurchSuite
         $this->api_application = Arr::get($config, "api_application", "");
         $this->api_key = Arr::get($config, "api_key", "");
         $this->org = Arr::get($config, "org", "");
-        $this->tag_id_adults = Arr::get($config, "tag_id_adults", 0);
-        $this->tag_id_children = Arr::get($config, "tag_id_children", 0);
+        $this->tag_id_adults = Arr::get_integer($config, "tag_id_adults", 0);
+        $this->tag_id_children = Arr::get_integer($config, "tag_id_children", 0);
     }
 }
