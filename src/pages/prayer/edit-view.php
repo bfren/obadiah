@@ -7,6 +7,7 @@ use Feeds\Config\Config as C;
 use Feeds\Helpers\Hash;
 use Feeds\Pages\Parts\Header\Header_Model;
 use Feeds\Prayer\Month;
+use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Response\View;
 
 App::check();
@@ -35,7 +36,7 @@ $this->alert($model->result);
             There need to be an average of <?php _e($model->per_day); ?> people assigned to each day.
         </p>
         <div class="people">
-            <?php foreach ($model->prayer->people as $person) in_array(Hash::person($person), $model->people) || $this->part("person", model: $person); ?>
+            <?php foreach (Prayer_Calendar::get_people() as $person) in_array(Hash::person($person), $model->people) || $this->part("person", model: $person); ?>
         </div>
     </div>
     <div class="col-6 col-lg-8 col-xxl-10 mh-100 admin-prayer-calendar-column">
@@ -60,7 +61,7 @@ $this->alert($model->result);
                 }
 
                 // get the names of those people
-                $people = $model->prayer->get_people($people_hashes);
+                $people = Prayer_Calendar::get_people($people_hashes);
                 ?>
                 <div class="col-12 col-lg-6 col-xxl-4">
                     <div class="card mt-2 mb-2" id="day-<?php _e($i); ?>" data-date="<?php _e($date); ?>">

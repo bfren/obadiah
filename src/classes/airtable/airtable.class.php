@@ -17,7 +17,7 @@ class Airtable
     private readonly string $url;
 
     /**
-     * Connect to the Airtable API for the specified table.
+     * Build URL to connect to the specified table.
      *
      * @param string $table             Table name.
      * @return void

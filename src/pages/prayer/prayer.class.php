@@ -10,6 +10,7 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Prayer\Month;
+use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
 use Feeds\Response\View;
@@ -36,7 +37,7 @@ class Prayer
         $next_month = new DateTimeImmutable("next month");
         return new View("prayer", model: new Index_Model(
             result: $this->result,
-            months: Cache::get_prayer_calendar()->get_months(),
+            months: Prayer_Calendar::get_months(),
             next_month: $next_month->format(C::$formats->prayer_month_id)
         ));
     }
@@ -49,11 +50,8 @@ class Prayer
     #[Require_Admin]
     public function edit_get(): Action
     {
-        // get prayer calendar
-        $prayer_calendar = Cache::get_prayer_calendar();
-
         // define variables
-        $people_per_day = (int)round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
+        $people_per_day = (int)round(count(Cache::get_people()) / Month::MAX_DAYS, 1);
 
         // get template month (will pre-populate the days with this month's data)
         $from_id = Request::$get->string("from");
@@ -85,7 +83,6 @@ class Prayer
         // create edit view
         return new View("prayer", name: "edit", model: new Edit_Model(
             result: $this->result,
-            prayer: $prayer_calendar,
             for: $for->modify("first day of"),
             days: $from_days,
             people: $from_people,

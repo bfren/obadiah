@@ -17,7 +17,7 @@ class App
     private const CHECK = "CHECK";
 
     /**
-     * Application version.
+     * Application version - this is set using the version in the source / container image VERSION file (see init).
      *
      * @var string
      */
@@ -71,6 +71,7 @@ class App
 
         // require function scripts
         require_once "functions/escape.php";
+        require_once "functions/log.php";
     }
 
     /**

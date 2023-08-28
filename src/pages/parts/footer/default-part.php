@@ -3,6 +3,7 @@
 namespace Feeds\Pages\Parts\Footer;
 
 use Feeds\App;
+use Feeds\Config\Config as C;
 
 App::check();
 
@@ -14,7 +15,7 @@ App::check();
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container-fluid">
         <small class="text-muted">
-            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://christchurchb29.org">Christ Church Selly Park</a> (v<?php _e(App::$version) ?>).
+            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://github.com/bfren">bfren</a> (v<?php _e(App::$version) ?>).
             <span class="d-none d-sm-inline">Source on <a href="https://github.com/bfren/churchsuite-feeds" target="_blank">GitHub</a>.</span>
         </small>
     </div>

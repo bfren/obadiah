@@ -6,6 +6,7 @@ use DateInterval;
 use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use SplFileInfo;
 use Throwable;
@@ -127,6 +128,9 @@ class Month
         } catch (Throwable $th) {
             return Result::failure("Unable to save month data.");
         }
+
+        // clear refresh cache to force reload next time it's requested
+        Cache::clear_refresh();
 
         // return success result
         return Result::success("Month saved");

@@ -135,6 +135,12 @@ form input[type=time] {
   min-height: 50px;
 }
 
+.person .image img {
+  height: 50px;
+  object-fit: cover;
+  width: 50px;
+}
+
 @media print {
   @page {
     margin: 7mm;

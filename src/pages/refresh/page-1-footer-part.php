@@ -3,6 +3,7 @@
 namespace Feeds\Pages\Refresh;
 
 use Feeds\App;
+use Feeds\Config\Config as C;
 use Feeds\Response\View;
 
 App::check();
@@ -14,8 +15,8 @@ App::check();
 <div class="prayer-page-footer mt-2">
     <small>
         <p class="d-flex justify-content-between">
-            <span><a href="https://www.christchurchb29.org/privacy-policy" target="_blank">www.christchurchb29.org/privacy-policy</a></span>
-            <span>If you don&rsquo;t wish to be included, you can remove yourself in Church Suite or by contacting the office.</span>
+            <span><?php _h(C::$prayer->footer_page_1_left); ?></span>
+            <span><?php _h(C::$prayer->footer_page_1_right); ?></span>
         </p>
     </small>
 </div>

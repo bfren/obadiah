@@ -10,18 +10,25 @@ App::check();
 class Config_General
 {
     /**
-     * Church Suite API key.
+     * The name of your church (e.g. 'Christ Church').
      *
      * @var string
      */
-    public readonly string $church_suite_api;
+    public readonly string $church_name;
 
     /**
-     * Church Suite organisation subdomain (e.g. 'kingshope' for 'kingshope.churchsuite.com').
+     * The full name of your church (e.g. 'Christ Church Selly Park).
      *
      * @var string
      */
-    public readonly string $church_suite_org;
+    public readonly string $church_name_full;
+
+    /**
+     * Your church's website domain name (do *not* include https://).
+     *
+     * @var string
+     */
+    public readonly string $church_domain;
 
     /**
      * Whether or not the app is in production mode.
@@ -38,8 +45,9 @@ class Config_General
      */
     public function __construct(array $config)
     {
-        $this->church_suite_api = Arr::get($config, "church_suite_api", "");
-        $this->church_suite_org = Arr::get($config, "church_suite_org", "");
+        $this->church_name = Arr::get($config, "church_name", "");
+        $this->church_name_full = Arr::get($config, "church_name_full", "");
+        $this->church_domain = Arr::get($config, "church_domain", "");
         $this->production = Arr::get_boolean($config, "production", true);
     }
 }

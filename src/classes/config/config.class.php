@@ -25,6 +25,13 @@ class Config
     public static Config_Cache $cache;
 
     /**
+     * Church Suite config object.
+     *
+     * @var Config_ChurchSuite
+     */
+    public static Config_ChurchSuite $churchsuite;
+
+    /**
      * Dir config object.
      *
      * @var Config_Dir
@@ -108,6 +115,7 @@ class Config
         // create configuration objects
         self::$airtable = new Config_Airtable(Arr::get($config, "airtable", array()));
         self::$cache = new Config_Cache(Arr::get($config, "cache", array()));
+        self::$churchsuite = new Config_ChurchSuite(Arr::get($config, "churchsuite", array()));
         self::$dir = new Config_Dir($cwd, $data_dir);
         self::$events = new Config_Events(Arr::get($config, "events", array()));
         self::$formats = new Config_Formats(Arr::get($config, "formats", array()));

@@ -5,8 +5,10 @@ namespace Feeds\Cache;
 use Feeds\App;
 use Feeds\Bible\Bible_Plan;
 use Feeds\Calendar\Event;
+use Feeds\ChurchSuite\Api;
 use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
+use Feeds\Prayer\Person;
 use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Refresh;
 use Feeds\Request\Request;
@@ -31,6 +33,11 @@ class Cache
      * Lectionary cache name.
      */
     public const LECTIONARY = "lectionary";
+
+    /**
+     * People cache name.
+     */
+    public const PEOPLE = "people";
 
     /**
      * Prayer Calendar cache name.
@@ -111,6 +118,16 @@ class Cache
     public static function clear_lectionary(): void
     {
         self::clear(self::LECTIONARY);
+    }
+
+    /**
+     * Clear the People cache.
+     *
+     * @return void
+     */
+    public static function clear_people(): void
+    {
+        self::clear(self::PEOPLE);
     }
 
     /**
@@ -225,24 +242,24 @@ class Cache
     }
 
     /**
-     * Get Prayer calendar from the cache (or generate a fresh copy).
+     * Get People from the cache (or retrieve from ChurchSuite).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return Prayer_Calendar          Prayer Calendar object.
+     * @return Person[]                 Array of People.
      */
-    public static function get_prayer_calendar(bool $force = false): Prayer_Calendar
+    public static function get_people(bool $force = false): array
     {
-        return self::get_or_set(self::PRAYER, fn () => new Prayer_Calendar(), force: $force);
+        return self::get_or_set(self::PEOPLE, fn () => Api::get_prayer_calendar_people(), force: $force);
     }
 
     /**
-     * Get the Prayer calendar last modified timestamp.
+     * Get the People last modified timestamp.
      *
-     * @return int                      Prayer calendar last modified timestamp.
+     * @return int                      People last modified timestamp.
      */
-    public static function get_prayer_calendar_last_modified(): int
+    public static function get_people_last_modified(): int
     {
-        $path = self::get_cache_file_path(self::PRAYER);
+        $path = self::get_cache_file_path(self::PEOPLE);
         return self::get_last_modified($path);
     }
 

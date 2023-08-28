@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Bible\Day as Readings;
 use Feeds\Config\Config as C;
+use Feeds\Prayer\Person;
 
 App::check();
 
@@ -15,7 +16,7 @@ class Day
      * Create Day object.
      *
      * @param DateTimeImmutable $date   The date.
-     * @param string[] $people          Array of people.
+     * @param Person[]|string[] $people Array of people.
      * @param null|Readings $readings   Bible readings.
      * @return void
      */

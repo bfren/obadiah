@@ -32,8 +32,9 @@ class ICalendar extends Action
         }
 
         // add standard ICalendar headers
+        $filename = sprintf("%s-%s.ics", str_replace(" ", "-", strtolower(C::$general->church_name_full)), $this->filename);
         $this->add_header("Content-Type", "text/calendar; charset=utf-8");
-        $this->add_header("Content-Disposition", sprintf("attachment; filename=%s-%s.ics", C::$general->church_suite_org, $this->filename));
+        $this->add_header("Content-Disposition", sprintf("attachment; filename=%s", $filename));
         $this->add_header("Last-Modified", gmdate("D, d M Y H:i:s", $this->model->last_modified));
     }
 

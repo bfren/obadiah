@@ -17,9 +17,8 @@ $colour = $model->is_child ? "info" : "warning";
 $name = strtolower($model->get_full_name());
 $hash = Hash::person($model);
 
-// if this person is not in the prayer calendar, highlight them in red
-$prayer_calendar = Cache::get_prayer_calendar();
-if (!in_array($hash, array_keys($prayer_calendar->people))) {
+// if this person is not register for the prayer calendar, highlight them in red
+if (!in_array($hash, array_keys(Cache::get_people()))) {
     $colour = "danger";
 }
 

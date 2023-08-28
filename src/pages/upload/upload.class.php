@@ -54,9 +54,6 @@ class Upload
         $rota_files = array_slice(scandir(C::$dir->rota), 2);
         sort($rota_files);
 
-        $prayer_files = array_map("basename", glob(sprintf("%s/*.csv", C::$dir->prayer), 2));
-        sort($prayer_files);
-
         $bible_files = array_slice(scandir(C::$dir->bible), 2);
         sort($bible_files);
 
@@ -81,26 +78,6 @@ class Upload
             "date_end" => $rota_period_last_day->format("Y-m-d")
         ));
 
-        $prayer_adults_query = http_build_query(array(
-            "_module" => "ChurchSuite\AddressBook",
-            "_report_name" => "contact_table_generator",
-            "_report_view_module" => "addressbook",
-            "_report_view_file" => "contact_table_generator",
-            "columns" => array("first_name", "last_name"),
-            "status" => "active",
-            "tags" => array(30)
-        ));
-
-        $prayer_children_query = http_build_query(array(
-            "_module" => "ChurchSuite\Children",
-            "_report_name" => "child_table_generator",
-            "_report_view_module" => "children",
-            "_report_view_file" => "child_table_generator",
-            "columns" => array("first_name", "last_name"),
-            "status" => "active",
-            "tags" => array(31)
-        ));
-
         // return View
         return new View("upload", model: new Index_Model(
             result: $this->result,
@@ -108,12 +85,9 @@ class Upload
             rota_period_first_day: $rota_period_first_day,
             rota_period_last_day: $rota_period_last_day,
             rota_files: $rota_files,
-            prayer_files: $prayer_files,
             bible_files: $bible_files,
-            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$general->church_suite_org),
-            rota_href: sprintf(self::ROTA_HREF, C::$general->church_suite_org, $rota_query),
-            prayer_adults_href: sprintf(self::ADULTS_HREF, C::$general->church_suite_org, $prayer_adults_query),
-            prayer_children_href: sprintf(self::CHILDREN_HREF, C::$general->church_suite_org, $prayer_children_query)
+            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$churchsuite->org),
+            rota_href: sprintf(self::ROTA_HREF, C::$churchsuite->org, $rota_query)
         ));
     }
 
