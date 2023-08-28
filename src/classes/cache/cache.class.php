@@ -264,28 +264,6 @@ class Cache
     }
 
     /**
-     * Get Prayer calendar from the cache (or generate a fresh copy).
-     *
-     * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
-     * @return Prayer_Calendar          Prayer Calendar object.
-     */
-    public static function get_prayer_calendar(bool $force = false): Prayer_Calendar
-    {
-        return self::get_or_set(self::PRAYER, fn () => new Prayer_Calendar(), force: $force);
-    }
-
-    /**
-     * Get the Prayer calendar last modified timestamp.
-     *
-     * @return int                      Prayer calendar last modified timestamp.
-     */
-    public static function get_prayer_calendar_last_modified(): int
-    {
-        $path = self::get_cache_file_path(self::PRAYER);
-        return self::get_last_modified($path);
-    }
-
-    /**
      * Get Refresh calendar from the cache (or generate a fresh copy).
      *
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.

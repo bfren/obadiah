@@ -45,9 +45,6 @@ class Preload
             // People
             "people" => self::load(fn () => Cache::get_people(true)),
 
-            // Prayer Calendar
-            "prayer" => self::load(fn () => Cache::get_prayer_calendar(true)),
-
             // Refresh calendar
             "refresh" => self::load(fn () => Cache::get_refresh(true)),
 

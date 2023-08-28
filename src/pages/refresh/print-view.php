@@ -21,7 +21,6 @@ $current = $model->first_day;
 // we do this here so they can be reused instead of reloaded for each day
 $bible_plan = Cache::get_bible_plan();
 $lectionary = Cache::get_lectionary();
-$prayer_calendar = Cache::get_prayer_calendar();
 
 // output header
 $this->header(new Header_Model("Refresh Calendar"), variant: "print");
@@ -39,7 +38,7 @@ for ($i=1; $i<=2; $i++) {
     <div class="col-4">
         <?php
         for ($k=1; $k<=7; $k++) {
-            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary, $prayer_calendar));
+            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary));
             $current = $current->modify("+1 day");
         }
         ?>

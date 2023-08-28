@@ -18,13 +18,11 @@ class Day_Model
      * @param DateTimeImmutable $day            Formatted string to display the month being displayed.
      * @param Bible_Plan $bible_plan            Bible Plan (to save loading each time).
      * @param Lectionary $lectionary            Lectionary (to save loading each time).
-     * @param Prayer_Calendar $prayer_calendar  Prayer Calendar (to save loading each time).
      */
     public function __construct(
         public readonly DateTimeImmutable $day,
         public readonly Bible_Plan $bible_plan,
         public readonly Lectionary $lectionary,
-        public readonly Prayer_Calendar $prayer_calendar
     ) {
     }
 }

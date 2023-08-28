@@ -3,6 +3,7 @@
 namespace Feeds\Pages\Refresh;
 
 use Feeds\App;
+use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Response\View;
 
 App::check();
@@ -16,7 +17,7 @@ if ($model->day->format("N") == 7) {
     $lectionary_day = $model->lectionary->get_day($model->day);
     $services = $lectionary_day?->services;
 } else {
-    $people = $model->prayer_calendar->get_day($model->day);
+    $people = Prayer_Calendar::get_day($model->day);
     $readings = $model->bible_plan->get_day($model->day);
     $services = array();
 }

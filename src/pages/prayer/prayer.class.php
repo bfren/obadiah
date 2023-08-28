@@ -10,6 +10,7 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Prayer\Month;
+use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Request\Request;
 use Feeds\Response\Action;
 use Feeds\Response\View;
@@ -36,7 +37,7 @@ class Prayer
         $next_month = new DateTimeImmutable("next month");
         return new View("prayer", model: new Index_Model(
             result: $this->result,
-            months: Cache::get_prayer_calendar()->get_months(),
+            months: Prayer_Calendar::get_months(),
             next_month: $next_month->format(C::$formats->prayer_month_id)
         ));
     }
@@ -82,7 +83,6 @@ class Prayer
         // create edit view
         return new View("prayer", name: "edit", model: new Edit_Model(
             result: $this->result,
-            prayer: Cache::get_prayer_calendar(),
             for: $for->modify("first day of"),
             days: $from_days,
             people: $from_people,
