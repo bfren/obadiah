@@ -110,10 +110,10 @@ class Upload
             rota_files: $rota_files,
             prayer_files: $prayer_files,
             bible_files: $bible_files,
-            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$general->church_suite_org),
-            rota_href: sprintf(self::ROTA_HREF, C::$general->church_suite_org, $rota_query),
-            prayer_adults_href: sprintf(self::ADULTS_HREF, C::$general->church_suite_org, $prayer_adults_query),
-            prayer_children_href: sprintf(self::CHILDREN_HREF, C::$general->church_suite_org, $prayer_children_query)
+            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$churchsuite->org),
+            rota_href: sprintf(self::ROTA_HREF, C::$churchsuite->org, $rota_query),
+            prayer_adults_href: sprintf(self::ADULTS_HREF, C::$churchsuite->org, $prayer_adults_query),
+            prayer_children_href: sprintf(self::CHILDREN_HREF, C::$churchsuite->org, $prayer_children_query)
         ));
     }
 

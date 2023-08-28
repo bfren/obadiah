@@ -82,7 +82,7 @@ class Events
     public static function get_events(string $query): array
     {
         // setup curl
-        $url = sprintf(self::CALENDAR_HREF, C::$general->church_suite_org, $query);
+        $url = sprintf(self::CALENDAR_HREF, C::$churchsuite->org, $query);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
