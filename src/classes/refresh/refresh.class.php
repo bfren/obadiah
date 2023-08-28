@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
+use Feeds\Prayer\Prayer_Calendar;
 
 App::check();
 
@@ -45,7 +46,6 @@ class Refresh
 
         // get data from caches
         $bible = Cache::get_bible_plan();
-        $prayer = Cache::get_prayer_calendar();
 
         // get readings and people for each day
         $days = array();
@@ -58,7 +58,7 @@ class Refresh
             // create day object
             $day = new Day(
                 date: $value,
-                people: $prayer->get_day($value),
+                people: Prayer_Calendar::get_day($value, Prayer_Calendar::RETURN_OBJECT),
                 readings: $bible->get_day($value)
             );
 
