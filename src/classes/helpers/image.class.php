@@ -10,6 +10,17 @@ App::check();
 class Image
 {
     /**
+     * Get the absolute path of an image inside the resources directory.
+     *
+     * @param string $src               File name / path within /resources/img directory.
+     * @return string                   Absolute path to image file.
+     */
+    public static function get_src(string $src):string
+    {
+        return sprintf("/resources/img/%s", $src);
+    }
+
+    /**
      * Output an HTML image tag.
      *
      * @param string $src               Image source (within resources/img/ directory).
@@ -19,7 +30,7 @@ class Image
      */
     public static function echo_image(string $src, string $alt, ?string $class = null): void
     {
-        Escape::echo_html("<img src=\"/resources/img/%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", $src, $alt, $class);
+        Escape::echo_html("<img src=\"%1\$s\" class=\"%3\$s\" alt=\"%2\$s\" title=\"%2\$s\" />", self::get_src($src), $alt, $class);
     }
 
     /**
