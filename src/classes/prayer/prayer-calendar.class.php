@@ -13,12 +13,24 @@ App::check();
 class Prayer_Calendar
 {
     /**
+     * Tells get_day() to return the name of a person.
+     *
+     */
+    public const RETURN_FULL_NAME = 0;
+
+    /**
+     * Tells get_day() to return the full Person object.
+     *
+     */
+    public const RETURN_OBJECT = 1;
+
+    /**
      * Get matching people objects from an array of hashes.
      *
      * @param string[] $hashes          Array of hashes.
      * @return Person[]                 Array of matching Person objects.
      */
-    public function get_people(?array $hashes = null): array
+    public static function get_people(?array $hashes = null): array
     {
         // get people from cache and return if there are no hashes to match
         $all_people = Cache::get_people();
@@ -35,12 +47,12 @@ class Prayer_Calendar
     }
 
     /**
-     * Get the names of people on a particular day from the prayer calendar.
+     * Get the people on a particular day from the prayer calendar.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return string[]                 Array of people.
+     * @return Person[]                 Array of people.
      */
-    public function get_day(DateTimeImmutable $dt): array
+    public static function get_day(DateTimeImmutable $dt, int $return_as = self::RETURN_FULL_NAME): array
     {
         // get month
         $id = $dt->format(C::$formats->prayer_month_id);
@@ -54,15 +66,25 @@ class Prayer_Calendar
         // if we are at the end of the month return the configured additional people
         $day = (int)$dt->format("j");
         if (in_array($day, array(29, 30, 31))) {
-            $day = sprintf("day_%s", $day);
-            return C::$prayer->$day;
+            if ($return_as == self::RETURN_FULL_NAME) {
+                $day = sprintf("day_%s", $day);
+                return C::$prayer->$day;
+            } else {
+                return array();
+            }
         }
 
         // get the people hashes for the day
         $hashes = Arr::get($month->days, $dt->format(C::$formats->sortable_date), array());
 
-        // return people's names
-        return Arr::map($this->get_people($hashes), fn (Person $p) => $p->get_full_name(C::$prayer->show_last_name));
+        // return matching people
+        return Arr::map(self::get_people($hashes), function (Person $p) use ($return_as) {
+            if ($return_as == self::RETURN_FULL_NAME) {
+                return $p->get_full_name(C::$prayer->show_last_name);
+            } else {
+                return $p;
+            }
+        });
     }
 
     /**
