@@ -35,7 +35,7 @@ $this->alert($model->result);
             There need to be an average of <?php _e($model->per_day); ?> people assigned to each day.
         </p>
         <div class="people">
-            <?php foreach ($model->prayer->people as $person) in_array(Hash::person($person), $model->people) || $this->part("person", model: $person); ?>
+            <?php foreach ($model->prayer->get_people() as $person) in_array(Hash::person($person), $model->people) || $this->part("person", model: $person); ?>
         </div>
     </div>
     <div class="col-6 col-lg-8 col-xxl-10 mh-100 admin-prayer-calendar-column">

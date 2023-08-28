@@ -7,9 +7,6 @@ use Feeds\App;
 use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
-use Feeds\Helpers\Hash;
-use SplFileInfo;
-use Throwable;
 
 App::check();
 
@@ -21,10 +18,15 @@ class Prayer_Calendar
      * @param string[] $hashes          Array of hashes.
      * @return Person[]                 Array of matching Person objects.
      */
-    public function get_people(array $hashes): array
+    public function get_people(?array $hashes = null): array
     {
-        // get matching people
+        // get people from cache and return if there are no hashes to match
         $all_people = Cache::get_people();
+        if (!$hashes) {
+            return $all_people;
+        }
+
+        // get matching people
         $matching_people = Arr::map($hashes, fn (string $hash) => Arr::get($all_people, $hash, array()));
 
         // sort and return
@@ -81,58 +83,6 @@ class Prayer_Calendar
             // compare last names
             return $a->last_name <=> $b->last_name;
         });
-    }
-
-    /**
-     * Read people's names from the specified CSV file.
-     *
-     * @param string $filename          The name of the file (without path or .csv extension).
-     * @param bool $is_child            Whether or not the person is a child.
-     * @return Person[]
-     */
-    private function read_file(string $filename, bool $is_child): array
-    {
-        // get csv files from path
-        $path = sprintf("%s/%s.csv", C::$dir->prayer, $filename);
-        $file_info = new SplFileInfo($path);
-        if (!$file_info->isFile()) {
-            return array();
-        }
-
-        // read file into array
-        $people = array();
-
-        // open the file for reading
-        try {
-            $file_obj = $file_info->openFile("r");
-        } catch (Throwable $th) {
-            App::die("Unable to open the file: %s.", $file_info);
-        }
-
-        // read each line of the csv file
-        $first = true;
-        while (!$file_obj->eof()) {
-            // get row
-            $row = $file_obj->fgetcsv();
-
-            // skip the first row
-            if ($first) {
-                $first = false;
-                continue;
-            }
-
-            // skip empty rows
-            if (count($row) != 2) {
-                continue;
-            }
-
-            // add the person using a hash of the name as array key
-            $person = new Person($row[0], $row[1], $is_child);
-            $people[Hash::person($person)] = $person;
-        }
-
-        // return the array of people
-        return $people;
     }
 
     /**

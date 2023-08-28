@@ -49,11 +49,8 @@ class Prayer
     #[Require_Admin]
     public function edit_get(): Action
     {
-        // get prayer calendar
-        $prayer_calendar = Cache::get_prayer_calendar();
-
         // define variables
-        $people_per_day = (int)round(count($prayer_calendar->people) / Month::MAX_DAYS, 1);
+        $people_per_day = (int)round(count(Cache::get_people()) / Month::MAX_DAYS, 1);
 
         // get template month (will pre-populate the days with this month's data)
         $from_id = Request::$get->string("from");
@@ -85,7 +82,7 @@ class Prayer
         // create edit view
         return new View("prayer", name: "edit", model: new Edit_Model(
             result: $this->result,
-            prayer: $prayer_calendar,
+            prayer: Cache::get_prayer_calendar(),
             for: $for->modify("first day of"),
             days: $from_days,
             people: $from_people,
