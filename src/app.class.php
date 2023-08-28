@@ -71,6 +71,7 @@ class App
 
         // require function scripts
         require_once "functions/escape.php";
+        require_once "functions/log.php";
     }
 
     /**
