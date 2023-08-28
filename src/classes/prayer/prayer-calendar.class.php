@@ -22,7 +22,7 @@ class Prayer_Calendar
     {
         // get people from cache and return if there are no hashes to match
         $all_people = Cache::get_people();
-        if (!$hashes) {
+        if ($hashes === null) {
             return $all_people;
         }
 
