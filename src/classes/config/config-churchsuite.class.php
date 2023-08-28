@@ -31,6 +31,20 @@ class Config_ChurchSuite
     public readonly string $org;
 
     /**
+     * Church Suite Tag ID for adults who have consented to be in the Prayer Calendar.
+     *
+     * @var int
+     */
+    public readonly int $tag_id_adults;
+
+    /**
+     * Church Suite Tag ID for children whose parents have consented for them to be in the Prayer Calendar.
+     *
+     * @var int
+     */
+    public readonly int $tag_id_children;
+
+    /**
      * Get values from general configuration array.
      *
      * @param array $config             General configuration array.
@@ -41,5 +55,7 @@ class Config_ChurchSuite
         $this->api_application = Arr::get($config, "api_application", "");
         $this->api_key = Arr::get($config, "api_key", "");
         $this->org = Arr::get($config, "org", "");
+        $this->tag_id_adults = Arr::get($config, "tag_id_adults", 0);
+        $this->tag_id_children = Arr::get($config, "tag_id_children", 0);
     }
 }

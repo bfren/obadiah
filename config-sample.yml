@@ -14,6 +14,8 @@ church_suite:
   api_application: ''
   api_key: ''
   org: ''
+  tag_id_adults: 1
+  tag_id_children: 2
 
 events:
   cancelled_flag: '[Cancelled]'
