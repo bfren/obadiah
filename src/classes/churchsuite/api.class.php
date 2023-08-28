@@ -4,6 +4,7 @@ namespace Feeds\ChurchSuite;
 
 use Feeds\App;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Hash;
 use Feeds\Prayer\Person;
 use Feeds\Prayer\Prayer_Calendar;
 
@@ -75,7 +76,7 @@ class Api
      * @param string $endpoint          API endpoint (e.g. 'addressbook/contacts').
      * @param string $kind              The kind of people being requested ('contacts' or 'children').
      * @param bool $are_children        Whether or not the people being requested are children.
-     * @return Person[]                 Array of Person objects.
+     * @return Person[]                 Array of Person objects where the key is a unique hash (see Hash::person).
      */
     private function get_people(string $endpoint, string $kind, bool $are_children): array
     {
@@ -88,7 +89,8 @@ class Api
         // build array of People from the response
         $people = array();
         foreach ($response[$kind] as $person) {
-            $people[] = new Person($person["first_name"], $person["last_name"], $are_children);
+            $person = new Person($person["first_name"], $person["last_name"], $are_children);
+            $people[Hash::person($person)] = $person;
         }
 
         // return - the list is returned sorted by ChurchSuite
@@ -98,7 +100,7 @@ class Api
     /**
      * Get everyone who has consented to being in the Prayer Calendar.
      *
-     * @return Person[]                 Array of Person objects.
+     * @return Person[]                 Array of Person objects where the key is a unique hash (see Hash::person).
      */
     public static function get_prayer_calendar_people(): array
     {
