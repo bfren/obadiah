@@ -13,7 +13,7 @@ App::init();
 Router::map_page(P\Ajax\Ajax::class);
 Router::map_page(P\Auth\Auth::class, requires_auth: false);
 Router::map_page(P\Events\Events::class, requires_auth: false);
-Router::map_page(P\Prayer\Prayer::class, requires_admin: true);
+Router::map_page(P\Prayer\Prayer::class);
 Router::map_page(P\Preload\Preload::class, requires_auth: false);
 Router::map_page(P\Refresh\Refresh::class);
 Router::map_page(P\Rota\Rota::class);
