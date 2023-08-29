@@ -66,6 +66,7 @@ class Router
         try {
             $class = new ReflectionClass($page_class);
         } catch (Throwable $th) {
+            _l($th->getTraceAsString());
             App::die("Unable to find class %s.", $page_class);
         }
 
@@ -99,7 +100,8 @@ class Router
 
         // get route
         $route = self::get_route($page_name);
-        if (!$route) {print_r($page_name);exit;
+        if (!$route) {
+            _l("Route not found for page '%s'.", $page_name);
             return self::not_found();
         }
 
@@ -117,6 +119,7 @@ class Router
         try {
             $page_class = new ReflectionClass($route->page);
         } catch (Throwable $th) {
+            _l($th->getTraceAsString());
             return self::not_found();
         }
 
@@ -130,6 +133,7 @@ class Router
         try {
             $action_method = $page_class->getMethod($method_name);
         } catch (Throwable $th) {
+            _l($th->getTraceAsString());
             return self::not_found();
         }
 
@@ -142,6 +146,7 @@ class Router
         try {
             return $action_method->invoke($page_obj);
         } catch (Throwable $th) {
+            _l($th->getTraceAsString());
             return self::server_error($th);
         }
     }
