@@ -33,7 +33,7 @@ $this->header(new Header_Model("Refresh"));
     <div class="col-12 col-sm-6">
         <h3>People</h3>
         <?php if ($model->today->people) : ?>
-            <?php foreach ($model->today->people as $person) : $name = $person instanceof Person ? $person->get_full_name() : $person; ?>
+            <?php foreach ($model->today->people as $person) : $name = $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : $person; ?>
                 <div class="person d-flex align-items-center">
                     <div class="image">
                         <?php if($person instanceof Person && $person->image_url):?>
