@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Bible\Day as Readings;
 use Feeds\Config\Config as C;
+use Feeds\Helpers\Arr;
 use Feeds\Prayer\Person;
 
 App::check();
@@ -50,7 +51,11 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $description[] = join($separator, $this->people);
+            if ($this->people[0] instanceof Person) {
+                $description[] = join($separator, Arr::map($this->people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
+            } else {
+                $description[] = join($separator, $this->people);
+            }
             $description[] = "";
         }
 

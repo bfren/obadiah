@@ -95,6 +95,7 @@ class Prayer
      *
      * @return View
      */
+    #[Require_Admin]
     public function delete_get(): View
     {
         // get file and delete
