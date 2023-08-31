@@ -2,6 +2,7 @@
 
 namespace Feeds\Pages\Upload;
 
+use DateInterval;
 use DateTimeImmutable;
 use Feeds\Admin\Bible_File;
 use Feeds\Admin\Prayer_File;
@@ -20,11 +21,6 @@ class Upload
      * Church Suite home page URI.
      */
     private const CHURCH_SUITE_HREF = "https://%s.churchsuite.com";
-
-    /**
-     * Church Suite rota download URI.
-     */
-    private const ROTA_HREF = "https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?%s";
 
     /**
      * Church Suite address book download URI.
@@ -62,32 +58,21 @@ class Upload
         $rota_period = ceil($month / 4);
         $last_month = $rota_period * 4;
         $first_month = $last_month - 3;
-
         $rota_period_first_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $first_month, 1));
         $rota_period_last_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $last_month, 1))->modify("last day of this month");
 
-        // build Church Suite queries
-        $rota_query = http_build_query(array(
-            "_module" => "ChurchSuite\Rotas",
-            "_report_name" => "rotas_overview",
-            "_report_view_module" => "rotas",
-            "_report_view_file" => "rotas_overview",
-            "order_by" => "name",
-            "group_by" => "time",
-            "date_start" => $rota_period_first_day->format("Y-m-d"),
-            "date_end" => $rota_period_last_day->format("Y-m-d")
-        ));
+        // calculate the next four-month period
+        $next_period_first_day = $rota_period_last_day->add(new DateInterval("P1D"));
+        $next_period_last_day = $next_period_first_day->add(new DateInterval("P3M"))->modify("last day of this month");
 
         // return View
         return new View("upload", model: new Index_Model(
             result: $this->result,
-            rota_period: sprintf("%s-%s", date("y"), $rota_period),
-            rota_period_first_day: $rota_period_first_day,
-            rota_period_last_day: $rota_period_last_day,
+            rota: Rota_Period::create($rota_period_first_day, $rota_period_last_day),
+            next_rota: Rota_Period::create($next_period_first_day, $next_period_last_day),
             rota_files: $rota_files,
             bible_files: $bible_files,
-            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$churchsuite->org),
-            rota_href: sprintf(self::ROTA_HREF, C::$churchsuite->org, $rota_query)
+            church_suite_href: sprintf(self::CHURCH_SUITE_HREF, C::$churchsuite->org)
         ));
     }
 
