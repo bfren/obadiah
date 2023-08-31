@@ -4,7 +4,6 @@ namespace Feeds\Pages\Prayer;
 
 use Feeds\App;
 use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
 use Feeds\Response\View;
 
 App::check();
@@ -32,10 +31,8 @@ $this->alert($model->result);
             ?>
             <li>
             <a href="/refresh/print/?<?php _e(http_build_query($view_query)); ?>" target="_blank"><?php _e($month); ?></a>
-                <?php if (Request::$session->is_admin) : ?>
-                    <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php _e(http_build_query($edit_query)); ?>">edit</a>
-                    <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/delete/?<?php _e(http_build_query($delete_query)); ?>">delete</a>
-                <?php endif; ?>
+            <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php _e(http_build_query($edit_query)); ?>">edit</a>
+            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/delete/?<?php _e(http_build_query($delete_query)); ?>">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -43,19 +40,19 @@ $this->alert($model->result);
     <p>Nothing to see here - please try again later!</p>
 <?php endif; ?>
 
-<?php if (Request::$session->is_admin) : ?>
-    <h2>Create</h2>
-    <p>Please enter the month to create a calendar for, and click 'Create'.</p>
-    <form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="GET" action="/prayer/edit/" novalidate>
-        <div class="col-12 position-relative">
-            <label class="visually-hidden" for="for">Month</label>
-            <input type="text" class="form-control" id="for" name="for" placeholder="Month e.g. '<?php _e($model->next_month); ?>'" required />
-            <div class="invalid-tooltip">Please enter the month to create a prayer calendar for.</div>
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Create</button>
-        </div>
-    </form>
-<?php endif;
+<h2>Create</h2>
+<p>Please enter the month to create a calendar for, and click 'Create'.</p>
+<form class="row row-cols-lg-auto g-3 mb-3 align-items-center needs-validation" method="GET" action="/prayer/edit/" novalidate>
+    <div class="col-12 position-relative">
+        <label class="visually-hidden" for="for">Month</label>
+        <input type="text" class="form-control" id="for" name="for" placeholder="Month e.g. '<?php _e($model->next_month); ?>'" required />
+        <div class="invalid-tooltip">Please enter the month to create a prayer calendar for.</div>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+<?php
 
 $this->footer();
