@@ -50,7 +50,7 @@ class Prayer_Calendar
      * Get the people on a particular day from the prayer calendar.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return Person[]                 Array of people.
+     * @return array                    Array of people.
      */
     public static function get_day(DateTimeImmutable $dt, int $return_as = self::RETURN_FULL_NAME): array
     {
@@ -66,12 +66,8 @@ class Prayer_Calendar
         // if we are at the end of the month return the configured additional people
         $day = (int)$dt->format("j");
         if (in_array($day, array(29, 30, 31))) {
-            if ($return_as == self::RETURN_FULL_NAME) {
-                $day = sprintf("day_%s", $day);
-                return C::$prayer->$day;
-            } else {
-                return array();
-            }
+            $day = sprintf("day_%s", $day);
+            return C::$prayer->$day;
         }
 
         // get the people hashes for the day
