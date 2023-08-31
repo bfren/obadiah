@@ -29,7 +29,7 @@ $this->alert($model->result);
 <form class="row row-cols-md-auto g-3 mb-3 align-items-center needs-validation" method="POST" action="/upload" enctype="multipart/form-data" novalidate>
     <div class="col-12 position-relative">
         <label class="visually-hidden" for="name">Rota Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Name e.g. '<?php echo $model->rota_period; ?>'" required />
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name e.g. '<?php echo $model->rota->ref; ?>'" required />
         <div class="invalid-tooltip">Please enter the rota name.</div>
     </div>
     <div class="col-12 position-relative">
@@ -92,7 +92,8 @@ $this->alert($model->result);
                 <h5>Step One</h5>
                 <p>Log in to <a href="<?php _e($model->church_suite_href); ?>" target="_blank">Church Suite</a>.</p>
                 <h5>Step Two</h5>
-                <p>Click <a href="<?php _e($model->rota_href); ?>" target="_blank">here</a> to open the export page for the rota. (Set to the current rota period: <?php echo $model->rota_period_first_day->format(C::$formats->display_day_and_month); ?> to <?php echo $model->rota_period_last_day->format(C::$formats->display_day_and_month); ?>.)</p>
+                <p>Click <a href="<?php _e($model->rota->href); ?>" target="_blank">here</a> to open the export page for the rota <?php _e("(%s: %s to %s)", $model->rota->ref, $model->rota->first_day->format(C::$formats->display_day_and_month), $model->rota->last_day->format(C::$formats->display_day_and_month)); ?>.</p>
+                <p>Click <a href="<?php _e($model->next_rota->href); ?>" target="_blank">here</a> to open the export page for the next rota <?php _e("(%s: %s to %s)", $model->next_rota->ref, $model->next_rota->first_day->format(C::$formats->display_day_and_month), $model->next_rota->last_day->format(C::$formats->display_day_and_month)); ?>.</p>
                 <h5>Step Three</h5>
                 <p>Select the dates you wish to export - this should cover the entire period of the rota.</p>
                 <h5>Step Four</h5>
@@ -100,7 +101,7 @@ $this->alert($model->result);
                 <h5>Step Five</h5>
                 <p>Hover your mouse over the 'More' button and select 'Download CSV'.</p>
                 <h5>Step Six</h5>
-                <p>Close this box to return to the main screen, enter the name of the rota (e.g. '22-2'), choose the file you just downloaded, and click the 'Upload' button.</p>
+                <p>Close this box to return to the main screen, enter the name of the rota (e.g. '<?php _e($model->rota->ref); ?>'), choose the file you just downloaded, and click the 'Upload' button.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
