@@ -47,7 +47,7 @@ class Config_Login
     {
         $this->admin = Arr::get($config, "admin", "");
         $this->api = Arr::get($config, "api", "");
-        $this->max_attempts = Arr::get($config, "max_attempts", 5);
+        $this->max_attempts = Arr::get_integer($config, "max_attempts", 5);
         $this->pass = Arr::get($config, "pass", "");
     }
 }

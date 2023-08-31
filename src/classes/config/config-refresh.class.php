@@ -59,8 +59,8 @@ class Config_Refresh
      */
     public function __construct(array $config)
     {
-        $this->days_before = Arr::get($config, "days_before", 7);
-        $this->days_after = Arr::get($config, "days_after", 2);
+        $this->days_before = Arr::get_integer($config, "days_before", 7);
+        $this->days_after = Arr::get_integer($config, "days_after", 2);
         $this->footer_page_1_left = Arr::get($config, "footer_page_1_left", "");
         $this->footer_page_1_right = Arr::get($config, "footer_page_1_right", "");
         $this->footer_page_2_left = Arr::get($config, "footer_page_2_left", "");
