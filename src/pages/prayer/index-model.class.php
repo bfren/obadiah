@@ -20,8 +20,6 @@ class Index_Model
         public readonly ?Result $result,
         public readonly array $months,
         public readonly string $next_month
-    )
-    {
-
+    ) {
     }
 }

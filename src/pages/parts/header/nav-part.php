@@ -7,6 +7,8 @@ use Feeds\Helpers\Image;
 use Feeds\Request\Request;
 use Feeds\Response\View;
 
+use function PHPSTORM_META\map;
+
 App::check();
 
 /** @var View $this */
@@ -17,7 +19,6 @@ if (Request::$session->is_authorised) {
     $links = array(
         "Home" => "/",
         "Rota" => "/rota",
-        "Prayer Calendar" => "/prayer",
         "Refresh" => "/refresh",
         "Log Out" => "/auth/logout"
     );
@@ -25,7 +26,9 @@ if (Request::$session->is_authorised) {
         $links = array_merge(
             array_slice($links, 0, 1),
             array("Upload" => "/upload"),
-            array_slice($links, 1)
+            array_slice($links, 1, 1),
+            array("Prayer Calendar" => "/prayer"),
+            array_slice($links, 2)
         );
     }
 } else {

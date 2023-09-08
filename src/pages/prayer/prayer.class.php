@@ -47,7 +47,6 @@ class Prayer
      *
      * @return Action
      */
-    #[Require_Admin]
     public function edit_get(): Action
     {
         // define variables
@@ -95,7 +94,6 @@ class Prayer
      *
      * @return View
      */
-    #[Require_Admin]
     public function delete_get(): View
     {
         // get file and delete

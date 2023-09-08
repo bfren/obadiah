@@ -55,7 +55,7 @@ class Config_Events
     {
         $this->cancelled_flag = Arr::get($config, "cancelled_flag", "[Cancelled]");
         $this->default_location = Arr::get($config, "default_location", "Church");
-        $this->length_in_minutes = Arr::get($config, "length_in_minutes", 60);
+        $this->length_in_minutes = Arr::get_integer($config, "length_in_minutes", 60);
         $this->pending_flag = Arr::get($config, "pending_flag", "[tbc]");
         $this->timezone = new DateTimeZone(Arr::get($config, "timezone", "Europe/London"));
     }

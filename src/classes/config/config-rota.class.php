@@ -47,7 +47,7 @@ class Config_Rota
     public function __construct(array $config)
     {
         $this->bible_version = Arr::get($config, "bible_version", "NIVUK");
-        $this->default_days = Arr::get($config, "default_days", 28);
+        $this->default_days = Arr::get_integer($config, "default_days", 28);
         $this->default_length = new DateInterval(Arr::get($config, "default_length", "PT60M"));
 
         $ministries = array();

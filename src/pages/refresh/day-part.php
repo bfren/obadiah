@@ -55,7 +55,7 @@ if ($model->day->format("N") == 7) {
         <?php else : ?>
             <?php if (isset($people)) : ?>
                 <div class="people">
-                    <?php _h(join(", ", array_map(function ($name) { return str_replace(" ", "&nbsp;", $name); }, $people))); ?>
+                    <?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?>
                 </div>
             <?php endif; ?>
             <?php if (isset($readings)) : ?>
