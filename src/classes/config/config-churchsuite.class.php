@@ -45,9 +45,9 @@ class Config_ChurchSuite
     public readonly int $tag_id_children;
 
     /**
-     * Get values from general configuration array.
+     * Get values from ChurchSuite configuration array.
      *
-     * @param array $config             General configuration array.
+     * @param array $config             ChurchSuite configuration array.
      * @return void
      */
     public function __construct(array $config)

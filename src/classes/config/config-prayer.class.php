@@ -38,9 +38,9 @@ class Config_Prayer
     public readonly bool $show_last_name;
 
     /**
-     * Get values from events configuration array.
+     * Get values from prayer configuration array.
      *
-     * @param array $config             Events configuration array.
+     * @param array $config             Prayer configuration array.
      * @return void
      */
     public function __construct(array $config)
