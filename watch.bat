@@ -1,1 +1,1 @@
-sass --watch src/public/resources/css:src/public/resources/css
+sass --style=compressed --watch src/public/resources/css:src/public/resources/css
