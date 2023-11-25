@@ -1,4 +1,4 @@
-FROM bfren/nginx-php:php8.2
+FROM bfren/nginx-php:php8.2-7.0.3
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/churchsuite-feeds"
 
@@ -20,5 +20,8 @@ COPY ./docker/overlay /
 # copy source files
 COPY ./src /www/
 COPY ./config-sample.yml /www/
+
+# run installation
+RUN bf-install
 
 VOLUME [ "/data" ]
