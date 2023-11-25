@@ -6,8 +6,10 @@ ARG BF_IMAGE
 ARG BF_VERSION
 
 ENV \
+    # required extensions
+    BF_PHP_EXT=curl session pecl-yaml
     # generate empty config.yml if one does not already exist
-    CCF_GENERATE_EMPTY_CONFIG=1
+    BF_CCF_GENERATE_EMPTY_CONFIG=1
 
 # clear base nginx files
 RUN rm -rf /www/*
