@@ -5,7 +5,7 @@ namespace Feeds\Lectionary;
 use DateInterval;
 use DateTimeImmutable;
 use Feeds\App;
-use Feeds\Airtable\Airtable;
+use Feeds\Baserow\Baserow;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 
@@ -28,56 +28,53 @@ class Lectionary
     public readonly array $series;
 
     /**
-     * Load lectionary from Airtable.
+     * Load lectionary and services from Baserow.
      *
      * @return void
      */
     public function __construct()
     {
-        // create Airtable loaders
-        $days = new Airtable("Day");
-        $services = new Airtable("Service");
+        // create Baserow loaders
+        $day_table = Baserow::Day();
+        $service_table = Baserow::Service();
 
         // get days
-        $days_fields = array(
+        $day = array(
             "Date",
             "Name",
             "Colour",
             "Collect"
         );
-        $days_records = $days->make_request(array("view" => "Feed", "fields" => $days_fields));
+        $day_results = $day_table->make_request(array("include" => join(",", $day)));
 
         // get services
-        $services_fields = array(
+        $service = array(
             "Date",
             "Time",
-            "Length (Minutes)",
-            "Name",
+            "Length",
+            "Service Name",
             "Series Title",
-            "Sermon Num",
-            "Sermon Title",
+            "Num",
+            "Title",
             "Main Reading",
             "Additional Reading",
             "Psalms"
         );
-        $services_records = $services->make_request(array("view" => "Feed", "fields" => $services_fields));
+        $service_results = $service_table->make_request(array("include" => join(",", $service)));
 
         // add days and services
         $days = array();
         $series = array();
-        foreach ($days_records as $day_record) {
-            // get fields
-            $day_fields = $day_record["fields"];
-
+        foreach ($day_results as $day) {
             // check date - if it is not set, continue
-            $date = Arr::get($day_fields, "Date");
+            $date = Arr::get($day, "Date");
             if (!$date) {
                 continue;
             }
 
             // get Services for Day
-            $day_services = array_filter($services_records, function (array $v, int $k) use ($date) {
-                return $v["fields"]["Date"] === $date;
+            $day_services = array_filter($service_results, function (array $v, int $k) use ($date) {
+                return $v["Date"] === $date;
             }, ARRAY_FILTER_USE_BOTH);
 
             // if there are no services, continue
@@ -87,28 +84,27 @@ class Lectionary
 
             // add Services to Day
             $l_services = array();
-            foreach ($day_services as $service_record) {
-                $service_fields = $service_record["fields"];
-                $series[] = Arr::get($service_fields, "Series Title");
+            foreach ($day_services as $service) {
+                $series[] = Arr::get($service, "Series Title");
                 $l_services[] = new Service(
-                    time: Arr::get($service_fields, "Time"),
-                    length: new DateInterval(sprintf("PT%sM", Arr::get($service_fields, "Length (Minutes)", 60))),
-                    name: Arr::get($service_fields, "Name", "Service"),
-                    series: Arr::get($service_fields, "Series Title"),
-                    num: Arr::get($service_fields, "Sermon Num"),
-                    title: Arr::get($service_fields, "Sermon Title"),
-                    main_reading: Arr::get($service_fields, "Main Reading"),
-                    additional_reading: Arr::get($service_fields, "Additional Reading"),
-                    psalms: Arr::map(explode(";", Arr::get($service_fields, "Psalms", "")), "trim")
+                    time: Arr::get($service, "Time"),
+                    length: new DateInterval(sprintf("PT%sM", Arr::get($service, "Length", 60))),
+                    name: Arr::get($service, "Service Name"),
+                    series: Arr::get($service, "Series Title"),
+                    num: Arr::get($service, "Num"),
+                    title: Arr::get($service, "Title"),
+                    main_reading: Arr::get($service, "Main Reading"),
+                    additional_reading: Arr::get($service, "Additional Reading"),
+                    psalms: Arr::map(explode(";", Arr::get($service, "Psalms", "")), "trim")
                 );
             }
 
             // add Day to Lectionary
             $days[] = new Day(
                 date: $date,
-                name: Arr::get($day_fields, "Name"),
-                colour: Arr::get($day_fields, "Colour"),
-                collect: Arr::get($day_fields, "Collect"),
+                name: Arr::get($day, "Name"),
+                colour: Arr::get($day, "Colour"),
+                collect: Arr::get($day, "Collect"),
                 services: $l_services
             );
         }
@@ -120,6 +116,30 @@ class Lectionary
         // store series
         asort($series);
         $this->series = array_unique(array_filter($series));
+    }
+
+    /**
+     * Get the Collect for the specified day - or the previous Sunday if there isn't one.
+     *
+     * @param DateTimeImmutable $dt     Date.
+     * @return null|string              Collect or null if not found.
+     */
+    public function get_collect(DateTimeImmutable $dt): ?string
+    {
+        // if this is a Lectionary day, return its collect
+        $day = $this->get_day($dt);
+        if ($day !== null) {
+            return $day->collect;
+        }
+
+        // get the collect for the previous Sunday
+        $previous_sunday = $this->get_day($dt->modify("previous Sunday"));
+        if ($previous_sunday !== null) {
+            return $previous_sunday->collect;
+        }
+
+        // return nothing
+        return null;
     }
 
     /**

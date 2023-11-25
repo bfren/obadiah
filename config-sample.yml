@@ -4,9 +4,13 @@ general:
   church_domain: ''
   production: true
 
-airtable:
-  base: ''
-  personal_access_token: ''
+baserow:
+  api_uri: ''
+  day_table_id: 0
+  day_view_id: 0
+  service_table_id: 0
+  service_view_id: 0
+  token: ''
 
 cache:
   duration_in_seconds: 3600

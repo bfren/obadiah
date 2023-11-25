@@ -75,6 +75,9 @@ $margin: 5px;
             padding-top: 1px;
 
             .services {
+                .people {
+                    font-size: 0.7rem;
+                }
                 .service {
                     .teaching {
                         margin-left: calc($margin * 2);

@@ -3,6 +3,7 @@
 namespace Feeds\Pages\Refresh;
 
 use Feeds\App;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Image;
 use Feeds\Pages\Parts\Header\Header_Model;
@@ -30,7 +31,20 @@ $this->header(new Header_Model("Refresh"));
 
 <div class="row">
 
-    <div class="col-12 col-sm-6">
+    <div class="col-12 col-md-4">
+        <h3>Bible Readings</h3>
+        <?php if ($model->today->readings) : $readings = $model->today->readings; ?>
+            <p><?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
+            <p><?php $this->part("reading", model: $readings->ot_1); ?></p>
+            <p><?php $this->part("reading", model: $readings->ot_2); ?></p>
+            <p><?php $this->part("reading", model: $readings->nt_gospels); ?></p>
+            <p><?php $this->part("reading", model: $readings->nt_epistles); ?></p>
+        <?php else : ?>
+            <p>There are no Bible readings for today.</p>
+        <?php endif; ?>
+    </div>
+
+    <div class="col-12 col-md-4">
         <h3>People</h3>
         <?php if ($model->today->people) : ?>
             <?php foreach ($model->today->people as $person) : $name = $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : $person; ?>
@@ -52,18 +66,12 @@ $this->header(new Header_Model("Refresh"));
         <?php endif; ?>
     </div>
 
-    <div class="col-12 col-sm-6">
-        <h3>Bible Readings</h3>
-        <?php if ($model->today->readings) : $readings = $model->today->readings; ?>
-            <p><?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
-            <p><?php $this->part("reading", model: $readings->ot_1); ?></p>
-            <p><?php $this->part("reading", model: $readings->ot_2); ?></p>
-            <p><?php $this->part("reading", model: $readings->nt_gospels); ?></p>
-            <p><?php $this->part("reading", model: $readings->nt_epistles); ?></p>
-        <?php else : ?>
-            <p>There are no Bible readings for today.</p>
-        <?php endif; ?>
+    <?php if (($collect = Cache::get_lectionary()->get_collect($model->today->date)) !== null) : ?>
+    <div class="col-12 col-md-4">
+        <h3>Collect</h3>
+        <?php _h(str_replace("\n", "<br />", $collect)); ?>
     </div>
+    <?php endif; ?>
 
 </div>
 

@@ -11,11 +11,11 @@ App::check();
 class Config
 {
     /**
-     * Airtable config object.
+     * Baserow config object.
      *
-     * @var Config_Airtable
+     * @var Config_Baserow
      */
-    public static Config_Airtable $airtable;
+    public static Config_Baserow $baserow;
 
     /**
      * Cache config object.
@@ -113,7 +113,7 @@ class Config
         $config = yaml_parse_file($config_file);
 
         // create configuration objects
-        self::$airtable = new Config_Airtable(Arr::get($config, "airtable", array()));
+        self::$baserow = new Config_Baserow(Arr::get($config, "baserow", array()));
         self::$cache = new Config_Cache(Arr::get($config, "cache", array()));
         self::$churchsuite = new Config_ChurchSuite(Arr::get($config, "churchsuite", array()));
         self::$dir = new Config_Dir($cwd, $data_dir);
