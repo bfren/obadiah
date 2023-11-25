@@ -119,6 +119,30 @@ class Lectionary
     }
 
     /**
+     * Get the Collect for the specified day - or the previous Sunday if there isn't one.
+     *
+     * @param DateTimeImmutable $dt     Date.
+     * @return null|string              Collect or null if not found.
+     */
+    public function get_collect(DateTimeImmutable $dt): ?string
+    {
+        // if this is a Lectionary day, return its collect
+        $day = $this->get_day($dt);
+        if ($day !== null) {
+            return $day->collect;
+        }
+
+        // get the collect for the previous Sunday
+        $previous_sunday = $this->get_day($dt->modify("previous Sunday"));
+        if ($previous_sunday !== null) {
+            return $previous_sunday->collect;
+        }
+
+        // return nothing
+        return null;
+    }
+
+    /**
      * Get day information from the Lectionary for the specified date.
      *
      * @param DateTimeImmutable $dt     Date.

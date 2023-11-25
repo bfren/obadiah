@@ -53,11 +53,6 @@ if ($model->day->format("N") == 7) {
                 <?php endforeach; ?>
             </div>
         <?php else : ?>
-            <?php if (isset($people)) : ?>
-                <div class="people">
-                    <?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?>
-                </div>
-            <?php endif; ?>
             <?php if (isset($readings)) : ?>
                 <div class="readings text-body-secondary">
                     <?php
@@ -67,6 +62,11 @@ if ($model->day->format("N") == 7) {
                         $this->part("reading", model: $readings->nt_gospels);
                         $this->part("reading", model: $readings->nt_epistles);
                     ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($people)) : ?>
+                <div class="people">
+                    <?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?>
                 </div>
             <?php endif; ?>
         <?php endif; ?>

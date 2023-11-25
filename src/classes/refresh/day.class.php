@@ -5,6 +5,7 @@ namespace Feeds\Refresh;
 use DateTimeImmutable;
 use Feeds\App;
 use Feeds\Bible\Day as Readings;
+use Feeds\Cache\Cache;
 use Feeds\Config\Config as C;
 use Feeds\Helpers\Arr;
 use Feeds\Prayer\Person;
@@ -48,6 +49,17 @@ class Day
     {
         $description = array();
 
+        // add readings
+        if ($this->readings) {
+            $description[] = "= Readings =";
+            $description[] = sprintf("Psalms %s", $this->readings->ot_psalms);
+            $description[] = $this->readings->ot_1;
+            $description[] = $this->readings->ot_2;
+            $description[] = $this->readings->nt_gospels;
+            $description[] = $this->readings->nt_epistles;
+            $description[] = "";
+        }
+
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
@@ -59,14 +71,10 @@ class Day
             $description[] = "";
         }
 
-        // add readings
-        if ($this->readings) {
-            $description[] = "= Readings =";
-            $description[] = sprintf("Psalms %s", $this->readings->ot_psalms);
-            $description[] = $this->readings->ot_1;
-            $description[] = $this->readings->ot_2;
-            $description[] = $this->readings->nt_gospels;
-            $description[] = $this->readings->nt_epistles;
+        // add collect
+        if (($collect = Cache::get_lectionary()->get_collect($this->date)) !== null) {
+            $description[] = "= Collect =";
+            $description[] = $collect;
             $description[] = "";
         }
 
