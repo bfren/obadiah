@@ -21,7 +21,4 @@ COPY ./docker/overlay /
 COPY ./src /www/
 COPY ./config-sample.yml /www/
 
-# run installation
-RUN bf-install
-
 VOLUME [ "/data" ]
