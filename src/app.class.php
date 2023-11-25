@@ -49,7 +49,7 @@ class App
         });
 
         // read application version
-        $image_version = new SplFileInfo("/BF_VERSION");
+        $image_version = new SplFileInfo("/etc/bf/VERSION");
         $source_version = new SplFileInfo(sprintf("%s/../VERSION", $cwd));
         if ($image_version->isFile()) {
             self::$version = file_get_contents($image_version->getRealPath());
