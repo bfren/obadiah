@@ -14,6 +14,11 @@
 				"savePath": null,
 				"savePathReplacementPairs": null
 			}
+		],
+		"nushellLanguageServer.includeDirs": [
+			"Q:/src/docker/alpine/overlay/etc/nu/scripts",
+			"Q:/src/docker/nginx-php/overlay/etc/nu/scripts",
+			"Q:/src/docker/php/overlay/etc/nu/scripts"
 		]
 	}
 }
