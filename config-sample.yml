@@ -4,10 +4,6 @@ general:
   church_domain: ''
   production: true
 
-airtable:
-  base: ''
-  personal_access_token: ''
-
 baserow:
   api_uri: ''
   day_table_id: 0
