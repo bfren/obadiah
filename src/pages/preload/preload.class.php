@@ -39,7 +39,7 @@ class Preload
                 Cache::get_events($query, fn ($q) => Events::get_events($q));
             }),
 
-            // Airtable lectionary
+            // Baserow lectionary
             "lectionary" => self::load(fn () => Cache::get_lectionary(true)),
 
             // People

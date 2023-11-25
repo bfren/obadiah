@@ -22,7 +22,7 @@ class Config
      *
      * @var Config_Baserow
      */
-    public static Config_Cache $baserow;
+    public static Config_Baserow $baserow;
 
     /**
      * Cache config object.
