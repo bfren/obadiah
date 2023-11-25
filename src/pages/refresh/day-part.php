@@ -38,6 +38,7 @@ if ($model->day->format("N") == 7) {
         <?php if (isset($lectionary_day)) : ?>
             <div class="services">
                 <div class="fw-bold"><?php _e($lectionary_day->name); ?></div>
+                <div class="people text-body-secondary">Give thanks for those serving in today&rsquo;s services.</div>
                 <?php foreach ($services as $service) : ?>
                     <div class="service d-flex">
                         <div class="time"><?php _e($service->time); ?></div>
@@ -65,9 +66,7 @@ if ($model->day->format("N") == 7) {
                 </div>
             <?php endif; ?>
             <?php if (isset($people)) : ?>
-                <div class="people">
-                    <?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?>
-                </div>
+                <div class="people"><?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?></div>
             <?php endif; ?>
         <?php endif; ?>
     </div>
