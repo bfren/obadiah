@@ -52,11 +52,11 @@ class Day
         // add readings
         if ($this->readings) {
             $description[] = "= Readings =";
-            $description[] = sprintf("Psalms %s", $this->readings->ot_psalms);
-            $description[] = $this->readings->ot_1;
-            $description[] = $this->readings->ot_2;
-            $description[] = $this->readings->nt_gospels;
-            $description[] = $this->readings->nt_epistles;
+            $description[] = sprintf("1: Psalms %s", $this->readings->ot_psalms);
+            $description[] = sprintf("2: %s", $this->readings->ot_1);
+            $description[] = sprintf("3: %s", $this->readings->ot_2);
+            $description[] = sprintf("4: %s", $this->readings->nt_gospels);
+            $description[] = sprintf("5: %s", $this->readings->nt_epistles);
             $description[] = "";
         }
 
