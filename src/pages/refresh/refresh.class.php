@@ -35,6 +35,16 @@ class Refresh
     }
 
     /**
+     * GET: /refresh/help
+     *
+     * @return View
+     */
+    public function help_get(): View
+    {
+        return new View("refresh", name: "help");
+    }
+
+    /**
      * GET: /refresh/print
      *
      * @return View
