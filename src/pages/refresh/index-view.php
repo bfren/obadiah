@@ -83,6 +83,7 @@ $this->header(new Header_Model("Refresh"));
 
 <h2><?php _e($this_month_text); ?></h2>
 <p>View a printable version of this month&rsquo;s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>" target="_blank">here</a>.</p>
+<p>Use <a href="/refresh/ics?api=<?php _e(C::$login->api); ?>">this link</a> to add an auto-updating Refresh calendar to your favourite calendar app.</p>
 
 <?php
 
