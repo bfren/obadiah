@@ -74,7 +74,7 @@ $this->header(new Header_Model("Refresh"));
     <?php if (($collect = Cache::get_lectionary()->get_collect($model->today->date)) !== null) : ?>
     <div class="col-12 col-md-4">
         <h3 class="mt-3">Collect</h3>
-        <p><em>These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together.  Normally they reflect the church calendar or a particular saint.</em></p>
+        <p class="small text-muted">These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together.  Normally they reflect the church calendar or a particular saint.</p>
         <?php _h(str_replace("\n", "<br />", $collect)); ?>
     </div>
     <?php endif; ?>
