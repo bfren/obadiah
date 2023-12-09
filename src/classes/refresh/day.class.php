@@ -63,10 +63,11 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            if ($this->people[0] instanceof Person) {
-                $description[] = join($separator, Arr::map($this->people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
+            $people = array_values($this->people);
+            if ($people[0] instanceof Person) {
+                $description[] = join($separator, Arr::map($people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
             } else {
-                $description[] = join($separator, $this->people);
+                $description[] = join($separator, $people);
             }
             $description[] = "";
         }
