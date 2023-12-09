@@ -52,21 +52,22 @@ class Day
         // add readings
         if ($this->readings) {
             $description[] = "= Readings =";
-            $description[] = sprintf("Psalms %s", $this->readings->ot_psalms);
-            $description[] = $this->readings->ot_1;
-            $description[] = $this->readings->ot_2;
-            $description[] = $this->readings->nt_gospels;
-            $description[] = $this->readings->nt_epistles;
+            $description[] = sprintf("1: Psalms %s", $this->readings->ot_psalms);
+            $description[] = sprintf("2: %s", $this->readings->ot_1);
+            $description[] = sprintf("3: %s", $this->readings->ot_2);
+            $description[] = sprintf("4: %s", $this->readings->nt_gospels);
+            $description[] = sprintf("5: %s", $this->readings->nt_epistles);
             $description[] = "";
         }
 
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            if ($this->people[0] instanceof Person) {
-                $description[] = join($separator, Arr::map($this->people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
+            $people = array_values($this->people);
+            if ($people[0] instanceof Person) {
+                $description[] = join($separator, Arr::map($people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
             } else {
-                $description[] = join($separator, $this->people);
+                $description[] = join($separator, $people);
             }
             $description[] = "";
         }

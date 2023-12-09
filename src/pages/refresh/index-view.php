@@ -27,26 +27,31 @@ $this->header(new Header_Model("Refresh"));
 ?>
 
 <h2><?php _e($model->today->date->format(C::$formats->display_date)); ?></h2>
-<p>Today&rsquo;s entry on the Refresh calendar.</p>
+<p class="small text-muted">
+    Today&rsquo;s entry on the Refresh calendar.<br/>
+    <a href="/refresh/help">Click here</a> for help and instructions.
+</p>
 
 <div class="row">
 
     <div class="col-12 col-md-4">
-        <h3>Bible Readings</h3>
+        <h3 class="mt-3">Bible Readings</h3>
         <?php if ($model->today->readings) : $readings = $model->today->readings; ?>
-            <p><?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
-            <p><?php $this->part("reading", model: $readings->ot_1); ?></p>
-            <p><?php $this->part("reading", model: $readings->ot_2); ?></p>
-            <p><?php $this->part("reading", model: $readings->nt_gospels); ?></p>
-            <p><?php $this->part("reading", model: $readings->nt_epistles); ?></p>
+            <p class="small text-muted">Click on a passage to view the text on Bible Gateway, using the <?php _e(C::$rota->bible_version) ?> translation.  There is more information about the five streams and how to use them <a href="/refresh/help">here</a>.</p>
+            <p>Stream 1: <?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
+            <p>Stream 2: <?php $this->part("reading", model: $readings->ot_1); ?></p>
+            <p>Stream 3: <?php $this->part("reading", model: $readings->ot_2); ?></p>
+            <p>Stream 4: <?php $this->part("reading", model: $readings->nt_gospels); ?></p>
+            <p>Stream 5: <?php $this->part("reading", model: $readings->nt_epistles); ?></p>
         <?php else : ?>
             <p>There are no Bible readings for today.</p>
         <?php endif; ?>
     </div>
 
     <div class="col-12 col-md-4">
-        <h3>People</h3>
+        <h3 class="mt-3">People</h3>
         <?php if ($model->today->people) : ?>
+            <p class="small text-muted"><?php _h(C::$refresh->footer_page_1_left); ?> <?php _h(C::$refresh->footer_page_1_right); ?></p>
             <?php foreach ($model->today->people as $person) : $name = $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : $person; ?>
                 <div class="person d-flex align-items-center">
                     <div class="image">
@@ -68,7 +73,8 @@ $this->header(new Header_Model("Refresh"));
 
     <?php if (($collect = Cache::get_lectionary()->get_collect($model->today->date)) !== null) : ?>
     <div class="col-12 col-md-4">
-        <h3>Collect</h3>
+        <h3 class="mt-3">Collect</h3>
+        <p class="small text-muted">These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together.  Normally they reflect the church calendar or a particular saint.</p>
         <?php _h(str_replace("\n", "<br />", $collect)); ?>
     </div>
     <?php endif; ?>
@@ -77,6 +83,7 @@ $this->header(new Header_Model("Refresh"));
 
 <h2><?php _e($this_month_text); ?></h2>
 <p>View a printable version of this month&rsquo;s calendar <a href="/refresh/print/?<?php _e($this_month_query); ?>" target="_blank">here</a>.</p>
+<p>Use <a href="/refresh/ics?api=<?php _e(C::$login->api); ?>">this link</a> to add an auto-updating Refresh calendar to your favourite calendar app.</p>
 
 <?php
 
