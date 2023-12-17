@@ -36,7 +36,7 @@ $this->header(new Header_Model("Refresh Help"));
         <strong>Stream 5</strong> is the rest of the New Testament, from Acts through the letters of Paul and others, all the way to Revelation.
     </li>
 </ul>
-<p>You can download the whole plan for the year in printable form <a href="/resources/files/bible-reading-plan.pdf" target="_blank">here</a>, if you want to keep track of what you have read.  (You will notice that there are no readings planned for Sundays - this is deliberate, perhaps on those days you could reflect on the previous week&rsquo;s readings, or read the passages set for the day&rsquo;s services.)</p>
+<p>You can download the whole plan for the year in printable form <a href="/resources/files/bible-reading-plan-2024.pdf" target="_blank">here</a>, if you want to keep track of what you have read.  (You will notice that there are no readings planned for Sundays - this is deliberate, perhaps on those days you could reflect on the previous week&rsquo;s readings, or read the passages set for the day&rsquo;s services.)</p>
 
 <h2>People</h2>
 <p>The next section contains a few people to pray for each day from our church family, so every member of our church family (that wants to) is prayed for every month.  They are normally grouped by family - if you would like to be moved please contact the church office.</p>
