@@ -43,12 +43,14 @@ $this->header(new Header_Model("Refresh"));
             <p>Stream 3: <?php $this->part("reading", model: $readings->ot_2); ?></p>
             <p>Stream 4: <?php $this->part("reading", model: $readings->nt_gospels); ?></p>
             <p>Stream 5: <?php $this->part("reading", model: $readings->nt_epistles); ?></p>
+        <?php elseif ($model->today->date->format("N") == 7) : ?>
+            <p>Look back over the week&rsquo;s readings and pray through what stood out &ndash; or look through the readings for today&rsquo;s services.</p>
         <?php else : ?>
             <p>There are no Bible readings for today.</p>
         <?php endif; ?>
     </div>
 
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4 mb-2">
         <h3 class="mt-3">People</h3>
         <?php if ($model->today->people) : ?>
             <p class="small text-muted"><?php _h(C::$refresh->footer_page_1_left); ?> <?php _h(C::$refresh->footer_page_1_right); ?></p>
@@ -66,6 +68,8 @@ $this->header(new Header_Model("Refresh"));
                     <div class="name ps-2"><?php _e($name); ?></div>
                 </div>
             <?php endforeach; ?>
+        <?php elseif ($model->today->date->format("N") == 7) : ?>
+            <p>Give thanks for those serving in today&rsquo;s services.</p>
         <?php else : ?>
             <p>There are no people on the prayer calendar today.</p>
         <?php endif; ?>
