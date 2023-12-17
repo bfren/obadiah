@@ -28,9 +28,12 @@ class Refresh
         // get calendar
         $refresh = Cache::get_refresh();
 
+        // get (optional) day index
+        $index = Request::$get->int("index");
+
         // return view
         return new View("refresh", model: new Index_Model(
-            today: $refresh->today
+            today: $index == 0 ? $refresh->today : $refresh->days[$index]
         ));
     }
 
