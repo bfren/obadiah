@@ -8,7 +8,7 @@ export BF_E=`basename ${0}`
 # Call preload script.
 #======================================================================================================================
 
-bf-write-debug "Calling preload script." preload
+bf-write "Calling preload script." preload
 CODE=$(bf-test-url --return-status "http://localhost/preload")
 [[ "${CODE}" = "200" ]] && exit 0 \
     || bf-write-error "Error executing preload (HTTP ${CODE})." preload

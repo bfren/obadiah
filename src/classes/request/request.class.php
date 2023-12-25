@@ -44,7 +44,7 @@ class Request
     public static Super_Global $get;
 
     /**
-     * Current requesth host.
+     * Current request host.
      *
      * @var string
      */
