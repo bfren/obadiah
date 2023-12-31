@@ -96,7 +96,7 @@ class Bible_Plan
         // get the plan day number:
         // we skip Sundays so subtract the number of weeks from the number of days
         // then we add one because the index is 1-based
-        $day = $days - $sundays;
+        $day = $days - $sundays + 1;
 
         // return the day from the days array
         if ($day > count($this->days)) {
