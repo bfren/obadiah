@@ -16,7 +16,7 @@ App::check();
 
 // get refresh links
 $refresh_print_uri = sprintf("/refresh/print/?%s", http_build_query($model->refresh_print));
-$refresh_feed_uri = sprintf("/refresh/ics/?%s", http_build_query($model->refresh_feed));
+$refresh_feed_uri = sprintf("webcal://%s/refresh/ics/?%s", Request::$host, http_build_query($model->refresh_feed));
 
 // output header
 $this->header(new Header_Model("Home", subtitle: "These pages house the various feeds generated from Church Suite."));
