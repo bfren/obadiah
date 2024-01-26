@@ -62,9 +62,9 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/ccf:dev
-            bfren/ccf:${{ steps.version.outputs.contents }}-beta
+            bfren/ccf:${{ steps.version.outputs.contents }}-dev
             ghcr.io/bfren/ccf:dev
-            ghcr.io/bfren/ccf:${{ steps.version.outputs.contents }}-beta
+            ghcr.io/bfren/ccf:${{ steps.version.outputs.contents }}-dev
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
