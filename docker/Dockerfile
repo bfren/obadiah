@@ -1,4 +1,4 @@
-FROM bfren/nginx-php:php8.3-7.2.2
+FROM bfren/nginx-php:php8.3-7.2.14
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/churchsuite-feeds"
 
