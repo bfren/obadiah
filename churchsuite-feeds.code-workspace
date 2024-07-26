@@ -7,14 +7,6 @@
 	"settings": {
 		"editor.renderWhitespace": "boundary",
 		"files.trimTrailingWhitespace": true,
-		"liveSassCompile.settings.formats": [
-			{
-				"format": "compressed",
-				"extensionName": ".min.css",
-				"savePath": null,
-				"savePathReplacementPairs": null
-			}
-		],
 		"nushellLanguageServer.includeDirs": [
 			"Q:/src/docker/alpine/overlay/etc/nu/scripts",
 			"Q:/src/docker/nginx-php/overlay/etc/nu/scripts",

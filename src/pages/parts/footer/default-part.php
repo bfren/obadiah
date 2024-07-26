@@ -3,7 +3,6 @@
 namespace Feeds\Pages\Parts\Footer;
 
 use Feeds\App;
-use Feeds\Config\Config as C;
 
 App::check();
 

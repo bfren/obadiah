@@ -4,7 +4,6 @@ namespace Feeds\Pages\Prayer;
 
 use DateTimeImmutable;
 use Feeds\Admin\Prayer_File;
-use Feeds\Admin\Require_Admin;
 use Feeds\Admin\Result;
 use Feeds\App;
 use Feeds\Cache\Cache;

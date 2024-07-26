@@ -5,7 +5,6 @@ namespace Feeds\Pages\Prayer;
 use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
-use Feeds\Prayer\Prayer_Calendar;
 
 App::check();
 
