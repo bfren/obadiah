@@ -3,7 +3,6 @@
 namespace Feeds\Pages\Upload;
 
 use Feeds\Admin\Bible_File;
-use Feeds\Admin\Prayer_File;
 use Feeds\Admin\Rota_File;
 use Feeds\App;
 use Feeds\Config\Config as C;

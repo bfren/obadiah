@@ -2,7 +2,6 @@
 
 namespace Feeds\Pages\Upload;
 
-use DateTimeImmutable;
 use Feeds\Admin\Result;
 use Feeds\App;
 

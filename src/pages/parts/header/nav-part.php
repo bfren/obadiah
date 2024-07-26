@@ -7,8 +7,6 @@ use Feeds\Helpers\Image;
 use Feeds\Request\Request;
 use Feeds\Response\View;
 
-use function PHPSTORM_META\map;
-
 App::check();
 
 /** @var View $this */

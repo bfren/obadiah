@@ -9,7 +9,6 @@ use Feeds\ChurchSuite\Api;
 use Feeds\Helpers\Hash;
 use Feeds\Lectionary\Lectionary;
 use Feeds\Prayer\Person;
-use Feeds\Prayer\Prayer_Calendar;
 use Feeds\Refresh\Refresh;
 use Feeds\Request\Request;
 use Feeds\Rota\Rota;

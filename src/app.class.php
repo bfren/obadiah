@@ -7,7 +7,6 @@ use Feeds\Config\Config as C;
 use Feeds\Request\Request;
 use Feeds\Router\Router;
 use SplFileInfo;
-use SplFileObject;
 
 class App
 {
