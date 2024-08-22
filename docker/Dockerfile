@@ -1,6 +1,6 @@
 FROM bfren/nginx-php:php8.3-7.2.14
 
-LABEL org.opencontainers.image.source="https://github.com/bfren/churchsuite-feeds"
+LABEL org.opencontainers.image.source="https://github.com/bfren/obadiah"
 
 ARG BF_IMAGE
 ARG BF_VERSION
