@@ -25,7 +25,7 @@ abstract class Action
     protected function __construct(
         private readonly int $status
     ) {
-        $this->add_header("X-Software", "bfren/ccf");
+        $this->add_header("X-Software", "bfren/obadiah");
     }
 
     /**
