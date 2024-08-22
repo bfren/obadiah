@@ -14,9 +14,19 @@ class Baserow
      *
      * @return Baserow                  Configured Baserow object.
      */
-    public static function Day() : Baserow
+    public static function Day(): Baserow
     {
         return new Baserow(C::$baserow->lectionary_token, C::$baserow->day_table_id, C::$baserow->day_view_id);
+    }
+
+    /**
+     * Create Baserow object for inserting into the Confidential Self-Declaration table.
+     *
+     * @return Baserow                  Configured Baserow object.
+     */
+    public static function Declaration(): Baserow
+    {
+        return new Baserow(C::$baserow->safeguarding_token, C::$baserow->declaration_table_id);
     }
 
     /**
@@ -24,7 +34,7 @@ class Baserow
      *
      * @return Baserow                  Configured Baserow object.
      */
-    public static function Service() : Baserow
+    public static function Service(): Baserow
     {
         return new Baserow(C::$baserow->lectionary_token, C::$baserow->service_table_id, C::$baserow->service_view_id);
     }
@@ -44,21 +54,26 @@ class Baserow
     private readonly string $url;
 
     /**
-     * Build URL to connect to the specified table and view.
+     * Build URL to connect to the specified table (and view for querying).
      *
      * @param string $token             Database Token.
      * @param int $table_id             Table ID.
-     * @param int $view_id              View ID.
+     * @param ?int $view_id             Optional View ID.
      * @return void
      */
-    public function __construct(string $token, int $table_id, int $view_id)
+    public function __construct(string $token, int $table_id, ?int $view_id = null)
     {
         $this->token = $token;
-        $this->url = sprintf("%s/database/rows/table/%s/?view_id=%s&user_field_names=true", C::$baserow->api_uri, $table_id, $view_id);
+
+        if ($view_id == null) {
+            $this->url = sprintf("%s/database/rows/table/%s/?&user_field_names=true", C::$baserow->api_uri, $table_id);
+        } else {
+            $this->url = sprintf("%s/database/rows/table/%s/?view_id=%s&user_field_names=true", C::$baserow->api_uri, $table_id, $view_id);
+        }
     }
 
     /**
-     * Make a request to the Baserow API and return array of results.
+     * Make a GET request to the Baserow API and return array of results.
      *
      * @param array $data               Optional request data.
      * @return array                    All results for the specified view.
@@ -110,5 +125,39 @@ class Baserow
 
         // return the complete array of results
         return $results;
+    }
+
+    /**
+     * Make a POST request to the Baserow API.
+     *
+     * @param array $data               Request data.
+     * @return Post_Result              POST request result.
+     */
+    public function post(array $data): Post_Result
+    {
+        // build HTTP form from data
+        $form = http_build_query($data);
+
+        // create curl request
+        $handle = curl_init($this->url);
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($handle, CURLOPT_POST, 1);
+        curl_setopt($handle, CURLOPT_POSTFIELDS, $form);
+
+        // make request and output on error
+        $json = curl_exec($handle);
+        if (!$json) {
+            return new Post_Result(500, curl_error($handle));
+        }
+
+        // decode JSON response and output on error
+        $result = json_decode($json, true);
+        if (isset($result["error"])) {
+            return new Post_Result(400, $result["detail"]);
+        }
+
+        // if we get here the POST was successful
+        return new Post_Result(200, "OK");
     }
 }

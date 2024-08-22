@@ -3,6 +3,7 @@
 namespace Obadiah\Request;
 
 use Obadiah\App;
+use stdClass;
 
 App::check();
 
@@ -49,6 +50,13 @@ class Request
      * @var string
      */
     public static string $host;
+
+    /**
+     * Returns posted JSON as an associative array.
+     *
+     * @var array
+     */
+    public static array $json;
 
     /**
      * Request method (e.g. POST).
@@ -103,6 +111,7 @@ class Request
         self::$env = new Super_Global(INPUT_ENV);
         self::$files = $_FILES ?: array();
         self::$get = new Super_Global(INPUT_GET);
+        self::$json = json_decode(file_get_contents("php://input"), true);
         self::$post = new Super_Global(INPUT_POST);
         self::$server = new Super_Global(INPUT_SERVER);
         self::$session = new Session();
