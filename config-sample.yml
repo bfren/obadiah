@@ -11,8 +11,8 @@ baserow:
   service_table_id: 0
   service_view_id: 0
   lectionary_token: ''
-  declarations_table_id: 0
-  references_table_id: 0
+  declaration_table_id: 0
+  reference_table_id: 0
   safeguarding_token: ''
 
 cache:

@@ -35,14 +35,14 @@ class Config_Baserow
      *
      * @var int
      */
-    public readonly int $declarations_table_id;
+    public readonly int $declaration_table_id;
 
     /**
      * The ID of the Confidential References table.
      *
      * @var int
      */
-    public readonly int $references_table_id;
+    public readonly int $reference_table_id;
 
     /**
      * The ID of the Service table.
@@ -86,8 +86,8 @@ class Config_Baserow
         # Table and View IDs
         $this->day_table_id = Arr::get_integer($config, "day_table_id");
         $this->day_view_id = Arr::get_integer($config, "day_view_id");
-        $this->declarations_table_id = Arr::get_integer($config, "declarations_table_id");
-        $this->references_table_id = Arr::get_integer($config, "references_table_id");
+        $this->declaration_table_id = Arr::get_integer($config, "declaration_table_id");
+        $this->reference_table_id = Arr::get_integer($config, "reference_table_id");
         $this->service_table_id = Arr::get_integer($config, "service_table_id");
         $this->service_view_id = Arr::get_integer($config, "service_view_id");
 
