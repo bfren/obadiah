@@ -43,7 +43,7 @@ class App
 
         // automatically load class definitions from classes directory
         spl_autoload_register(function ($class) use ($cwd) {
-            $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "feeds/pages", "feeds"), array("/", "-", "pages", "classes"), strtolower($class)));
+            $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "obadiah/pages", "obadiah"), array("/", "-", "pages", "classes"), strtolower($class)));
             require_once $path;
         });
 
