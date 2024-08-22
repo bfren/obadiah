@@ -37,7 +37,7 @@ class Api
      * @param array $data               Request data.
      * @return mixed                    API response.
      */
-    private function make_request(string $endpoint, array $data): mixed
+    private function get(string $endpoint, array $data): mixed
     {
         // build URL from data
         $url = sprintf("https://api.churchsuite.com/%s/%s?%s", $this->version, $endpoint, http_build_query($data));
@@ -82,7 +82,7 @@ class Api
     private function get_people(string $endpoint, string $kind, bool $are_children): array
     {
         // make request and return empty array on failure
-        $response = $this->make_request($endpoint, array($kind => "true"));
+        $response = $this->get($endpoint, array($kind => "true"));
         if ($response === null) {
             return array();
         }

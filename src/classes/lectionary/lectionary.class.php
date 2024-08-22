@@ -45,7 +45,7 @@ class Lectionary
             "Colour",
             "Collect"
         );
-        $day_results = $day_table->make_request(array("include" => join(",", $day)));
+        $day_results = $day_table->get(array("include" => join(",", $day)));
 
         // get services
         $service = array(
@@ -60,7 +60,7 @@ class Lectionary
             "Additional Reading",
             "Psalms"
         );
-        $service_results = $service_table->make_request(array("include" => join(",", $service)));
+        $service_results = $service_table->get(array("include" => join(",", $service)));
 
         // add days and services
         $days = array();
