@@ -12,8 +12,8 @@ class Post_Result
      * Holds information about a Baserow POST request.
      *
      * @param int $status               HTTP status to use.
-     * @param string $content           Response content - either 'OK' or information about an error.
+     * @param mixed $content            Response content - either 'OK' or information about an error.
      * @return void
      */
-    public function __construct(public readonly int $status, public readonly string $content) {}
+    public function __construct(public readonly int $status, public readonly mixed $content) {}
 }
