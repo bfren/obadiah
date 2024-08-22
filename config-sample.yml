@@ -10,7 +10,10 @@ baserow:
   day_view_id: 0
   service_table_id: 0
   service_view_id: 0
-  token: ''
+  lectionary_token: ''
+  declarations_table_id: 0
+  references_table_id: 0
+  safeguarding_token: ''
 
 cache:
   duration_in_seconds: 3600

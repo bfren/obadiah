@@ -16,7 +16,7 @@ class Baserow
      */
     public static function Day() : Baserow
     {
-        return new Baserow(C::$baserow->day_table_id, C::$baserow->day_view_id);
+        return new Baserow(C::$baserow->lectionary_token, C::$baserow->day_table_id, C::$baserow->day_view_id);
     }
 
     /**
@@ -26,8 +26,15 @@ class Baserow
      */
     public static function Service() : Baserow
     {
-        return new Baserow(C::$baserow->service_table_id, C::$baserow->service_view_id);
+        return new Baserow(C::$baserow->lectionary_token, C::$baserow->service_table_id, C::$baserow->service_view_id);
     }
+
+    /**
+     * Token to access the required database.
+     *
+     * @var string
+     */
+    private readonly string $token;
 
     /**
      * Constructed URL to the API for a specified table (see constructor).
@@ -39,12 +46,14 @@ class Baserow
     /**
      * Build URL to connect to the specified table and view.
      *
+     * @param string $token             Database Token.
      * @param int $table_id             Table ID.
      * @param int $view_id              View ID.
      * @return void
      */
-    public function __construct(int $table_id, int $view_id)
+    public function __construct(string $token, int $table_id, int $view_id)
     {
+        $this->token = $token;
         $this->url = sprintf("%s/database/rows/table/%s/?view_id=%s&user_field_names=true", C::$baserow->api_uri, $table_id, $view_id);
     }
 
@@ -54,14 +63,14 @@ class Baserow
      * @param array $data               Optional request data.
      * @return array                    All results for the specified view.
      */
-    public function make_request(array $data = array()): array
+    public function get(array $data = array()): array
     {
         // build HTTP query from data
         $query = http_build_query($data);
 
         // create curl request
         $handle = curl_init(sprintf("%s&%s", $this->url, $query));
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", C::$baserow->token)));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
         // make request and output on error
@@ -88,7 +97,7 @@ class Baserow
             parse_str(parse_url($result["next"], PHP_URL_QUERY), $next_data);
 
             // use the next page value to get the next batch of results
-            $next_results = $this->make_request($next_data);
+            $next_results = $this->get($next_data);
 
             // if $next_results is a string that means an error has occured so return it
             if (is_string($next_results)) {
