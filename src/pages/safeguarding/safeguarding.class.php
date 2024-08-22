@@ -30,6 +30,7 @@ class Safeguarding
         if ($result->status == 200) {
             return new Json($result->content);
         } else {
+            _l("Unable to execute Baserow insert: %s.", json_encode($result->content));
             return new Json(array("error" => $result->content, "data" => $row), $result->status);
         }
     }
@@ -45,7 +46,7 @@ class Safeguarding
         $form = Request::$json;
 
         // parse date/time
-        $dt_string = sprintf("%s %s", Arr::get($form, "date_1"), Arr::get($form, "time_1"));
+        $dt_string = trim(sprintf("%s %s", Arr::get($form, "date_1"), Arr::get($form, "time_1")));
         $dt = DateTimeImmutable::createFromFormat("d/m/Y H:i", $dt_string, C::$events->timezone);
         if ($dt === false) {
             _l("Unable to parse date '%s'.", $dt_string);
@@ -131,7 +132,7 @@ class Safeguarding
         $form = Request::$json;
 
         // remove hyphens from select values
-        $get_select = fn(int $num) => str_replace("_", " ", Arr::get($form, "select_$num"));
+        $get_select = fn(int $num) => str_replace("-", " ", Arr::get($form, "select_$num"));
 
         // map JSON to Baserow table fields
         $row = array(
