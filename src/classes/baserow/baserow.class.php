@@ -30,6 +30,16 @@ class Baserow
     }
 
     /**
+     * Create Baserow object for inserting into the Confidential Reference table.
+     *
+     * @return Baserow                  Configured Baserow object.
+     */
+    public static function Reference(): Baserow
+    {
+        return new Baserow(C::$baserow->safeguarding_token, C::$baserow->reference_table_id);
+    }
+
+    /**
      * Create Baserow object for querying the Service table.
      *
      * @return Baserow                  Configured Baserow object.

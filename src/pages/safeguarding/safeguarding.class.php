@@ -81,4 +81,43 @@ class Safeguarding
         $declaration_table = Baserow::Declaration();
         return self::execute($declaration_table, $row);
     }
+
+    /**
+     * Retrieve JSON request object and post it to the Confidential Reference table in Baserow.
+     *
+     * @return Json                     JSON response to return to the client.
+     */
+    public function reference_post(): Json
+    {
+        // receive JSON data from website
+        $form = Request::$json;
+
+        // remove hyphens from select values
+        $get_select = fn (int $num) => str_replace("-", " ", $form["select-$num"]);
+
+        // map JSON to Baserow table fields
+        $row = array(
+            "Applicant Full Name" => $form["name-1"],
+            "Relationship" => $form["text-1"],
+            "Known For" => $form["text-2"],
+            "Suitability" => $get_select(1),
+            "Experience" => $get_select(2),
+            "Care" => $get_select(3),
+            "Equality" => $get_select(4),
+            "Honesty etc" => $get_select(5),
+            "Comments" => $form["textarea-1"],
+            "Health" => $form["select-6"],
+            "Health Details" => $form["textarea-2"],
+            "Unsuitability" => $form["select-7"],
+            "Unsuitability Details" => $form["textarea-3"],
+            "Referee Full Name" => $form["name-2"],
+            "Confirm" => $form["checkbox-1"] == "true",
+            "Referee Email" => $form["email-1"],
+            "Referee Phone" => $form["phone-1"],
+        );
+
+        // create Baserow connection and execute request
+        $reference_table = Baserow::Reference();
+        return self::execute($reference_table, $row);
+    }
 }
