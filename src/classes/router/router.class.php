@@ -146,7 +146,7 @@ class Router
         try {
             return $action_method->invoke($page_obj);
         } catch (Throwable $th) {
-            _l($th->getTraceAsString());
+            _l("Message: %s\nTrace: %s", $th->getMessage(), $th->getTraceAsString());
             return self::server_error($th);
         }
     }
