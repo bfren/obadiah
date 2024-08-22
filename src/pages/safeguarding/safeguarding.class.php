@@ -5,6 +5,7 @@ namespace Obadiah\Pages\Safeguarding;
 use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Baserow\Baserow;
+use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
@@ -31,6 +32,38 @@ class Safeguarding
         } else {
             return new Json(array("error" => $result->content, "data" => $row), $result->status);
         }
+    }
+
+    /**
+     * Retrieve JSON request object and post it to the Safeguarding Concern table in Baserow.
+     *
+     * @return Json                     JSON response to return to the client.
+     */
+    public function concern_post(): Json
+    {
+        // receive JSON data from website
+        $form = Request::$json;
+
+        // parse date/time
+        $dt_string = sprintf("%s %s", Arr::get($form, "date-1"), Arr::get($form, "time-1"));
+        $dt = DateTimeImmutable::createFromFormat("Y-m-d H:i", $dt_string, C::$events->timezone);
+
+        // map JSON to Baserow table fields
+        $row = array(
+            "Name" => Arr::get($form, "text-1"),
+            "Contact Details" => Arr::get($form, "text-5"),
+            "Activity" => Arr::get($form, "text-2"),
+            "Who" => Arr::get($form, "text-3"),
+            "Date of Activity / Concern" => $dt->format("c"),
+            "Details" => Arr::get($form, "textarea-1"),
+            "Reported" => Arr::get($form, "radio-1"),
+            "Reported To" => Arr::get($form, "text-4"),
+            "Action" => Arr::get($form, "textarea-2"),
+        );
+
+        // create Baserow connection and execute request
+        $concern_table = Baserow::Concern();
+        return self::execute($concern_table, $row);
     }
 
     /**
@@ -75,7 +108,7 @@ class Safeguarding
             "16." => Arr::get($form, "select-16"),
             "16. Details" => Arr::get($form, "textarea-11"),
             "Declaration" => Arr::get($form, "name-2"),
-            "Overseas Consent" => Arr::get($form, "name-3")
+            "Overseas Consent" => Arr::get($form, "name-3"),
         );
 
         // create Baserow connection and execute request

@@ -6,14 +6,15 @@ general:
 
 baserow:
   api_uri: ''
+  concern_table_id: 0
   day_table_id: 0
   day_view_id: 0
-  service_table_id: 0
-  service_view_id: 0
-  lectionary_token: ''
   declaration_table_id: 0
+  lectionary_token: ''
   reference_table_id: 0
   safeguarding_token: ''
+  service_table_id: 0
+  service_view_id: 0
 
 cache:
   duration_in_seconds: 3600

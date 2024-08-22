@@ -10,6 +10,16 @@ App::check();
 class Baserow
 {
     /**
+     * Create Baserow object for querying the Concern table.
+     *
+     * @return Baserow                  Configured Baserow object.
+     */
+    public static function Concern(): Baserow
+    {
+        return new Baserow(C::$baserow->safeguarding_token, C::$baserow->concern_table_id);
+    }
+
+    /**
      * Create Baserow object for querying the Day table.
      *
      * @return Baserow                  Configured Baserow object.
