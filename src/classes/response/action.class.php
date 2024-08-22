@@ -56,14 +56,15 @@ abstract class Action
     }
 
     /**
-     * Send headers to the response.
+     * Send HTTP status and configured headers to the response.
      *
      * @return void
      */
     public function send_headers()
     {
+        http_response_code($this->status);
         foreach ($this->headers as $header) {
-            header(sprintf("%s: %s", $header->key, $header->value), $this->status);
+            header(sprintf("%s: %s", $header->key, $header->value));
         }
     }
 
