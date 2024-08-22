@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Pages\Auth;
+namespace Obadiah\Pages\Auth;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 

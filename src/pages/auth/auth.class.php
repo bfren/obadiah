@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Pages\Auth;
+namespace Obadiah\Pages\Auth;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Response\Action;
-use Feeds\Response\View;
-use Feeds\Response\Redirect;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Request\Request;
+use Obadiah\Response\Action;
+use Obadiah\Response\View;
+use Obadiah\Response\Redirect;
 
 App::check();
 

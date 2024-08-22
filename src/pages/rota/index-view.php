@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Obadiah\Pages\Rota;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
-use Feeds\Rota\Builder;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
+use Obadiah\Rota\Builder;
 
 App::check();
 

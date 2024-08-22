@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Pages\Upload;
+namespace Obadiah\Pages\Upload;
 
-use Feeds\Admin\Bible_File;
-use Feeds\Admin\Rota_File;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Response\View;
+use Obadiah\Admin\Bible_File;
+use Obadiah\Admin\Rota_File;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Response\View;
 
 App::check();
 

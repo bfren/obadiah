@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Calendar;
+namespace Obadiah\Calendar;
 
 use DateTimeZone;
-use Feeds\App;
-use Feeds\Calendar\TZ\Europe_London;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Calendar\TZ\Europe_London;
+use Obadiah\Config\Config as C;
 
 App::check();
 

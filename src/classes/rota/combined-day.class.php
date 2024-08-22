@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateTimeImmutable;
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

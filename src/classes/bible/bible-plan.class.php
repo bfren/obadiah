@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Bible;
+namespace Obadiah\Bible;
 
 use DateTimeImmutable;
-use Feeds\Admin\Bible_File;
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\Admin\Bible_File;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 use SplFileInfo;
 use Throwable;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
 use DateTimeImmutable;
-use Feeds\Admin\Result;
-use Feeds\App;
+use Obadiah\Admin\Result;
+use Obadiah\App;
 
 App::check();
 

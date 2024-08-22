@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Parts\Alert;
+namespace Obadiah\Pages\Parts\Alert;
 
-use Feeds\App;
-use Feeds\Admin\Result;
+use Obadiah\App;
+use Obadiah\Admin\Result;
 
 App::check();
 

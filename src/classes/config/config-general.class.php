@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 

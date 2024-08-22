@@ -1,6 +1,6 @@
 <?php
 
-use Feeds\Helpers\Escape;
+use Obadiah\Helpers\Escape;
 
 /**
  * Escape $text - using sprintf if $args are defined.

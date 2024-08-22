@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Response\View;
 
 App::check();
 

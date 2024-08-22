@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

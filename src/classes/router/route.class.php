@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Router;
+namespace Obadiah\Router;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

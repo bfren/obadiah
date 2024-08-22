@@ -1,15 +1,15 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Image;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Prayer\Person;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Image;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Prayer\Person;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 

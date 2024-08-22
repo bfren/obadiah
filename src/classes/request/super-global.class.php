@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Request;
+namespace Obadiah\Request;
 
-use Feeds\App;
-use Feeds\Helpers\Sanitise;
+use Obadiah\App;
+use Obadiah\Helpers\Sanitise;
 
 App::check();
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Pages\Home;
+namespace Obadiah\Pages\Home;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Home\Index_Model;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Home\Index_Model;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 

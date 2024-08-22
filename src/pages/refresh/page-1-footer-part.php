@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Response\View;
 
 App::check();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
+use Obadiah\App;
 use SplFileInfo;
 
 App::check();

@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Parts\Header\Header_Model;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Parts\Header\Header_Model;
 use SplFileInfo;
 
 App::check();

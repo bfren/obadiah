@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Lectionary;
+namespace Obadiah\Lectionary;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Baserow\Baserow;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Baserow\Baserow;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 

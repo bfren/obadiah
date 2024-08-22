@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Calendar\TZ;
+namespace Obadiah\Calendar\TZ;
 
-use Feeds\App;
-use Feeds\Calendar\Timezone;
+use Obadiah\App;
+use Obadiah\Calendar\Timezone;
 
 App::check();
 

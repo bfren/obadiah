@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Helpers;
+namespace Obadiah\Helpers;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

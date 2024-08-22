@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Pages\Error;
+namespace Obadiah\Pages\Error;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\View\Html;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\View\Html;
 
 App::check();
 

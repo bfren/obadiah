@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Refresh;
+namespace Obadiah\Refresh;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Bible\Day as Readings;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Prayer\Person;
+use Obadiah\App;
+use Obadiah\Bible\Day as Readings;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Prayer\Person;
 
 App::check();
 

@@ -1,20 +1,20 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Filters\After_Filter;
-use Feeds\Rota\Filters\Before_Filter;
-use Feeds\Rota\Filters\Day_Filter;
-use Feeds\Rota\Filters\Person_Filter;
-use Feeds\Rota\Filters\Series_Filter;
-use Feeds\Rota\Filters\Start_Filter;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Filters\After_Filter;
+use Obadiah\Rota\Filters\Before_Filter;
+use Obadiah\Rota\Filters\Day_Filter;
+use Obadiah\Rota\Filters\Person_Filter;
+use Obadiah\Rota\Filters\Series_Filter;
+use Obadiah\Rota\Filters\Start_Filter;
 use SplFileObject;
 use Throwable;
 

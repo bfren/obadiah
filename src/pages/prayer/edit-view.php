@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Hash;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Prayer\Month;
-use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Hash;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Prayer\Month;
+use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Response\View;
 
 App::check();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Pages\Parts\Header;
+namespace Obadiah\Pages\Parts\Header;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

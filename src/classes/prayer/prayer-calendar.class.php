@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Prayer;
+namespace Obadiah\Prayer;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 

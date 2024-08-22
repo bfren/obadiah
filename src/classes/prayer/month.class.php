@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Prayer;
+namespace Obadiah\Prayer;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
 use SplFileInfo;
 use Throwable;
 

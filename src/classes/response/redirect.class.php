@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\App;
-use Feeds\Request\Request;
+use Obadiah\App;
+use Obadiah\Request\Request;
 
 App::check();
 

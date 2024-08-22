@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Calendar;
+namespace Obadiah\Calendar;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Request\Request;
 use JsonSerializable;
 
 App::check();

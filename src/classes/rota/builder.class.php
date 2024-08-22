@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Service;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Service;
 
 App::check();
 

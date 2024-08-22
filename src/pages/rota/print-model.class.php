@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Obadiah\Pages\Rota;
 
-use Feeds\App;
-use Feeds\Rota\Combined_Day;
+use Obadiah\App;
+use Obadiah\Rota\Combined_Day;
 
 App::check();
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Rota\Filters;
+namespace Obadiah\Rota\Filters;
 
-use Feeds\App;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Service;
+use Obadiah\App;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Service;
 
 App::check();
 

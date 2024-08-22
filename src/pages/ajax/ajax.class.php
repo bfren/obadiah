@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Pages\Ajax;
+namespace Obadiah\Pages\Ajax;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Prayer\Month;
-use Feeds\Request\Request;
-use Feeds\Response\Json;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Prayer\Month;
+use Obadiah\Request\Request;
+use Obadiah\Response\Json;
 use Throwable;
 
 App::check();

@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Pages\Preload;
+namespace Obadiah\Pages\Preload;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Events\Events;
-use Feeds\Response\Json;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Events\Events;
+use Obadiah\Response\Json;
 use Throwable;
 
 App::check();

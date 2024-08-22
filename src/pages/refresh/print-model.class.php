@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
 use DateTimeImmutable;
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\ChurchSuite;
+namespace Obadiah\ChurchSuite;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Helpers\Hash;
-use Feeds\Prayer\Person;
-use Feeds\Prayer\Prayer_Calendar;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\Hash;
+use Obadiah\Prayer\Person;
+use Obadiah\Prayer\Prayer_Calendar;
 
 App::check();
 

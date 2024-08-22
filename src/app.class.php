@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds;
+namespace Obadiah;
 
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Router\Router;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Request\Request;
+use Obadiah\Router\Router;
 use SplFileInfo;
 
 class App

@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Refresh;
+namespace Obadiah\Refresh;
 
 use DateInterval;
 use DatePeriod;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Prayer\Prayer_Calendar;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Prayer\Prayer_Calendar;
 
 App::check();
 

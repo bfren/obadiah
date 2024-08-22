@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Helpers\Image;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Helpers\Image;
+use Obadiah\Response\View;
 
 App::check();
 

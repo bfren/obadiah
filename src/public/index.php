@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds;
+namespace Obadiah;
 
-use Feeds\Pages as P;
-use Feeds\Router\Router;
+use Obadiah\Pages as P;
+use Obadiah\Router\Router;
 
 // initialise app
 require_once "../app.class.php";

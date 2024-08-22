@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Upload;
+namespace Obadiah\Pages\Upload;
 
-use Feeds\Admin\Result;
-use Feeds\App;
+use Obadiah\Admin\Result;
+use Obadiah\App;
 
 App::check();
 

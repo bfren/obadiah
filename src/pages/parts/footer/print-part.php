@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Parts\Footer;
+namespace Obadiah\Pages\Parts\Footer;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 
 App::check();
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Feeds\Pages\Events;
+namespace Obadiah\Pages\Events;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Calendar\Event;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
-use Feeds\Response\ICalendar;
-use Feeds\Response\Json;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Request\Request;
+use Obadiah\Response\ICalendar;
+use Obadiah\Response\Json;
 
 App::check();
 

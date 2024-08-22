@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Error;
+namespace Obadiah\Pages\Error;
 
-use Feeds\App;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 use Throwable;
 
 App::check();

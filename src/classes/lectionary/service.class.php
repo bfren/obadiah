@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Lectionary;
+namespace Obadiah\Lectionary;
 
 use DateInterval;
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

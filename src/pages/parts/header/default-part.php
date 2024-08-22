@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Parts\Header;
+namespace Obadiah\Pages\Parts\Header;
 
-use Feeds\App;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Response\View;
 
 App::check();
 
@@ -17,7 +17,7 @@ App::check();
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?php _e($model->title); ?> | Church Suite Feeds</title>
+    <title><?php _e($model->title); ?> | Obadiah</title>
 	<link href="https://static.bcg.xyz/fonts/source-sans.css" rel="stylesheet" />
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/resources/css/dragula.min.css" rel="stylesheet" />

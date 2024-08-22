@@ -1,17 +1,17 @@
 <?php
 
-namespace Feeds\Cache;
+namespace Obadiah\Cache;
 
-use Feeds\App;
-use Feeds\Bible\Bible_Plan;
-use Feeds\Calendar\Event;
-use Feeds\ChurchSuite\Api;
-use Feeds\Helpers\Hash;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Prayer\Person;
-use Feeds\Refresh\Refresh;
-use Feeds\Request\Request;
-use Feeds\Rota\Rota;
+use Obadiah\App;
+use Obadiah\Bible\Bible_Plan;
+use Obadiah\Calendar\Event;
+use Obadiah\ChurchSuite\Api;
+use Obadiah\Helpers\Hash;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Prayer\Person;
+use Obadiah\Refresh\Refresh;
+use Obadiah\Request\Request;
+use Obadiah\Rota\Rota;
 use SplFileInfo;
 
 App::check();

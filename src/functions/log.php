@@ -1,6 +1,6 @@
 <?php
 
-use Feeds\Helpers\Log;
+use Obadiah\Helpers\Log;
 
 /**
  * Log an error to the standard output buffer - using sprintf if $args are defined.

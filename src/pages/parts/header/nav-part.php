@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Pages\Parts\Header;
+namespace Obadiah\Pages\Parts\Header;
 
-use Feeds\App;
-use Feeds\Helpers\Image;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Helpers\Image;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 
@@ -40,7 +40,7 @@ if (Request::$session->is_authorised) {
         <div class="container-fluid d-flex justify-content-between">
             <a href="/" class="d-flex align-items-center mb-md-0 text-dark text-decoration-none">
                 <?php Image::echo_logo("logo me-4"); ?>
-                <span class="fs-4">Church Feeds</span>
+                <span class="fs-4">Obadiah</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

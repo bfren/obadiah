@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Request\Request;
 
 App::check();
 

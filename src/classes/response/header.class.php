@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Refresh\Day;
+use Obadiah\App;
+use Obadiah\Refresh\Day;
 
 App::check();
 

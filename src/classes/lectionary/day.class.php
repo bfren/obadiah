@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Lectionary;
+namespace Obadiah\Lectionary;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 

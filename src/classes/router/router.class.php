@@ -1,16 +1,16 @@
 <?php
 
-namespace Feeds\Router;
+namespace Obadiah\Router;
 
-use Feeds\Admin\Require_Admin;
-use Feeds\App;
-use Feeds\Helpers\Arr;
-use Feeds\Pages\Error\Error;
-use Feeds\Pages\Home\Home;
-use Feeds\Request\Request;
-use Feeds\Response\Action;
-use Feeds\Response\Redirect;
-use Feeds\Response\View;
+use Obadiah\Admin\Require_Admin;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
+use Obadiah\Pages\Error\Error;
+use Obadiah\Pages\Home\Home;
+use Obadiah\Request\Request;
+use Obadiah\Response\Action;
+use Obadiah\Response\Redirect;
+use Obadiah\Response\View;
 use ReflectionClass;
 use Throwable;
 
@@ -39,11 +39,11 @@ class Router
      *
      * Examples:
      *
-     *      add_page("Foo")             Maps page /foo to be handled by class \Feeds\Pages\Foo\Foo.
+     *      add_page("Foo")             Maps page /foo to be handled by class \Obadiah\Pages\Foo\Foo.
      *
-     *      add_page("Foo", "bar")      Maps page /bar to be handled by class \Feeds\Pages\Foo\Foo.
+     *      add_page("Foo", "bar")      Maps page /bar to be handled by class \Obadiah\Pages\Foo\Foo.
      *
-     * @param string $page_class        The name of the page class to map (see \Feeds\Pages).
+     * @param string $page_class        The name of the page class to map (see \Obadiah\Pages).
      * @param null|string $uri_path     Optional path override - by default $page_class will be used.
      * @param bool $requires_auth       If true, all page actions will require authentication.
      * @param bool $requires_admin      If true, all page actions will require administrative privileges.

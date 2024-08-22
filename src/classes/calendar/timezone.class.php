@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Calendar;
+namespace Obadiah\Calendar;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
 use DateTimeImmutable;
-use Feeds\Admin\Prayer_File;
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Prayer\Month;
-use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Request\Request;
-use Feeds\Response\Action;
-use Feeds\Response\View;
+use Obadiah\Admin\Prayer_File;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Prayer\Month;
+use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Request\Request;
+use Obadiah\Response\Action;
+use Obadiah\Response\View;
 use Throwable;
 
 App::check();

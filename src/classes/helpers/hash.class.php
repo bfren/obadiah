@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Helpers;
+namespace Obadiah\Helpers;
 
-use Feeds\App;
-use Feeds\Prayer\Person;
-use Feeds\Rota\Combined_Service;
+use Obadiah\App;
+use Obadiah\Prayer\Person;
+use Obadiah\Rota\Combined_Service;
 
 App::check();
 
