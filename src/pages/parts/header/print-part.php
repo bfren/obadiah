@@ -19,7 +19,7 @@ App::check();
     <title><?php _e($model->title); ?> | Obadiah</title>
 	<link href="https://static.bcg.xyz/fonts/source-sans.css" rel="stylesheet" />
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/resources/css/feeds.css" rel="stylesheet" />
+    <link href="/resources/css/obadiah.css" rel="stylesheet" />
 </head>
 
 <body>
