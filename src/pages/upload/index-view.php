@@ -72,7 +72,7 @@ $this->alert($model->result);
     <ul>
         <?php foreach ($model->bible_files as $file) : ?>
             <li>
-                <?php _e($file); ?> (last modified <?php _e(Bible_File::get_last_modified($file)); ?>)
+                <?php _e($file); ?> (last modified <?php _e(Bible_File::get_last_modified()); ?>)
                 <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/upload/delete_bible">delete</a>
             </li>
         <?php endforeach; ?>

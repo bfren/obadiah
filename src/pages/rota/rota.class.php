@@ -148,7 +148,7 @@ class Rota
                     end: $service->end,
                     title: Builder::get_summary($service, Arr::get(self::get_filters(), "person")),
                     location: C::$events->default_location,
-                    description: Builder::get_description($day, $service, "\n")
+                    description: Builder::get_description($day, $service, separator: "\n")
                 );
             }
         }
