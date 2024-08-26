@@ -1,25 +1,26 @@
 <?php
 
-namespace Obadiah\Pages\Safeguarding;
+namespace Obadiah\Api\Safeguarding;
 
-use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Baserow\Baserow;
-use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\DateTime;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
+use Throwable;
 
 App::check();
 
-class Safeguarding
+class Safeguarding extends Endpoint
 {
     /**
      * Execute a POST request on the provided table.
      *
-     * @param Baserow $table            Baserow table object.
-     * @param mixed[] $row              Array of row data to POST.
-     * @return Json                     JSON response to return to the client.
+     * @param Baserow $table                        Baserow table object.
+     * @param mixed[] $row                          Array of row data to POST.
+     * @return Json                                 JSON response to return to the client.
      */
     private static function execute(Baserow $table, array $row): Json
     {
@@ -38,7 +39,7 @@ class Safeguarding
     /**
      * Retrieve JSON request object and post it to the Safeguarding Concern table in Baserow.
      *
-     * @return Json                     JSON response to return to the client.
+     * @return Json                                 JSON response to return to the client.
      */
     public function concern_post(): Json
     {
@@ -47,9 +48,10 @@ class Safeguarding
 
         // parse date/time
         $dt_string = trim(sprintf("%s %s", Arr::get($form, "date_1"), Arr::get($form, "time_1")));
-        $dt = DateTimeImmutable::createFromFormat("d/m/Y H:i", $dt_string, C::$events->timezone);
-        if ($dt === false) {
-            _l("Unable to parse date '%s'.", $dt_string);
+        try {
+            $dt = DateTime::create("d/m/Y H:i", $dt_string, true);
+        } catch (Throwable $th) {
+            _l_throwable($th);
             return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
         }
 
@@ -74,7 +76,7 @@ class Safeguarding
     /**
      * Retrieve JSON request object and post it to the Confidential Self_Declaration table in Baserow.
      *
-     * @return Json                     JSON response to return to the client.
+     * @return Json                                 JSON response to return to the client.
      */
     public function declaration_post(): Json
     {
@@ -124,7 +126,7 @@ class Safeguarding
     /**
      * Retrieve JSON request object and post it to the Confidential Reference table in Baserow.
      *
-     * @return Json                     JSON response to return to the client.
+     * @return Json                                 JSON response to return to the client.
      */
     public function reference_post(): Json
     {
