@@ -4,6 +4,7 @@ namespace Obadiah\Config;
 
 use Obadiah\App;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\IO;
 use SplFileInfo;
 
 App::check();
@@ -96,7 +97,7 @@ class Config
     public static function init(string $cwd): void
     {
         // get path to data directory
-        $data_dir_path = trim(file_get_contents(sprintf("%s/_path_to_data_dir_", $cwd)));
+        $data_dir_path = IO::file_get_contents(sprintf("%s/_path_to_data_dir_", $cwd));
         $data_dir = new SplFileInfo($data_dir_path);
         if(!$data_dir->isDir()) {
             App::die("Unable to find data directory at '%s'.", $data_dir->getRealPath());

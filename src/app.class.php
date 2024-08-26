@@ -3,8 +3,8 @@
 namespace Obadiah;
 
 use Obadiah\Cache\Cache;
-use Obadiah\Cli\Cli;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\IO;
 use Obadiah\Request\Request;
 use Obadiah\Router\Router;
 use SplFileInfo;
@@ -47,7 +47,9 @@ class App
 
         // automatically load class definitions from classes directory
         spl_autoload_register(function ($class) use ($cwd) {
-            $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "obadiah/pages", "obadiah"), array("/", "-", "pages", "classes"), strtolower($class)));
+            $search = [0 => "\\", 1 => "_", 2 => "obadiah/api", 3 => "obadiah/pages", 4 => "obadiah"];
+            $replace = [0 => "/", 1 => "-", 2 => "api", 3 => "pages", 4 => "classes"];
+            $path = sprintf("%s/%s.class.php", $cwd, str_replace($search, $replace, strtolower($class)));
             require_once $path;
         });
 
@@ -55,9 +57,9 @@ class App
         $image_version = new SplFileInfo("/etc/bf/VERSION");
         $source_version = new SplFileInfo(sprintf("%s/../VERSION", $cwd));
         if ($image_version->isFile()) {
-            self::$version = file_get_contents($image_version->getRealPath());
+            self::$version = IO::file_get_contents($image_version);
         } else if ($source_version->isFile()) {
-            self::$version = file_get_contents($source_version->getRealPath());
+            self::$version = IO::file_get_contents($source_version);
         }
 
         // load configuration
@@ -96,13 +98,7 @@ class App
      */
     public static function die(string $message, mixed ...$args): void
     {
-        // if arguments have been provided, use sprintf
-        if (count($args) > 0) {
-            $message = sprintf($message, ...$args);
-        }
-
-        // output message and exit
-        print_r($message);
+        _l($message, ...$args);
         exit;
     }
 }

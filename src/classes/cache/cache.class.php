@@ -7,6 +7,7 @@ use Obadiah\Bible\Bible_Plan;
 use Obadiah\Calendar\Event;
 use Obadiah\ChurchSuite\Api;
 use Obadiah\Helpers\Hash;
+use Obadiah\Helpers\IO;
 use Obadiah\Lectionary\Lectionary;
 use Obadiah\Prayer\Person;
 use Obadiah\Refresh\Refresh;
@@ -355,7 +356,7 @@ class Cache
         // if the file exists, and the cache file has not expired, read and unserialise the value
         $last_modified = self::get_last_modified($path);
         if (time() - $last_modified < self::$duration_in_seconds) {
-            return unserialize(file_get_contents($path));
+            return unserialize(IO::file_get_contents($path));
         }
 
         // get a fresh value and serialise it to the cache
