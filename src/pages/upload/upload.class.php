@@ -23,16 +23,6 @@ class Upload
     private const CHURCH_SUITE_HREF = "https://%s.churchsuite.com";
 
     /**
-     * Church Suite address book download URI.
-     */
-    private const ADULTS_HREF = "https://%s.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?%s";
-
-    /**
-     * Church Suite children download URI.
-     */
-    private const CHILDREN_HREF = "https://%s.churchsuite.com/modules/children/reports/child_table_generator.php?%s";
-
-    /**
      * Operation result.
      *
      * @var null|Result
