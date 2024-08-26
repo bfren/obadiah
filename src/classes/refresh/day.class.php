@@ -26,8 +26,7 @@ class Day
         public readonly DateTimeImmutable $date,
         public readonly array $people,
         public readonly ?Readings $readings
-    ) {
-    }
+    ) {}
 
     /**
      * Build event summary.
@@ -63,12 +62,8 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $people = array_values($this->people);
-            if ($people[0] instanceof Person) {
-                $description[] = join($separator, Arr::map($people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
-            } else {
-                $description[] = join($separator, $people);
-            }
+            $people = Arr::map($this->people, fn($person) => $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : (string) $person);
+            $description[] = join($separator, $people);
             $description[] = "";
         }
 
