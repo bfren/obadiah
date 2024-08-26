@@ -22,8 +22,8 @@ class Log
             return;
         }
 
-        // add slashes - if arguments have been provided, use sprintf
-        $message = addslashes(count($args) > 0 ? sprintf($error, ...$args) : $error);
+        // if arguments have been provided, use sprintf
+        $message = count($args) > 0 ? sprintf($error, ...$args) : $error;
 
         // send to error log
         error_log($message);
