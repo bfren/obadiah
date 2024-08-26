@@ -22,11 +22,10 @@ class Unknown extends Command
     /**
      * Output error message and exit.
      *
-     * @return void
+     * @return never
      */
     public function execute(): void
     {
-        _l("Unknown command: %s.", $this->command_name);
-        exit;
+        App::die("Unknown command: %s.", $this->command_name);
     }
 }

@@ -22,7 +22,7 @@ class Crypto
             return sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE, SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE);
         } catch (Throwable $th) {
             _l_throwable($th);
-            exit;
+            App::die("Unable to hash password.");
         }
     }
 

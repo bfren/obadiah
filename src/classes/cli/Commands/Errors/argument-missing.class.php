@@ -26,11 +26,10 @@ class Argument_Missing extends Command
     /**
      * Output error message and exit.
      *
-     * @return void
+     * @return never
      */
     public function execute(): void
     {
-        _l("Command %s requires parameter %s%s.", $this->command_name, $this->arg_long, $this->arg_short == null ? "" : " | $this->arg_short");
-        exit;
+        App::die("Command %s requires parameter %s%s.", $this->command_name, $this->arg_long, $this->arg_short == null ? "" : " | $this->arg_short");
     }
 }

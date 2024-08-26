@@ -22,11 +22,10 @@ class Invalid extends Command
     /**
      * Output error message and exit.
      *
-     * @return void
+     * @return never
      */
     public function execute(): void
     {
-        _l("Error creating %s.", $this->command_class);
-        exit;
+        App::die("Error creating %s.", $this->command_class);
     }
 }
