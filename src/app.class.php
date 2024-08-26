@@ -26,7 +26,7 @@ class App
     /**
      * Initialise application - register autoloader - setup Request, etc.
      *
-     * @var bool $is_http               Whether or not the app is being loaded via HTTP.
+     * @param bool $is_http             Whether or not the app is being loaded via HTTP.
      * @return void
      */
     public static function init(bool $is_http = true): void
@@ -68,7 +68,7 @@ class App
 
         // initialise HTTP Request / Router
         if ($is_http) {
-            Request::init($cwd);
+            Request::init();
             Router::init();
         }
 
@@ -92,7 +92,7 @@ class App
      * Ouput message and exit (equivalent of die).
      *
      * @param string $message           Output (error) message.
-     * @return void
+     * @return never
      */
     public static function die(string $message, mixed ...$args): void
     {
