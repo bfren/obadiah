@@ -98,7 +98,7 @@ class App
      */
     public static function die(string $message, mixed ...$args): void
     {
-        _l($message, ...$args);
+        printf($message, ...$args);
         exit;
     }
 }
