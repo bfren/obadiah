@@ -8,10 +8,11 @@ use Obadiah\Request\Request;
 use Obadiah\Response\Action;
 use Obadiah\Response\View;
 use Obadiah\Response\Redirect;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Auth
+class Auth extends Endpoint
 {
     /**
      * GET: /auth/login

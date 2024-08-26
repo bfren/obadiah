@@ -13,10 +13,11 @@ use Obadiah\Request\Request;
 use Obadiah\Response\ICalendar;
 use Obadiah\Response\Json;
 use Obadiah\Response\View;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Refresh
+class Refresh extends Endpoint
 {
     /**
      * GET: /refresh

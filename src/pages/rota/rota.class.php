@@ -15,10 +15,11 @@ use Obadiah\Response\View;
 use Obadiah\Rota\Builder;
 use Obadiah\Rota\Combined_Day;
 use Obadiah\Rota\Rota as R;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Rota
+class Rota extends Endpoint
 {
     /**
      * Get rota filters.

@@ -8,11 +8,12 @@ use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
 use Obadiah\Pages\Events\Events;
 use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Preload
+class Preload extends Endpoint
 {
     /**
      * GET: /preload

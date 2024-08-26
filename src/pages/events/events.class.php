@@ -12,10 +12,11 @@ use Obadiah\Helpers\Arr;
 use Obadiah\Request\Request;
 use Obadiah\Response\ICalendar;
 use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Events
+class Events extends Endpoint
 {
     /**
      * Church Suite calendar feed URI.
@@ -81,14 +82,20 @@ class Events
      */
     public static function get_events(string $query): array
     {
-        // setup curl
+        // create curl request
         $url = sprintf(self::CALENDAR_HREF, C::$churchsuite->org, $query);
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $handle = curl_init($url);
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $url);
+            return [];
+        }
+
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
         // get calendar JSON
-        $json = curl_exec($ch);
-        if (curl_errno($ch) != 0) {
+        $json = curl_exec($handle);
+        if (!is_string($json)) {
+            _l(curl_error($handle));
             return [];
         }
 
@@ -106,7 +113,7 @@ class Events
 
             // get status - can be 'confirmed', 'pending' or 'cancelled'
             // add flag to title if necessary
-            $status = Arr::get($event, "status");
+            $status = Arr::get($event, "status", "");
             if ($status == "cancelled") {
                 $title = sprintf("%s %s", C::$events->cancelled_flag, $title);
             } else if ($status == "pending") {
@@ -115,7 +122,7 @@ class Events
 
             // get location
             $location_data = Arr::get($event, "location", []);
-            if(($address = Arr::get($location_data, "address")) !== null) {
+            if(($address = Arr::get($location_data, "address", "")) !== "") {
                 $location = $address;
             } else {
                 $location = Arr::get($location_data, "name", C::$events->default_location);

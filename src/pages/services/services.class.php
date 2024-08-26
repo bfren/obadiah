@@ -11,10 +11,11 @@ use Obadiah\Pages\Rota\Rota;
 use Obadiah\Response\ICalendar;
 use Obadiah\Response\Json;
 use Obadiah\Rota\Builder;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Services
+class Services extends Endpoint
 {
     /**
      * GET: /services/ics

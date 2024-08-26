@@ -7,11 +7,12 @@ use Obadiah\App;
 use Obadiah\Prayer\Month;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Ajax
+class Ajax extends Endpoint
 {
     /**
      * Holds an optional JSON result.

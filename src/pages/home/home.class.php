@@ -9,10 +9,11 @@ use Obadiah\Config\Config as C;
 use Obadiah\Pages\Home\Index_Model;
 use Obadiah\Response\View;
 use Obadiah\Rota\Rota;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Home
+class Home extends Endpoint
 {
     /**
      * GET: /

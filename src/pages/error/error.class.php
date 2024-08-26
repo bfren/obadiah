@@ -5,11 +5,12 @@ namespace Obadiah\Pages\Error;
 use Obadiah\App;
 use Obadiah\Request\Request;
 use Obadiah\Response\View;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Error
+class Error extends Endpoint
 {
     /**
      * Return 'Not Found' view.
