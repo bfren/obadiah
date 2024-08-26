@@ -37,7 +37,7 @@ class Sanitise
 
         // strip out the whitespace that may now exist after removing the octets.
         if ($found) {
-            $filtered = preg_replace('/ +/', ' ', $filtered);
+            $filtered = preg_replace('/ +/', ' ', $filtered) ?: "";
         }
 
         // trim and return filtered string
@@ -55,12 +55,12 @@ class Sanitise
     public static function strip_tags($string, $remove_breaks = false)
     {
         // strip tags (including script / style)
-        $filtered = preg_replace("@<(script|style)[^>]*?>.*?</\\1>@si", "", $string);
+        $filtered = preg_replace("@<(script|style)[^>]*?>.*?</\\1>@si", "", $string) ?: "";
         $filtered = strip_tags($filtered);
 
         // remove breaks
         if ($remove_breaks) {
-            $filtered = preg_replace("/[\r\n\t ]+/", " ", $filtered);
+            $filtered = preg_replace("/[\r\n\t ]+/", " ", $filtered) ?: "";
         }
 
         // trim and return filtered string

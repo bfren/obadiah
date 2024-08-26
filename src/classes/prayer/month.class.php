@@ -78,7 +78,7 @@ class Month
      *
      * @return string                   This month e.g. 'January 2022'.
      */
-    public function get_display_text(): ?string
+    public function get_display_text(): string
     {
         return $this->get_first_day_of_month()->format(C::$formats->display_month);
     }

@@ -15,7 +15,7 @@ App::check();
 // otherwise, get the people on the prayer calendar for this day
 if ($model->day->format("N") == 7) {
     $lectionary_day = $model->lectionary->get_day($model->day);
-    $services = $lectionary_day?->services;
+    $services = $lectionary_day?->services ?: [];
 } else {
     $people = Prayer_Calendar::get_day($model->day);
     $readings = $model->bible_plan->get_day($model->day);

@@ -12,9 +12,9 @@ class Arr
     /**
      * Replacement for array_key_exists - also checks that the value of $array[$key] is not null.
      *
-     * @param mixed[] $array            Array of values.
-     * @param int|string $key           Key to search for.
-     * @return bool                     True if $array contains $key and is not null.
+     * @param mixed[] $array                        Array of values.
+     * @param int|string $key                       Key to search for.
+     * @return bool                                 True if $array contains $key and is not null.
      */
     public static function exists(array $array, int|string $key): bool
     {
@@ -25,10 +25,10 @@ class Arr
      * Safely get a value from an associative array.
      *
      * @template T
-     * @param T[]|array<int|string, T> $array            Array of values.
-     * @param int|string $key           The key to search for.
-     * @param T|null $default            Default value if key does not exist.
-     * @return T|null                    Key value, or $default if key does not exist.
+     * @param T[]|array<int|string, T> $array       Array of values.
+     * @param int|string $key                       The key to search for.
+     * @param T|null $default                       Default value if key does not exist.
+     * @return T                                    Key value, or $default if key does not exist.
      */
     public static function get(array $array, int|string $key, mixed $default = null): mixed
     {
@@ -42,10 +42,10 @@ class Arr
     /**
      * Safely get a boolean value from an array.
      *
-     * @param mixed[] $array            Array of values.
-     * @param int|string $key           The key to search for.
-     * @param boolean $default          Default value if key does not exist.
-     * @return boolean                  Key value, or $default if key does not exist.
+     * @param mixed[] $array                        Array of values.
+     * @param int|string $key                       The key to search for.
+     * @param boolean $default                      Default value if key does not exist.
+     * @return boolean                              Key value, or $default if key does not exist.
      */
     public static function get_boolean(array $array, int|string $key, bool $default = false): bool
     {
@@ -59,10 +59,10 @@ class Arr
     /**
      * Safely get an integer value from an array.
      *
-     * @param mixed[] $array            Array of values.
-     * @param int|string $key           The key to search for.
-     * @param int $default              Default value if key does not exist.
-     * @return int                      Key value, or $default if key does not exist.
+     * @param mixed[] $array                        Array of values.
+     * @param int|string $key                       The key to search for.
+     * @param int $default                          Default value if key does not exist.
+     * @return int                                  Key value, or $default if key does not exist.
      */
     public static function get_integer(array $array, int|string $key, int $default = 0): int
     {
@@ -76,10 +76,10 @@ class Arr
     /**
      * Get a required value from an associative array.
      *
-     * @param mixed[] $array            Array of values.
-     * @param int|string $key           The key to search for.
-     * @return mixed                    Key value if key does not exist.
-     * @throws Exception                When $key is not found in $array.
+     * @param mixed[] $array                        Array of values.
+     * @param int|string $key                       The key to search for.
+     * @return mixed                                Key value if key does not exist.
+     * @throws Exception                            When $key is not found in $array.
      */
     public static function get_required(array $array, int|string $key): mixed
     {
@@ -94,10 +94,10 @@ class Arr
      * Safely get a value from an array, and then sanitise the input.
      * If the value is not a string, an empty string will be returned.
      *
-     * @param mixed[] $array            Array of values.
-     * @param int|string $key           The key to search for.
-     * @param string $default           Default value if key does not exist.
-     * @return string                   Key value, or $default if key does not exist.
+     * @param mixed[] $array                        Array of values.
+     * @param int|string $key                       The key to search for.
+     * @param string $default                       Default value if key does not exist.
+     * @return string                               Key value, or $default if key does not exist.
      */
     public static function get_sanitised(array $array, int|string $key, string $default = null): string
     {
@@ -116,9 +116,9 @@ class Arr
      *
      * @template T
      * @template U
-     * @param T[] $array                        Array to map.
-     * @param callable(T): U|null $callback     Callback function (should return a transformed value).
-     * @return U[]                              Array of transformed elements.
+     * @param T[] $array                            Array to map.
+     * @param callable(T): U|null $callback         Callback function (should return a transformed value).
+     * @return U[]                                  Array of transformed elements.
      */
     public static function map(array $array, ?callable $callback = null): array
     {
@@ -130,9 +130,9 @@ class Arr
      * it will remove empty elements.
      *
      * @template T
-     * @param T[] $array                Array to search.
-     * @param callable|null $callback   Callback function (should return bool),
-     * @return T[]                      Array of matching elements.
+     * @param T[] $array                            Array to search.
+     * @param callable|null $callback               Callback function (should return bool),
+     * @return T[]                                  Array of matching elements.
      */
     public static function match(array $array, ?callable $callback = null): array
     {
@@ -143,9 +143,9 @@ class Arr
      * Returns the key of the matching element in $array, or false if the element cannot be found.
      *
      * @template T
-     * @param T[] $array                Array to search.
-     * @param T $value                  Value to search for.
-     * @return int|string|false         Key of the first found value, or false if not found.
+     * @param T[] $array                            Array to search.
+     * @param T $value                              Value to search for.
+     * @return int|string|false                     Key of the first found value, or false if not found.
      */
     public static function search(array $array, mixed $value): int|string|false
     {
