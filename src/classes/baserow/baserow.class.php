@@ -96,7 +96,7 @@ class Baserow
      * Make a GET request to the Baserow API and return array of results.
      *
      * @param array $data               Optional request data.
-     * @return array                    All results for the specified view.
+     * @return array                    All results for the specified view, an error message, or null on failure.
      */
     public function get(array $data = []): array
     {
@@ -111,14 +111,15 @@ class Baserow
         // make request and output on error
         $json = curl_exec($handle);
         if (!$json) {
-            print_r(curl_error($handle));
-            return null;
+            _l(curl_error($handle));
+            return [];
         }
 
         // decode JSON response and output on error
         $result = json_decode($json, true);
         if (isset($result["error"])) {
-            return sprintf("Error: %s", $result["detail"]);
+            _l("Error: %s", $result["detail"]);
+            return [];
         }
 
         // get records
@@ -134,8 +135,8 @@ class Baserow
             // use the next page value to get the next batch of results
             $next_results = $this->get($next_data);
 
-            // if $next_results is a string that means an error has occured so return it
-            if (is_string($next_results)) {
+            // if $next_results is an empty array that means there are no more results or an error has occured so return
+            if (count($next_results) == 0) {
                 return $next_results;
             }
 
