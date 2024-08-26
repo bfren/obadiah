@@ -35,7 +35,7 @@ if (Request::$session->is_denied()) {
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
         <div class="invalid-tooltip">Please enter the password.</div>
     </div>
-    <input type="hidden" name="attempts" value="<?php _e(Request::$session->login_attempts); ?>" />
+    <input type="hidden" name="attempts" value="<?php _e("%s", Request::$session->login_attempts); ?>" />
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

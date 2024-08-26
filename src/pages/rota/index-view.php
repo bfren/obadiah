@@ -94,7 +94,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 <select class="form-control" name="max">
                     <option value="">Show All</option>
                     <?php for ($i = 1; $i <= 20; $i++) : $selected = $i == Arr::get($model->filters, "max") ? "selected" : ""; ?>
-                        <option value="<?php _e($i); ?>" <?php _e($selected); ?>><?php _e($i); ?> service<?php _e($i > 1 ? "s" : ""); ?></option>
+                        <option value="<?php _e("%s", $i); ?>" <?php _e($selected); ?>><?php _e("$i"); ?> service<?php _e($i > 1 ? "s" : ""); ?></option>
                     <?php endfor; ?>
                 </select>
             </div>
