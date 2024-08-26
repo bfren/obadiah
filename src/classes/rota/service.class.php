@@ -5,6 +5,7 @@ namespace Obadiah\Rota;
 use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\DateTime;
 
 App::check();
 
@@ -46,7 +47,7 @@ class Service
             $data[$header_row[$i]] = $row[$i];
         }
         // get the start date and time as a timestamp
-        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), C::$events->timezone);
+        $this->start = DateTime::create(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), true);
 
         // get the ministries
         $this->ministries = $this->get_ministries($data);
@@ -103,9 +104,15 @@ class Service
     {
         // remove any notes
         $sanitised = preg_replace("/Notes:(.*)\n\n/s", "", $people);
+        if ($sanitised === null) {
+            return [];
+        }
 
         // split by new line
         $individuals = preg_split("/\n/", trim($sanitised));
+        if ($individuals === false) {
+            return [];
+        }
 
         // remove clash indicators
         $without_clash = str_replace(array("!! ", "** "), "", $individuals);

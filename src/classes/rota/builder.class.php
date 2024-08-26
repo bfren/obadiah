@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\DateTime;
 use Obadiah\Lectionary\Lectionary;
 use Obadiah\Rota\Service;
 
@@ -89,8 +90,10 @@ class Builder
             }
 
             // add the day to the rota
+            $c_date = DateTime::create(C::$formats->sortable_date, $lectionary_day->date, true);
+
             $rota[$lectionary_day->date] = new Combined_Day(
-                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$events->timezone)->setTime(0, 0),
+                date: $c_date->setTime(0, 0),
                 name: $lectionary_day->name,
                 colour: $lectionary_day->colour,
                 collect: $lectionary_day->collect ?: $sunday_collect,
