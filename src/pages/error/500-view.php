@@ -19,7 +19,7 @@ if (!C::$general->production) : ?>
 
     <p class="mt-2"><?php _e($model->getMessage()); ?></p>
     <p>Trace:</p>
-    <p><?php _h(str_replace("\n", "<br/>", $model->getTraceAsString())) ?></p>
+    <p><?php _h(join("<br/>", str_replace("\n", "<br/>", [$model->getMessage(), $model->getTraceAsString()]))) ?></p>
 
 <?php endif;
 
