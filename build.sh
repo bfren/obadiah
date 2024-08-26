@@ -12,4 +12,4 @@ docker buildx build \
     -t obadiah${PHP}-dev \
     . \
     && \
-    docker run -it -e BF_DEBUG=1 obadiah${PHP}-dev sh
+    docker run -it -e BF_DEBUG=1 -v $(pwd)/src:/www -v $(pwd)/data:/data obadiah${PHP}-dev sh
