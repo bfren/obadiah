@@ -13,3 +13,14 @@ function _l(?string $text, mixed ...$args): void
 {
     Log::error($text, ...$args);
 }
+
+/**
+ * Log a Throwable type to the standard output buffer.
+ *
+ * @param Throwable $th                 Throwable object.
+ * @return void
+ */
+function _l_throwable(Throwable $th): void
+{
+    Log::error("Message: %s\nTrace: %s", $th->getMessage(), $th->getTraceAsString());
+}
