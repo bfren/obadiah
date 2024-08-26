@@ -4,6 +4,7 @@ namespace Obadiah\Pages\Auth;
 
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Crypto\Crypto;
 use Obadiah\Request\Request;
 use Obadiah\Response\Action;
 use Obadiah\Response\View;
@@ -47,11 +48,11 @@ class Auth extends Endpoint
         $pass = Request::$post->string("password");
 
         // check user / admin passwords
-        if ($user == "user" && $pass == C::$login->pass) {
+        if ($user == "user" && Crypto::verify_password(C::$login->pass, $pass)) {
             Request::$session->authorise();
             $uri = Request::$get->string("requested", default: "/");
             return new Redirect($uri);
-        } elseif ($user == "admin" && $pass == C::$login->admin) {
+        } elseif ($user == "admin" && Crypto::verify_password(C::$login->admin, $pass)) {
             Request::$session->authorise(true);
             $uri = Request::$get->string("requested", default: "/");
             return new Redirect($uri);
