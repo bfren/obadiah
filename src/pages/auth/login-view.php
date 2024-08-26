@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Pages\Auth;
+namespace Obadiah\Pages\Auth;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 
@@ -35,7 +35,7 @@ if (Request::$session->is_denied()) {
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
         <div class="invalid-tooltip">Please enter the password.</div>
     </div>
-    <input type="hidden" name="attempts" value="<?php _e(Request::$session->login_attempts); ?>" />
+    <input type="hidden" name="attempts" value="<?php _e("%s", Request::$session->login_attempts); ?>" />
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

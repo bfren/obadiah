@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

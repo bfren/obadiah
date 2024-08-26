@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Bible;
+namespace Obadiah\Bible;
 
 use DateTimeImmutable;
-use Feeds\Admin\Bible_File;
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\Admin\Bible_File;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 use SplFileInfo;
 use Throwable;
 
@@ -31,7 +31,7 @@ class Bible_Plan
         $path = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
         $file_info = new SplFileInfo($path);
         if (!$file_info->isFile()) {
-            $this->days = array();
+            $this->days = [];
             return;
         }
 
@@ -39,11 +39,12 @@ class Bible_Plan
         try {
             $file_obj = $file_info->openFile("r");
         } catch (Throwable $th) {
+            _l_throwable($th);
             App::die("Unable to read the file: %s.", $file_info->getRealPath());
         }
 
         // build array of days
-        $days = array();
+        $days = [];
         $trim = fn ($input) => trim(str_replace("\"", "", $input));
 
         while (!$file_obj->eof()) {
@@ -74,7 +75,7 @@ class Bible_Plan
      * Get the Bible reading plan day for the specified date.
      *
      * @param DateTimeImmutable $dt     Date to retrieve Bible readings for.
-     * @return null|Day                 Day object (or null if $dt is a Sunday or towards the end of the year).
+     * @return Day|null                 Day object (or null if $dt is a Sunday or towards the end of the year).
      */
     public function get_day(DateTimeImmutable $dt): ?Day
     {
@@ -84,7 +85,7 @@ class Bible_Plan
         }
 
         // get first day of year
-        $first_day = $dt->setDate($dt->format("Y"), 1, 1);
+        $first_day = $dt->setDate((int) $dt->format("Y"), 1, 1);
 
         // get number of days since first day of year
         $days = $dt->diff($first_day, true)->days + 1;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\App;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
 
 App::check();
 

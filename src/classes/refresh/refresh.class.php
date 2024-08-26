@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Refresh;
+namespace Obadiah\Refresh;
 
 use DateInterval;
 use DatePeriod;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Prayer\Prayer_Calendar;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Prayer\Prayer_Calendar;
 
 App::check();
 
@@ -48,7 +48,8 @@ class Refresh
         $bible = Cache::get_bible_plan();
 
         // get readings and people for each day
-        $days = array();
+        $days = [];
+        $today_value = null;
         foreach ($period as $value) {
             // skip Sundays
             if ($value->format("N") == "7") {
@@ -56,15 +57,16 @@ class Refresh
             }
 
             // create day object
+            $immutable = DateTimeImmutable::createFromInterface($value);
             $day = new Day(
-                date: $value,
-                people: Prayer_Calendar::get_day($value, Prayer_Calendar::RETURN_OBJECT),
-                readings: $bible->get_day($value)
+                date: $immutable,
+                people: Prayer_Calendar::get_day($immutable, Prayer_Calendar::RETURN_OBJECT),
+                readings: $bible->get_day($immutable)
             );
 
             // set today
-            if ($value == $today) {
-                $this->today = $day;
+            if ($immutable == $today) {
+                $today_value = $day;
             }
 
             // add to days array
@@ -75,8 +77,6 @@ class Refresh
         $this->days = $days;
 
         // if today has not been set, create an empty one for today
-        if (!isset($this->today)) {
-            $this->today = new Day($today, people: array(), readings: null);
-        }
+        $this->today = $today_value ?: new Day($today, people: [], readings: null);
     }
 }

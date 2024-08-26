@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -54,7 +54,7 @@ class Config_Refresh
     /**
      * Get values from refresh configuration array.
      *
-     * @param array $config             Refresh configuration array.
+     * @param mixed[] $config           Refresh configuration array.
      * @return void
      */
     public function __construct(array $config)

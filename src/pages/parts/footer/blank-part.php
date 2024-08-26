@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Pages\Parts\Footer;
+namespace Obadiah\Pages\Parts\Footer;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

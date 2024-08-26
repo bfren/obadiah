@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
 use DateInterval;
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -13,7 +13,7 @@ class Config_Rota
     /**
      * The Bible version to use for links on rota pages.
      *
-     * @var int
+     * @var string
      */
     public readonly string $bible_version;
 
@@ -41,7 +41,7 @@ class Config_Rota
     /**
      * Get values from rota configuration array.
      *
-     * @param array $config             Rota configuration array.
+     * @param mixed[] $config           Rota configuration array.
      * @return void
      */
     public function __construct(array $config)
@@ -50,8 +50,8 @@ class Config_Rota
         $this->default_days = Arr::get_integer($config, "default_days", 28);
         $this->default_length = new DateInterval(Arr::get($config, "default_length", "PT60M"));
 
-        $ministries = array();
-        foreach (Arr::get($config, "ministries") as $ministry) {
+        $ministries = [];
+        foreach (Arr::get($config, "ministries", []) as $ministry) {
             $ministries[] = new Config_Rota_Ministry($ministry);
         }
         $this->ministries = $ministries;

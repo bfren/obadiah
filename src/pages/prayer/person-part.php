@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Helpers\Hash;
-use Feeds\Prayer\Person;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Helpers\Hash;
+use Obadiah\Prayer\Person;
 
 App::check();
 

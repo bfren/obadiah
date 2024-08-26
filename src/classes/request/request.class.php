@@ -1,8 +1,9 @@
 <?php
 
-namespace Feeds\Request;
+namespace Obadiah\Request;
 
-use Feeds\App;
+use Obadiah\App;
+use Obadiah\Helpers\IO;
 
 App::check();
 
@@ -32,7 +33,7 @@ class Request
     /**
      * Encapsulates $_FILES.
      *
-     * @var array
+     * @var mixed[]
      */
     public static array $files;
 
@@ -49,6 +50,13 @@ class Request
      * @var string
      */
     public static string $host;
+
+    /**
+     * Returns posted JSON as an associative array.
+     *
+     * @var mixed[]
+     */
+    public static array $json;
 
     /**
      * Request method (e.g. POST).
@@ -101,8 +109,9 @@ class Request
     {
         self::$cookies = new Super_Global(INPUT_COOKIE);
         self::$env = new Super_Global(INPUT_ENV);
-        self::$files = $_FILES ?: array();
+        self::$files = $_FILES ?: [];
         self::$get = new Super_Global(INPUT_GET);
+        self::$json = json_decode(IO::php_input(), true) ?: [];
         self::$post = new Super_Global(INPUT_POST);
         self::$server = new Super_Global(INPUT_SERVER);
         self::$session = new Session();

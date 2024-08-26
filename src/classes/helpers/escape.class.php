@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Helpers;
+namespace Obadiah\Helpers;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 
@@ -11,8 +11,8 @@ class Escape
     /**
      * Escape $text - using sprintf if $args are defined.
      *
-     * @param null|string $text             Text (or sprintf format) to be escaped.
-     * @param array $args                   Optional arguments to use for sprintf.
+     * @param string|null $text             Text (or sprintf format) to be escaped.
+     * @param mixed $args                   Optional arguments to use for sprintf.
      * @return string                       Safe (escaped) text.
      */
     public static function get_text(?string $text, mixed ...$args): string
@@ -35,8 +35,8 @@ class Escape
     /**
      * Safely echo $text - using sprintf if $args are defined.
      *
-     * @param null|string $text             Text (or sprintf format) to be printed.
-     * @param array $args                   Optional arguments to use for sprintf.
+     * @param string|null $text             Text (or sprintf format) to be printed.
+     * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */
     public static function echo_text(?string $text, mixed ...$args): void
@@ -47,8 +47,8 @@ class Escape
     /**
      * Escape $html - using sprintf if $args are defined.
      *
-     * @param null|string $html             HTML (or sprintf format) to be escaped.
-     * @param array $args                   Optional arguments to use for sprintf.
+     * @param string|null $html             HTML (or sprintf format) to be escaped.
+     * @param mixed $args                   Optional arguments to use for sprintf.
      * @return string                       Safe (escaped) html.
      */
     public static function get_html(?string $html, mixed ...$args): string
@@ -71,8 +71,8 @@ class Escape
     /**
      * Safely echo $html - using sprintf if $args are defined.
      *
-     * @param null|string $html             HTML (or sprintf format) to be printed.
-     * @param array $args                   Optional arguments to use for sprintf.
+     * @param string|null $html             HTML (or sprintf format) to be printed.
+     * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */
     public static function echo_html(?string $html, mixed ...$args): void

@@ -6,10 +6,10 @@ docker buildx build \
     --load \
     --no-cache \
     --progress plain \
-    --build-arg BF_IMAGE=ccf \
+    --build-arg BF_IMAGE=obadiah \
     --build-arg BF_VERSION=${IMAGE} \
     -f docker/Dockerfile \
-    -t ccf${PHP}-dev \
+    -t obadiah${PHP}-dev \
     . \
     && \
-    docker run -it -e BF_DEBUG=1 ccf${PHP}-dev sh
+    docker run -it -e BF_DEBUG=1 -v $(pwd)/src:/www -v $(pwd)/data:/data obadiah${PHP}-dev sh

@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Parts\Reading;
+namespace Obadiah\Pages\Parts\Reading;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 
 App::check();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
 use Attribute;
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 

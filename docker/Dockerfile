@@ -1,6 +1,6 @@
-FROM bfren/nginx-php:php8.3-7.2.14
+FROM bfren/nginx-php:php8.3-7.2.17
 
-LABEL org.opencontainers.image.source="https://github.com/bfren/churchsuite-feeds"
+LABEL org.opencontainers.image.source="https://github.com/bfren/obadiah"
 
 ARG BF_IMAGE
 ARG BF_VERSION
@@ -17,7 +17,7 @@ COPY ./config-sample.yml /www/
 
 ENV \
     # required extensions
-    BF_PHP_EXT="curl session pecl-yaml" \
+    BF_PHP_EXT="curl session sodium pecl-yaml" \
     # generate empty config.yml if one does not already exist
     BF_CCF_GENERATE_EMPTY_CONFIG="1"
 

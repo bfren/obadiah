@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateTimeImmutable;
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 
@@ -13,8 +13,8 @@ class Combined_Day
      * Create Combined_Day object.
      *
      * @param DateTimeImmutable $date           DateTime object referencing midnight of the specified day.
-     * @param null|string $name                 The name of this day in the lectionary (e.g. 8th after Trinity).
-     * @param null|string $colour               The liturgical colour of the day (e.g. White/Gold).
+     * @param string|null $name                 The name of this day in the lectionary (e.g. 8th after Trinity).
+     * @param string|null $colour               The liturgical colour of the day (e.g. White/Gold).
      * @param string $collect                   The Collect for today.
      * @param Combined_Service[] $services      Array of services on this particular day, sorted by start time.
      * @return void

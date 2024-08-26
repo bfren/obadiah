@@ -1,11 +1,12 @@
 <?php
 
-namespace Feeds;
+namespace Obadiah;
 
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Router\Router;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\IO;
+use Obadiah\Request\Request;
+use Obadiah\Router\Router;
 use SplFileInfo;
 
 class App
@@ -25,9 +26,10 @@ class App
     /**
      * Initialise application - register autoloader - setup Request, etc.
      *
+     * @param bool $is_http             Whether or not the app is being loaded via HTTP.
      * @return void
      */
-    public static function init(): void
+    public static function init(bool $is_http = true): void
     {
         // ensure we are running on PHP 8.3
         version_compare(PHP_VERSION, "8.3.0", ">=") || self::die("This application requires at least PHP 8.3.");
@@ -35,15 +37,19 @@ class App
         // get current working directory
         $cwd = __DIR__;
 
-        // start session
-        session_start();
+        // start session unless running as CLI
+        if ($is_http) {
+            session_start();
+        }
 
         // each PHP script checks if this is defined to ensure incorrect access is denied
         define(self::CHECK, true);
 
         // automatically load class definitions from classes directory
         spl_autoload_register(function ($class) use ($cwd) {
-            $path = sprintf("%s/%s.class.php", $cwd, str_replace(array("\\", "_", "feeds/pages", "feeds"), array("/", "-", "pages", "classes"), strtolower($class)));
+            $search = [0 => "\\", 1 => "_", 2 => "obadiah/api", 3 => "obadiah/pages", 4 => "obadiah"];
+            $replace = [0 => "/", 1 => "-", 2 => "api", 3 => "pages", 4 => "classes"];
+            $path = sprintf("%s/%s.class.php", $cwd, str_replace($search, $replace, strtolower($class)));
             require_once $path;
         });
 
@@ -51,22 +57,22 @@ class App
         $image_version = new SplFileInfo("/etc/bf/VERSION");
         $source_version = new SplFileInfo(sprintf("%s/../VERSION", $cwd));
         if ($image_version->isFile()) {
-            self::$version = file_get_contents($image_version->getRealPath());
+            self::$version = IO::file_get_contents($image_version);
         } else if ($source_version->isFile()) {
-            self::$version = file_get_contents($source_version->getRealPath());
+            self::$version = IO::file_get_contents($source_version);
         }
 
         // load configuration
         C::init($cwd);
 
-        // initialise request variables
-        Request::init($cwd);
-
         // initialise cache
         Cache::init(C::$dir->cache, C::$cache->duration_in_seconds);
 
-        // initialise router
-        Router::init();
+        // initialise HTTP Request / Router
+        if ($is_http) {
+            Request::init();
+            Router::init();
+        }
 
         // require function scripts
         require_once "functions/escape.php";
@@ -88,17 +94,11 @@ class App
      * Ouput message and exit (equivalent of die).
      *
      * @param string $message           Output (error) message.
-     * @return void
+     * @return never
      */
     public static function die(string $message, mixed ...$args): void
     {
-        // if arguments have been provided, use sprintf
-        if (count($args) > 0) {
-            $message = sprintf($message, ...$args);
-        }
-
-        // output message and exit
-        print_r($message);
+        printf($message, ...$args);
         exit;
     }
 }

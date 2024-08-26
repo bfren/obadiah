@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -40,7 +40,7 @@ class Config_Login
     /**
      * Get values from login configuration array.
      *
-     * @param array $config             Login configuration array.
+     * @param mixed[] $config           Login configuration array.
      * @return void
      */
     public function __construct(array $config)

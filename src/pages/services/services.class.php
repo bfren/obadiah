@@ -1,20 +1,21 @@
 <?php
 
-namespace Feeds\Pages\Services;
+namespace Obadiah\Pages\Services;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Calendar\Event;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Rota\Rota;
-use Feeds\Response\ICalendar;
-use Feeds\Response\Json;
-use Feeds\Rota\Builder;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Rota\Rota;
+use Obadiah\Response\ICalendar;
+use Obadiah\Response\Json;
+use Obadiah\Rota\Builder;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Services
+class Services extends Endpoint
 {
     /**
      * GET: /services/ics
@@ -27,7 +28,7 @@ class Services
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(
@@ -59,7 +60,7 @@ class Services
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(

@@ -1,22 +1,23 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
 use DateInterval;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Calendar\Event;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
-use Feeds\Prayer\Month;
-use Feeds\Request\Request;
-use Feeds\Response\ICalendar;
-use Feeds\Response\Json;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
+use Obadiah\Prayer\Month;
+use Obadiah\Request\Request;
+use Obadiah\Response\ICalendar;
+use Obadiah\Response\Json;
+use Obadiah\Response\View;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Refresh
+class Refresh extends Endpoint
 {
     /**
      * GET: /refresh
@@ -82,7 +83,7 @@ class Refresh
         $refresh = Cache::get_refresh();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($refresh->days as $day) {
             $events[] = new Event(
                 uid: Event::create_uid(Cache::get_refresh_last_modified()),
@@ -113,7 +114,7 @@ class Refresh
         $refresh = Cache::get_refresh();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($refresh->days as $day) {
             $events[] = new Event(
                 uid: Event::create_uid(Cache::get_refresh_last_modified()),

@@ -1,21 +1,22 @@
 <?php
 
-namespace Feeds\Pages\Upload;
+namespace Obadiah\Pages\Upload;
 
 use DateInterval;
-use DateTimeImmutable;
-use Feeds\Admin\Bible_File;
-use Feeds\Admin\Prayer_File;
-use Feeds\Admin\Result;
-use Feeds\Admin\Rota_File;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\Admin\Bible_File;
+use Obadiah\Admin\Prayer_File;
+use Obadiah\Admin\Result;
+use Obadiah\Admin\Rota_File;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\DateTime;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Upload
+class Upload extends Endpoint
 {
     /**
      * Church Suite home page URI.
@@ -23,19 +24,9 @@ class Upload
     private const CHURCH_SUITE_HREF = "https://%s.churchsuite.com";
 
     /**
-     * Church Suite address book download URI.
-     */
-    private const ADULTS_HREF = "https://%s.churchsuite.com/modules/addressbook/reports/contact_table_generator.php?%s";
-
-    /**
-     * Church Suite children download URI.
-     */
-    private const CHILDREN_HREF = "https://%s.churchsuite.com/modules/children/reports/child_table_generator.php?%s";
-
-    /**
      * Operation result.
      *
-     * @var null|Result
+     * @var Result|null
      */
     private ?Result $result = null;
 
@@ -47,10 +38,10 @@ class Upload
     public function index_get(): View
     {
         // get uploaded files and sort by name
-        $rota_files = array_slice(scandir(C::$dir->rota), 2);
+        $rota_files = array_slice(scandir(C::$dir->rota) ?: [], 2);
         sort($rota_files);
 
-        $bible_files = array_slice(scandir(C::$dir->bible), 2);
+        $bible_files = array_slice(scandir(C::$dir->bible) ?: [], 2);
         sort($bible_files);
 
         // calculate the current four-month period of the year
@@ -58,8 +49,8 @@ class Upload
         $rota_period = ceil($month / 4);
         $last_month = $rota_period * 4;
         $first_month = $last_month - 3;
-        $rota_period_first_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $first_month, 1));
-        $rota_period_last_day = DateTimeImmutable::createFromFormat("Y-m-d", sprintf("%s-%s-%s", date("Y"), $last_month, 1))->modify("last day of this month");
+        $rota_period_first_day = DateTime::create("Y-m-d", sprintf("%s-%s-%s", date("Y"), $first_month, 1));
+        $rota_period_last_day = DateTime::create("Y-m-d", sprintf("%s-%s-%s", date("Y"), $last_month, 1))->modify("last day of this month");
 
         // calculate the next four-month period
         $next_period_first_day = $rota_period_last_day->add(new DateInterval("P1D"));

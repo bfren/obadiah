@@ -1,29 +1,30 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Obadiah\Pages\Rota;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Calendar\Event;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
-use Feeds\Response\ICalendar;
-use Feeds\Response\Json;
-use Feeds\Response\View;
-use Feeds\Rota\Builder;
-use Feeds\Rota\Combined_Day;
-use Feeds\Rota\Rota as R;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Request\Request;
+use Obadiah\Response\ICalendar;
+use Obadiah\Response\Json;
+use Obadiah\Response\View;
+use Obadiah\Rota\Builder;
+use Obadiah\Rota\Combined_Day;
+use Obadiah\Rota\Rota as R;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Rota
+class Rota extends Endpoint
 {
     /**
      * Get rota filters.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_filters(): array
     {
@@ -107,7 +108,7 @@ class Rota
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(
@@ -139,7 +140,7 @@ class Rota
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(
@@ -148,7 +149,7 @@ class Rota
                     end: $service->end,
                     title: Builder::get_summary($service, Arr::get(self::get_filters(), "person")),
                     location: C::$events->default_location,
-                    description: Builder::get_description($day, $service, "\n")
+                    description: Builder::get_description($day, $service, separator: "\n")
                 );
             }
         }

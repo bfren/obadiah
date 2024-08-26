@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -40,14 +40,14 @@ class Config_Prayer
     /**
      * Get values from prayer configuration array.
      *
-     * @param array $config             Prayer configuration array.
+     * @param mixed[] $config           Prayer configuration array.
      * @return void
      */
     public function __construct(array $config)
     {
-        $this->day_29 = Arr::get($config, "day_29", array());
-        $this->day_30 = Arr::get($config, "day_30", array());
-        $this->day_31 = Arr::get($config, "day_31", array());
+        $this->day_29 = Arr::get($config, "day_29", []);
+        $this->day_30 = Arr::get($config, "day_30", []);
+        $this->day_31 = Arr::get($config, "day_31", []);
         $this->show_last_name = Arr::get_boolean($config, "show_last_name", false);
     }
 }

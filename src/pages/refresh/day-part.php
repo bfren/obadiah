@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Response\View;
 
 App::check();
 
@@ -15,11 +15,11 @@ App::check();
 // otherwise, get the people on the prayer calendar for this day
 if ($model->day->format("N") == 7) {
     $lectionary_day = $model->lectionary->get_day($model->day);
-    $services = $lectionary_day?->services;
+    $services = $lectionary_day?->services ?: [];
 } else {
     $people = Prayer_Calendar::get_day($model->day);
     $readings = $model->bible_plan->get_day($model->day);
-    $services = array();
+    $services = [];
 }
 
 ?>

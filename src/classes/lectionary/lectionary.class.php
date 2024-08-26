@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Lectionary;
+namespace Obadiah\Lectionary;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Baserow\Baserow;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Baserow\Baserow;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -45,7 +45,7 @@ class Lectionary
             "Colour",
             "Collect"
         );
-        $day_results = $day_table->make_request(array("include" => join(",", $day)));
+        $day_results = $day_table->get(array("include" => join(",", $day)));
 
         // get services
         $service = array(
@@ -60,14 +60,14 @@ class Lectionary
             "Additional Reading",
             "Psalms"
         );
-        $service_results = $service_table->make_request(array("include" => join(",", $service)));
+        $service_results = $service_table->get(array("include" => join(",", $service)));
 
         // add days and services
-        $days = array();
-        $series = array();
+        $days = [];
+        $series = [];
         foreach ($day_results as $day) {
             // check date - if it is not set, continue
-            $date = Arr::get($day, "Date");
+            $date = Arr::get($day, "Date", "");
             if (!$date) {
                 continue;
             }
@@ -83,13 +83,13 @@ class Lectionary
             }
 
             // add Services to Day
-            $l_services = array();
+            $l_services = [];
             foreach ($day_services as $service) {
                 $series[] = Arr::get($service, "Series Title");
                 $l_services[] = new Service(
-                    time: Arr::get($service, "Time"),
+                    time: Arr::get_required($service, "Time"),
                     length: new DateInterval(sprintf("PT%sM", Arr::get($service, "Length", 60))),
-                    name: Arr::get($service, "Service Name"),
+                    name: Arr::get_required($service, "Service Name"),
                     series: Arr::get($service, "Series Title"),
                     num: Arr::get($service, "Num"),
                     title: Arr::get($service, "Title"),
@@ -122,7 +122,7 @@ class Lectionary
      * Get the Collect for the specified day - or the previous Sunday if there isn't one.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return null|string              Collect or null if not found.
+     * @return string|null              Collect or null if not found.
      */
     public function get_collect(DateTimeImmutable $dt): ?string
     {
@@ -146,7 +146,7 @@ class Lectionary
      * Get day information from the Lectionary for the specified date.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return null|Day                 Lectionary day.
+     * @return Day|null                 Lectionary day.
      */
     public function get_day(DateTimeImmutable $dt): ?Day
     {
@@ -169,7 +169,7 @@ class Lectionary
      * Get service information from the Lectionary for the specified date and time.
      *
      * @param DateTimeImmutable $dt     Service date and time.
-     * @return null|Service             Lectionary service.
+     * @return Service|null             Lectionary service.
      */
     public function get_service(DateTimeImmutable $dt): ?Service
     {

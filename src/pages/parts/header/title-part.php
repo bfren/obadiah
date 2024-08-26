@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Parts\Header;
+namespace Obadiah\Pages\Parts\Header;
 
-use Feeds\App;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Response\View;
 
 App::check();
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Pages\Prayer\Print_Model;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Pages\Refresh\Print_Model;
+use Obadiah\Response\View;
 
 App::check();
 

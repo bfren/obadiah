@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Request;
+namespace Obadiah\Request;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 

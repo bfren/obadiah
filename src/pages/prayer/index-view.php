@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
-use Feeds\App;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Response\View;
 
 App::check();
 

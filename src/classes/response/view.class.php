@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Parts\Header\Header_Model;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Parts\Header\Header_Model;
 use SplFileInfo;
 
 App::check();
@@ -74,7 +74,7 @@ class View extends Action
      * Output view part.
      *
      * @param string $name              Part name.
-     * @param null|string $variant      Part variant ('default' used if not set).
+     * @param string|null $variant      Part variant ('default' used if not set).
      * @param mixed $model              Part model.
      * @return void
      */
@@ -102,7 +102,7 @@ class View extends Action
      * Output header part.
      *
      * @param Header_Model $model       Part model.
-     * @param null|string $variant      Header variant name.
+     * @param string|null $variant      Header variant name.
      * @return void
      */
     public function header(Header_Model $model, ?string $variant = null): void
@@ -113,7 +113,7 @@ class View extends Action
     /**
      * Output footer part.
      *
-     * @param null|string $variant      Footer variant name.
+     * @param string|null $variant      Footer variant name.
      * @return void
      */
     public function footer(?string $variant = null): void
@@ -124,7 +124,7 @@ class View extends Action
     /**
      * Output alert part.
      *
-     * @param null|Result $result       Result object to use as the model.
+     * @param Result|null $result       Result object to use as the model.
      * @return void
      */
     public function alert(?Result $result) :void

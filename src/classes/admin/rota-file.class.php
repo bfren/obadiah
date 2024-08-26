@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Request\Request;
 
 App::check();
 
@@ -28,11 +28,11 @@ class Rota_File
         if (!$name) App::die("You must enter the rota name, e.g. 22-2.");
 
         // get paths
-        $tmp_path = Arr::get($info, "tmp_name");
+        $tmp_path = Arr::get($info, "tmp_name", "");
         $csv_path = sprintf("%s/%s.csv", C::$dir->rota, $name);
 
         // move file to the correct location, overwriting whatever is already there
-        if (move_uploaded_file($tmp_path, $csv_path)) {
+        if ($tmp_path && move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_rota();
             return Result::success(sprintf("The rota file '%s' was uploaded successfully.", $name));
         }
@@ -43,8 +43,8 @@ class Rota_File
     /**
      * Get the last modified date of the specified rota CSV file.
      *
-     * @param string $filename          Rota CSV file name (without path).
-     * @return string                   Formatted date time string.
+     * @param string $filename                      Rota CSV file name (without path).
+     * @return string                               Formatted date time string.
      */
     public static function get_last_modified($filename): string
     {
@@ -54,7 +54,7 @@ class Rota_File
     /**
      * Delete a rota CSV file.
      *
-     * @param string $filename          Rota CSV file name (without path).
+     * @param string $filename                      Rota CSV file name (without path).
      * @return Result
      */
     public static function delete(string $filename): Result

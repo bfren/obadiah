@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Request;
+namespace Obadiah\Request;
 
-use Feeds\App;
-use Feeds\Helpers\Sanitise;
+use Obadiah\App;
+use Obadiah\Helpers\Sanitise;
 
 App::check();
 
@@ -23,17 +23,16 @@ class Super_Global
     /**
      * Return all values from the superglobal.
      *
-     * @return array                    All superglobal values (or an empty array).
+     * @return mixed[]                  All superglobal values (or an empty array).
      */
     public function all(): array
     {
-        return filter_input_array($this->type) ?: array();
+        return filter_input_array($this->type) ?: [];
     }
 
     /**
      * Get and sanitise a boolean value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param bool $default             Optional default value.
      * @return bool                     Value or default value.
@@ -46,7 +45,6 @@ class Super_Global
     /**
      * Get and sanitise an integer value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param int $default              Optional default value.
      * @return int                      Value or default value.
@@ -59,7 +57,6 @@ class Super_Global
     /**
      * Get and sanitise a string value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param string $default           Optional default value.
      * @return string                   Value or default value.

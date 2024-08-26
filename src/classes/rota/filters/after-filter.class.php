@@ -1,12 +1,13 @@
 <?php
 
-namespace Feeds\Rota\Filters;
+namespace Obadiah\Rota\Filters;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Service;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Service;
+use Throwable;
 
 App::check();
 
@@ -28,12 +29,12 @@ class After_Filter implements Filter
         }
 
         // convert the date to a timestamp
-        $dt = new DateTimeImmutable($value, C::$events->timezone);
-        if ($dt) {
+        try {
+            $dt = new DateTimeImmutable($value, C::$events->timezone);
             return $service->start->format(C::$formats->sortable_date) >= $dt->format(C::$formats->sortable_date);
+        } catch (Throwable $th) {
+            _l_throwable($th);
+            return false;
         }
-
-        // if we get here $value was an invalid date format so return false
-        return false;
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -40,7 +40,7 @@ class Config_General
     /**
      * Get values from general configuration array.
      *
-     * @param array $config             General configuration array.
+     * @param mixed[] $config           General configuration array.
      * @return void
      */
     public function __construct(array $config)

@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Prayer;
+namespace Obadiah\Prayer;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
 use SplFileInfo;
 use Throwable;
 
@@ -33,22 +33,15 @@ class Month
         public readonly string $id,
         public readonly array $days,
         public readonly array $people
-    ) {
-    }
+    ) {}
 
     /**
      * Get a date time object for the first day of this month.
      *
-     * @return null|DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function get_first_day_of_month(): ?DateTimeImmutable
+    public function get_first_day_of_month(): DateTimeImmutable
     {
-        // return empty if ID is not set
-        if (!$this->id) {
-            return null;
-        }
-
-        // parse month ID as date
         return new DateTimeImmutable(sprintf("%s-01", $this->id));
     }
 
@@ -83,16 +76,11 @@ class Month
     /**
      * Return a formatted date string of this month.
      *
-     * @return null|string              This month e.g. 'January 2022'.
+     * @return string                   This month e.g. 'January 2022'.
      */
-    public function get_display_text(): ?string
+    public function get_display_text(): string
     {
-        $dt = $this->get_first_day_of_month();
-        if ($dt) {
-            return $dt->format(C::$formats->display_month);
-        }
-
-        return null;
+        return $this->get_first_day_of_month()->format(C::$formats->display_month);
     }
 
     /**
@@ -106,12 +94,13 @@ class Month
         try {
             // get data
             $id = $data->id;
-            $days = array();
+            $days = [];
             foreach ($data->days as $day) {
                 $days[$day->date] = $day->people;
             }
             $people = $data->people;
         } catch (Throwable $th) {
+            _l_throwable($th);
             return Result::failure("Unable to read month data.");
         }
 
@@ -126,6 +115,7 @@ class Month
         try {
             file_put_contents($path, $data);
         } catch (Throwable $th) {
+            _l_throwable($th);
             return Result::failure("Unable to save month data.");
         }
 
@@ -139,7 +129,7 @@ class Month
     /**
      * Load the days for a specific month from a data store, if it exists.
      *
-     * @param null|string $id           Month ID, format YYYY-MM.
+     * @param string|null $id           Month ID, format YYYY-MM.
      * @return Month                    Month object containing deserialised days (if store file exists).
      */
     public static function load(?string $id): Month
@@ -150,11 +140,14 @@ class Month
         // if the file exists, read and deserialise
         $file = new SplFileInfo($path);
         if ($file->isReadable() && ($data = file_get_contents($file->getRealPath()))) {
-            return unserialize($data);
+            $month = unserialize($data);
+            if ($month !== false) {
+                return $month;
+            }
         }
 
         // return empty Month object
-        return new Month($id ?: "", array(), array());
+        return new Month($id ?: "", [], []);
     }
 
     /**
@@ -173,6 +166,6 @@ class Month
         }
 
         // return blank month
-        return new Month("", array(), array());
+        return new Month("", [], []);
     }
 }

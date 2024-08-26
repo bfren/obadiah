@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Refresh;
+namespace Obadiah\Refresh;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Bible\Day as Readings;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Prayer\Person;
+use Obadiah\App;
+use Obadiah\Bible\Day as Readings;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Prayer\Person;
 
 App::check();
 
@@ -19,15 +19,14 @@ class Day
      *
      * @param DateTimeImmutable $date   The date.
      * @param Person[]|string[] $people Array of people.
-     * @param null|Readings $readings   Bible readings.
+     * @param Readings|null $readings   Bible readings.
      * @return void
      */
     public function __construct(
         public readonly DateTimeImmutable $date,
         public readonly array $people,
         public readonly ?Readings $readings
-    ) {
-    }
+    ) {}
 
     /**
      * Build event summary.
@@ -47,7 +46,7 @@ class Day
      */
     public function get_description(string $separator = "\\n"): string
     {
-        $description = array();
+        $description = [];
 
         // add readings
         if ($this->readings) {
@@ -63,20 +62,19 @@ class Day
         // add people
         if (!empty($this->people)) {
             $description[] = "= People =";
-            $people = array_values($this->people);
-            if ($people[0] instanceof Person) {
-                $description[] = join($separator, Arr::map($people, fn (Person $person) => $person->get_full_name(C::$prayer->show_last_name)));
-            } else {
-                $description[] = join($separator, $people);
-            }
+            $people = Arr::map($this->people, fn($person) => $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : (string) $person);
+            $description[] = join($separator, $people);
             $description[] = "";
         }
 
         // add collect
         if (($collect = Cache::get_lectionary()->get_collect($this->date)) !== null) {
-            $description[] = "= Collect =";
-            $description[] = join($separator, preg_split("/\n/", $collect));
-            $description[] = "";
+            $lines = preg_split("/\n/", $collect);
+            if ($lines !== false) {
+                $description[] = "= Collect =";
+                $description[] = join($separator, $lines);
+                $description[] = "";
+            }
         }
 
         // return description

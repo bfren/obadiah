@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -47,7 +47,7 @@ class Config_ChurchSuite
     /**
      * Get values from ChurchSuite configuration array.
      *
-     * @param array $config             ChurchSuite configuration array.
+     * @param mixed[] $config           ChurchSuite configuration array.
      * @return void
      */
     public function __construct(array $config)

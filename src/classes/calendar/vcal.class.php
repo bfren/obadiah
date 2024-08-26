@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Calendar;
+namespace Obadiah\Calendar;
 
 use DateTimeZone;
-use Feeds\App;
-use Feeds\Calendar\TZ\Europe_London;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Calendar\TZ\Europe_London;
+use Obadiah\Config\Config as C;
 
 App::check();
 
@@ -16,7 +16,7 @@ class VCal
      *
      * @var string[]
      */
-    private array $lines = array();
+    private array $lines = [];
 
     /**
      * Create VCal object.
@@ -35,7 +35,7 @@ class VCal
      * Get ICal timezone definition, or null if not supported.
      *
      * @param DateTimeZone $timezone    Config timezone.
-     * @return null|Timezone            ICal timezone.
+     * @return Timezone|null            ICal timezone.
      */
     private static function get_ical_timezone(DateTimeZone $timezone): ?Timezone
     {

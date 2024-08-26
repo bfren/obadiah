@@ -1,12 +1,12 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Obadiah\Pages\Rota;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Response\View;
-use Feeds\Rota\Combined_Day;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
+use Obadiah\Rota\Combined_Day;
 
 App::check();
 

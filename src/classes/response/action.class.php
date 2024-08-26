@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Response;
+namespace Obadiah\Response;
 
-use Feeds\App;
-use Feeds\Request\Request;
+use Obadiah\App;
+use Obadiah\Request\Request;
 
 App::check();
 
@@ -14,7 +14,7 @@ abstract class Action
      *
      * @var Header[]
      */
-    private array $headers = array();
+    private array $headers = [];
 
     /**
      * Add default headers.
@@ -25,7 +25,7 @@ abstract class Action
     protected function __construct(
         private readonly int $status
     ) {
-        $this->add_header("X-Software", "bfren/ccf");
+        $this->add_header("X-Software", "bfren/obadiah");
     }
 
     /**
@@ -56,14 +56,15 @@ abstract class Action
     }
 
     /**
-     * Send headers to the response.
+     * Send HTTP status and configured headers to the response.
      *
      * @return void
      */
     public function send_headers()
     {
+        http_response_code($this->status);
         foreach ($this->headers as $header) {
-            header(sprintf("%s: %s", $header->key, $header->value), $this->status);
+            header(sprintf("%s: %s", $header->key, $header->value));
         }
     }
 

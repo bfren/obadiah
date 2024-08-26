@@ -1,18 +1,19 @@
 <?php
 
-namespace Feeds\Pages\Home;
+namespace Obadiah\Pages\Home;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Home\Index_Model;
-use Feeds\Response\View;
-use Feeds\Rota\Rota;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Home\Index_Model;
+use Obadiah\Response\View;
+use Obadiah\Rota\Rota;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Home
+class Home extends Endpoint
 {
     /**
      * GET: /

@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
+use Obadiah\App;
 use SplFileInfo;
 
 App::check();
@@ -47,8 +47,8 @@ class Config_Dir
     /**
      * Ensure data directories exist.
      *
-     * @param array $cwd                Current working directory.
-     * @param array $data_dir           Absolute path to data directory.
+     * @param string $cwd               Current working directory.
+     * @param string $data_dir          Absolute path to data directory.
      * @return void
      */
     public function __construct(public readonly string $cwd, public readonly string $data_dir)

@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Pages\Parts\Footer;
+namespace Obadiah\Pages\Parts\Footer;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 
@@ -15,7 +15,7 @@ App::check();
     <div class="container-fluid">
         <small class="text-muted">
             Copyright &copy; <?php _e(date("Y")); ?> <a href="https://github.com/bfren">bfren</a> (v<?php _e(App::$version) ?>).
-            <span class="d-none d-sm-inline">Source on <a href="https://github.com/bfren/churchsuite-feeds" target="_blank">GitHub</a>.</span>
+            <span class="d-none d-sm-inline">Source on <a href="https://github.com/bfren/obadiah" target="_blank">GitHub</a>.</span>
         </small>
     </div>
 </footer>

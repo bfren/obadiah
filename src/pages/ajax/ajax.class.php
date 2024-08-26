@@ -1,22 +1,23 @@
 <?php
 
-namespace Feeds\Pages\Ajax;
+namespace Obadiah\Pages\Ajax;
 
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Prayer\Month;
-use Feeds\Request\Request;
-use Feeds\Response\Json;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Prayer\Month;
+use Obadiah\Request\Request;
+use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Ajax
+class Ajax extends Endpoint
 {
     /**
      * Holds an optional JSON result.
      *
-     * @var null|Json
+     * @var Json|null
      */
     private ?Json $result = null;
 
@@ -42,8 +43,9 @@ class Ajax
 
         // decode JSON
         try {
-            $json = json_decode($input);
+            $json = json_decode($input, flags: JSON_THROW_ON_ERROR);
         } catch (Throwable $th) {
+            _l_throwable($th);
             $this->result = new Json(Result::failure("Invalid request."), 400);
             return null;
         }

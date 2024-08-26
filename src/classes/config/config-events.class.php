@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
 use DateTimeZone;
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -48,7 +48,7 @@ class Config_Events
     /**
      * Get values from events configuration array.
      *
-     * @param array $config             Events configuration array.
+     * @param mixed[] $config           Events configuration array.
      * @return void
      */
     public function __construct(array $config)

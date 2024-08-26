@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Pages\Refresh;
+namespace Obadiah\Pages\Refresh;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Bible\Bible_Plan;
-use Feeds\Lectionary\Lectionary;
+use Obadiah\App;
+use Obadiah\Bible\Bible_Plan;
+use Obadiah\Lectionary\Lectionary;
 
 App::check();
 

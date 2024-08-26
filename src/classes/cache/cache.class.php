@@ -1,17 +1,18 @@
 <?php
 
-namespace Feeds\Cache;
+namespace Obadiah\Cache;
 
-use Feeds\App;
-use Feeds\Bible\Bible_Plan;
-use Feeds\Calendar\Event;
-use Feeds\ChurchSuite\Api;
-use Feeds\Helpers\Hash;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Prayer\Person;
-use Feeds\Refresh\Refresh;
-use Feeds\Request\Request;
-use Feeds\Rota\Rota;
+use Obadiah\App;
+use Obadiah\Bible\Bible_Plan;
+use Obadiah\Calendar\Event;
+use Obadiah\ChurchSuite\Api;
+use Obadiah\Helpers\Hash;
+use Obadiah\Helpers\IO;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Prayer\Person;
+use Obadiah\Refresh\Refresh;
+use Obadiah\Request\Request;
+use Obadiah\Rota\Rota;
 use SplFileInfo;
 
 App::check();
@@ -338,11 +339,11 @@ class Cache
      *
      * @param string $id                Cache file name.
      * @param callable $callable        Callable function to get cache value if expired or not set.
-     * @param array $args               Optional args to pass to $callable.
+     * @param mixed[] $args             Optional args to pass to $callable.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return mixed                    Value (cached or generated).
      */
-    private static function get_or_set(string $id, callable $callable, array $args = array(), bool $force = false): mixed
+    private static function get_or_set(string $id, callable $callable, array $args = [], bool $force = false): mixed
     {
         // clear cache if $force is set
         if ($force || Request::$get->bool("force")) {
@@ -355,7 +356,7 @@ class Cache
         // if the file exists, and the cache file has not expired, read and unserialise the value
         $last_modified = self::get_last_modified($path);
         if (time() - $last_modified < self::$duration_in_seconds) {
-            return unserialize(file_get_contents($path));
+            return unserialize(IO::file_get_contents($path));
         }
 
         // get a fresh value and serialise it to the cache

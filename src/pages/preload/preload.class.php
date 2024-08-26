@@ -1,18 +1,19 @@
 <?php
 
-namespace Feeds\Pages\Preload;
+namespace Obadiah\Pages\Preload;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Events\Events;
-use Feeds\Response\Json;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Events\Events;
+use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Preload
+class Preload extends Endpoint
 {
     /**
      * GET: /preload
@@ -60,7 +61,7 @@ class Preload
      * Call a function and return the result plus execution time (or error reason).
      *
      * @param callable $callable        Callable function.
-     * @return array                    OK if $callable executed successfully, Error if not.
+     * @return mixed[]                  OK if $callable executed successfully, Error if not.
      */
     private static function load(callable $callable): array
     {
@@ -74,6 +75,7 @@ class Preload
             $execution_time = ($end_time - $start_time);
             return array("result" => "OK", "time" => sprintf('%05.4fs', $execution_time));
         } catch (Throwable $th) {
+            _l_throwable($th);
             return array("result" => "Error", "reason" => $th->getMessage());
         }
     }

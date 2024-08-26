@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Helpers;
+namespace Obadiah\Helpers;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 
 App::check();
 
@@ -25,7 +25,7 @@ class Image
      *
      * @param string $src               Image source (within resources/img/ directory).
      * @param string $alt               Image alternative text (will be used for title as well).
-     * @param null|string $class        Optional CSS class.
+     * @param string|null $class        Optional CSS class.
      * @return void
      */
     public static function echo_image(string $src, string $alt, ?string $class = null): void

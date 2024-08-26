@@ -1,28 +1,29 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
 use DateTimeImmutable;
-use Feeds\Admin\Prayer_File;
-use Feeds\Admin\Result;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Prayer\Month;
-use Feeds\Prayer\Prayer_Calendar;
-use Feeds\Request\Request;
-use Feeds\Response\Action;
-use Feeds\Response\View;
+use Obadiah\Admin\Prayer_File;
+use Obadiah\Admin\Result;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Prayer\Month;
+use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Request\Request;
+use Obadiah\Response\Action;
+use Obadiah\Response\View;
+use Obadiah\Router\Endpoint;
 use Throwable;
 
 App::check();
 
-class Prayer
+class Prayer extends Endpoint
 {
     /**
      * Result object.
      *
-     * @var null|Result
+     * @var Result|null
      */
     private ?Result $result = null;
 
@@ -60,7 +61,7 @@ class Prayer
         }
 
         // the day for loop begins with 1 not 0 so we need an empty array item to push everything up one place
-        $from_days = array_merge(array(""), array_values($from->days));
+        $from_days = array_merge([""], array_values($from->days));
         $from_people = $from->people;
 
         // get the month this calendar is for
@@ -74,6 +75,7 @@ class Prayer
         try {
             $for = new DateTimeImmutable(sprintf("%s-01", $for_id));
         } catch (Throwable $th) {
+            _l_throwable($th);
             $this->result = Result::failure("Unable to determine the month this calendar is for.");
             return $this->index_get();
         }

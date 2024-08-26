@@ -1,10 +1,10 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
 use SplFileInfo;
 
 App::check();

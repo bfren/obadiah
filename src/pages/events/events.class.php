@@ -1,21 +1,22 @@
 <?php
 
-namespace Feeds\Pages\Events;
+namespace Obadiah\Pages\Events;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Calendar\Event;
-use Feeds\Calendar\VCal;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Request\Request;
-use Feeds\Response\ICalendar;
-use Feeds\Response\Json;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
+use Obadiah\Calendar\VCal;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Request\Request;
+use Obadiah\Response\ICalendar;
+use Obadiah\Response\Json;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Events
+class Events extends Endpoint
 {
     /**
      * Church Suite calendar feed URI.
@@ -81,32 +82,38 @@ class Events
      */
     public static function get_events(string $query): array
     {
-        // setup curl
+        // create curl request
         $url = sprintf(self::CALENDAR_HREF, C::$churchsuite->org, $query);
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $handle = curl_init($url);
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $url);
+            return [];
+        }
+
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
         // get calendar JSON
-        $json = curl_exec($ch);
-        if (curl_errno($ch) != 0) {
-            return array();
+        $json = curl_exec($handle);
+        if (!is_string($json)) {
+            _l(curl_error($handle));
+            return [];
         }
 
         // decode JSON
         $calendar = json_decode($json, true);
         if (!is_array($calendar)) {
-            return array();
+            return [];
         }
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($calendar as $event) {
             // get title
             $title = Arr::get($event, "name");
 
             // get status - can be 'confirmed', 'pending' or 'cancelled'
             // add flag to title if necessary
-            $status = Arr::get($event, "status");
+            $status = Arr::get($event, "status", "");
             if ($status == "cancelled") {
                 $title = sprintf("%s %s", C::$events->cancelled_flag, $title);
             } else if ($status == "pending") {
@@ -114,8 +121,8 @@ class Events
             }
 
             // get location
-            $location_data = Arr::get($event, "location", array());
-            if(($address = Arr::get($location_data, "address")) !== null) {
+            $location_data = Arr::get($event, "location", []);
+            if(($address = Arr::get($location_data, "address", "")) !== "") {
                 $location = $address;
             } else {
                 $location = Arr::get($location_data, "name", C::$events->default_location);
@@ -123,9 +130,9 @@ class Events
 
             // build and event to the array
             $events[] = new Event(
-                uid: Arr::get($event, "id"),
-                start: new DateTimeImmutable(Arr::get($event, "datetime_start"), C::$events->timezone),
-                end: new DateTimeImmutable(Arr::get($event, "datetime_end"), C::$events->timezone),
+                uid: Arr::get_required($event, "id"),
+                start: new DateTimeImmutable(Arr::get_required($event, "datetime_start"), C::$events->timezone),
+                end: new DateTimeImmutable(Arr::get_required($event, "datetime_end"), C::$events->timezone),
                 title: $title,
                 location: $location,
                 description: Arr::get($event, "description")

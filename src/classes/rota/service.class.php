@@ -1,10 +1,11 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\DateTime;
 
 App::check();
 
@@ -41,18 +42,18 @@ class Service
     public function __construct(array $header_row, array $row)
     {
         // read the data into an associative array using the header row
-        $data = array();
+        $data = [];
         for ($i = 0; $i < count($header_row); $i++) {
             $data[$header_row[$i]] = $row[$i];
         }
         // get the start date and time as a timestamp
-        $this->start = DateTimeImmutable::createFromFormat(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), C::$events->timezone);
+        $this->start = DateTime::create(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), true);
 
         // get the ministries
         $this->ministries = $this->get_ministries($data);
 
         // get all the people involved in this service
-        $people = array();
+        $people = [];
         foreach ($this->ministries as $service_ministries) {
             // remove extra information and merge arrays
             $people = array_merge(preg_replace("/ \(.*\)/", "", $service_ministries->people), $people);
@@ -66,13 +67,13 @@ class Service
     /**
      * Get all supported ministries and the people assigned to each one, and add to $this->ministries.
      *
-     * @param array $data               Associative array of service data.
+     * @param mixed[] $data             Associative array of service data.
      * @return Service_Ministry[]       Associative array of ministries.
      */
     private function get_ministries(array $data): array
     {
         // create empty ministries array
-        $ministries = array();
+        $ministries = [];
         foreach ($data as $rota_ministry => $people) {
             // skip if no-one is assigned
             if (!$people) {
@@ -103,9 +104,15 @@ class Service
     {
         // remove any notes
         $sanitised = preg_replace("/Notes:(.*)\n\n/s", "", $people);
+        if ($sanitised === null) {
+            return [];
+        }
 
         // split by new line
         $individuals = preg_split("/\n/", trim($sanitised));
+        if ($individuals === false) {
+            return [];
+        }
 
         // remove clash indicators
         $without_clash = str_replace(array("!! ", "** "), "", $individuals);

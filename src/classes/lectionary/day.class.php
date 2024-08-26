@@ -1,11 +1,11 @@
 <?php
 
-namespace Feeds\Lectionary;
+namespace Obadiah\Lectionary;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -15,9 +15,9 @@ class Day
      * Create Day object.
      *
      * @param string $date              String (sortable) representation of the date for this day in the lectionary.
-     * @param null|string $name         The name of this day in the lectionary (e.g. 8th after Trinity).
-     * @param null|string $colour       The liturgical colour of the day (e.g. White/Gold).
-     * @param null|string $collect      The Collect for today.
+     * @param string|null $name         The name of this day in the lectionary (e.g. 8th after Trinity).
+     * @param string|null $colour       The liturgical colour of the day (e.g. White/Gold).
+     * @param string|null $collect      The Collect for today.
      * @param Service[] $services       Array of services on this particular day, sorted by start time.
      * @return void
      */
@@ -34,7 +34,7 @@ class Day
      * Get lectionary details for a service at the specified time.
      *
      * @param DateTimeImmutable $dt     Service start time to search for.
-     * @return null|Service             Matching lectionary service or null if not found.
+     * @return Service|null             Matching lectionary service or null if not found.
      */
     public function get_service(DateTimeImmutable $dt): ?Service
     {

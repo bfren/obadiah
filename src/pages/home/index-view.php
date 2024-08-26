@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\Pages\Home;
+namespace Obadiah\Pages\Home;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Pages\Home\Index_Model;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Pages\Home\Index_Model;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
 
 App::check();
 
@@ -34,7 +34,7 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <?php if (Request::$session->is_admin) : ?>
     <h2>Caches</h2>
-    <p><a href="/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e(C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <p><a href="/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
 <?php endif; ?>
 
 <?php

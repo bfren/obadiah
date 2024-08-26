@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -33,7 +33,7 @@ class Config_Rota_Ministry
     /**
      * Get values from a rota configuration ministries array.
      *
-     * @param array $config             Rota configuration ministries array.
+     * @param mixed[] $config           Rota configuration ministries array.
      * @return void
      */
     public function __construct(array $config)

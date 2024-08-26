@@ -1,22 +1,24 @@
 <?php
 
-namespace Feeds\Pages\Auth;
+namespace Obadiah\Pages\Auth;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Request\Request;
-use Feeds\Response\Action;
-use Feeds\Response\View;
-use Feeds\Response\Redirect;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Crypto\Crypto;
+use Obadiah\Request\Request;
+use Obadiah\Response\Action;
+use Obadiah\Response\View;
+use Obadiah\Response\Redirect;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Auth
+class Auth extends Endpoint
 {
     /**
      * GET: /auth/login
      *
-     * @return View
+     * @return Action
      */
     public function login_get(): Action
     {
@@ -37,20 +39,20 @@ class Auth
     /**
      * POST: /auth/login
      *
-     * @return Redirect
+     * @return Action
      */
-    public function login_post() : Redirect
+    public function login_post() : Action
     {
         // get username and password
         $user = Request::$post->string("username");
         $pass = Request::$post->string("password");
 
         // check user / admin passwords
-        if ($user == "user" && $pass == C::$login->pass) {
+        if ($user == "user" && Crypto::verify_password(C::$login->pass, $pass)) {
             Request::$session->authorise();
             $uri = Request::$get->string("requested", default: "/");
             return new Redirect($uri);
-        } elseif ($user == "admin" && $pass == C::$login->admin) {
+        } elseif ($user == "admin" && Crypto::verify_password(C::$login->admin, $pass)) {
             Request::$session->authorise(true);
             $uri = Request::$get->string("requested", default: "/");
             return new Redirect($uri);
@@ -60,20 +62,20 @@ class Auth
         Request::$session->deny();
 
         // redirect to login page
-        return new Redirect(sprintf("/auth/login", true));
+        return new Redirect("/auth/login", true);
     }
 
     /**
      * GET: /auth/logout
      *
-     * @return Redirect
+     * @return Action
      */
-    public function logout_get() : Redirect
+    public function logout_get() : Action
     {
         // log the user out
         Request::$session->logout();
 
         // redirect to login page
-        return new Redirect(sprintf("/auth/login", true));
+        return new Redirect("/auth/login", true);
     }
 }

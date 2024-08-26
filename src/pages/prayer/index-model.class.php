@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Pages\Prayer;
+namespace Obadiah\Pages\Prayer;
 
-use Feeds\Admin\Result;
-use Feeds\App;
+use Obadiah\Admin\Result;
+use Obadiah\App;
 
 App::check();
 
@@ -12,7 +12,7 @@ class Index_Model
     /**
      * Create Index model.
      *
-     * @param null|Result $result       Operation result.
+     * @param Result|null $result       Operation result.
      * @param string[] $months          Array of months in the cache.
      * @param string $next_month        Month ID of next month.
      */

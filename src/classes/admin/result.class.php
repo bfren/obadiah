@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Admin;
+namespace Obadiah\Admin;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 
@@ -12,7 +12,7 @@ class Result
      * Create Result object.
      *
      * @param bool $success             Whether or not the operation was a success.
-     * @param null|string $message      Optional message.
+     * @param string|null $message      Optional message.
      * @return void
      */
     private function __construct(
@@ -24,7 +24,7 @@ class Result
     /**
      * Return a success result with an optional message.
      *
-     * @param null|string $message      Optional message.
+     * @param string|null $message      Optional message.
      * @return Result                   Success result.
      */
     public static function success(?string $message): Result

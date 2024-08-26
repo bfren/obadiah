@@ -1,13 +1,13 @@
 <?php
 
-namespace Feeds\ChurchSuite;
+namespace Obadiah\ChurchSuite;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Helpers\Hash;
-use Feeds\Prayer\Person;
-use Feeds\Prayer\Prayer_Calendar;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\Hash;
+use Obadiah\Prayer\Person;
+use Obadiah\Prayer\Prayer_Calendar;
 
 App::check();
 
@@ -34,16 +34,21 @@ class Api
      * Make a request to the ChurchSuite API and return the response - logging any errors.
      *
      * @param string $endpoint          ChurchSuite API endpoint.
-     * @param array $data               Request data.
+     * @param mixed[] $data             Request data.
      * @return mixed                    API response.
      */
-    private function make_request(string $endpoint, array $data): mixed
+    private function get(string $endpoint, array $data): mixed
     {
         // build URL from data
         $url = sprintf("https://api.churchsuite.com/%s/%s?%s", $this->version, $endpoint, http_build_query($data));
 
         // create curl request
         $handle = curl_init($url);
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $url);
+            return null;
+        }
+
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(
             sprintf("X-Account: %s", C::$churchsuite->org),
             sprintf("X-Application: %s", C::$churchsuite->api_application),
@@ -53,7 +58,7 @@ class Api
 
         // make request - on error log and return null
         $json = curl_exec($handle);
-        if (!$json) {
+        if (!is_string($json)) {
             _l(print_r(curl_error($handle), true));
             return null;
         }
@@ -61,10 +66,10 @@ class Api
         // decode JSON response - on error log and return null
         $result = json_decode($json, true);
         if (!$result) {
-            _l("Unable to decode JSON response from %s", $url);
+            _l("Unable to decode JSON response from %s.", $url);
             return null;
         } elseif (isset($result["error"])) {
-            _l("Error retrieving %s: %s", $url, $result["error"]["message"]);
+            _l("Error retrieving %s: %s.", $url, $result["error"]["message"]);
             return null;
         }
 
@@ -82,15 +87,15 @@ class Api
     private function get_people(string $endpoint, string $kind, bool $are_children): array
     {
         // make request and return empty array on failure
-        $response = $this->make_request($endpoint, array($kind => "true"));
+        $response = $this->get($endpoint, array($kind => "true"));
         if ($response === null) {
-            return array();
+            return [];
         }
 
         // build array of People from the response
-        $people = array();
+        $people = [];
         foreach ($response[$kind] as $person) {
-            $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", array()), "md", array()), "url");
+            $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", []), "md", []), "url");
             $person = new Person(
                 first_name: $person["first_name"],
                 last_name: $person["last_name"],

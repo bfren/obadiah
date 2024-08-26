@@ -66,14 +66,14 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/ccf:latest
-            bfren/ccf:${{ steps.version_major.outputs.contents }}
-            bfren/ccf:${{ steps.version_minor.outputs.contents }}
-            bfren/ccf:${{ steps.version.outputs.contents }}
-            ghcr.io/bfren/ccf:latest
-            ghcr.io/bfren/ccf:${{ steps.version_major.outputs.contents }}
-            ghcr.io/bfren/ccf:${{ steps.version_minor.outputs.contents }}
-            ghcr.io/bfren/ccf:${{ steps.version.outputs.contents }}
+            bfren/obadiah:latest
+            bfren/obadiah:${{ steps.version_major.outputs.contents }}
+            bfren/obadiah:${{ steps.version_minor.outputs.contents }}
+            bfren/obadiah:${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/obadiah:latest
+            ghcr.io/bfren/obadiah:${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/obadiah:${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/obadiah:${{ steps.version.outputs.contents }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

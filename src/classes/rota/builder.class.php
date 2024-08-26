@@ -1,13 +1,14 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Service;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\DateTime;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Service;
 
 App::check();
 
@@ -21,7 +22,7 @@ class Builder
     /**
      * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
      *
-     * @var array
+     * @var array<int, string>
      */
     public static array $days_of_the_week = array(
         7 => "Sunday",
@@ -43,7 +44,7 @@ class Builder
     public static function build_combined_rota(Lectionary $lectionary, array $services): array
     {
         // create an empty array to hold the combined rota
-        $rota = array();
+        $rota = [];
         $sunday_collect = "";
 
         foreach ($lectionary->days as $lectionary_day) {
@@ -64,7 +65,7 @@ class Builder
             }
 
             // add all the services
-            $c_services = array();
+            $c_services = [];
             foreach ($rota_services as $rota_service) {
                 // get lectionary information and create combined service
                 $lectionary_service = $lectionary_day->get_service($rota_service->start);
@@ -78,19 +79,21 @@ class Builder
                     end: $rota_service->start->add($lectionary_service->length),
                     time: $rota_service->start->format(C::$formats->display_time),
                     name: $lectionary_service->name,
-                    series_title: $lectionary_service?->series,
-                    sermon_num: $lectionary_service?->num,
-                    sermon_title: $lectionary_service?->title,
-                    main_reading: $lectionary_service?->main_reading,
-                    additional_reading: $lectionary_service?->additional_reading,
-                    psalms: $lectionary_service?->psalms ?: array(),
+                    series_title: $lectionary_service->series,
+                    sermon_num: $lectionary_service->num,
+                    sermon_title: $lectionary_service->title,
+                    main_reading: $lectionary_service->main_reading,
+                    additional_reading: $lectionary_service->additional_reading,
+                    psalms: $lectionary_service->psalms ?: [],
                     ministries: $rota_service->ministries
                 );
             }
 
             // add the day to the rota
+            $c_date = DateTime::create(C::$formats->sortable_date, $lectionary_day->date, true);
+
             $rota[$lectionary_day->date] = new Combined_Day(
-                date: DateTimeImmutable::createFromFormat(C::$formats->sortable_date, $lectionary_day->date, C::$events->timezone)->setTime(0, 0),
+                date: $c_date->setTime(0, 0),
                 name: $lectionary_day->name,
                 colour: $lectionary_day->colour,
                 collect: $lectionary_day->collect ?: $sunday_collect,
@@ -106,9 +109,9 @@ class Builder
      * Get the name of the specified day of the week.
      *
      * @param int $num                  Day number.
-     * @return null|string              Day name.
+     * @return string|null              Day name.
      */
-    public static function get_day(int $num): null|string
+    public static function get_day(int $num): string|null
     {
         return Arr::get(self::$days_of_the_week, $num);
     }
@@ -117,7 +120,7 @@ class Builder
      * Generate an event summary for a service, including ministry indicators for the specified person.
      *
      * @param Combined_Service $service     Service object.
-     * @param null|string $person           Selected person.
+     * @param string|null $person           Selected person.
      * @return string                       Service name with ministry indicators.
      */
     public static function get_summary(Combined_Service $service, ?string $person = null): string
@@ -131,7 +134,7 @@ class Builder
         }
 
         // look for certain ministries
-        $ministries = array();
+        $ministries = [];
         foreach ($service->ministries as $service_ministry) {
             foreach ($service_ministry->people as $p) {
                 if (str_starts_with($p, $person)) {
@@ -173,7 +176,7 @@ class Builder
         string $separator = "\\n"
     ): string {
         // create empty array for description lines
-        $description = array();
+        $description = [];
 
         // add lectionary info
         if ($day->name && $day->colour) {

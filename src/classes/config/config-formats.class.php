@@ -1,9 +1,9 @@
 <?php
 
-namespace Feeds\Config;
+namespace Obadiah\Config;
 
-use Feeds\App;
-use Feeds\Helpers\Arr;
+use Obadiah\App;
+use Obadiah\Helpers\Arr;
 
 App::check();
 
@@ -103,7 +103,7 @@ class Config_Formats
     /**
      * Get values from formats configuration array.
      *
-     * @param array $config             Formats configuration array.
+     * @param mixed[] $config           Formats configuration array.
      * @return void
      */
     public function __construct(array $config)

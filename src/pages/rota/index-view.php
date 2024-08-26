@@ -1,14 +1,14 @@
 <?php
 
-namespace Feeds\Pages\Rota;
+namespace Obadiah\Pages\Rota;
 
-use Feeds\App;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Pages\Parts\Header\Header_Model;
-use Feeds\Request\Request;
-use Feeds\Response\View;
-use Feeds\Rota\Builder;
+use Obadiah\App;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Request;
+use Obadiah\Response\View;
+use Obadiah\Rota\Builder;
 
 App::check();
 
@@ -75,7 +75,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 <select class="form-control" name="day">
                     <option value="">Choose...</option>
                     <?php foreach (Builder::$days_of_the_week as $num => $txt) : $selected = $num == Arr::get($model->filters, "day") ? "selected" : ""; ?>
-                        <option value="<?php _e($num); ?>" <?php _e($selected); ?>><?php _e($txt); ?></option>
+                        <option value="<?php _e("%s", $num); ?>" <?php _e($selected); ?>><?php _e($txt); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -94,7 +94,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 <select class="form-control" name="max">
                     <option value="">Show All</option>
                     <?php for ($i = 1; $i <= 20; $i++) : $selected = $i == Arr::get($model->filters, "max") ? "selected" : ""; ?>
-                        <option value="<?php _e($i); ?>" <?php _e($selected); ?>><?php _e($i); ?> service<?php _e($i > 1 ? "s" : ""); ?></option>
+                        <option value="<?php _e("%s", $i); ?>" <?php _e($selected); ?>><?php _e("%s", $i); ?> service<?php _e($i > 1 ? "s" : ""); ?></option>
                     <?php endfor; ?>
                 </select>
             </div>

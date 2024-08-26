@@ -1,20 +1,20 @@
 <?php
 
-namespace Feeds\Rota;
+namespace Obadiah\Rota;
 
 use DateInterval;
 use DateTimeImmutable;
-use Feeds\App;
-use Feeds\Cache\Cache;
-use Feeds\Config\Config as C;
-use Feeds\Helpers\Arr;
-use Feeds\Lectionary\Lectionary;
-use Feeds\Rota\Filters\After_Filter;
-use Feeds\Rota\Filters\Before_Filter;
-use Feeds\Rota\Filters\Day_Filter;
-use Feeds\Rota\Filters\Person_Filter;
-use Feeds\Rota\Filters\Series_Filter;
-use Feeds\Rota\Filters\Start_Filter;
+use Obadiah\App;
+use Obadiah\Cache\Cache;
+use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Lectionary\Lectionary;
+use Obadiah\Rota\Filters\After_Filter;
+use Obadiah\Rota\Filters\Before_Filter;
+use Obadiah\Rota\Filters\Day_Filter;
+use Obadiah\Rota\Filters\Person_Filter;
+use Obadiah\Rota\Filters\Series_Filter;
+use Obadiah\Rota\Filters\Start_Filter;
 use SplFileObject;
 use Throwable;
 
@@ -52,10 +52,16 @@ class Rota
     {
         // get csv files from path
         $csv = glob(sprintf("%s/*.csv", C::$dir->rota));
+        if ($csv === false) {
+            $this->services = [];
+            $this->people = [];
+            $this->last_modified_timestamp = 0;
+            return;
+        }
 
         // read each file into arrays
-        $services = array();
-        $people = array();
+        $services = [];
+        $people = [];
         $last_modified_timestamp = 0;
         foreach ($csv as $file) {
             // store the file modification time
@@ -68,15 +74,19 @@ class Rota
             try {
                 $file_obj = new SplFileObject($file, "r");
             } catch (Throwable $th) {
-                App::die("Unable to open the file: %s.", $file_obj->getRealPath());
+                _l_throwable($th);
+                App::die("Unable to open the file: %s.", $file);
             }
 
             // read each line of the csv file
             $include = false;
-            $header_row = array();
+            $header_row = [];
             while (!$file_obj->eof()) {
                 // read the next row
                 $row = $file_obj->fgetcsv();
+                if ($row === false) {
+                    continue;
+                }
 
                 // include the service if the row counts match and there is a service assigned
                 if ($include && count($header_row) == count($row) && $row[1] != "No service") {
@@ -99,7 +109,7 @@ class Rota
         }
 
         // sort services by timestamp
-        usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
+        usort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
         $lectionary_last_modified = Cache::get_lectionary_last_modified();
@@ -116,19 +126,19 @@ class Rota
     /**
      * Apply filters and return matching services.
      *
-     * @param array                     Filters to apply (usually from the query string).
-     * @param Lectionary                Lectionary object.
+     * @param string[] $filters         Filters to apply (usually from the query string).
+     * @param Lectionary $lectionary    Lectionary object.
      * @return Service[]                Services matching the supplied filters.
      */
     public function apply_filters(array $filters, Lectionary $lectionary): array
     {
         // if the filters array is empty, or include=all is set, return all services
-        if (!$filters || empty($filters) || Arr::get($filters, "include") == "all") {
+        if (!$filters || Arr::get($filters, "include") == "all") {
             return $this->services;
         }
 
         // create array to hold matched services
-        $services = array();
+        $services = [];
 
         // create filter objects
         $person_filter = new Person_Filter();
@@ -179,8 +189,8 @@ class Rota
     /**
      * Return filters to show upcoming Sunday services.
      *
-     * @param bool                      If true, only 10:30 services will be shown.
-     * @return array                    Filter values for use on rota page.
+     * @param bool $ten_thirty_only     If true, only 10:30 services will be shown.
+     * @return array<string, mixed>     Filter values for use on rota page.
      */
     public static function upcoming_sundays(bool $ten_thirty_only = false): array
     {

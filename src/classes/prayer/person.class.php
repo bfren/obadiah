@@ -1,8 +1,8 @@
 <?php
 
-namespace Feeds\Prayer;
+namespace Obadiah\Prayer;
 
-use Feeds\App;
+use Obadiah\App;
 
 App::check();
 
