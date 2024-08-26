@@ -5,7 +5,7 @@ namespace Obadiah\Pages\Refresh;
 use Obadiah\App;
 use Obadiah\Cache\Cache;
 use Obadiah\Pages\Parts\Header\Header_Model;
-use Obadiah\Pages\Prayer\Print_Model;
+use Obadiah\Pages\Refresh\Print_Model;
 use Obadiah\Response\View;
 
 App::check();

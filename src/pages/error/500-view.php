@@ -5,12 +5,12 @@ namespace Obadiah\Pages\Error;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Pages\Parts\Header\Header_Model;
-use Obadiah\View\Html;
+use Obadiah\Response\View;
 use Throwable;
 
 App::check();
 
-/** @var Html $this */
+/** @var View $this */
 /** @var Throwable $model */
 
 $this->header(new Header_Model("Error", subtitle: "Something went wrong, please try again."));
