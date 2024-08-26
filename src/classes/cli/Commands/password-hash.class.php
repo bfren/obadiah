@@ -26,11 +26,10 @@ class Password_Hash extends Command
     /**
      * Output the hashed password.
      *
-     * @return void
+     * @return never
      */
     public function execute(): void
     {
-        echo(Crypto::hash_password($this->password));
-        exit;
+        App::die(Crypto::hash_password($this->password));
     }
 }
