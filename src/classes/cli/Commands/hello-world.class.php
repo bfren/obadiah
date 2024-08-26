@@ -28,6 +28,6 @@ class Hello_World extends Command
      */
     public function execute(): void
     {
-        echo ("Hello, $this->person!");
+        App::die("Hello, $this->person!");
     }
 }
