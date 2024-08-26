@@ -13,7 +13,7 @@ class Config_Rota
     /**
      * The Bible version to use for links on rota pages.
      *
-     * @var int
+     * @var string
      */
     public readonly string $bible_version;
 

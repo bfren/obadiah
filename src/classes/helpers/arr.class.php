@@ -29,7 +29,7 @@ class Arr
      * @param array $array              Array of values.
      * @param int|string $key           The key to search for.
      * @param T $default                Default value if key does not exist.
-     * @return T                        Key value, or $default if key does not exist.
+     * @return mixed                    Key value, or $default if key does not exist.
      */
     public static function get(array $array, int|string $key, mixed $default = null): mixed
     {
@@ -62,8 +62,8 @@ class Arr
      *
      * @param array $array              Array of values.
      * @param int|string $key           The key to search for.
-     * @param boolean $default          Default value if key does not exist.
-     * @return boolean                  Key value, or $default if key does not exist.
+     * @param int $default              Default value if key does not exist.
+     * @return int                      Key value, or $default if key does not exist.
      */
     public static function get_integer(array $array, int|string $key, int $default = 0): int
     {
@@ -77,10 +77,9 @@ class Arr
     /**
      * Get a required value from an associative array.
      *
-     * @template T
      * @param array $array              Array of values.
      * @param int|string $key           The key to search for.
-     * @return T                        Key value, or $default if key does not exist.
+     * @return mixed                    Key value, or $default if key does not exist.
      */
     public static function get_required(array $array, int|string $key): mixed
     {
@@ -116,9 +115,10 @@ class Arr
      * Transform each element in $array using $callback.
      *
      * @template T
-     * @param T[] $array                Array to map.
-     * @param null|callable $callback   Callback function (should return a transformed value).
-     * @return T[]                      Array of transformed elements.
+     * @template U
+     * @param T[] $array                        Array to map.
+     * @param null|callable(T): U $callback     Callback function (should return a transformed value).
+     * @return U[]                              Array of transformed elements.
      */
     public static function map(array $array, ?callable $callback = null): array
     {
@@ -145,7 +145,7 @@ class Arr
      * @template T
      * @param T[] $array                Array to search.
      * @param T $value                  Value to search for.
-     * @return int|string|bool          Key of the first found value, or false if not found.
+     * @return int|string|false         Key of the first found value, or false if not found.
      */
     public static function search(array $array, mixed $value): int|string|false
     {

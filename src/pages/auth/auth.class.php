@@ -16,7 +16,7 @@ class Auth
     /**
      * GET: /auth/login
      *
-     * @return View
+     * @return Action
      */
     public function login_get(): Action
     {
@@ -37,9 +37,9 @@ class Auth
     /**
      * POST: /auth/login
      *
-     * @return Redirect
+     * @return Action
      */
-    public function login_post() : Redirect
+    public function login_post() : Action
     {
         // get username and password
         $user = Request::$post->string("username");
@@ -60,20 +60,20 @@ class Auth
         Request::$session->deny();
 
         // redirect to login page
-        return new Redirect(sprintf("/auth/login", true));
+        return new Redirect("/auth/login", true);
     }
 
     /**
      * GET: /auth/logout
      *
-     * @return Redirect
+     * @return Action
      */
-    public function logout_get() : Redirect
+    public function logout_get() : Action
     {
         // log the user out
         Request::$session->logout();
 
         // redirect to login page
-        return new Redirect(sprintf("/auth/login", true));
+        return new Redirect("/auth/login", true);
     }
 }

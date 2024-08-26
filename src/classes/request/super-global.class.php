@@ -33,7 +33,6 @@ class Super_Global
     /**
      * Get and sanitise a boolean value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param bool $default             Optional default value.
      * @return bool                     Value or default value.
@@ -46,7 +45,6 @@ class Super_Global
     /**
      * Get and sanitise an integer value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param int $default              Optional default value.
      * @return int                      Value or default value.
@@ -59,7 +57,6 @@ class Super_Global
     /**
      * Get and sanitise a string value.
      *
-     * @param int $type                 Global type.
      * @param string $key               Array key.
      * @param string $default           Optional default value.
      * @return string                   Value or default value.

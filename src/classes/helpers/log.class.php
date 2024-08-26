@@ -12,7 +12,7 @@ class Log
      * Log an error - using sprintf if $args are defined.
      *
      * @param null|string $error            Error message (or sprintf format) to be logged.
-     * @param array $args                   Optional arguments to use for sprintf.
+     * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */
     public static function error(?string $error, mixed ...$args): void
