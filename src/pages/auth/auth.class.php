@@ -76,6 +76,6 @@ class Auth extends Endpoint
         Request::$session->logout();
 
         // redirect to login page
-        return new Redirect("/auth/login", true);
+        return new Redirect("/auth/login");
     }
 }
