@@ -3,6 +3,7 @@
 namespace Obadiah;
 
 use Obadiah\Cache\Cache;
+use Obadiah\Cli\Cli;
 use Obadiah\Config\Config as C;
 use Obadiah\Request\Request;
 use Obadiah\Router\Router;
@@ -25,9 +26,10 @@ class App
     /**
      * Initialise application - register autoloader - setup Request, etc.
      *
+     * @var bool $is_http               Whether or not the app is being loaded via HTTP.
      * @return void
      */
-    public static function init(): void
+    public static function init(bool $is_http = true): void
     {
         // ensure we are running on PHP 8.3
         version_compare(PHP_VERSION, "8.3.0", ">=") || self::die("This application requires at least PHP 8.3.");
@@ -35,8 +37,10 @@ class App
         // get current working directory
         $cwd = __DIR__;
 
-        // start session
-        session_start();
+        // start session unless running as CLI
+        if ($is_http) {
+            session_start();
+        }
 
         // each PHP script checks if this is defined to ensure incorrect access is denied
         define(self::CHECK, true);
@@ -59,14 +63,14 @@ class App
         // load configuration
         C::init($cwd);
 
-        // initialise request variables
-        Request::init($cwd);
-
         // initialise cache
         Cache::init(C::$dir->cache, C::$cache->duration_in_seconds);
 
-        // initialise router
-        Router::init();
+        // initialise HTTP Request / Router
+        if ($is_http) {
+            Request::init($cwd);
+            Router::init();
+        }
 
         // require function scripts
         require_once "functions/escape.php";
