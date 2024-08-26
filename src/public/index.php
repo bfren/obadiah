@@ -2,6 +2,7 @@
 
 namespace Obadiah;
 
+use Obadiah\Api as A;
 use Obadiah\Pages as P;
 use Obadiah\Router\Router;
 
@@ -9,17 +10,19 @@ use Obadiah\Router\Router;
 require_once "../app.class.php";
 App::init();
 
+// map api
+Router::map_endpoint(A\Safeguarding\Safeguarding::class);
+
 // map pages
-Router::map_page(P\Ajax\Ajax::class);
-Router::map_page(P\Auth\Auth::class, requires_auth: false);
-Router::map_page(P\Events\Events::class, requires_auth: false);
-Router::map_page(P\Prayer\Prayer::class, requires_admin: true);
-Router::map_page(P\Preload\Preload::class, requires_auth: false);
-Router::map_page(P\Refresh\Refresh::class);
-Router::map_page(P\Rota\Rota::class);
-Router::map_page(P\Safeguarding\Safeguarding::class);
-Router::map_page(P\Services\Services::class, requires_auth: false);
-Router::map_page(P\Upload\Upload::class, requires_admin: true);
+Router::map_endpoint(P\Ajax\Ajax::class);
+Router::map_endpoint(P\Auth\Auth::class, requires_auth: false);
+Router::map_endpoint(P\Events\Events::class, requires_auth: false);
+Router::map_endpoint(P\Prayer\Prayer::class, requires_admin: true);
+Router::map_endpoint(P\Preload\Preload::class, requires_auth: false);
+Router::map_endpoint(P\Refresh\Refresh::class);
+Router::map_endpoint(P\Rota\Rota::class);
+Router::map_endpoint(P\Services\Services::class, requires_auth: false);
+Router::map_endpoint(P\Upload\Upload::class, requires_admin: true);
 
 // get and execute page action
 $action = Router::get_action();
