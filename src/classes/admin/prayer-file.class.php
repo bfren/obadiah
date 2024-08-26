@@ -25,8 +25,8 @@ class Prayer_File
     /**
      * Handle a file upload.
      *
-     * @param string $type              Upload type, i.e. 'adults' or 'children'.
-     * @param string $filename          The filename to save - use one of the class constants.
+     * @param string $type                          Upload type, i.e. 'adults' or 'children'.
+     * @param string $filename                      The filename to save - use one of the class constants.
      * @return Result
      */
     private static function upload(string $type, string $filename): Result
@@ -36,11 +36,11 @@ class Prayer_File
         in_array(Arr::get($info, "type"), array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // get paths
-        $tmp_path = Arr::get($info, "tmp_name");
+        $tmp_path = Arr::get($info, "tmp_name", "");
         $csv_path = sprintf("%s/%s", C::$dir->prayer, $filename);
 
         // move file to the correct location, overwriting whatever is already there
-        if (move_uploaded_file($tmp_path, $csv_path)) {
+        if ($tmp_path && move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_prayer_calendar();
             return Result::success(sprintf("The %s prayer calendar file was uploaded successfully.", $type));
         }
@@ -71,8 +71,8 @@ class Prayer_File
     /**
      * Get the last modified date of the specified prayer calendar CSV file.
      *
-     * @param string $filename          Prayer Calendar CSV file name (without path).
-     * @return string                   Formatted date time string.
+     * @param string $filename                      Prayer Calendar CSV file name (without path).
+     * @return string                               Formatted date time string.
      */
     public static function get_last_modified($filename): string
     {
@@ -82,7 +82,7 @@ class Prayer_File
     /**
      * Delete a prayer calendar CSV file.
      *
-     * @param string $filename          Prayer calendar CSV file name (without path).
+     * @param string $filename                      Prayer calendar CSV file name (without path).
      * @return Result
      */
     public static function delete(string $filename): Result

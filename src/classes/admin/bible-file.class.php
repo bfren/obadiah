@@ -29,11 +29,11 @@ class Bible_File
         in_array(Arr::get($info, "type"), array("text/plain")) || App::die("You may only upload text files.");
 
         // get paths
-        $tmp_path = Arr::get($info, "tmp_name");
+        $tmp_path = Arr::get($info, "tmp_name", "");
         $csv_path = sprintf("%s/%s.txt", C::$dir->bible, self::NAME);
 
         // move file to the correct location, overwriting whatever is already there
-        if (move_uploaded_file($tmp_path, $csv_path)) {
+        if ($tmp_path && move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_bible_plan();
             return Result::success("The Bible plan file was uploaded successfully.");
         }
@@ -44,7 +44,7 @@ class Bible_File
     /**
      * Get the last modified date of the Bible plan CSV file.
      *
-     * @return string                   Formatted date time string.
+     * @return string                               Formatted date time string.
      */
     public static function get_last_modified(): string
     {

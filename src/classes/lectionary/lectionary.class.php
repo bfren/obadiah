@@ -67,7 +67,7 @@ class Lectionary
         $series = [];
         foreach ($day_results as $day) {
             // check date - if it is not set, continue
-            $date = Arr::get($day, "Date");
+            $date = Arr::get($day, "Date", "");
             if (!$date) {
                 continue;
             }

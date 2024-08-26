@@ -4,7 +4,6 @@ namespace Obadiah\Helpers;
 
 use Exception;
 use Obadiah\App;
-use Throwable;
 
 App::check();
 
@@ -26,10 +25,10 @@ class Arr
      * Safely get a value from an associative array.
      *
      * @template T
-     * @param mixed[] $array            Array of values.
+     * @param T[]|array<int|string, T> $array            Array of values.
      * @param int|string $key           The key to search for.
-     * @param T $default                Default value if key does not exist.
-     * @return mixed                    Key value, or $default if key does not exist.
+     * @param T|null $default            Default value if key does not exist.
+     * @return T|null                    Key value, or $default if key does not exist.
      */
     public static function get(array $array, int|string $key, mixed $default = null): mixed
     {
