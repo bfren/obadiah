@@ -39,6 +39,7 @@ class Bible_Plan
         try {
             $file_obj = $file_info->openFile("r");
         } catch (Throwable $th) {
+            _l_throwable($th);
             App::die("Unable to read the file: %s.", $file_info->getRealPath());
         }
 
@@ -84,7 +85,7 @@ class Bible_Plan
         }
 
         // get first day of year
-        $first_day = $dt->setDate($dt->format("Y"), 1, 1);
+        $first_day = $dt->setDate((int) $dt->format("Y"), 1, 1);
 
         // get number of days since first day of year
         $days = $dt->diff($first_day, true)->days + 1;

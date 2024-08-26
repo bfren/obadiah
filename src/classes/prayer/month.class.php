@@ -140,9 +140,9 @@ class Month
      * Load the days for a specific month from a data store, if it exists.
      *
      * @param null|string $id           Month ID, format YYYY-MM.
-     * @return Month                    Month object containing deserialised days (if store file exists).
+     * @return Month|false              Month object containing deserialised days (if store file exists).
      */
-    public static function load(?string $id): Month
+    public static function load(?string $id): Month|false
     {
         // get path to data file
         $path = sprintf("%s/%s.month", C::$dir->prayer, $id);

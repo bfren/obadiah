@@ -59,7 +59,7 @@ class Prayer_Calendar
         $month = Month::load($id);
 
         // return empty array if the month does not exist
-        if ($month === null) {
+        if ($month === false) {
             return [];
         }
 
