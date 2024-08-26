@@ -78,12 +78,12 @@ class Builder
                     end: $rota_service->start->add($lectionary_service->length),
                     time: $rota_service->start->format(C::$formats->display_time),
                     name: $lectionary_service->name,
-                    series_title: $lectionary_service?->series,
-                    sermon_num: $lectionary_service?->num,
-                    sermon_title: $lectionary_service?->title,
-                    main_reading: $lectionary_service?->main_reading,
-                    additional_reading: $lectionary_service?->additional_reading,
-                    psalms: $lectionary_service?->psalms ?: [],
+                    series_title: $lectionary_service->series,
+                    sermon_num: $lectionary_service->num,
+                    sermon_title: $lectionary_service->title,
+                    main_reading: $lectionary_service->main_reading,
+                    additional_reading: $lectionary_service->additional_reading,
+                    psalms: $lectionary_service->psalms ?: [],
                     ministries: $rota_service->ministries
                 );
             }
