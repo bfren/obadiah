@@ -5,7 +5,7 @@ use Obadiah\Helpers\Log;
 /**
  * Log an error to the standard output buffer - using sprintf if $args are defined.
  *
- * @param null|string $text             Error message (or sprintf format) to be logged.
+ * @param string|null $text             Error message (or sprintf format) to be logged.
  * @param mixed $args                   Optional arguments to use for sprintf.
  * @return void
  */

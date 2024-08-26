@@ -13,7 +13,7 @@ class Edit_Model
     /**
      * Create Edit model.
      *
-     * @param null|Result $result       Operation result.
+     * @param Result|null $result       Operation result.
      * @param DateTimeImmutable $for    The first day of the month being edited.
      * @param array $days               The people assigned to each day of the month (excluding Sundays).
      * @param array $people             Hashes of the people who are already on this month's prayer calendar

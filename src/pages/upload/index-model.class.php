@@ -12,7 +12,7 @@ class Index_Model
     /**
      * Create Index model.
      *
-     * @param null|Result $result       Operation result.
+     * @param Result|null $result       Operation result.
      * @param Rota_Period $rota         The first day of the rota period.
      * @param Rota_Period $next_rota    The last day of the rota period.
      * @param array $rota_files         Array of uploaded rota files.

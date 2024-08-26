@@ -19,7 +19,7 @@ class Day
      *
      * @param DateTimeImmutable $date   The date.
      * @param Person[]|string[] $people Array of people.
-     * @param null|Readings $readings   Bible readings.
+     * @param Readings|null $readings   Bible readings.
      * @return void
      */
     public function __construct(

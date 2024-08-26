@@ -35,7 +35,7 @@ class VCal
      * Get ICal timezone definition, or null if not supported.
      *
      * @param DateTimeZone $timezone    Config timezone.
-     * @return null|Timezone            ICal timezone.
+     * @return Timezone|null            ICal timezone.
      */
     private static function get_ical_timezone(DateTimeZone $timezone): ?Timezone
     {

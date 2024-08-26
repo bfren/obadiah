@@ -14,7 +14,7 @@ class Argument_Missing extends Command
      *
      * @param string $command_name              Command name.
      * @param string $arg_long                  Long form of the missing argument.
-     * @param null|string $arg_short            Optional short form of the missing argument.
+     * @param string|null $arg_short            Optional short form of the missing argument.
      * @return void
      */
     public function __construct(

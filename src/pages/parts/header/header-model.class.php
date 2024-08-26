@@ -12,8 +12,8 @@ class Header_Model
      * Create Header model.
      *
      * @param string $title             Page title.
-     * @param null|string $subtitle     Optional page subtitle.
-     * @param null|string $class        Optional class for HTML tag.
+     * @param string|null $subtitle     Optional page subtitle.
+     * @param string|null $class        Optional class for HTML tag.
      * @param bool $overflow_scroll     Enable overflow scroll for this page.
      */
     public function __construct(

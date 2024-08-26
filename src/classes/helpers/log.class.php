@@ -11,7 +11,7 @@ class Log
     /**
      * Log an error - using sprintf if $args are defined.
      *
-     * @param null|string $error            Error message (or sprintf format) to be logged.
+     * @param string|null $error            Error message (or sprintf format) to be logged.
      * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */

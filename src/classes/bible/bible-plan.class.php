@@ -75,7 +75,7 @@ class Bible_Plan
      * Get the Bible reading plan day for the specified date.
      *
      * @param DateTimeImmutable $dt     Date to retrieve Bible readings for.
-     * @return null|Day                 Day object (or null if $dt is a Sunday or towards the end of the year).
+     * @return Day|null                 Day object (or null if $dt is a Sunday or towards the end of the year).
      */
     public function get_day(DateTimeImmutable $dt): ?Day
     {

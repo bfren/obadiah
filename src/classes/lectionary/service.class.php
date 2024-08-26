@@ -15,11 +15,11 @@ class Service
      * @param string $time                      The start time of this service.
      * @param DateInterval $length              Length of this service.
      * @param string $name                      The name of this service (e.g. 'Morning Prayer').
-     * @param null|string $series               Optional name of the teaching series.
-     * @param null|int $num                     Optional 1-based index of this sermon within the teaching series.
-     * @param null|string $title                Optional sermon title.
-     * @param null|string $main_reading         Optional main reading.
-     * @param null|string $additional_reading   Optional additional reading.
+     * @param string|null $series               Optional name of the teaching series.
+     * @param int|null $num                     Optional 1-based index of this sermon within the teaching series.
+     * @param string|null $title                Optional sermon title.
+     * @param string|null $main_reading         Optional main reading.
+     * @param string|null $additional_reading   Optional additional reading.
      * @param array $psalms                     Optional psalms.
      * @return void
      */

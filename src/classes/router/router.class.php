@@ -44,7 +44,7 @@ class Router
      *      add_page("Foo", "bar")      Maps page /bar to be handled by class \Obadiah\Pages\Foo\Foo.
      *
      * @param string $page_class        The name of the page class to map (see \Obadiah\Pages).
-     * @param null|string $uri_path     Optional path override - by default $page_class will be used.
+     * @param string|null $uri_path     Optional path override - by default $page_class will be used.
      * @param bool $requires_auth       If true, all page actions will require authentication.
      * @param bool $requires_admin      If true, all page actions will require administrative privileges.
      * @return void
@@ -79,7 +79,7 @@ class Router
      * Get a mapped route by page name.
      *
      * @param string $page              Page name.
-     * @return null|Route               Route, or null if the route cannot be found.
+     * @return Route|null               Route, or null if the route cannot be found.
      */
     public static function get_route(string $page): ?Route
     {

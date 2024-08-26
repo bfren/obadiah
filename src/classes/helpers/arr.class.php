@@ -117,7 +117,7 @@ class Arr
      * @template T
      * @template U
      * @param T[] $array                        Array to map.
-     * @param null|callable(T): U $callback     Callback function (should return a transformed value).
+     * @param callable(T): U|null $callback     Callback function (should return a transformed value).
      * @return U[]                              Array of transformed elements.
      */
     public static function map(array $array, ?callable $callback = null): array
@@ -131,7 +131,7 @@ class Arr
      *
      * @template T
      * @param T[] $array                Array to search.
-     * @param null|callable $callback   Callback function (should return bool),
+     * @param callable|null $callback   Callback function (should return bool),
      * @return T[]                      Array of matching elements.
      */
     public static function match(array $array, ?callable $callback = null): array

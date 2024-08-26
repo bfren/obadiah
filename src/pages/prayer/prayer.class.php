@@ -22,7 +22,7 @@ class Prayer
     /**
      * Result object.
      *
-     * @var null|Result
+     * @var Result|null
      */
     private ?Result $result = null;
 

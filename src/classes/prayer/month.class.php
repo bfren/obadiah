@@ -39,7 +39,7 @@ class Month
     /**
      * Get a date time object for the first day of this month.
      *
-     * @return null|DateTimeImmutable
+     * @return DateTimeImmutable|null
      */
     public function get_first_day_of_month(): ?DateTimeImmutable
     {
@@ -83,7 +83,7 @@ class Month
     /**
      * Return a formatted date string of this month.
      *
-     * @return null|string              This month e.g. 'January 2022'.
+     * @return string|null              This month e.g. 'January 2022'.
      */
     public function get_display_text(): ?string
     {
@@ -141,7 +141,7 @@ class Month
     /**
      * Load the days for a specific month from a data store, if it exists.
      *
-     * @param null|string $id           Month ID, format YYYY-MM.
+     * @param string|null $id           Month ID, format YYYY-MM.
      * @return Month|false              Month object containing deserialised days (if store file exists).
      */
     public static function load(?string $id): Month|false

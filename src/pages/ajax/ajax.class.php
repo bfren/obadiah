@@ -16,7 +16,7 @@ class Ajax
     /**
      * Holds an optional JSON result.
      *
-     * @var null|Json
+     * @var Json|null
      */
     private ?Json $result = null;
 

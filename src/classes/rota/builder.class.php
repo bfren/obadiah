@@ -106,9 +106,9 @@ class Builder
      * Get the name of the specified day of the week.
      *
      * @param int $num                  Day number.
-     * @return null|string              Day name.
+     * @return string|null              Day name.
      */
-    public static function get_day(int $num): null|string
+    public static function get_day(int $num): string|null
     {
         return Arr::get(self::$days_of_the_week, $num);
     }
@@ -117,7 +117,7 @@ class Builder
      * Generate an event summary for a service, including ministry indicators for the specified person.
      *
      * @param Combined_Service $service     Service object.
-     * @param null|string $person           Selected person.
+     * @param string|null $person           Selected person.
      * @return string                       Service name with ministry indicators.
      */
     public static function get_summary(Combined_Service $service, ?string $person = null): string

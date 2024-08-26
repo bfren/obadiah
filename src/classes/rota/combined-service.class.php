@@ -16,11 +16,11 @@ class Combined_Service
      * @param DateTimeImmutable $end            Service end.
      * @param string $time                      Service start time (e.g. 10:30).
      * @param string $name                      Service name (e.g. 'Morning Prayer').
-     * @param null|string $series_title         Optional name of the teaching series.
-     * @param null|int $sermon_num              Optional 1-based index of this sermon within the teaching series.
-     * @param null|string $sermon_title         Optional sermon title.
-     * @param null|string $main_reading         Optional main reading.
-     * @param null|string $additional_reading   Optional additional reading.
+     * @param string|null $series_title         Optional name of the teaching series.
+     * @param int|null $sermon_num              Optional 1-based index of this sermon within the teaching series.
+     * @param string|null $sermon_title         Optional sermon title.
+     * @param string|null $main_reading         Optional main reading.
+     * @param string|null $additional_reading   Optional additional reading.
      * @param array $psalms                     Optional psalms.
      * @param Service_Ministry[] $ministries    Ministries from the rota.
      * @return void

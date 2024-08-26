@@ -25,7 +25,7 @@ class Upload
     /**
      * Operation result.
      *
-     * @var null|Result
+     * @var Result|null
      */
     private ?Result $result = null;
 

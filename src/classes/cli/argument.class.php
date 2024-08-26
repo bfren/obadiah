@@ -13,8 +13,8 @@ class Argument
     /**
      * Define a commandline argument.
      *
-     * @param null|string $long         Override long name, to be used as --property.
-     * @param null|string $short        Optional short name, e.g. -p.
+     * @param string|null $long         Override long name, to be used as --property.
+     * @param string|null $short        Optional short name, e.g. -p.
      * @param bool $required            Whether or not this parameter is required.
      * @return void
      */

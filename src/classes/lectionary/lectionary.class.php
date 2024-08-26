@@ -122,7 +122,7 @@ class Lectionary
      * Get the Collect for the specified day - or the previous Sunday if there isn't one.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return null|string              Collect or null if not found.
+     * @return string|null              Collect or null if not found.
      */
     public function get_collect(DateTimeImmutable $dt): ?string
     {
@@ -146,7 +146,7 @@ class Lectionary
      * Get day information from the Lectionary for the specified date.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return null|Day                 Lectionary day.
+     * @return Day|null                 Lectionary day.
      */
     public function get_day(DateTimeImmutable $dt): ?Day
     {
@@ -169,7 +169,7 @@ class Lectionary
      * Get service information from the Lectionary for the specified date and time.
      *
      * @param DateTimeImmutable $dt     Service date and time.
-     * @return null|Service             Lectionary service.
+     * @return Service|null             Lectionary service.
      */
     public function get_service(DateTimeImmutable $dt): ?Service
     {

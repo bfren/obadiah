@@ -19,7 +19,7 @@ class Event implements JsonSerializable
      * @param DateTimeImmutable $end    End date and time.
      * @param string $title             Title.
      * @param string $location          Location.
-     * @param null|string $description  Extended description.
+     * @param string|null $description  Extended description.
      * @param bool $is_all_day          Whether or not the event is an all day event.
      * @return void
      */

@@ -14,7 +14,7 @@ class Json extends Action
      *
      * @param mixed $model              JSON model.
      * @param int $status               HTTP status code.
-     * @param null|int $last_modified   Optional last modified timestamp.
+     * @param int|null $last_modified   Optional last modified timestamp.
      * @return void
      */
     public function __construct(
