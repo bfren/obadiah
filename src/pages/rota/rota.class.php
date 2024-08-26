@@ -107,7 +107,7 @@ class Rota
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(
@@ -139,7 +139,7 @@ class Rota
         $rota = Rota::build_combined_rota();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($rota as $day) {
             foreach ($day->services as $service) {
                 $events[] = new Event(

@@ -84,13 +84,13 @@ class Api
         // make request and return empty array on failure
         $response = $this->get($endpoint, array($kind => "true"));
         if ($response === null) {
-            return array();
+            return [];
         }
 
         // build array of People from the response
-        $people = array();
+        $people = [];
         foreach ($response[$kind] as $person) {
-            $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", array()), "md", array()), "url");
+            $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", []), "md", []), "url");
             $person = new Person(
                 first_name: $person["first_name"],
                 last_name: $person["last_name"],

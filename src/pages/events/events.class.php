@@ -89,17 +89,17 @@ class Events
         // get calendar JSON
         $json = curl_exec($ch);
         if (curl_errno($ch) != 0) {
-            return array();
+            return [];
         }
 
         // decode JSON
         $calendar = json_decode($json, true);
         if (!is_array($calendar)) {
-            return array();
+            return [];
         }
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($calendar as $event) {
             // get title
             $title = Arr::get($event, "name");
@@ -114,7 +114,7 @@ class Events
             }
 
             // get location
-            $location_data = Arr::get($event, "location", array());
+            $location_data = Arr::get($event, "location", []);
             if(($address = Arr::get($location_data, "address")) !== null) {
                 $location = $address;
             } else {
@@ -123,9 +123,9 @@ class Events
 
             // build and event to the array
             $events[] = new Event(
-                uid: Arr::get($event, "id"),
-                start: new DateTimeImmutable(Arr::get($event, "datetime_start"), C::$events->timezone),
-                end: new DateTimeImmutable(Arr::get($event, "datetime_end"), C::$events->timezone),
+                uid: Arr::get_required($event, "id"),
+                start: new DateTimeImmutable(Arr::get_required($event, "datetime_start"), C::$events->timezone),
+                end: new DateTimeImmutable(Arr::get_required($event, "datetime_end"), C::$events->timezone),
                 title: $title,
                 location: $location,
                 description: Arr::get($event, "description")

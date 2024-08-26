@@ -30,7 +30,7 @@ if (Request::$session->is_authorised) {
         );
     }
 } else {
-    $links = array();
+    $links = [];
 }
 
 ?>

@@ -14,7 +14,7 @@ abstract class Action
      *
      * @var Header[]
      */
-    private array $headers = array();
+    private array $headers = [];
 
     /**
      * Add default headers.

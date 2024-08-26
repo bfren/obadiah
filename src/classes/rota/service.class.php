@@ -41,7 +41,7 @@ class Service
     public function __construct(array $header_row, array $row)
     {
         // read the data into an associative array using the header row
-        $data = array();
+        $data = [];
         for ($i = 0; $i < count($header_row); $i++) {
             $data[$header_row[$i]] = $row[$i];
         }
@@ -52,7 +52,7 @@ class Service
         $this->ministries = $this->get_ministries($data);
 
         // get all the people involved in this service
-        $people = array();
+        $people = [];
         foreach ($this->ministries as $service_ministries) {
             // remove extra information and merge arrays
             $people = array_merge(preg_replace("/ \(.*\)/", "", $service_ministries->people), $people);
@@ -72,7 +72,7 @@ class Service
     private function get_ministries(array $data): array
     {
         // create empty ministries array
-        $ministries = array();
+        $ministries = [];
         foreach ($data as $rota_ministry => $people) {
             // skip if no-one is assigned
             if (!$people) {

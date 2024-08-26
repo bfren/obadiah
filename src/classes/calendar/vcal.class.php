@@ -16,7 +16,7 @@ class VCal
      *
      * @var string[]
      */
-    private array $lines = array();
+    private array $lines = [];
 
     /**
      * Create VCal object.

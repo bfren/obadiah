@@ -48,7 +48,7 @@ class Refresh
         $bible = Cache::get_bible_plan();
 
         // get readings and people for each day
-        $days = array();
+        $days = [];
         foreach ($period as $value) {
             // skip Sundays
             if ($value->format("N") == "7") {
@@ -76,7 +76,7 @@ class Refresh
 
         // if today has not been set, create an empty one for today
         if (!isset($this->today)) {
-            $this->today = new Day($today, people: array(), readings: null);
+            $this->today = new Day($today, people: [], readings: null);
         }
     }
 }

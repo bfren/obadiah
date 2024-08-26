@@ -106,7 +106,7 @@ class Month
         try {
             // get data
             $id = $data->id;
-            $days = array();
+            $days = [];
             foreach ($data->days as $day) {
                 $days[$day->date] = $day->people;
             }
@@ -154,7 +154,7 @@ class Month
         }
 
         // return empty Month object
-        return new Month($id ?: "", array(), array());
+        return new Month($id ?: "", [], []);
     }
 
     /**
@@ -173,6 +173,6 @@ class Month
         }
 
         // return blank month
-        return new Month("", array(), array());
+        return new Month("", [], []);
     }
 }

@@ -19,7 +19,7 @@ if ($model->day->format("N") == 7) {
 } else {
     $people = Prayer_Calendar::get_day($model->day);
     $readings = $model->bible_plan->get_day($model->day);
-    $services = array();
+    $services = [];
 }
 
 ?>

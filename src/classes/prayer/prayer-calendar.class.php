@@ -39,7 +39,7 @@ class Prayer_Calendar
         }
 
         // get matching people
-        $matching_people = Arr::map($hashes, fn (string $hash) => Arr::get($all_people, $hash, array()));
+        $matching_people = Arr::map($hashes, fn (string $hash) => Arr::get($all_people, $hash, []));
 
         // sort and return
         self::sort_people($matching_people);
@@ -60,7 +60,7 @@ class Prayer_Calendar
 
         // return empty array if the month does not exist
         if ($month === null) {
-            return array();
+            return [];
         }
 
         // if we are at the end of the month return the configured additional people
@@ -71,7 +71,7 @@ class Prayer_Calendar
         }
 
         // get the people hashes for the day
-        $hashes = Arr::get($month->days, $dt->format(C::$formats->sortable_date), array());
+        $hashes = Arr::get($month->days, $dt->format(C::$formats->sortable_date), []);
 
         // return matching people
         return Arr::map(self::get_people($hashes), function (Person $p) use ($return_as) {

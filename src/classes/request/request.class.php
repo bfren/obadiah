@@ -110,9 +110,9 @@ class Request
     {
         self::$cookies = new Super_Global(INPUT_COOKIE);
         self::$env = new Super_Global(INPUT_ENV);
-        self::$files = $_FILES ?: array();
+        self::$files = $_FILES ?: [];
         self::$get = new Super_Global(INPUT_GET);
-        self::$json = json_decode(file_get_contents("php://input"), true) ?: array();
+        self::$json = json_decode(file_get_contents("php://input"), true) ?: [];
         self::$post = new Super_Global(INPUT_POST);
         self::$server = new Super_Global(INPUT_SERVER);
         self::$session = new Session();

@@ -43,7 +43,7 @@ class Builder
     public static function build_combined_rota(Lectionary $lectionary, array $services): array
     {
         // create an empty array to hold the combined rota
-        $rota = array();
+        $rota = [];
         $sunday_collect = "";
 
         foreach ($lectionary->days as $lectionary_day) {
@@ -64,7 +64,7 @@ class Builder
             }
 
             // add all the services
-            $c_services = array();
+            $c_services = [];
             foreach ($rota_services as $rota_service) {
                 // get lectionary information and create combined service
                 $lectionary_service = $lectionary_day->get_service($rota_service->start);
@@ -83,7 +83,7 @@ class Builder
                     sermon_title: $lectionary_service?->title,
                     main_reading: $lectionary_service?->main_reading,
                     additional_reading: $lectionary_service?->additional_reading,
-                    psalms: $lectionary_service?->psalms ?: array(),
+                    psalms: $lectionary_service?->psalms ?: [],
                     ministries: $rota_service->ministries
                 );
             }
@@ -131,7 +131,7 @@ class Builder
         }
 
         // look for certain ministries
-        $ministries = array();
+        $ministries = [];
         foreach ($service->ministries as $service_ministry) {
             foreach ($service_ministry->people as $p) {
                 if (str_starts_with($p, $person)) {
@@ -173,7 +173,7 @@ class Builder
         string $separator = "\\n"
     ): string {
         // create empty array for description lines
-        $description = array();
+        $description = [];
 
         // add lectionary info
         if ($day->name && $day->colour) {

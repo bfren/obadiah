@@ -57,7 +57,7 @@ $this->alert($model->result);
                 if (isset($model->days[$i])) {
                     $people_hashes = $model->days[$i];
                 } else {
-                    $people_hashes = array();
+                    $people_hashes = [];
                 }
 
                 // get the names of those people

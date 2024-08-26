@@ -50,8 +50,8 @@ class Config_Rota
         $this->default_days = Arr::get_integer($config, "default_days", 28);
         $this->default_length = new DateInterval(Arr::get($config, "default_length", "PT60M"));
 
-        $ministries = array();
-        foreach (Arr::get($config, "ministries") as $ministry) {
+        $ministries = [];
+        foreach (Arr::get($config, "ministries", []) as $ministry) {
             $ministries[] = new Config_Rota_Ministry($ministry);
         }
         $this->ministries = $ministries;

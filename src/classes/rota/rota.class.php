@@ -54,8 +54,8 @@ class Rota
         $csv = glob(sprintf("%s/*.csv", C::$dir->rota));
 
         // read each file into arrays
-        $services = array();
-        $people = array();
+        $services = [];
+        $people = [];
         $last_modified_timestamp = 0;
         foreach ($csv as $file) {
             // store the file modification time
@@ -73,7 +73,7 @@ class Rota
 
             // read each line of the csv file
             $include = false;
-            $header_row = array();
+            $header_row = [];
             while (!$file_obj->eof()) {
                 // read the next row
                 $row = $file_obj->fgetcsv();
@@ -128,7 +128,7 @@ class Rota
         }
 
         // create array to hold matched services
-        $services = array();
+        $services = [];
 
         // create filter objects
         $person_filter = new Person_Filter();

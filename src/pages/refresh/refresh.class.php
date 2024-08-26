@@ -82,7 +82,7 @@ class Refresh
         $refresh = Cache::get_refresh();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($refresh->days as $day) {
             $events[] = new Event(
                 uid: Event::create_uid(Cache::get_refresh_last_modified()),
@@ -113,7 +113,7 @@ class Refresh
         $refresh = Cache::get_refresh();
 
         // build events array
-        $events = array();
+        $events = [];
         foreach ($refresh->days as $day) {
             $events[] = new Event(
                 uid: Event::create_uid(Cache::get_refresh_last_modified()),

@@ -98,7 +98,7 @@ class Baserow
      * @param array $data               Optional request data.
      * @return array                    All results for the specified view.
      */
-    public function get(array $data = array()): array
+    public function get(array $data = []): array
     {
         // build HTTP query from data
         $query = http_build_query($data);
@@ -128,7 +128,7 @@ class Baserow
         // and keep going recursively until all the records have been retrieved
         if (isset($result["next"])) {
             // get the URL query and parse into an array to use for the next query
-            $next_data = array();
+            $next_data = [];
             parse_str(parse_url($result["next"], PHP_URL_QUERY), $next_data);
 
             // use the next page value to get the next batch of results

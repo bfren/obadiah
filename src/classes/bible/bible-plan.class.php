@@ -31,7 +31,7 @@ class Bible_Plan
         $path = sprintf("%s/%s.txt", C::$dir->bible, Bible_File::NAME);
         $file_info = new SplFileInfo($path);
         if (!$file_info->isFile()) {
-            $this->days = array();
+            $this->days = [];
             return;
         }
 
@@ -43,7 +43,7 @@ class Bible_Plan
         }
 
         // build array of days
-        $days = array();
+        $days = [];
         $trim = fn ($input) => trim(str_replace("\"", "", $input));
 
         while (!$file_obj->eof()) {

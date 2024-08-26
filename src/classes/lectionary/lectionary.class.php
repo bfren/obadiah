@@ -63,8 +63,8 @@ class Lectionary
         $service_results = $service_table->get(array("include" => join(",", $service)));
 
         // add days and services
-        $days = array();
-        $series = array();
+        $days = [];
+        $series = [];
         foreach ($day_results as $day) {
             // check date - if it is not set, continue
             $date = Arr::get($day, "Date");
@@ -83,13 +83,13 @@ class Lectionary
             }
 
             // add Services to Day
-            $l_services = array();
+            $l_services = [];
             foreach ($day_services as $service) {
                 $series[] = Arr::get($service, "Series Title");
                 $l_services[] = new Service(
-                    time: Arr::get($service, "Time"),
+                    time: Arr::get_required($service, "Time"),
                     length: new DateInterval(sprintf("PT%sM", Arr::get($service, "Length", 60))),
-                    name: Arr::get($service, "Service Name"),
+                    name: Arr::get_required($service, "Service Name"),
                     series: Arr::get($service, "Series Title"),
                     num: Arr::get($service, "Num"),
                     title: Arr::get($service, "Title"),

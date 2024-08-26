@@ -342,7 +342,7 @@ class Cache
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return mixed                    Value (cached or generated).
      */
-    private static function get_or_set(string $id, callable $callable, array $args = array(), bool $force = false): mixed
+    private static function get_or_set(string $id, callable $callable, array $args = [], bool $force = false): mixed
     {
         // clear cache if $force is set
         if ($force || Request::$get->bool("force")) {

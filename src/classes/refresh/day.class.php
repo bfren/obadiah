@@ -47,7 +47,7 @@ class Day
      */
     public function get_description(string $separator = "\\n"): string
     {
-        $description = array();
+        $description = [];
 
         // add readings
         if ($this->readings) {

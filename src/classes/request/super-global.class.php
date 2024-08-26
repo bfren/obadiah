@@ -27,7 +27,7 @@ class Super_Global
      */
     public function all(): array
     {
-        return filter_input_array($this->type) ?: array();
+        return filter_input_array($this->type) ?: [];
     }
 
     /**
