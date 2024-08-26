@@ -12,7 +12,7 @@ class Baserow
     /**
      * Create Baserow object for querying the Concern table.
      *
-     * @return Baserow                  Configured Baserow object.
+     * @return Baserow                              Configured Baserow object.
      */
     public static function Concern(): Baserow
     {
@@ -22,7 +22,7 @@ class Baserow
     /**
      * Create Baserow object for querying the Day table.
      *
-     * @return Baserow                  Configured Baserow object.
+     * @return Baserow                              Configured Baserow object.
      */
     public static function Day(): Baserow
     {
@@ -32,7 +32,7 @@ class Baserow
     /**
      * Create Baserow object for inserting into the Confidential Self-Declaration table.
      *
-     * @return Baserow                  Configured Baserow object.
+     * @return Baserow                              Configured Baserow object.
      */
     public static function Declaration(): Baserow
     {
@@ -42,7 +42,7 @@ class Baserow
     /**
      * Create Baserow object for inserting into the Confidential Reference table.
      *
-     * @return Baserow                  Configured Baserow object.
+     * @return Baserow                              Configured Baserow object.
      */
     public static function Reference(): Baserow
     {
@@ -52,7 +52,7 @@ class Baserow
     /**
      * Create Baserow object for querying the Service table.
      *
-     * @return Baserow                  Configured Baserow object.
+     * @return Baserow                              Configured Baserow object.
      */
     public static function Service(): Baserow
     {
@@ -76,9 +76,9 @@ class Baserow
     /**
      * Build URL to connect to the specified table (and view for querying).
      *
-     * @param string $token             Database Token.
-     * @param int $table_id             Table ID.
-     * @param ?int $view_id             Optional View ID.
+     * @param string $token                         Database Token.
+     * @param int $table_id                         Table ID.
+     * @param ?int $view_id                         Optional View ID.
      * @return void
      */
     public function __construct(string $token, int $table_id, ?int $view_id = null)
@@ -95,8 +95,8 @@ class Baserow
     /**
      * Make a GET request to the Baserow API and return array of results.
      *
-     * @param mixed[] $data             Optional request data.
-     * @return mixed[]                  All results for the specified view, an error message, or null on failure.
+     * @param mixed[] $data                         Optional request data.
+     * @return mixed[]                              All results for the specified view, an error message, or null on failure.
      */
     public function get(array $data = []): array
     {
@@ -105,17 +105,22 @@ class Baserow
 
         // create curl request
         $handle = curl_init(sprintf("%s&%s", $this->url, $query));
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $this->url);
+            return [];
+        }
+
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
 
-        // make request and output on error
+        // make request and return empty array on error
         $json = curl_exec($handle);
-        if (!$json) {
+        if (!is_string($json)) {
             _l(curl_error($handle));
             return [];
         }
 
-        // decode JSON response and output on error
+        // decode JSON response and return empty array on error
         $result = json_decode($json, true);
         if (isset($result["error"])) {
             _l("Error: %s", $result["detail"]);
@@ -129,8 +134,11 @@ class Baserow
         // and keep going recursively until all the records have been retrieved
         if (isset($result["next"])) {
             // get the URL query and parse into an array to use for the next query
+            $next_url = parse_url($result["next"], PHP_URL_QUERY);
             $next_data = [];
-            parse_str(parse_url($result["next"], PHP_URL_QUERY), $next_data);
+            if ($next_url) {
+                parse_str($next_url, $next_data);
+            }
 
             // use the next page value to get the next batch of results
             $next_results = $this->get($next_data);
@@ -151,8 +159,8 @@ class Baserow
     /**
      * Make a POST request to the Baserow API.
      *
-     * @param mixed[] $data             Request data.
-     * @return Post_Result              POST request result.
+     * @param mixed[] $data                         Request data.
+     * @return Post_Result                          POST request result.
      */
     public function post(array $data): Post_Result
     {
@@ -161,15 +169,23 @@ class Baserow
 
         // create curl request
         $handle = curl_init($this->url);
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $this->url);
+            return new Post_Result(500, "Error, please try again.");
+        }
+
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(
+            sprintf("Authorization: Token %s", $this->token)
+        ));
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($handle, CURLOPT_POST, 1);
         curl_setopt($handle, CURLOPT_POSTFIELDS, $form);
 
         // make request and output on error
         $json = curl_exec($handle);
-        if (!$json) {
-            return new Post_Result(500, curl_error($handle));
+        if (!is_string($json)) {
+            _l(curl_error($handle));
+            return new Post_Result(500, "Error, please try again.");
         }
 
         // decode JSON response and output on error

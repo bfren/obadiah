@@ -52,6 +52,12 @@ class Rota
     {
         // get csv files from path
         $csv = glob(sprintf("%s/*.csv", C::$dir->rota));
+        if ($csv === false) {
+            $this->services = [];
+            $this->people = [];
+            $this->last_modified_timestamp = 0;
+            return;
+        }
 
         // read each file into arrays
         $services = [];
@@ -78,6 +84,9 @@ class Rota
             while (!$file_obj->eof()) {
                 // read the next row
                 $row = $file_obj->fgetcsv();
+                if ($row === false) {
+                    continue;
+                }
 
                 // include the service if the row counts match and there is a service assigned
                 if ($include && count($header_row) == count($row) && $row[1] != "No service") {
@@ -100,7 +109,7 @@ class Rota
         }
 
         // sort services by timestamp
-        usort($services, fn (Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
+        usort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
 
         // check lectionary cache last modified
         $lectionary_last_modified = Cache::get_lectionary_last_modified();

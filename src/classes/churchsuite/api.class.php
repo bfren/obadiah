@@ -44,6 +44,11 @@ class Api
 
         // create curl request
         $handle = curl_init($url);
+        if ($handle === false) {
+            _l("Unable to create cURL request for %s.", $url);
+            return null;
+        }
+
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(
             sprintf("X-Account: %s", C::$churchsuite->org),
             sprintf("X-Application: %s", C::$churchsuite->api_application),
@@ -53,7 +58,7 @@ class Api
 
         // make request - on error log and return null
         $json = curl_exec($handle);
-        if (!$json) {
+        if (!is_string($json)) {
             _l(print_r(curl_error($handle), true));
             return null;
         }
@@ -61,10 +66,10 @@ class Api
         // decode JSON response - on error log and return null
         $result = json_decode($json, true);
         if (!$result) {
-            _l("Unable to decode JSON response from %s", $url);
+            _l("Unable to decode JSON response from %s.", $url);
             return null;
         } elseif (isset($result["error"])) {
-            _l("Error retrieving %s: %s", $url, $result["error"]["message"]);
+            _l("Error retrieving %s: %s.", $url, $result["error"]["message"]);
             return null;
         }
 

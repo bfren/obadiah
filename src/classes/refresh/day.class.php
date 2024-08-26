@@ -69,9 +69,12 @@ class Day
 
         // add collect
         if (($collect = Cache::get_lectionary()->get_collect($this->date)) !== null) {
-            $description[] = "= Collect =";
-            $description[] = join($separator, preg_split("/\n/", $collect));
-            $description[] = "";
+            $lines = preg_split("/\n/", $collect);
+            if ($lines !== false) {
+                $description[] = "= Collect =";
+                $description[] = join($separator, $lines);
+                $description[] = "";
+            }
         }
 
         // return description

@@ -33,22 +33,15 @@ class Month
         public readonly string $id,
         public readonly array $days,
         public readonly array $people
-    ) {
-    }
+    ) {}
 
     /**
      * Get a date time object for the first day of this month.
      *
-     * @return DateTimeImmutable|null
+     * @return DateTimeImmutable
      */
-    public function get_first_day_of_month(): ?DateTimeImmutable
+    public function get_first_day_of_month(): DateTimeImmutable
     {
-        // return empty if ID is not set
-        if (!$this->id) {
-            return null;
-        }
-
-        // parse month ID as date
         return new DateTimeImmutable(sprintf("%s-01", $this->id));
     }
 
@@ -83,16 +76,11 @@ class Month
     /**
      * Return a formatted date string of this month.
      *
-     * @return string|null              This month e.g. 'January 2022'.
+     * @return string                   This month e.g. 'January 2022'.
      */
     public function get_display_text(): ?string
     {
-        $dt = $this->get_first_day_of_month();
-        if ($dt) {
-            return $dt->format(C::$formats->display_month);
-        }
-
-        return null;
+        return $this->get_first_day_of_month()->format(C::$formats->display_month);
     }
 
     /**
@@ -142,9 +130,9 @@ class Month
      * Load the days for a specific month from a data store, if it exists.
      *
      * @param string|null $id           Month ID, format YYYY-MM.
-     * @return Month|false              Month object containing deserialised days (if store file exists).
+     * @return Month                    Month object containing deserialised days (if store file exists).
      */
-    public static function load(?string $id): Month|false
+    public static function load(?string $id): Month
     {
         // get path to data file
         $path = sprintf("%s/%s.month", C::$dir->prayer, $id);
@@ -152,7 +140,10 @@ class Month
         // if the file exists, read and deserialise
         $file = new SplFileInfo($path);
         if ($file->isReadable() && ($data = file_get_contents($file->getRealPath()))) {
-            return unserialize($data);
+            $month = unserialize($data);
+            if ($month !== false) {
+                return $month;
+            }
         }
 
         // return empty Month object

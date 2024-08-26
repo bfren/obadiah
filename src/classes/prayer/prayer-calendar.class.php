@@ -39,7 +39,7 @@ class Prayer_Calendar
         }
 
         // get matching people
-        $matching_people = Arr::map($hashes, fn (string $hash) => Arr::get($all_people, $hash, []));
+        $matching_people = Arr::map($hashes, fn(string $hash) => Arr::get($all_people, $hash, []));
 
         // sort and return
         self::sort_people($matching_people);
@@ -50,18 +50,13 @@ class Prayer_Calendar
      * Get the people on a particular day from the prayer calendar.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return string[]                 Array of people.
+     * @return Person[]|string[]        Array of people.
      */
     public static function get_day(DateTimeImmutable $dt, int $return_as = self::RETURN_FULL_NAME): array
     {
         // get month
         $id = $dt->format(C::$formats->prayer_month_id);
         $month = Month::load($id);
-
-        // return empty array if the month does not exist
-        if ($month === false) {
-            return [];
-        }
 
         // if we are at the end of the month return the configured additional people
         $day = (int)$dt->format("j");
@@ -112,6 +107,9 @@ class Prayer_Calendar
     {
         // get saved month files
         $files = glob(sprintf("%s/*.month", C::$dir->prayer));
+        if ($files === false) {
+            return [];
+        }
         sort($files);
 
         // return each month without the '.month' extension
