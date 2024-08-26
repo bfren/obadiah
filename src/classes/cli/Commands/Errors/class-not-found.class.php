@@ -16,7 +16,7 @@ class Class_Not_Found extends Command
      * @param string $command_class         Command class name.
      * @return void
      */
-    private function __construct(
+    public function __construct(
         public readonly string $command_class
     ) {}
 
