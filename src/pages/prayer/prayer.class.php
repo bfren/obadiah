@@ -74,6 +74,7 @@ class Prayer
         try {
             $for = new DateTimeImmutable(sprintf("%s-01", $for_id));
         } catch (Throwable $th) {
+            _l_throwable($th);
             $this->result = Result::failure("Unable to determine the month this calendar is for.");
             return $this->index_get();
         }

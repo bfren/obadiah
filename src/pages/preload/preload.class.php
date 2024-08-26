@@ -74,6 +74,7 @@ class Preload
             $execution_time = ($end_time - $start_time);
             return array("result" => "OK", "time" => sprintf('%05.4fs', $execution_time));
         } catch (Throwable $th) {
+            _l_throwable($th);
             return array("result" => "Error", "reason" => $th->getMessage());
         }
     }

@@ -42,8 +42,9 @@ class Ajax
 
         // decode JSON
         try {
-            $json = json_decode($input);
+            $json = json_decode($input, flags: JSON_THROW_ON_ERROR);
         } catch (Throwable $th) {
+            _l_throwable($th);
             $this->result = new Json(Result::failure("Invalid request."), 400);
             return null;
         }

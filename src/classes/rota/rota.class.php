@@ -68,7 +68,8 @@ class Rota
             try {
                 $file_obj = new SplFileObject($file, "r");
             } catch (Throwable $th) {
-                App::die("Unable to open the file: %s.", $file_obj->getRealPath());
+                _l_throwable($th);
+                App::die("Unable to open the file: %s.", $file);
             }
 
             // read each line of the csv file
@@ -116,14 +117,14 @@ class Rota
     /**
      * Apply filters and return matching services.
      *
-     * @param array                     Filters to apply (usually from the query string).
-     * @param Lectionary                Lectionary object.
+     * @param array $filters            Filters to apply (usually from the query string).
+     * @param Lectionary $lectionary    Lectionary object.
      * @return Service[]                Services matching the supplied filters.
      */
     public function apply_filters(array $filters, Lectionary $lectionary): array
     {
         // if the filters array is empty, or include=all is set, return all services
-        if (!$filters || empty($filters) || Arr::get($filters, "include") == "all") {
+        if (!$filters || Arr::get($filters, "include") == "all") {
             return $this->services;
         }
 
@@ -179,7 +180,7 @@ class Rota
     /**
      * Return filters to show upcoming Sunday services.
      *
-     * @param bool                      If true, only 10:30 services will be shown.
+     * @param bool $ten_thirty_only     If true, only 10:30 services will be shown.
      * @return array                    Filter values for use on rota page.
      */
     public static function upcoming_sundays(bool $ten_thirty_only = false): array

@@ -112,6 +112,7 @@ class Month
             }
             $people = $data->people;
         } catch (Throwable $th) {
+            _l_throwable($th);
             return Result::failure("Unable to read month data.");
         }
 
@@ -126,6 +127,7 @@ class Month
         try {
             file_put_contents($path, $data);
         } catch (Throwable $th) {
+            _l_throwable($th);
             return Result::failure("Unable to save month data.");
         }
 
