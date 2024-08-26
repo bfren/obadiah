@@ -21,7 +21,7 @@ class Combined_Service
      * @param string|null $sermon_title         Optional sermon title.
      * @param string|null $main_reading         Optional main reading.
      * @param string|null $additional_reading   Optional additional reading.
-     * @param array $psalms                     Optional psalms.
+     * @param string[] $psalms                  Optional psalms.
      * @param Service_Ministry[] $ministries    Ministries from the rota.
      * @return void
      */

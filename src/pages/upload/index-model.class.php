@@ -15,8 +15,8 @@ class Index_Model
      * @param Result|null $result       Operation result.
      * @param Rota_Period $rota         The first day of the rota period.
      * @param Rota_Period $next_rota    The last day of the rota period.
-     * @param array $rota_files         Array of uploaded rota files.
-     * @param array $bible_files        Array of uploaded Bible reading plan files.
+     * @param mixed[] $rota_files       Array of uploaded rota files.
+     * @param mixed[] $bible_files      Array of uploaded Bible reading plan files.
      * @param string $church_suite_href Church Suite home page URI.
      */
     public function __construct(

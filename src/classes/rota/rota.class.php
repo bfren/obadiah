@@ -117,7 +117,7 @@ class Rota
     /**
      * Apply filters and return matching services.
      *
-     * @param array $filters            Filters to apply (usually from the query string).
+     * @param string[] $filters         Filters to apply (usually from the query string).
      * @param Lectionary $lectionary    Lectionary object.
      * @return Service[]                Services matching the supplied filters.
      */
@@ -181,7 +181,7 @@ class Rota
      * Return filters to show upcoming Sunday services.
      *
      * @param bool $ten_thirty_only     If true, only 10:30 services will be shown.
-     * @return array                    Filter values for use on rota page.
+     * @return array<string, mixed>     Filter values for use on rota page.
      */
     public static function upcoming_sundays(bool $ten_thirty_only = false): array
     {

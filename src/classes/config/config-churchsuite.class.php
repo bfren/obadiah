@@ -47,7 +47,7 @@ class Config_ChurchSuite
     /**
      * Get values from ChurchSuite configuration array.
      *
-     * @param array $config             ChurchSuite configuration array.
+     * @param mixed[] $config           ChurchSuite configuration array.
      * @return void
      */
     public function __construct(array $config)

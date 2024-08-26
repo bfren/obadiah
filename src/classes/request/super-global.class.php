@@ -23,7 +23,7 @@ class Super_Global
     /**
      * Return all values from the superglobal.
      *
-     * @return array                    All superglobal values (or an empty array).
+     * @return mixed[]                  All superglobal values (or an empty array).
      */
     public function all(): array
     {

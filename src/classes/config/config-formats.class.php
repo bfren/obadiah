@@ -103,7 +103,7 @@ class Config_Formats
     /**
      * Get values from formats configuration array.
      *
-     * @param array $config             Formats configuration array.
+     * @param mixed[] $config           Formats configuration array.
      * @return void
      */
     public function __construct(array $config)

@@ -13,7 +13,7 @@ class Arr
     /**
      * Replacement for array_key_exists - also checks that the value of $array[$key] is not null.
      *
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           Key to search for.
      * @return bool                     True if $array contains $key and is not null.
      */
@@ -26,7 +26,7 @@ class Arr
      * Safely get a value from an associative array.
      *
      * @template T
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           The key to search for.
      * @param T $default                Default value if key does not exist.
      * @return mixed                    Key value, or $default if key does not exist.
@@ -43,7 +43,7 @@ class Arr
     /**
      * Safely get a boolean value from an array.
      *
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           The key to search for.
      * @param boolean $default          Default value if key does not exist.
      * @return boolean                  Key value, or $default if key does not exist.
@@ -60,7 +60,7 @@ class Arr
     /**
      * Safely get an integer value from an array.
      *
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           The key to search for.
      * @param int $default              Default value if key does not exist.
      * @return int                      Key value, or $default if key does not exist.
@@ -77,9 +77,10 @@ class Arr
     /**
      * Get a required value from an associative array.
      *
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           The key to search for.
-     * @return mixed                    Key value, or $default if key does not exist.
+     * @return mixed                    Key value if key does not exist.
+     * @throws Exception                When $key is not found in $array.
      */
     public static function get_required(array $array, int|string $key): mixed
     {
@@ -94,7 +95,7 @@ class Arr
      * Safely get a value from an array, and then sanitise the input.
      * If the value is not a string, an empty string will be returned.
      *
-     * @param array $array              Array of values.
+     * @param mixed[] $array            Array of values.
      * @param int|string $key           The key to search for.
      * @param string $default           Default value if key does not exist.
      * @return string                   Key value, or $default if key does not exist.
@@ -108,7 +109,7 @@ class Arr
         }
 
         // return sanitised string value
-        return Sanitise::text_input((string) $value);
+        return Sanitise::text_input($value);
     }
 
     /**

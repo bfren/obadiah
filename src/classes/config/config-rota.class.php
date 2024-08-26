@@ -41,7 +41,7 @@ class Config_Rota
     /**
      * Get values from rota configuration array.
      *
-     * @param array $config             Rota configuration array.
+     * @param mixed[] $config           Rota configuration array.
      * @return void
      */
     public function __construct(array $config)

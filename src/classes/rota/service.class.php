@@ -66,7 +66,7 @@ class Service
     /**
      * Get all supported ministries and the people assigned to each one, and add to $this->ministries.
      *
-     * @param array $data               Associative array of service data.
+     * @param mixed[] $data             Associative array of service data.
      * @return Service_Ministry[]       Associative array of ministries.
      */
     private function get_ministries(array $data): array

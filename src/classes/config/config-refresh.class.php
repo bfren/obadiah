@@ -54,7 +54,7 @@ class Config_Refresh
     /**
      * Get values from refresh configuration array.
      *
-     * @param array $config             Refresh configuration array.
+     * @param mixed[] $config           Refresh configuration array.
      * @return void
      */
     public function __construct(array $config)

@@ -338,7 +338,7 @@ class Cache
      *
      * @param string $id                Cache file name.
      * @param callable $callable        Callable function to get cache value if expired or not set.
-     * @param array $args               Optional args to pass to $callable.
+     * @param mixed[] $args             Optional args to pass to $callable.
      * @param bool $force               If true, $callable will be used whether or not the cache entry has expired.
      * @return mixed                    Value (cached or generated).
      */

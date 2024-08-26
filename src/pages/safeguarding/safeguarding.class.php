@@ -18,7 +18,7 @@ class Safeguarding
      * Execute a POST request on the provided table.
      *
      * @param Baserow $table            Baserow table object.
-     * @param array $row                Array of row data to POST.
+     * @param mixed[] $row              Array of row data to POST.
      * @return Json                     JSON response to return to the client.
      */
     private static function execute(Baserow $table, array $row): Json

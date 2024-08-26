@@ -82,7 +82,7 @@ class Config_Baserow
     /**
      * Get values from Baserow configuration array.
      *
-     * @param array $config             Baserow configuration array.
+     * @param mixed[] $config           Baserow configuration array.
      * @return void
      */
     public function __construct(array $config)

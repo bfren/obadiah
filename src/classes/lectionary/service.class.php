@@ -20,7 +20,7 @@ class Service
      * @param string|null $title                Optional sermon title.
      * @param string|null $main_reading         Optional main reading.
      * @param string|null $additional_reading   Optional additional reading.
-     * @param array $psalms                     Optional psalms.
+     * @param string[] $psalms                  Optional psalms.
      * @return void
      */
     public function __construct(

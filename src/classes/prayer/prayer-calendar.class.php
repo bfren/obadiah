@@ -50,7 +50,7 @@ class Prayer_Calendar
      * Get the people on a particular day from the prayer calendar.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @return array                    Array of people.
+     * @return string[]                 Array of people.
      */
     public static function get_day(DateTimeImmutable $dt, int $return_as = self::RETURN_FULL_NAME): array
     {

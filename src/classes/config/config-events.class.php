@@ -48,7 +48,7 @@ class Config_Events
     /**
      * Get values from events configuration array.
      *
-     * @param array $config             Events configuration array.
+     * @param mixed[] $config           Events configuration array.
      * @return void
      */
     public function __construct(array $config)

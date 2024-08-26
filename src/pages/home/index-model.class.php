@@ -11,10 +11,10 @@ class Index_Model
     /**
      * Create Index model.
      *
-     * @param array $this_week          Rota filter values to show this week's services.
-     * @param array $upcoming           Rota filter values to show upcoming Sunday services.
-     * @param array $refresh_print      Query values to link to printable version of this month's refresh calendar.
-     * @param array $refresh_feed       Query values to enable refresh ICS feed.
+     * @param mixed[] $this_week        Rota filter values to show this week's services.
+     * @param mixed[] $upcoming         Rota filter values to show upcoming Sunday services.
+     * @param mixed[] $refresh_print    Query values to link to printable version of this month's refresh calendar.
+     * @param mixed[] $refresh_feed     Query values to enable refresh ICS feed.
      */
     public function __construct(
         public readonly array $this_week,

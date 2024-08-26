@@ -19,7 +19,7 @@ class Config_Cache
     /**
      * Get values from cache configuration array.
      *
-     * @param array $config             Cache configuration array.
+     * @param mixed[] $config           Cache configuration array.
      * @return void
      */
     public function __construct(array $config)

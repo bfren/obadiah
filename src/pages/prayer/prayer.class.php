@@ -60,7 +60,7 @@ class Prayer
         }
 
         // the day for loop begins with 1 not 0 so we need an empty array item to push everything up one place
-        $from_days = array_merge(array(""), array_values($from->days));
+        $from_days = array_merge([""], array_values($from->days));
         $from_people = $from->people;
 
         // get the month this calendar is for

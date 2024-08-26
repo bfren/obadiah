@@ -23,7 +23,7 @@ class Rota
     /**
      * Get rota filters.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_filters(): array
     {

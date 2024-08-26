@@ -95,8 +95,8 @@ class Baserow
     /**
      * Make a GET request to the Baserow API and return array of results.
      *
-     * @param array $data               Optional request data.
-     * @return array                    All results for the specified view, an error message, or null on failure.
+     * @param mixed[] $data             Optional request data.
+     * @return mixed[]                  All results for the specified view, an error message, or null on failure.
      */
     public function get(array $data = []): array
     {
@@ -151,7 +151,7 @@ class Baserow
     /**
      * Make a POST request to the Baserow API.
      *
-     * @param array $data               Request data.
+     * @param mixed[] $data             Request data.
      * @return Post_Result              POST request result.
      */
     public function post(array $data): Post_Result

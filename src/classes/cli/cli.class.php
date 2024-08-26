@@ -52,7 +52,7 @@ class Cli
     /**
      * Parse arguments and return a matching command.
      *
-     * @param array $args               The arguments to parse (usually $argv).
+     * @param string[] $args            The arguments to parse (usually $argv).
      * @return Command                  The matching Command object.
      */
     public static function get_command(array $args): ?Command
@@ -62,6 +62,10 @@ class Cli
 
         // get command name and class
         $command_name = array_shift($args);
+        if ($command_name === null) {
+            return new Unknown("<not specified>");
+        }
+
         if (($command_class = Arr::get(self::$commands, $command_name)) === null) {
             return new Unknown($command_name);
         }
@@ -126,8 +130,8 @@ class Cli
     /**
      * Parse and sanitise arguments (e.g. remove duplicates).
      *
-     * @param array $args               Array of arguments to sanitise.
-     * @return array                    Sanitised arguments as key => value pair.
+     * @param string[] $args            Array of arguments to sanitise.
+     * @return array<string, mixed>    Sanitised arguments as key => value pair.
      */
     private static function parse_args(array $args): array
     {

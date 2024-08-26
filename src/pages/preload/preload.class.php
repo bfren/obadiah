@@ -60,7 +60,7 @@ class Preload
      * Call a function and return the result plus execution time (or error reason).
      *
      * @param callable $callable        Callable function.
-     * @return array                    OK if $callable executed successfully, Error if not.
+     * @return mixed[]                  OK if $callable executed successfully, Error if not.
      */
     private static function load(callable $callable): array
     {

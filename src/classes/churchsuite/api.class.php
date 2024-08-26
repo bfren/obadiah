@@ -34,7 +34,7 @@ class Api
      * Make a request to the ChurchSuite API and return the response - logging any errors.
      *
      * @param string $endpoint          ChurchSuite API endpoint.
-     * @param array $data               Request data.
+     * @param mixed[] $data             Request data.
      * @return mixed                    API response.
      */
     private function get(string $endpoint, array $data): mixed

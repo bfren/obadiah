@@ -40,7 +40,7 @@ class Config_Prayer
     /**
      * Get values from prayer configuration array.
      *
-     * @param array $config             Prayer configuration array.
+     * @param mixed[] $config           Prayer configuration array.
      * @return void
      */
     public function __construct(array $config)

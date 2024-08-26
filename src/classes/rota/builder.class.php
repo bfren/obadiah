@@ -21,7 +21,7 @@ class Builder
     /**
      * Array of days of the week, starting with Sunday, numbered to match DateTimeImmutable format 'N'
      *
-     * @var array
+     * @var array<int, string>
      */
     public static array $days_of_the_week = array(
         7 => "Sunday",

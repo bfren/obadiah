@@ -34,7 +34,7 @@ class Request
     /**
      * Encapsulates $_FILES.
      *
-     * @var array
+     * @var mixed[]
      */
     public static array $files;
 
@@ -55,7 +55,7 @@ class Request
     /**
      * Returns posted JSON as an associative array.
      *
-     * @var array
+     * @var mixed[]
      */
     public static array $json;
 
