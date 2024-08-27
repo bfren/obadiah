@@ -1,6 +1,6 @@
 <?php
 
-namespace Obadiah\Pages\Preload;
+namespace Obadiah\Api\Preload;
 
 use DateTimeImmutable;
 use Obadiah\App;

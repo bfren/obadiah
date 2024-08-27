@@ -1,6 +1,6 @@
 <?php
 
-namespace Obadiah\Pages\Ajax;
+namespace Obadiah\Api\Ajax;
 
 use Obadiah\Admin\Result;
 use Obadiah\App;
