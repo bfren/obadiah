@@ -173,7 +173,7 @@ class Lectionary
      */
     public function get_service(DateTimeImmutable $dt): ?Service
     {
-        if($day = $this->get_day($dt)) {
+        if ($day = $this->get_day($dt)) {
             return $day->get_service($dt);
         }
 

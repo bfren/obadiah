@@ -65,7 +65,7 @@ class Ajax extends Endpoint
         $data = $this->get_input();
 
         // check for failure result
-        if($this->result) {
+        if ($this->result) {
             return $this->result;
         }
 

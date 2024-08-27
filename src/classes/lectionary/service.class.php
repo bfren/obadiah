@@ -33,6 +33,5 @@ class Service
         public readonly ?string $main_reading,
         public readonly ?string $additional_reading,
         public readonly array $psalms
-    ) {
-    }
+    ) {}
 }

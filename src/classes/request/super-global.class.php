@@ -17,8 +17,7 @@ class Super_Global
      */
     public function __construct(
         public readonly int $type
-    ) {
-    }
+    ) {}
 
     /**
      * Return all values from the superglobal.

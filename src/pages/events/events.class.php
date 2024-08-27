@@ -32,7 +32,7 @@ class Events extends Endpoint
     {
         // get events
         $query = self::get_query();
-        $events = Cache::get_events($query, fn (string $q) => self::get_events($q));
+        $events = Cache::get_events($query, fn(string $q) => self::get_events($q));
 
         // create calendar
         $vcal = new VCal($events, Cache::get_events_last_modified($query));
@@ -49,7 +49,7 @@ class Events extends Endpoint
     public function json_get(): Json
     {
         // get events
-        $events = Cache::get_events(self::get_query(), fn (string $q) => self::get_events($q));
+        $events = Cache::get_events(self::get_query(), fn(string $q) => self::get_events($q));
 
         // return JSON action
         return new Json($events);
@@ -60,7 +60,7 @@ class Events extends Endpoint
      *
      * @return string                   URL-encoded query (using http_build_query()).
      */
-    private static function get_query():string
+    private static function get_query(): string
     {
         // get query options
         $query = array(
@@ -122,7 +122,7 @@ class Events extends Endpoint
 
             // get location
             $location_data = Arr::get($event, "location", []);
-            if(($address = Arr::get($location_data, "address", "")) !== "") {
+            if (($address = Arr::get($location_data, "address", "")) !== "") {
                 $location = $address;
             } else {
                 $location = Arr::get($location_data, "name", C::$events->default_location);

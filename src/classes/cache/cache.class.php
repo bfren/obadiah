@@ -168,7 +168,7 @@ class Cache
      */
     public static function get_bible_plan(bool $force = false): Bible_Plan
     {
-        return self::get_or_set(self::BIBLE_PLAN, fn () => new Bible_Plan(), force: $force);
+        return self::get_or_set(self::BIBLE_PLAN, fn() => new Bible_Plan(), force: $force);
     }
 
     /**
@@ -227,7 +227,7 @@ class Cache
      */
     public static function get_lectionary(bool $force = false): Lectionary
     {
-        return self::get_or_set(self::LECTIONARY, fn () => new Lectionary(), force: $force);
+        return self::get_or_set(self::LECTIONARY, fn() => new Lectionary(), force: $force);
     }
 
     /**
@@ -249,7 +249,7 @@ class Cache
      */
     public static function get_people(bool $force = false): array
     {
-        return self::get_or_set(self::PEOPLE, fn () => Api::get_prayer_calendar_people(), force: $force);
+        return self::get_or_set(self::PEOPLE, fn() => Api::get_prayer_calendar_people(), force: $force);
     }
 
     /**
@@ -271,7 +271,7 @@ class Cache
      */
     public static function get_refresh(bool $force = false): Refresh
     {
-        return self::get_or_set(self::REFRESH, fn () => new Refresh(), force: $force);
+        return self::get_or_set(self::REFRESH, fn() => new Refresh(), force: $force);
     }
 
     /**
@@ -293,7 +293,7 @@ class Cache
      */
     public static function get_rota(bool $force = false): Rota
     {
-        return self::get_or_set(self::ROTA, fn () => new Rota(), force: $force);
+        return self::get_or_set(self::ROTA, fn() => new Rota(), force: $force);
     }
 
     /**

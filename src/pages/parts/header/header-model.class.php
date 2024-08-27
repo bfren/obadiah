@@ -21,6 +21,5 @@ class Header_Model
         public readonly ?string $subtitle = null,
         public readonly ?string $class = null,
         public readonly bool $overflow_scroll = false
-    ) {
-    }
+    ) {}
 }

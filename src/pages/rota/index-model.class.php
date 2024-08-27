@@ -26,6 +26,5 @@ class Index_Model
         public readonly array $people,
         public readonly array $series,
         public readonly array $days
-    ) {
-    }
+    ) {}
 }

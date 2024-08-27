@@ -24,7 +24,7 @@ class Preload extends Endpoint
     {
         $results = array(
             // Bible Reading plan
-            "bible" => self::load(fn () => Cache::get_bible_plan(true)),
+            "bible" => self::load(fn() => Cache::get_bible_plan(true)),
 
             // Church Suite events
             "events" => self::load(function () {
@@ -37,20 +37,20 @@ class Preload extends Endpoint
                 $query = http_build_query(array("date_start" => $start_of_month));
 
                 // get events
-                Cache::get_events($query, fn ($q) => Events::get_events($q));
+                Cache::get_events($query, fn($q) => Events::get_events($q));
             }),
 
             // Baserow lectionary
-            "lectionary" => self::load(fn () => Cache::get_lectionary(true)),
+            "lectionary" => self::load(fn() => Cache::get_lectionary(true)),
 
             // People
-            "people" => self::load(fn () => Cache::get_people(true)),
+            "people" => self::load(fn() => Cache::get_people(true)),
 
             // Refresh calendar
-            "refresh" => self::load(fn () => Cache::get_refresh(true)),
+            "refresh" => self::load(fn() => Cache::get_refresh(true)),
 
             // Church Suite rota
-            "rota" => self::load(fn () => Cache::get_rota(true))
+            "rota" => self::load(fn() => Cache::get_rota(true))
         );
 
         // return JSON response

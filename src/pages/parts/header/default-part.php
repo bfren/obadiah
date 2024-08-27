@@ -18,7 +18,7 @@ App::check();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?php _e($model->title); ?> | Obadiah</title>
-	<link href="https://static.bcg.xyz/fonts/source-sans.css" rel="stylesheet" />
+    <link href="https://static.bcg.xyz/fonts/source-sans.css" rel="stylesheet" />
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/resources/css/dragula.min.css" rel="stylesheet" />
     <link href="/resources/css/obadiah.css" rel="stylesheet" />
@@ -35,9 +35,9 @@ App::check();
         <main class="flex-grow-1 h-100" style="overflow-y: auto">
             <div class="container-fluid h-100">
 
-        <?php else : ?>
+            <?php else : ?>
 
-        <main class="flex-grow-1">
-            <div class="container-fluid">
+                <main class="flex-grow-1">
+                    <div class="container-fluid">
 
-        <?php endif; ?>
+                    <?php endif; ?>

@@ -15,7 +15,7 @@ App::check();
 
 ?>
 
-<?php if(count($model) == 0): ?>
+<?php if (count($model) == 0): ?>
     <p>No services were found matching the current filters.</p>
 <?php endif; ?>
 

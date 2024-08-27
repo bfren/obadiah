@@ -21,8 +21,7 @@ class ICalendar extends Action
         public readonly string $filename,
         public readonly VCal $model,
         int $status = 200,
-    )
-    {
+    ) {
         // add default headers
         parent::__construct($status);
 

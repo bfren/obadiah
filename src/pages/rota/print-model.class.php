@@ -21,6 +21,5 @@ class Print_Model
         public readonly ?string $day,
         public readonly ?string $person,
         public readonly array $days
-    ) {
-    }
+    ) {}
 }

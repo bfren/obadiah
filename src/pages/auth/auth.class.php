@@ -41,7 +41,7 @@ class Auth extends Endpoint
      *
      * @return Action
      */
-    public function login_post() : Action
+    public function login_post(): Action
     {
         // get username and password
         $user = Request::$post->string("username");
@@ -70,7 +70,7 @@ class Auth extends Endpoint
      *
      * @return Action
      */
-    public function logout_get() : Action
+    public function logout_get(): Action
     {
         // log the user out
         Request::$session->logout();

@@ -22,8 +22,7 @@ class Person
         public readonly string $last_name,
         public readonly bool $is_child,
         public readonly ?string $image_url
-    ) {
-    }
+    ) {}
 
     /**
      * Return the person's full name.

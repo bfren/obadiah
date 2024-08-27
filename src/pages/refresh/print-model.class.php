@@ -20,6 +20,5 @@ class Print_Model
         public readonly string $month,
         public readonly DateTimeImmutable $first_day,
         public readonly DateTimeImmutable $last_day,
-    ) {
-    }
+    ) {}
 }

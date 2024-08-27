@@ -16,7 +16,7 @@ class Hash
      * @param string $query             URL-encoded query (e.g. using http_build_query()).
      * @return string                   MD5 hash.
      */
-    public static function events_query(string $query):string
+    public static function events_query(string $query): string
     {
         return md5($query);
     }

@@ -22,6 +22,5 @@ class Day_Model
         public readonly DateTimeImmutable $day,
         public readonly Bible_Plan $bible_plan,
         public readonly Lectionary $lectionary,
-    ) {
-    }
+    ) {}
 }

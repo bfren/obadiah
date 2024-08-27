@@ -26,31 +26,30 @@ $lectionary = Cache::get_lectionary();
 $this->header(new Header_Model("Refresh Calendar"), variant: "print");
 
 // output two pages
-for ($i=1; $i<=2; $i++) {
+for ($i = 1; $i <= 2; $i++) {
 
     $this->part("heading", model: $model->month);
 ?>
 
-<div class="row prayer-calendar-days">
+    <div class="row prayer-calendar-days">
 
-<?php for ($j=1; $j<=3; $j++) : ?>
+        <?php for ($j = 1; $j <= 3; $j++) : ?>
 
-    <div class="col-4">
-        <?php
-        for ($k=1; $k<=7; $k++) {
-            $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary));
-            $current = $current->modify("+1 day");
-        }
-        ?>
+            <div class="col-4">
+                <?php
+                for ($k = 1; $k <= 7; $k++) {
+                    $this->part("day", model: new Day_Model($current, $bible_plan, $lectionary));
+                    $current = $current->modify("+1 day");
+                }
+                ?>
+            </div>
+
+        <?php endfor; ?>
+
     </div>
-
-<?php endfor; ?>
-
-</div>
 
 <?php
     $this->part(sprintf("page-%s-footer", $i));
-
 }
 
 $this->footer("blank");

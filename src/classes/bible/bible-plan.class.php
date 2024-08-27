@@ -45,7 +45,7 @@ class Bible_Plan
 
         // build array of days
         $days = [];
-        $trim = fn ($input) => trim(str_replace("\"", "", $input));
+        $trim = fn($input) => trim(str_replace("\"", "", $input));
 
         while (!$file_obj->eof()) {
             // read the next line
