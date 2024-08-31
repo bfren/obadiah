@@ -87,7 +87,7 @@ abstract class Action
 
         // return an error view for the capture Throwable
         try {
-            Error::server_error($th)->execute();
+            Error::teapot()->execute();
             exit;
         } catch (Throwable $th) {
             _l_throwable($th);
