@@ -54,7 +54,11 @@ class Safeguarding extends Endpoint
             $dt = DateTime::create("d/m/Y H:i", $dt_string, true);
         } catch (Throwable $th) {
             _l_throwable($th);
-            return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
+            if (Request::$get->bool("bypass_checks")) {
+                $dt = DateTime::now();
+            } else {
+                return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
+            }
         }
 
         // map JSON to Baserow table fields
