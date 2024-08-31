@@ -2,6 +2,7 @@
 
 namespace Obadiah\Helpers;
 
+use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Request\Request;
 
@@ -29,10 +30,10 @@ class Log
         }
 
         // if arguments have been provided, use sprintf
-        $message = count($args) > 0 ? sprintf($text, ...$args) : $text;
+        $message = sprintf("%s [debug] " . $text, date("c"), ...$args);
 
-        // TODO: implementation that doesn't output as an error
-        error_log($message);
+        // output to stdout
+        file_put_contents("php://stdout", $message);
     }
 
     /**
