@@ -16,7 +16,7 @@ class DateTime
      *
      * @param string $format                DateTime format.
      * @param string $datetime              DateTime string.
-     * @return DateTimeImmutable            DateTimeImmutable object.
+     * @return DateTimeImmutable
      * @throws Exception                    When DateTimeImmutable::createFromFormat fails.
      */
     public static function create(string $format, string $datetime, bool $with_timezone = false): DateTimeImmutable
@@ -32,5 +32,15 @@ class DateTime
 
         // return
         return $dt;
+    }
+
+    /**
+     * Create a DateTimeImmutable object representing the current time.
+     *
+     * @return DateTimeImmutable
+     */
+    public static function now(): DateTimeImmutable
+    {
+        return new DateTimeImmutable("now", C::$events->timezone);
     }
 }
