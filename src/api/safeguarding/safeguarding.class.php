@@ -48,8 +48,6 @@ class Safeguarding extends Endpoint
         $form = Request::$json;
         Log::debug("Concern form received: %s", json_encode($form));
 
-        // accept test data from website form
-
         // parse date/time
         $dt_string = trim(sprintf("%s %s", Arr::get($form, "date-1"), Arr::get($form, "time-1")));
         try {
@@ -86,6 +84,7 @@ class Safeguarding extends Endpoint
     {
         // receive JSON data from website
         $form = Request::$json;
+        Log::debug("Declaration form received: %s", json_encode($form));
 
         // map JSON to Baserow table fields
         $row = array(
@@ -136,6 +135,7 @@ class Safeguarding extends Endpoint
     {
         // receive JSON data from website
         $form = Request::$json;
+        Log::debug("Reference form received: %s", json_encode($form));
 
         // remove hyphens from select values
         $get_select = fn(int $num) => str_replace("-", " ", Arr::get($form, "select_$num"));
