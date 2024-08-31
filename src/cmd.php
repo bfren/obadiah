@@ -14,4 +14,4 @@ Cli::map_command("say:hello", C\Hello_World::class);
 
 // parse and execute commandline
 $command = Cli::get_command($argv);
-$command->execute();
+$command->try_execute();

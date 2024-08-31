@@ -97,17 +97,17 @@ class Router
         $route = self::get_route($endpoint_name);
         if ($route === null) {
             _l("Route not found for endpoint '%s'.", $endpoint_name);
-            return self::not_found();
+            return Error::not_found();
         }
 
         // check authentication
         if ($route->requires_auth && !Request::$session->is_authorised) {
-            return self::denied();
+            return Error::denied();
         }
 
         // check admin privileges
         if ($route->requires_admin && !Request::$session->is_admin) {
-            return self::denied();
+            return Error::denied();
         }
 
         // get endpoint class
@@ -121,12 +121,12 @@ class Router
             $action_method = $endpoint_class->getMethod($method_name);
         } catch (Throwable $th) {
             _l_throwable($th);
-            return self::not_found();
+            return Error::not_found();
         }
 
         // check for admin requirement
         if (!empty($action_method->getAttributes(Require_Admin::class)) && !Request::$session->is_admin) {
-            return self::denied();
+            return Error::denied();
         }
 
         // run action, catching any errors
@@ -135,40 +135,7 @@ class Router
             return $action_method->invoke($endpoint);
         } catch (Throwable $th) {
             _l_throwable($th);
-            return self::server_error($th);
+            return Error::server_error($th);
         }
-    }
-
-    /**
-     * Deny access and redirect to login page.
-     *
-     * @return Redirect
-     */
-    private static function denied(): Redirect
-    {
-        Request::$session->deny();
-        return new Redirect("/auth/login", include_path: true);
-    }
-
-    /**
-     * Return 'Not Found' view.
-     *
-     * @return View                                 Error 'Not Found' view.
-     */
-    private static function not_found(): View
-    {
-        $error = new Error();
-        return $error->not_found();
-    }
-
-    /**
-     * Return 'Server Error' view.
-     *
-     * @return View                                 Error 'Server Error' view.
-     */
-    private static function server_error(Throwable $th): View
-    {
-        $error = new Error();
-        return $error->server_error($th);
     }
 }
