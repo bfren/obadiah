@@ -13,7 +13,7 @@ class Log
     /**
      * Log a debug message - using sprintf if $args are defined.
      *
-     * @param string|null $error            Message (or sprintf format) to be logged.
+     * @param string|null $text             Message (or sprintf format) to be logged.
      * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */
