@@ -27,4 +27,4 @@ Router::map_endpoint(P\Upload\Upload::class, requires_admin: true);
 // get and execute page action
 $action = Router::get_action();
 $action->send_headers();
-$action->execute();
+$action->try_execute();
