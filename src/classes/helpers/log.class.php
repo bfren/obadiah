@@ -3,11 +3,38 @@
 namespace Obadiah\Helpers;
 
 use Obadiah\App;
+use Obadiah\Request\Request;
 
 App::check();
 
 class Log
 {
+    /**
+     * Log a debug message - using sprintf if $args are defined.
+     *
+     * @param string|null $error            Message (or sprintf format) to be logged.
+     * @param mixed $args                   Optional arguments to use for sprintf.
+     * @return void
+     */
+    public static function debug(?string $text, mixed ...$args): void
+    {
+        // if string is null do nothing
+        if ($text === null) {
+            return;
+        }
+
+        // if debug flag is not set do nothing
+        if (!Request::$debug) {
+            return;
+        }
+
+        // if arguments have been provided, use sprintf
+        $message = count($args) > 0 ? sprintf($text, ...$args) : $text;
+
+        // TODO: implementation that doesn't output as an error
+        error_log($message);
+    }
+
     /**
      * Log an error - using sprintf if $args are defined.
      *
