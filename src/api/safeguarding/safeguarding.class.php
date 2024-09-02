@@ -53,7 +53,6 @@ class Safeguarding extends Endpoint
         try {
             $dt = DateTime::create("d/m/Y H:i", $dt_string, true);
         } catch (Throwable $th) {
-            _l(json_encode($form));
             _l_throwable($th);
             if (Request::$get->bool("bypass_checks")) {
                 $dt = DateTime::now();
