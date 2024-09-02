@@ -49,10 +49,11 @@ class Safeguarding extends Endpoint
         Log::debug("Concern form received: %s", json_encode($form));
 
         // parse date/time
-        $dt_string = trim(sprintf("%s %s", Arr::get($form, "date-1"), Arr::get($form, "time-1")));
+        $dt_string = trim(sprintf("%s %s", Arr::get($form, "date_1"), Arr::get($form, "time_1")));
         try {
             $dt = DateTime::create("d/m/Y H:i", $dt_string, true);
         } catch (Throwable $th) {
+            _l(json_encode($form));
             _l_throwable($th);
             if (Request::$get->bool("bypass_checks")) {
                 $dt = DateTime::now();
@@ -63,15 +64,15 @@ class Safeguarding extends Endpoint
 
         // map JSON to Baserow table fields
         $row = array(
-            "Name" => Arr::get($form, "text-1"),
-            "Contact Details" => Arr::get($form, "text-5"),
-            "Activity" => Arr::get($form, "text-2"),
-            "Who" => Arr::get($form, "text-3"),
+            "Name" => Arr::get($form, "text_1"),
+            "Contact Details" => Arr::get($form, "text_5"),
+            "Activity" => Arr::get($form, "text_2"),
+            "Who" => Arr::get($form, "text_3"),
             "Date of Activity / Concern" => $dt->format("c"),
-            "Details" => Arr::get($form, "textarea-1"),
-            "Reported" => Arr::get($form, "radio-1"),
-            "Reported To" => Arr::get($form, "text-4"),
-            "Action" => Arr::get($form, "textarea-2"),
+            "Details" => Arr::get($form, "textarea_1"),
+            "Reported" => Arr::get($form, "radio_1"),
+            "Reported To" => Arr::get($form, "text_4"),
+            "Action" => Arr::get($form, "textarea_2"),
         );
 
         // create Baserow connection and execute request
@@ -92,37 +93,37 @@ class Safeguarding extends Endpoint
 
         // map JSON to Baserow table fields
         $row = array(
-            "Name" => Arr::get($form, "name-1"),
-            "Role Applied For" => Arr::get($form, "text-1"),
-            "1." => Arr::get($form, "select-1"),
-            "1. Details" => Arr::get($form, "textarea-1"),
-            "2." => Arr::get($form, "select-2"),
-            "2. Details" => Arr::get($form, "textarea-2"),
-            "3." => Arr::get($form, "select-3"),
-            "3. Details" => Arr::get($form, "textarea-3"),
-            "4." => Arr::get($form, "select-4"),
-            "4. Details" => Arr::get($form, "textarea-4"),
-            "5." => Arr::get($form, "select-5"),
-            "6." => Arr::get($form, "select-6"),
-            "6. Details" => Arr::get($form, "textarea-5"),
-            "7." => Arr::get($form, "select-7"),
-            "7. Details" => Arr::get($form, "textarea-6"),
-            "8." => Arr::get($form, "select-8"),
-            "8. Details" => Arr::get($form, "textarea-7"),
-            "9." => Arr::get($form, "select-9"),
-            "10." => Arr::get($form, "select-10"),
-            "11." => Arr::get($form, "select-11"),
-            "12." => Arr::get($form, "select-12"),
-            "13." => Arr::get($form, "select-13"),
-            "13. Details" => Arr::get($form, "textarea-8"),
-            "14." => Arr::get($form, "select-14"),
-            "14. Details" => Arr::get($form, "textarea-9"),
-            "15." => Arr::get($form, "select-15"),
-            "15. Details" => Arr::get($form, "textarea-10"),
-            "16." => Arr::get($form, "select-16"),
-            "16. Details" => Arr::get($form, "textarea-11"),
-            "Declaration" => Arr::get($form, "name-2"),
-            "Overseas Consent" => Arr::get($form, "name-3"),
+            "Name" => Arr::get($form, "name_1"),
+            "Role Applied For" => Arr::get($form, "text_1"),
+            "1." => Arr::get($form, "select_1"),
+            "1. Details" => Arr::get($form, "textarea_1"),
+            "2." => Arr::get($form, "select_2"),
+            "2. Details" => Arr::get($form, "textarea_2"),
+            "3." => Arr::get($form, "select_3"),
+            "3. Details" => Arr::get($form, "textarea_3"),
+            "4." => Arr::get($form, "select_4"),
+            "4. Details" => Arr::get($form, "textarea_4"),
+            "5." => Arr::get($form, "select_5"),
+            "6." => Arr::get($form, "select_6"),
+            "6. Details" => Arr::get($form, "textarea_5"),
+            "7." => Arr::get($form, "select_7"),
+            "7. Details" => Arr::get($form, "textarea_6"),
+            "8." => Arr::get($form, "select_8"),
+            "8. Details" => Arr::get($form, "textarea_7"),
+            "9." => Arr::get($form, "select_9"),
+            "10." => Arr::get($form, "select_10"),
+            "11." => Arr::get($form, "select_11"),
+            "12." => Arr::get($form, "select_12"),
+            "13." => Arr::get($form, "select_13"),
+            "13. Details" => Arr::get($form, "textarea_8"),
+            "14." => Arr::get($form, "select_14"),
+            "14. Details" => Arr::get($form, "textarea_9"),
+            "15." => Arr::get($form, "select_15"),
+            "15. Details" => Arr::get($form, "textarea_10"),
+            "16." => Arr::get($form, "select_16"),
+            "16. Details" => Arr::get($form, "textarea_11"),
+            "Declaration" => Arr::get($form, "name_2"),
+            "Overseas Consent" => Arr::get($form, "name_3"),
         );
 
         // create Baserow connection and execute request
@@ -146,23 +147,23 @@ class Safeguarding extends Endpoint
 
         // map JSON to Baserow table fields
         $row = array(
-            "Applicant Full Name" => Arr::get($form, "name-1"),
-            "Relationship" => Arr::get($form, "text-1"),
-            "Known For" => Arr::get($form, "text-2"),
+            "Applicant Full Name" => Arr::get($form, "name_1"),
+            "Relationship" => Arr::get($form, "text_1"),
+            "Known For" => Arr::get($form, "text_2"),
             "Suitability" => $get_select(1),
             "Experience" => $get_select(2),
             "Care" => $get_select(3),
             "Equality" => $get_select(4),
             "Honesty etc" => $get_select(5),
-            "Comments" => Arr::get($form, "textarea-1"),
-            "Health" => Arr::get($form, "select-6"),
-            "Health Details" => Arr::get($form, "textarea-2"),
-            "Unsuitability" => Arr::get($form, "select-7"),
-            "Unsuitability Details" => Arr::get($form, "textarea-3"),
-            "Referee Full Name" => Arr::get($form, "name-2"),
-            "Confirm" => Arr::get($form, "checkbox-1") == "true",
-            "Referee Email" => Arr::get($form, "email-1"),
-            "Referee Phone" => Arr::get($form, "phone-1"),
+            "Comments" => Arr::get($form, "textarea_1"),
+            "Health" => Arr::get($form, "select_6"),
+            "Health Details" => Arr::get($form, "textarea_2"),
+            "Unsuitability" => Arr::get($form, "select_7"),
+            "Unsuitability Details" => Arr::get($form, "textarea_3"),
+            "Referee Full Name" => Arr::get($form, "name_2"),
+            "Confirm" => Arr::get($form, "checkbox_1") == "true",
+            "Referee Email" => Arr::get($form, "email_1"),
+            "Referee Phone" => Arr::get($form, "phone_1"),
         );
 
         // create Baserow connection and execute request
