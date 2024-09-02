@@ -21,6 +21,5 @@ class Route
         public readonly string $endpoint,
         public readonly bool $requires_auth = true,
         public readonly bool $requires_admin = true
-    ) {
-    }
+    ) {}
 }

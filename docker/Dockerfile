@@ -1,4 +1,4 @@
-FROM bfren/nginx-php:php8.3-7.2.17
+FROM bfren/nginx-php:php8.3-7.2.20
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/obadiah"
 
@@ -19,7 +19,7 @@ ENV \
     # required extensions
     BF_PHP_EXT="curl session sodium pecl-yaml" \
     # generate empty config.yml if one does not already exist
-    BF_CCF_GENERATE_EMPTY_CONFIG="1"
+    BF_OBADIAH_GENERATE_EMPTY_CONFIG="1"
 
 # run installation
 RUN bf-install

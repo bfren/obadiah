@@ -46,7 +46,7 @@ if ($model->day->format("N") == 7) {
                             <?php if ($service->main_reading) : ?>
                                 <?php _e($service->main_reading); ?>
                                 <?php if ($service->additional_reading) _e("& %s", $service->additional_reading); ?>
-                                <br/>
+                                <br />
                             <?php endif; ?>
                             <?php _e($service->title); ?>
                         </div>
@@ -57,16 +57,16 @@ if ($model->day->format("N") == 7) {
             <?php if (isset($readings)) : ?>
                 <div class="readings text-body-secondary">
                     <?php
-                        $this->part("reading", model: sprintf("Ps. %s", $readings->ot_psalms));
-                        $this->part("reading", model: $readings->ot_1);
-                        $this->part("reading", model: $readings->ot_2);
-                        $this->part("reading", model: $readings->nt_gospels);
-                        $this->part("reading", model: $readings->nt_epistles);
+                    $this->part("reading", model: sprintf("Ps. %s", $readings->ot_psalms));
+                    $this->part("reading", model: $readings->ot_1);
+                    $this->part("reading", model: $readings->ot_2);
+                    $this->part("reading", model: $readings->nt_gospels);
+                    $this->part("reading", model: $readings->nt_epistles);
                     ?>
                 </div>
             <?php endif; ?>
             <?php if (isset($people)) : ?>
-                <div class="people"><?php _h(join(", ", array_map(fn (string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?></div>
+                <div class="people"><?php _h(join(", ", array_map(fn(string $name) => str_replace(" ", "&nbsp;", $name), $people))); ?></div>
             <?php endif; ?>
         <?php endif; ?>
     </div>

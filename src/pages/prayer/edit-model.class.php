@@ -26,6 +26,5 @@ class Edit_Model
         public readonly array $days,
         public readonly array $people,
         public readonly int $per_day
-    ) {
-    }
+    ) {}
 }

@@ -26,6 +26,5 @@ class Index_Model
         public readonly array $rota_files,
         public readonly array $bible_files,
         public readonly string $church_suite_href,
-    ) {
-    }
+    ) {}
 }

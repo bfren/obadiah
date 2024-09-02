@@ -21,6 +21,5 @@ class Index_Model
         public readonly array $upcoming,
         public readonly array $refresh_print,
         public readonly array $refresh_feed
-    ) {
-    }
+    ) {}
 }

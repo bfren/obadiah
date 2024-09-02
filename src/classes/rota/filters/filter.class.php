@@ -18,5 +18,5 @@ interface Filter
      * @param string $value             Filter value (e.g. the date or a person's name).
      * @return bool                     True if the service matches $value.
      */
-    public function apply(Lectionary $lectionary, Service $service, string $value) : bool;
+    public function apply(Lectionary $lectionary, Service $service, string $value): bool;
 }

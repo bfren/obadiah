@@ -37,6 +37,5 @@ class Combined_Service
         public readonly ?string $additional_reading,
         public readonly array $psalms,
         public readonly array $ministries
-    ) {
-    }
+    ) {}
 }

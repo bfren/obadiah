@@ -29,7 +29,7 @@ $this->header(new Header_Model("Refresh"));
 
 <h2><?php _e($model->today->date->format(C::$formats->display_date)); ?></h2>
 <p class="small text-muted">
-    Today&rsquo;s entry on the Refresh calendar.<br/>
+    Today&rsquo;s entry on the Refresh calendar.<br />
     <a href="/refresh/help">Click here</a> for help and instructions.
 </p>
 
@@ -38,7 +38,7 @@ $this->header(new Header_Model("Refresh"));
     <div class="col-12 col-md-4">
         <h3 class="mt-3">Bible Readings</h3>
         <?php if ($model->today->readings) : $readings = $model->today->readings; ?>
-            <p class="small text-muted">Click on a passage to view the text on Bible Gateway, using the <?php _e(C::$rota->bible_version) ?> translation.  There is more information about the five streams and how to use them <a href="/refresh/help">here</a>.</p>
+            <p class="small text-muted">Click on a passage to view the text on Bible Gateway, using the <?php _e(C::$rota->bible_version) ?> translation. There is more information about the five streams and how to use them <a href="/refresh/help">here</a>.</p>
             <p>Stream 1: <?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
             <p>Stream 2: <?php $this->part("reading", model: $readings->ot_1); ?></p>
             <p>Stream 3: <?php $this->part("reading", model: $readings->ot_2); ?></p>
@@ -58,7 +58,7 @@ $this->header(new Header_Model("Refresh"));
             <?php foreach ($model->today->people as $person) : $name = $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : $person; ?>
                 <div class="person d-flex align-items-center">
                     <div class="image">
-                        <?php if($person instanceof Person && $person->image_url):?>
+                        <?php if ($person instanceof Person && $person->image_url): ?>
                             <a href="<?php _e($person->image_url) ?>" target="_blank">
                                 <img src="<?php _e($person->image_url) ?>" alt="<?php _e($name); ?>" title="<?php _e($name); ?>" />
                             </a>
@@ -77,11 +77,11 @@ $this->header(new Header_Model("Refresh"));
     </div>
 
     <?php if (($collect = Cache::get_lectionary()->get_collect($model->today->date)) !== null) : ?>
-    <div class="col-12 col-md-4">
-        <h3 class="mt-3">Collect</h3>
-        <p class="small text-muted">These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together.  Normally they reflect the church calendar or a particular saint.</p>
-        <?php _h(str_replace("\n", "<br />", $collect)); ?>
-    </div>
+        <div class="col-12 col-md-4">
+            <h3 class="mt-3">Collect</h3>
+            <p class="small text-muted">These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together. Normally they reflect the church calendar or a particular saint.</p>
+            <?php _h(str_replace("\n", "<br />", $collect)); ?>
+        </div>
     <?php endif; ?>
 
 </div>

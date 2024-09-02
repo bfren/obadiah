@@ -27,8 +27,7 @@ class Day
         public readonly ?string $colour,
         public readonly ?string $collect,
         public readonly array $services
-    ) {
-    }
+    ) {}
 
     /**
      * Get lectionary details for a service at the specified time.

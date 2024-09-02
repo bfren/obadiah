@@ -18,7 +18,7 @@ class Person_Filter implements Filter
      * @param string $value             A person's name.
      * @return bool                     True if person ($value) is doing one of the ministries in the service.
      */
-    public function apply(Lectionary $lectionary, Service $service, string $value) : bool
+    public function apply(Lectionary $lectionary, Service $service, string $value): bool
     {
         // if no person value is set, include the service
         if (!$value) {

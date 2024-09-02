@@ -28,8 +28,7 @@ class VCal
     public function __construct(
         public readonly array $events,
         public readonly int $last_modified
-    ) {
-    }
+    ) {}
 
     /**
      * Get ICal timezone definition, or null if not supported.

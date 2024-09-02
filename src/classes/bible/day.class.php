@@ -24,6 +24,5 @@ class Day
         public readonly string $ot_2,
         public readonly string $nt_gospels,
         public readonly string $nt_epistles
-    ) {
-    }
+    ) {}
 }

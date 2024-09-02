@@ -6,6 +6,7 @@ use Obadiah\App;
 use Obadiah\Baserow\Baserow;
 use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\DateTime;
+use Obadiah\Helpers\Log;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
 use Obadiah\Router\Endpoint;
@@ -45,6 +46,7 @@ class Safeguarding extends Endpoint
     {
         // receive JSON data from website
         $form = Request::$json;
+        Log::debug("Concern form received: %s", json_encode($form));
 
         // parse date/time
         $dt_string = trim(sprintf("%s %s", Arr::get($form, "date_1"), Arr::get($form, "time_1")));
@@ -52,7 +54,11 @@ class Safeguarding extends Endpoint
             $dt = DateTime::create("d/m/Y H:i", $dt_string, true);
         } catch (Throwable $th) {
             _l_throwable($th);
-            return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
+            if (Request::$get->bool("bypass_checks")) {
+                $dt = DateTime::now();
+            } else {
+                return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
+            }
         }
 
         // map JSON to Baserow table fields
@@ -82,6 +88,7 @@ class Safeguarding extends Endpoint
     {
         // receive JSON data from website
         $form = Request::$json;
+        Log::debug("Declaration form received: %s", json_encode($form));
 
         // map JSON to Baserow table fields
         $row = array(
@@ -132,6 +139,7 @@ class Safeguarding extends Endpoint
     {
         // receive JSON data from website
         $form = Request::$json;
+        Log::debug("Reference form received: %s", json_encode($form));
 
         // remove hyphens from select values
         $get_select = fn(int $num) => str_replace("-", " ", Arr::get($form, "select_$num"));

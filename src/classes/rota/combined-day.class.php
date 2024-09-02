@@ -25,6 +25,5 @@ class Combined_Day
         public readonly ?string $colour,
         public readonly string $collect,
         public readonly array $services
-    ) {
-    }
+    ) {}
 }

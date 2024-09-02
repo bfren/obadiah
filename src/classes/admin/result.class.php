@@ -18,8 +18,7 @@ class Result
     private function __construct(
         public readonly bool $success,
         public readonly ?string $message
-    ) {
-    }
+    ) {}
 
     /**
      * Return a success result with an optional message.

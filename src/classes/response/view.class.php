@@ -127,7 +127,7 @@ class View extends Action
      * @param Result|null $result       Result object to use as the model.
      * @return void
      */
-    public function alert(?Result $result) :void
+    public function alert(?Result $result): void
     {
         $this->part("alert", model: $result);
     }

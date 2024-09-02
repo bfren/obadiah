@@ -17,6 +17,5 @@ class Service_Ministry
     public function __construct(
         public readonly ?string $abbreviation,
         public readonly array $people
-    ) {
-    }
+    ) {}
 }

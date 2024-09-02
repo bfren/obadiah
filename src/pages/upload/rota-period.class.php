@@ -28,10 +28,9 @@ class Rota_Period
         public readonly DateTimeImmutable $first_day,
         public readonly DateTimeImmutable $last_day,
         public readonly string $href
-    ) {
-    }
+    ) {}
 
-    public static function create(DateTimeImmutable $first_day, DateTimeImmutable $last_day) : Rota_Period
+    public static function create(DateTimeImmutable $first_day, DateTimeImmutable $last_day): Rota_Period
     {
         $period = ceil($first_day->format("n") / 4);
         $ref = sprintf("%s-%s", $first_day->format("y"), $period);

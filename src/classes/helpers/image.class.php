@@ -15,7 +15,7 @@ class Image
      * @param string $src               File name / path within /resources/img directory.
      * @return string                   Absolute path to image file.
      */
-    public static function get_src(string $src):string
+    public static function get_src(string $src): string
     {
         return sprintf("/resources/img/%s", $src);
     }

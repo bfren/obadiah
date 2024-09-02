@@ -31,8 +31,7 @@ class Event implements JsonSerializable
         public readonly string $location,
         public readonly ?string $description,
         public readonly bool $is_all_day = false
-    ) {
-    }
+    ) {}
 
     /**
      * Generate a unique ID for an event.

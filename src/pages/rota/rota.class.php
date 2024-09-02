@@ -102,7 +102,7 @@ class Rota extends Endpoint
      *
      * @return ICalendar
      */
-    public function ics_get():ICalendar
+    public function ics_get(): ICalendar
     {
         // get combined rota
         $rota = Rota::build_combined_rota();

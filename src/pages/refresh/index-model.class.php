@@ -16,6 +16,5 @@ class Index_Model
      */
     public function __construct(
         public readonly Day $today
-    ) {
-    }
+    ) {}
 }

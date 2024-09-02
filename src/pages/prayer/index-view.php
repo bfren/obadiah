@@ -30,9 +30,9 @@ $this->alert($model->result);
             $delete_query = array("file" => sprintf("%s.month", $month));
             ?>
             <li>
-            <a href="/refresh/print/?<?php _e(http_build_query($view_query)); ?>" target="_blank"><?php _e($month); ?></a>
-            <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php _e(http_build_query($edit_query)); ?>">edit</a>
-            <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/delete/?<?php _e(http_build_query($delete_query)); ?>">delete</a>
+                <a href="/refresh/print/?<?php _e(http_build_query($view_query)); ?>" target="_blank"><?php _e($month); ?></a>
+                <a class="badge rounded-pill text-bg-warning fw-bold" href="/prayer/edit/?<?php _e(http_build_query($edit_query)); ?>">edit</a>
+                <a class="badge rounded-pill text-bg-danger fw-bold check-first" href="/prayer/delete/?<?php _e(http_build_query($delete_query)); ?>">delete</a>
             </li>
         <?php endforeach; ?>
     </ul>

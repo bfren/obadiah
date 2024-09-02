@@ -3,7 +3,9 @@
 namespace Obadiah\Response;
 
 use Obadiah\App;
+use Obadiah\Pages\Error\Error;
 use Obadiah\Request\Request;
+use Throwable;
 
 App::check();
 
@@ -66,6 +68,24 @@ abstract class Action
         foreach ($this->headers as $header) {
             header(sprintf("%s: %s", $header->key, $header->value));
         }
+    }
+
+    /**
+     * Execute action and exit, catching and logging any errors.
+     *
+     * @return never
+     */
+    final public function try_execute(): void
+    {
+        // attempt to execute the current action
+        try {
+            $this->execute();
+        } catch (Throwable $th) {
+            _l_throwable($th);
+            App::die("Something went wrong.");
+        }
+
+        exit;
     }
 
     /**
