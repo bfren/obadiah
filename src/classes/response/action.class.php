@@ -80,21 +80,12 @@ abstract class Action
         // attempt to execute the current action
         try {
             $this->execute();
-            exit;
         } catch (Throwable $th) {
             _l_throwable($th);
+            App::die("Something went wrong.");
         }
 
-        // return an error view for the capture Throwable
-        try {
-            Error::teapot()->execute();
-            exit;
-        } catch (Throwable $th) {
-            _l_throwable($th);
-        }
-
-        // something has gone very wrong!
-        App::die("Something went wrong.");
+        exit;
     }
 
     /**
