@@ -11,7 +11,7 @@ class Text extends Action
     /**
      * Store plain text and add headers.
      *
-     * @param mixed $text               Plain text value.
+     * @param string $text              Plain text value.
      * @param int $status               HTTP status code.
      * @param int|null $last_modified   Optional last modified timestamp.
      * @return void

@@ -4,10 +4,11 @@ namespace Obadiah\Pages\Robots;
 
 use Obadiah\App;
 use Obadiah\Response\Text;
+use Obadiah\Router\Endpoint;
 
 App::check();
 
-class Robots
+class Robots extends Endpoint
 {
     /**
      * Disallow access.
