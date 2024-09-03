@@ -10,7 +10,7 @@ App::check();
 class Json extends Action
 {
     /**
-     * Create Json and add headers.
+     * Store JSON model and add headers.
      *
      * @param mixed $model              JSON model.
      * @param int $status               HTTP status code.
@@ -33,7 +33,7 @@ class Json extends Action
         // add standard JSON headers
         $this->add_header("Access-Control-Allow-Origin", "*");
         $this->add_header("Content-Type", "text/json; charset=utf-8");
-        $this->add_header("Last-Modified", gmdate("D, d M Y H:i:s", $last_modified ?: time()));
+        $this->add_last_modified_header($last_modified);
     }
 
     /**
