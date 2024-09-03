@@ -3,7 +3,6 @@
 namespace Obadiah\Response;
 
 use Obadiah\App;
-use Obadiah\Pages\Error\Error;
 use Obadiah\Request\Request;
 use Throwable;
 
@@ -21,7 +20,7 @@ abstract class Action
     /**
      * Add default headers.
      *
-     * @param int $status               HTTP status code.
+     * @param int $status                       HTTP status code.
      * @return void
      */
     protected function __construct(
@@ -33,8 +32,8 @@ abstract class Action
     /**
      * Add a header to the response.
      *
-     * @param string $key               Header key.
-     * @param string $value             Header value.
+     * @param string $key                       Header key.
+     * @param string $value                     Header value.
      * @return void
      */
     protected function add_header(string $key, string $value)
@@ -45,7 +44,7 @@ abstract class Action
     /**
      * Add debug headers if $debug is set in Request.
      *
-     * @return bool                     True if the debug headers have been added.
+     * @return bool                             True if the debug headers have been added.
      */
     protected function add_debug_headers(): bool
     {
@@ -55,6 +54,17 @@ abstract class Action
         }
 
         return false;
+    }
+
+    /**
+     * Add Last-Modified header.
+     *
+     * @param int|null $last_modified               Optional Last Modified value - if null will use current time.
+     * @return void
+     */
+    protected function add_last_modified_header(?int $last_modified = null)
+    {
+        $this->add_header("Last-Modified", gmdate("D, d M Y H:i:s", $last_modified ?: time()));
     }
 
     /**
