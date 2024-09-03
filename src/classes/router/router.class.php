@@ -47,6 +47,7 @@ class Router
      * @template T of Endpoint
      * @param class-string<T> $endpoint_class       The name of the endpoint class to map (see \Obadiah\Api and \Obadiah\Pages).
      * @param string|null $uri_path                 Optional path override - by default $page_class will be used.
+     * @param string $uri_prefix                    Optional path prefix - e.g. 'api/'.
      * @param bool $requires_auth                   If true, all page actions will require authentication.
      * @param bool $requires_admin                  If true, all page actions will require administrative privileges.
      * @return void
@@ -54,6 +55,7 @@ class Router
     public static function map_endpoint(
         string $endpoint_class,
         ?string $uri_path = null,
+        string $uri_prefix = "",
         bool $requires_auth = true,
         bool $requires_admin = false
     ): void {
@@ -66,7 +68,7 @@ class Router
 
         // add route
         $class = new ReflectionClass($endpoint_class);
-        $key = $uri_path ?: strtolower($class->getShortName());
+        $key = sprintf("%s%s", $uri_prefix, $uri_path ?: strtolower($class->getShortName()));
         self::$routes[$key] = $route;
     }
 
