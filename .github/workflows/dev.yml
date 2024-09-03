@@ -13,16 +13,17 @@ jobs:
       -
         name: Checkout code
         uses: actions/checkout@v4
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout code
-        uses: actions/checkout@v4
       -
         name: Run PHPStan checks
         run: |
           ./check.sh
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v4
       -
         name: Get repository name
         run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
