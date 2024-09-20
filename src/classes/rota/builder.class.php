@@ -96,7 +96,6 @@ class Builder
                     main_reading: $lectionary_service->main_reading,
                     additional_reading: $lectionary_service->additional_reading,
                     psalms: $lectionary_service->psalms ?: [],
-                    guest_speaker: $lectionary_service->guest_speaker,
                     ministries: $ministries
                 );
             }

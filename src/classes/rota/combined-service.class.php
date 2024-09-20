@@ -22,7 +22,6 @@ class Combined_Service
      * @param string|null $main_reading         Optional main reading.
      * @param string|null $additional_reading   Optional additional reading.
      * @param string[] $psalms                  Optional psalms.
-     * @param string|null $guest_speaker        Optional guest speaker.
      * @param array<string, Service_Ministry> $ministries    Ministries from the rota.
      * @return void
      */
@@ -37,7 +36,6 @@ class Combined_Service
         public readonly ?string $main_reading,
         public readonly ?string $additional_reading,
         public readonly array $psalms,
-        public readonly ?string $guest_speaker,
         public readonly array $ministries
     ) {}
 }
