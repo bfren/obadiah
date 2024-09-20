@@ -59,7 +59,7 @@ App::check();
                                     }
 
                                     if ($combined_service->additional_reading) {
-                                        _e(" & ");
+                                        _h("&nbsp;&amp;");
                                         $this->part("reading", model: $combined_service->additional_reading);
                                     }
                                     ?>
