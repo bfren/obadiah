@@ -21,7 +21,7 @@ class Service
     /**
      * The ministries and people assigned to this service.
      *
-     * @var Service_Ministry[]              Array key is ministry name / description.
+     * @var array<string, Service_Ministry>         Array key is ministry name / description.
      */
     public readonly array $ministries;
 
@@ -35,8 +35,8 @@ class Service
     /**
      * Construct a service object from an array of data.
      *
-     * @param string[] $header_row      Array of rota data headings (e.g. 'Date', 'Preacher').
-     * @param string[] $row             Array of data matching the headings.
+     * @param string[] $header_row                  Array of rota data headings (e.g. 'Date', 'Preacher').
+     * @param string[] $row                         Array of data matching the headings.
      * @return void
      */
     public function __construct(array $header_row, array $row)
@@ -67,8 +67,8 @@ class Service
     /**
      * Get all supported ministries and the people assigned to each one, and add to $this->ministries.
      *
-     * @param mixed[] $data             Associative array of service data.
-     * @return Service_Ministry[]       Associative array of ministries.
+     * @param mixed[] $data                         Associative array of service data.
+     * @return Service_Ministry[]                   Associative array of ministries.
      */
     private function get_ministries(array $data): array
     {
@@ -97,8 +97,8 @@ class Service
     /**
      * Sanitise the input, removing various bits of unnecessary information provided by Church Suite.
      *
-     * @param string $people            List of people assigned to this ministry (and other bits of information).
-     * @return string[]                 Array of people's names.
+     * @param string $people                        List of people assigned to this ministry (and other bits of information).
+     * @return string[]                             Array of people's names.
      */
     private function sanitise_people(string $people): array
     {
