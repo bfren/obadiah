@@ -6,6 +6,7 @@ use Obadiah\App;
 use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Image;
+use Obadiah\Helpers\Psalms;
 use Obadiah\Pages\Parts\Header\Header_Model;
 use Obadiah\Prayer\Person;
 use Obadiah\Request\Request;
@@ -39,7 +40,7 @@ $this->header(new Header_Model("Refresh"));
         <h3 class="mt-3">Bible Readings</h3>
         <?php if ($model->today->readings) : $readings = $model->today->readings; ?>
             <p class="small text-muted">Click on a passage to view the text on Bible Gateway, using the <?php _e(C::$rota->bible_version) ?> translation. There is more information about the five streams and how to use them <a href="/refresh/help">here</a>.</p>
-            <p>Stream 1: <?php $this->part("reading", model: sprintf("Psalms %s", $readings->ot_psalms)); ?></p>
+            <p>Stream 1: <?php $this->part("reading", model: sprintf("%s %s", Psalms::pluralise($readings->ot_psalms), $readings->ot_psalms)); ?></p>
             <p>Stream 2: <?php $this->part("reading", model: $readings->ot_1); ?></p>
             <p>Stream 3: <?php $this->part("reading", model: $readings->ot_2); ?></p>
             <p>Stream 4: <?php $this->part("reading", model: $readings->nt_gospels); ?></p>

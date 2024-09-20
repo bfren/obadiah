@@ -80,7 +80,7 @@ $this->alert($model->result);
 <script type="text/javascript">
     var prayer_calendar_month_max_days = <?php _e("%s", Month::MAX_DAYS); ?>;
     var prayer_calendar_month_id = "<?php _e($model->for->format(C::$formats->prayer_month_id)); ?>";
-    var prayer_calendar_save_url = "/ajax/month";
+    var prayer_calendar_save_url = "/api/ajax/month";
 </script>
 
 <?php

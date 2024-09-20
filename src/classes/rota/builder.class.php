@@ -73,6 +73,17 @@ class Builder
                     continue;
                 }
 
+                // replace any instances of 'Guest Speaker'
+                $ministries = [];
+                foreach ($rota_service->ministries as $name => $ministry) {
+                    $ministries[$name] = new Service_Ministry(
+                        abbreviation: $ministry->abbreviation,
+                        people: Arr::map($ministry->people, function ($person) use ($lectionary_service) {
+                            return $person === "Guest Speaker" ? $lectionary_service->guest_speaker : $person;
+                        })
+                    );
+                };
+
                 // create Combined Service object
                 $c_services[] = new Combined_Service(
                     start: $rota_service->start,
@@ -85,7 +96,7 @@ class Builder
                     main_reading: $lectionary_service->main_reading,
                     additional_reading: $lectionary_service->additional_reading,
                     psalms: $lectionary_service->psalms ?: [],
-                    ministries: $rota_service->ministries
+                    ministries: $ministries
                 );
             }
 

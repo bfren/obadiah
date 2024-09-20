@@ -8,6 +8,7 @@ use Obadiah\Bible\Day as Readings;
 use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\Psalms;
 use Obadiah\Prayer\Person;
 
 App::check();
@@ -51,7 +52,7 @@ class Day
         // add readings
         if ($this->readings) {
             $description[] = "= Readings =";
-            $description[] = sprintf("1: Psalms %s", $this->readings->ot_psalms);
+            $description[] = sprintf("1: %s %s", Psalms::pluralise($this->readings->ot_psalms), $this->readings->ot_psalms);
             $description[] = sprintf("2: %s", $this->readings->ot_1);
             $description[] = sprintf("3: %s", $this->readings->ot_2);
             $description[] = sprintf("4: %s", $this->readings->nt_gospels);

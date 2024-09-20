@@ -22,7 +22,7 @@ class Combined_Service
      * @param string|null $main_reading         Optional main reading.
      * @param string|null $additional_reading   Optional additional reading.
      * @param string[] $psalms                  Optional psalms.
-     * @param Service_Ministry[] $ministries    Ministries from the rota.
+     * @param array<string, Service_Ministry> $ministries    Ministries from the rota.
      * @return void
      */
     public function __construct(

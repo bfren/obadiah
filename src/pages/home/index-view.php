@@ -34,7 +34,7 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <?php if (Request::$session->is_admin) : ?>
     <h2>Caches</h2>
-    <p><a href="/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <p><a href="/api/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
 <?php endif; ?>
 
 <?php

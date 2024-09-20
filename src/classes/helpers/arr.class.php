@@ -57,6 +57,24 @@ class Arr
     }
 
     /**
+     * Safely get the last value from an array.
+     *
+     * @template T
+     * @param T[]|array<int|string, T> $array       Array of values.
+     * @param T|null $default                       Default value to return if array is empty.
+     * @return T                                    Last value, or $default if array is empty.
+     */
+    public static function get_last(array $array, mixed $default = null): mixed
+    {
+        $key = array_key_last($array);
+        if ($key === null) {
+            return $default;
+        }
+
+        return self::get($array, $key);
+    }
+
+    /**
      * Safely get an integer value from an array.
      *
      * @param mixed[] $array                        Array of values.

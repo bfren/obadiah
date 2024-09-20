@@ -58,7 +58,8 @@ class Lectionary
             "Title",
             "Main Reading",
             "Additional Reading",
-            "Psalms"
+            "Psalms",
+            "Guest Speaker"
         );
         $service_results = $service_table->get(array("include" => join(",", $service)));
 
@@ -95,7 +96,8 @@ class Lectionary
                     title: Arr::get($service, "Title"),
                     main_reading: Arr::get($service, "Main Reading"),
                     additional_reading: Arr::get($service, "Additional Reading"),
-                    psalms: Arr::map(explode(";", Arr::get($service, "Psalms", "")), "trim")
+                    psalms: Arr::map(explode(";", Arr::get($service, "Psalms", "")), "trim"),
+                    guest_speaker: Arr::get($service, "Guest Speaker")
                 );
             }
 

@@ -55,7 +55,7 @@ class Ajax extends Endpoint
     }
 
     /**
-     * POST: /ajax/month (called from Prayer Calendar edit page).
+     * POST: /api/ajax/month (called from Prayer Calendar edit page).
      *
      * @return Json                     JSON result.
      */
