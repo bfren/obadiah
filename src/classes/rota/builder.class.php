@@ -85,6 +85,7 @@ class Builder
                     main_reading: $lectionary_service->main_reading,
                     additional_reading: $lectionary_service->additional_reading,
                     psalms: $lectionary_service->psalms ?: [],
+                    guest_speaker: $lectionary_service->guest_speaker,
                     ministries: $rota_service->ministries
                 );
             }
@@ -220,7 +221,11 @@ class Builder
         if ($include_people && $service->ministries) {
             $description[] = "= Ministries =";
             foreach ($service->ministries as $name => $service_ministry) {
-                $description[] = sprintf("%s: %s", $name, join(", ", $service_ministry->people));
+                $people = Arr::map($service_ministry->people, function ($person) use ($service) {
+                    return $person == "Guest Speaker" ? $service->guest_speaker : $person;
+                });
+
+                $description[] = sprintf("%s: %s", $name, join(", ", $people));
             }
             $description[] = "";
         }
