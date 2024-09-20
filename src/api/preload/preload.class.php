@@ -16,7 +16,7 @@ App::check();
 class Preload extends Endpoint
 {
     /**
-     * GET: /preload
+     * GET: /api/preload
      *
      * @return Json
      */
