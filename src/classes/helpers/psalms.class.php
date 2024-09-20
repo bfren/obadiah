@@ -8,6 +8,12 @@ App::check();
 
 class Psalms
 {
+    /**
+     * Return singular or plural Psalm' or 'Psalms' based on $psalms.
+     *
+     * @param string[]|string $psalms               The psalms to check.
+     * @return string                               Either 'Psalm' or 'Psalms'.
+     */
     public static function pluralise(array|string $psalms): string
     {
         // split string by comma
