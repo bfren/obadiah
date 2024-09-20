@@ -58,7 +58,8 @@ class Lectionary
             "Title",
             "Main Reading",
             "Additional Reading",
-            "Psalms"
+            "Psalms",
+            "Guest Speaker"
         );
         $service_results = $service_table->get(array("include" => join(",", $service)));
 
