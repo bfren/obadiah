@@ -4,6 +4,7 @@ namespace Obadiah\Pages\Rota;
 
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Psalms;
 use Obadiah\Request\Request;
 use Obadiah\Response\View;
 use Obadiah\Rota\Combined_Day;
@@ -50,7 +51,7 @@ App::check();
                                 <p class="bible mb-0">
                                     <?php
                                     if (count($combined_service->psalms)) {
-                                        $this->part("reading", model: sprintf("Psalms %s", join("; ", $combined_service->psalms)));
+                                        $this->part("reading", model: sprintf("%s %s", Psalms::pluralise($combined_service->psalms), join("; ", $combined_service->psalms)));
                                         _e(", ");
                                     }
 
