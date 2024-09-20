@@ -9,8 +9,6 @@ use Obadiah\Pages\Error\Error;
 use Obadiah\Pages\Home\Home;
 use Obadiah\Request\Request;
 use Obadiah\Response\Action;
-use Obadiah\Response\Redirect;
-use Obadiah\Response\View;
 use ReflectionClass;
 use Throwable;
 
@@ -68,19 +66,40 @@ class Router
 
         // add route
         $class = new ReflectionClass($endpoint_class);
-        $key = sprintf("%s%s", $uri_prefix, $uri_path ?: strtolower($class->getShortName()));
+        $key = trim(sprintf("%s/%s", $uri_prefix, $uri_path ?: strtolower($class->getShortName())), "/");
         self::$routes[$key] = $route;
     }
 
     /**
-     * Get a mapped route by endpoint name.
+     * Get a mapped route and the requested action by analysing the Request URI.
      *
-     * @param string $endpoint                      Endpoint name.
-     * @return Route|null                           Route, or null if the route cannot be found.
+     * @return Matched_Endpoint|null                Matched_Endpoint object, or null if the route cannot be found.
      */
-    public static function get_route(string $endpoint): ?Route
+    public static function match_route(): ?Matched_Endpoint
     {
-        return Arr::get(self::$routes, $endpoint);
+        // split URI to get page and action
+        $parts = Arr::match(explode("/", Request::$uri));
+
+        // search for endpoint without prefix
+        $endpoint_without_prefix = Arr::get($parts, 0, "home");
+        if (Arr::exists(self::$routes, $endpoint_without_prefix)) {
+            return new Matched_Endpoint(
+                route: Arr::get(self::$routes, $endpoint_without_prefix),
+                action: Arr::get($parts, 1, "index")
+            );
+        }
+
+        // search for endpoint with prefix
+        $endpoint_with_prefix = sprintf("%s/%s", Arr::get($parts, 0), Arr::get($parts, 1, "home"));
+        if (Arr::exists(self::$routes, $endpoint_with_prefix)) {
+            return new Matched_Endpoint(
+                route: Arr::get(self::$routes, $endpoint_with_prefix),
+                action: Arr::get($parts, 2, "index")
+            );
+        }
+
+        // return null as route cannot be found
+        return null;
     }
 
     /**
@@ -90,17 +109,15 @@ class Router
      */
     public static function get_action(): Action
     {
-        // split URI to get page and action
-        $parts = Arr::match(explode("/", Request::$uri));
-        $endpoint_name = Arr::get($parts, 0, "home");
-        $action_name = Arr::get($parts, 1, "index");
-
-        // get route
-        $route = self::get_route($endpoint_name);
-        if ($route === null) {
-            _l("Route not found for endpoint '%s'.", $endpoint_name);
+        // attempt to get route and action
+        $matched = self::match_route();
+        if ($matched === null) {
+            _l("Route not found for URI '%s'.", Request::$uri);
             return Error::not_found();
         }
+
+        $route = $matched->route;
+        $action_name = $matched->action;
 
         // check authentication
         if ($route->requires_auth && !Request::$session->is_authorised) {

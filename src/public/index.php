@@ -11,7 +11,7 @@ require_once "../app.class.php";
 App::init();
 
 // map api
-define("API_PREFIX", "api/");
+define("API_PREFIX", "api");
 Router::map_endpoint(A\Ajax\Ajax::class, uri_prefix: API_PREFIX);
 Router::map_endpoint(A\Preload\Preload::class, uri_prefix: API_PREFIX, requires_auth: false);
 Router::map_endpoint(A\Safeguarding\Safeguarding::class, uri_prefix: API_PREFIX);
