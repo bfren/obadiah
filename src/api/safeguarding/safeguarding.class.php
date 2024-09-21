@@ -33,8 +33,23 @@ class Safeguarding extends Endpoint
             return new Json($result->content);
         } else {
             _l("Unable to execute Baserow insert: %s.", json_encode($result->content));
-            return new Json(array("error" => $result->content, "data" => $row), $result->status);
+            return self::error(array("error" => $result->content, "data" => $row), $result->status);
         }
+    }
+
+    /**
+     * Returns an error as HTTP 200 if always_200 is set to true - to support Forminator WP Plugin.
+     *
+     * @param array $model                          Error model.
+     * @param int $status                           Status to return if always_200 is false.
+     * @return Json                                 Json response to return to the client.
+     */
+    private static function error(array $model, int $status) : Json
+    {
+        return match (Request::$get->bool("always_200")) {
+            true => new Json($model),
+            false => new Json($model, $status)
+        };
     }
 
     /**
@@ -57,7 +72,7 @@ class Safeguarding extends Endpoint
             if (Request::$get->bool("bypass_checks")) {
                 $dt = DateTime::now();
             } else {
-                return new Json(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
+                return self::error(array("error" => sprintf("Unable to parse date: %s.", $dt_string)), 400);
             }
         }
 
