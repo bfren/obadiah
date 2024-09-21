@@ -40,11 +40,11 @@ class Safeguarding extends Endpoint
     /**
      * Returns an error as HTTP 200 if always_200 is set to true - to support Forminator WP Plugin.
      *
-     * @param array $model                          Error model.
+     * @param mixed $model                          Error model.
      * @param int $status                           Status to return if always_200 is false.
      * @return Json                                 Json response to return to the client.
      */
-    private static function error(array $model, int $status) : Json
+    private static function error(mixed $model, int $status) : Json
     {
         return match (Request::$get->bool("always_200")) {
             true => new Json($model),
