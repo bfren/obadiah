@@ -1,4 +1,4 @@
-FROM bfren/nginx-php:php8.3-7.2.24
+FROM bfren/nginx-php:php8.3-7.3.0
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/obadiah"
 
