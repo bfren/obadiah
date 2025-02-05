@@ -46,12 +46,14 @@ class Builder
         // create an empty array to hold the combined rota
         $rota = [];
         $sunday_collect = "";
+        $sunday_additional_collect = "";
 
         foreach ($lectionary->days as $lectionary_day) {
             // update the Sunday collect
             $date = new DateTimeImmutable($lectionary_day->date);
             if ($date->format("N") == "7") {
                 $sunday_collect = $lectionary_day->collect;
+                $sunday_additional_collect = $lectionary_day->additional_collect;
             }
 
             // look for any services on this day
@@ -108,6 +110,7 @@ class Builder
                 name: $lectionary_day->name,
                 colour: $lectionary_day->colour,
                 collect: $lectionary_day->collect ?: $sunday_collect,
+                additional_collect: $lectionary_day->additional_collect ?: $sunday_additional_collect,
                 services: $c_services
             );
         }
@@ -236,10 +239,15 @@ class Builder
             $description[] = "";
         }
 
-        // add Collect
+        // add Collects
         if ($day->collect) {
             $description[] = "= Collect =";
             array_push($description, ...explode("\n", $day->collect));
+            $description[] = "";
+        }
+        if ($day->additional_collect) {
+            $description[] = "= Additional Collect =";
+            array_push($description, ...explode("\n", $day->additional_collect));
             $description[] = "";
         }
 

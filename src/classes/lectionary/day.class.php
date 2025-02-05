@@ -14,11 +14,12 @@ class Day
     /**
      * Create Day object.
      *
-     * @param string $date              String (sortable) representation of the date for this day in the lectionary.
-     * @param string|null $name         The name of this day in the lectionary (e.g. 8th after Trinity).
-     * @param string|null $colour       The liturgical colour of the day (e.g. White/Gold).
-     * @param string|null $collect      The Collect for today.
-     * @param Service[] $services       Array of services on this particular day, sorted by start time.
+     * @param string $date                      String (sortable) representation of the date for this day in the lectionary.
+     * @param string|null $name                 The name of this day in the lectionary (e.g. 8th after Trinity).
+     * @param string|null $colour               The liturgical colour of the day (e.g. White/Gold).
+     * @param string|null $collect              The Collect for today.
+     * @param string|null $additional_collect   The Additional Collect for today.
+     * @param Service[] $services               Array of services on this particular day, sorted by start time.
      * @return void
      */
     public function __construct(
@@ -26,6 +27,7 @@ class Day
         public readonly ?string $name,
         public readonly ?string $colour,
         public readonly ?string $collect,
+        public readonly ?string $additional_collect,
         public readonly array $services
     ) {}
 

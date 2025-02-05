@@ -68,11 +68,19 @@ class Day
             $description[] = "";
         }
 
-        // add collect
+        // add Collects
         if (($collect = Cache::get_lectionary()->get_collect($this->date)) !== null) {
             $lines = preg_split("/\n/", $collect);
             if ($lines !== false) {
                 $description[] = "= Collect =";
+                $description[] = join($separator, $lines);
+                $description[] = "";
+            }
+        }
+        if (($additional_collect = Cache::get_lectionary()->get_additional_collect($this->date)) !== null) {
+            $lines = preg_split("/\n/", $additional_collect);
+            if ($lines !== false) {
+                $description[] = "= Additional Collect =";
                 $description[] = join($separator, $lines);
                 $description[] = "";
             }

@@ -16,6 +16,7 @@ class Combined_Day
      * @param string|null $name                 The name of this day in the lectionary (e.g. 8th after Trinity).
      * @param string|null $colour               The liturgical colour of the day (e.g. White/Gold).
      * @param string $collect                   The Collect for today.
+     * @param string $additional_collect        The Additional Collect for today.
      * @param Combined_Service[] $services      Array of services on this particular day, sorted by start time.
      * @return void
      */
@@ -24,6 +25,7 @@ class Combined_Day
         public readonly ?string $name,
         public readonly ?string $colour,
         public readonly string $collect,
+        public readonly string $additional_collect,
         public readonly array $services
     ) {}
 }
