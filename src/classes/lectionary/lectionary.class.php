@@ -2,6 +2,7 @@
 
 namespace Obadiah\Lectionary;
 
+use Closure;
 use DateInterval;
 use DateTimeImmutable;
 use Obadiah\App;
@@ -43,7 +44,8 @@ class Lectionary
             "Date",
             "Name",
             "Colour",
-            "Collect"
+            "Collect",
+            "Additional Collect"
         );
         $day_results = $day_table->get(array("include" => join(",", $day)));
 
@@ -68,8 +70,8 @@ class Lectionary
         $series = [];
         foreach ($day_results as $day) {
             // check date - if it is not set, continue
-            $date = Arr::get($day, "Date", "");
-            if (!$date) {
+            $date = Arr::get($day, "Date");
+            if ($date == null) {
                 continue;
             }
 
@@ -107,6 +109,7 @@ class Lectionary
                 name: Arr::get($day, "Name"),
                 colour: Arr::get($day, "Colour"),
                 collect: Arr::get($day, "Collect"),
+                additional_collect: Arr::get($day, "Additional Collect"),
                 services: $l_services
             );
         }
@@ -124,24 +127,47 @@ class Lectionary
      * Get the Collect for the specified day - or the previous Sunday if there isn't one.
      *
      * @param DateTimeImmutable $dt     Date.
+     * @param Closure $get_collect
      * @return string|null              Collect or null if not found.
      */
-    public function get_collect(DateTimeImmutable $dt): ?string
+    private function get_collect_common(DateTimeImmutable $dt, Closure $get_collect): ?string
     {
-        // if this is a Lectionary day, return its collect
+        // if this is a Lectionary day, return its Collect
         $day = $this->get_day($dt);
         if ($day !== null) {
-            return $day->collect;
+            return $get_collect($day);
         }
 
-        // get the collect for the previous Sunday
+        // get the Collect for the previous Sunday
         $previous_sunday = $this->get_day($dt->modify("previous Sunday"));
         if ($previous_sunday !== null) {
-            return $previous_sunday->collect;
+            return $get_collect($previous_sunday);
         }
 
         // return nothing
         return null;
+    }
+
+    /**
+     * Get the Collect for the specified day - or the previous Sunday if there isn't one.
+     *
+     * @param DateTimeImmutable $dt     Date.
+     * @return string|null              Collect or null if not found.
+     */
+    public function get_collect(DateTimeImmutable $dt): ?string
+    {
+        return $this->get_collect_common($dt, fn (Day $day) => $day->collect);
+    }
+
+    /**
+     * Get the Additional Collect for the specified day - or the previous Sunday if there isn't one.
+     *
+     * @param DateTimeImmutable $dt     Date.
+     * @return string|null              Additional Collect or null if not found.
+     */
+    public function get_additional_collect(DateTimeImmutable $dt): ?string
+    {
+        return $this->get_collect_common($dt, fn (Day $day) => $day->additional_collect);
     }
 
     /**

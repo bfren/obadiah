@@ -85,7 +85,13 @@ App::check();
                             <?php if (Request::$get->bool("collect")) : ?>
                                 <!-- Collect -->
                                 <div class="collect">
-                                    <p class="mt-2 mb-0"><?php _h(str_replace("\n", "<br/>", $day->collect)); ?></p>
+                                    <p class="fw-bold mt-2 mb-0">Collect</p>
+                                    <p class="mb-0"><?php _h(str_replace("\n", "<br/>", $day->collect)); ?></p>
+                                </div>
+                                <!-- Additional Collect -->
+                                <div class="collect">
+                                    <p class="fw-bold mt-2 mb-0">Additional Collect</p>
+                                    <p class="mb-0"><?php _h(str_replace("\n", "<br/>", $day->additional_collect)); ?></p>
                                 </div>
                             <?php endif; ?>
 

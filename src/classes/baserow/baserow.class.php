@@ -111,7 +111,7 @@ class Baserow
         }
 
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // make request and return empty array on error
         $json = curl_exec($handle);
@@ -177,8 +177,8 @@ class Baserow
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(
             sprintf("Authorization: Token %s", $this->token)
         ));
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($handle, CURLOPT_POST, 1);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handle, CURLOPT_POST, true);
         curl_setopt($handle, CURLOPT_POSTFIELDS, $form);
 
         // make request and output on error

@@ -39,7 +39,7 @@ class Prayer_Calendar
         }
 
         // get matching people
-        $matching_people = Arr::map($hashes, fn(string $hash) => Arr::get($all_people, $hash, []));
+        $matching_people = Arr::map($hashes, fn(string $hash) => Arr::get($all_people, $hash));
 
         // sort and return
         self::sort_people($matching_people);

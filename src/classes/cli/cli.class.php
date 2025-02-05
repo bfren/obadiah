@@ -25,8 +25,8 @@ class Cli
      * Map a command string to an implementation class.
      *
      * @template T of Command
-     * @param string $command_name                  String to use on the commandline to execute a command.
-     * @param class-string<T> $command_class        Implementation class.
+     * @param string $command_name                      String to use on the commandline to execute a command.
+     * @param class-string<T> $command_class            Implementation class.
      * @return void
      */
     public static function map_command(string $command_name, string $command_class)
@@ -41,10 +41,21 @@ class Cli
     }
 
     /**
+     * Get a strongly-typed ReflectionClass object for the specified command.
+     *
+     * @param class-string<Command> $command_class      Command class string.
+     * @return ReflectionClass<Command>                 ReflectionClass object.
+     */
+    private static function get_reflection_class(string $command_class) : ReflectionClass
+    {
+        return new ReflectionClass($command_class);
+    }
+
+    /**
      * Parse arguments and return a matching command.
      *
-     * @param string[] $args                        The arguments to parse (usually $argv).
-     * @return Command                              The matching Command object.
+     * @param string[] $args                            The arguments to parse (usually $argv).
+     * @return Command                                  The matching Command object.
      */
     public static function get_command(array $args): Command
     {
@@ -62,7 +73,7 @@ class Cli
         }
 
         // get any argument parameters
-        $command_class_info = new ReflectionClass($command_class);
+        $command_class_info = self::get_reflection_class($command_class);
         $command_args = [];
         foreach ($command_class_info->getProperties() as $prop) {
             // get properties with the Argument parameter
@@ -114,8 +125,8 @@ class Cli
     /**
      * Parse and sanitise arguments (e.g. remove duplicates).
      *
-     * @param string[] $args                        Array of arguments to sanitise.
-     * @return array<string, mixed>                 Sanitised arguments as key => value pair.
+     * @param string[] $args                            Array of arguments to sanitise.
+     * @return array<string, mixed>                     Sanitised arguments as key => value pair.
      */
     private static function parse_args(array $args): array
     {
@@ -150,8 +161,8 @@ class Cli
     /**
      * Return Unknown command.
      *
-     * @param string $command_name                  Requested command.
-     * @return Command                              Unknown command.
+     * @param string $command_name                      Requested command.
+     * @return Command                                  Unknown command.
      */
     private static function unknown(string $command_name): Command
     {
@@ -162,8 +173,8 @@ class Cli
      * Create Command without any constructor args.
      *
      * @template T of Command
-     * @param ReflectionClass<T> $command_class_info   Mapped command class.
-     * @return T                              Command object.
+     * @param ReflectionClass<T> $command_class_info    Mapped command class.
+     * @return T                                        Command object.
      */
     private static function command_without_args(ReflectionClass $command_class_info): Command
     {
@@ -173,10 +184,10 @@ class Cli
     /**
      * Return Argument_Missing command.
      *
-     * @param string $command_name                  Requested command.
-     * @param string $arg_long                      Long form of the missing argument.
-     * @param string|null $arg_short                Optional short form of the missing argument.
-     * @return Command                              Argument_Missing command.
+     * @param string $command_name                      Requested command.
+     * @param string $arg_long                          Long form of the missing argument.
+     * @param string|null $arg_short                    Optional short form of the missing argument.
+     * @return Command                                  Argument_Missing command.
      */
     private static function argument_missing(string $command_name, string $arg_long, ?string $arg_short): Command
     {
@@ -187,9 +198,9 @@ class Cli
      * Return Class_Not_Found command.
      *
      * @template T of Command
-     * @param ReflectionClass<T> $command_class_info   Mapped command class.
-     * @param mixed[] $args                         Constructor args.
-     * @return T                              Command object.
+     * @param ReflectionClass<T> $command_class_info    Mapped command class.
+     * @param mixed[] $args                             Constructor args.
+     * @return T                                        Command object.
      */
     private static function command_with_args(ReflectionClass $command_class_info, array $args): Command
     {
@@ -199,8 +210,8 @@ class Cli
     /**
      * Return Invalid command.
      *
-     * @param string $command_class                 Mapped command class.
-     * @return Command                              Invalid command.
+     * @param string $command_class                     Mapped command class.
+     * @return Command                                  Invalid command.
      */
     private static function invalid(string $command_class): Command
     {

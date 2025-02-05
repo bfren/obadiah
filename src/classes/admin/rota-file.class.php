@@ -28,11 +28,11 @@ class Rota_File
         if (!$name) App::die("You must enter the rota name, e.g. 22-2.");
 
         // get paths
-        $tmp_path = Arr::get($info, "tmp_name", "");
+        $tmp_path = Arr::get($info, "tmp_name");
         $csv_path = sprintf("%s/%s.csv", C::$dir->rota, $name);
 
         // move file to the correct location, overwriting whatever is already there
-        if ($tmp_path && move_uploaded_file($tmp_path, $csv_path)) {
+        if (is_string($tmp_path) && move_uploaded_file($tmp_path, $csv_path)) {
             Cache::clear_rota();
             return Result::success(sprintf("The rota file '%s' was uploaded successfully.", $name));
         }

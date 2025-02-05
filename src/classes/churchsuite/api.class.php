@@ -54,7 +54,7 @@ class Api
             sprintf("X-Application: %s", C::$churchsuite->api_application),
             sprintf("X-Auth: %s", C::$churchsuite->api_key)
         ));
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // make request - on error log and return null
         $json = curl_exec($handle);

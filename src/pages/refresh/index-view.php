@@ -82,6 +82,12 @@ $this->header(new Header_Model("Refresh"));
             <h3 class="mt-3">Collect</h3>
             <p class="small text-muted">These are set prayers used by the Church of England to gather (or &lsquo;collect&rsquo;) people and prayers together. Normally they reflect the church calendar or a particular saint.</p>
             <?php _h(str_replace("\n", "<br />", $collect)); ?>
+
+            <?php if (($additional_collect = Cache::get_lectionary()->get_additional_collect($model->today->date)) !== null) : ?>
+                <h3 class="mt-3">Additional Collect</h3>
+                <p class="small text-muted">These are similar to the main Collect but with simpler language.</p>
+                <?php _h(str_replace("\n", "<br />", $additional_collect)); ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 
