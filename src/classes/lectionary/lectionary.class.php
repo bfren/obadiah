@@ -70,8 +70,8 @@ class Lectionary
         $series = [];
         foreach ($day_results as $day) {
             // check date - if it is not set, continue
-            $date = Arr::get($day, "Date", "");
-            if (!$date) {
+            $date = Arr::get($day, "Date");
+            if ($date == null) {
                 continue;
             }
 
@@ -127,7 +127,7 @@ class Lectionary
      * Get the Collect for the specified day - or the previous Sunday if there isn't one.
      *
      * @param DateTimeImmutable $dt     Date.
-     * @param-closure-this ?string $get_collect
+     * @param Closure $get_collect
      * @return string|null              Collect or null if not found.
      */
     private function get_collect_common(DateTimeImmutable $dt, Closure $get_collect): ?string

@@ -90,7 +90,7 @@ class Events extends Endpoint
             return [];
         }
 
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // get calendar JSON
         $json = curl_exec($handle);
@@ -109,11 +109,11 @@ class Events extends Endpoint
         $events = [];
         foreach ($calendar as $event) {
             // get title
-            $title = Arr::get($event, "name");
+            $title = Arr::get($event, "name", "Unknown");
 
             // get status - can be 'confirmed', 'pending' or 'cancelled'
             // add flag to title if necessary
-            $status = Arr::get($event, "status", "");
+            $status = Arr::get($event, "status");
             if ($status == "cancelled") {
                 $title = sprintf("%s %s", C::$events->cancelled_flag, $title);
             } else if ($status == "pending") {
@@ -122,7 +122,7 @@ class Events extends Endpoint
 
             // get location
             $location_data = Arr::get($event, "location", []);
-            if (($address = Arr::get($location_data, "address", "")) !== "") {
+            if (($address = Arr::get($location_data, "address")) != null) {
                 $location = $address;
             } else {
                 $location = Arr::get($location_data, "name", C::$events->default_location);

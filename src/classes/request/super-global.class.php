@@ -12,7 +12,7 @@ class Super_Global
     /**
      * Create object.
      *
-     * @param int $type                 Superglobal type (e.g. INPUT_GET).
+     * @param 0|1|2|4|5 $type           Superglobal type (e.g. INPUT_GET).
      * @return void
      */
     public function __construct(
