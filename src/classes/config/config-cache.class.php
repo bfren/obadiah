@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Cache
+class Config_Cache extends Config_Section
 {
     /**
      * Duration in seconds before cache entries expire.
@@ -25,5 +25,12 @@ class Config_Cache
     public function __construct(array $config)
     {
         $this->duration_in_seconds = Arr::get_integer($config, "duration_in_seconds", 3600);
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "duration_in_seconds" => $this->duration_in_seconds,
+        ];
     }
 }

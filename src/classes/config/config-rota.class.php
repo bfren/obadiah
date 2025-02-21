@@ -5,10 +5,11 @@ namespace Obadiah\Config;
 use DateInterval;
 use Obadiah\App;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\DateTime;
 
 App::check();
 
-class Config_Rota
+class Config_Rota extends Config_Section
 {
     /**
      * The Bible version to use for links on rota pages.
@@ -55,5 +56,20 @@ class Config_Rota
             $ministries[] = new Config_Rota_Ministry($ministry);
         }
         $this->ministries = $ministries;
+    }
+
+    public function as_array(): array
+    {
+        $ministries = [];
+        foreach ($this->ministries as $ministry) {
+            $ministries[] = $ministry->as_array();
+        }
+
+        return [
+            "bible_version" => $this->bible_version,
+            "default_days" => $this->default_days,
+            "default_length" => DateTime::get_interval_spec($this->default_length),
+            "ministries" => $ministries,
+        ];
     }
 }

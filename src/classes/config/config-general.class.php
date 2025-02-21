@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_General
+class Config_General extends Config_Section
 {
     /**
      * The name of your church (e.g. 'Christ Church').
@@ -49,5 +49,15 @@ class Config_General
         $this->church_name_full = Arr::get($config, "church_name_full", "");
         $this->church_domain = Arr::get($config, "church_domain", "");
         $this->production = Arr::get_boolean($config, "production", true);
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "church_domain" => $this->church_domain,
+            "church_name_full" => $this->church_name_full,
+            "church_name" => $this->church_name,
+            "production" => $this->production,
+        ];
     }
 }

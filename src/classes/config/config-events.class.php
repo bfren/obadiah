@@ -8,7 +8,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Events
+class Config_Events extends Config_Section
 {
     /**
      * Prepended to events that have a status of 'cancelled'.
@@ -58,5 +58,16 @@ class Config_Events
         $this->length_in_minutes = Arr::get_integer($config, "length_in_minutes", 60);
         $this->pending_flag = Arr::get($config, "pending_flag", "[tbc]");
         $this->timezone = new DateTimeZone(Arr::get($config, "timezone", "Europe/London"));
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "cancelled_flag" => $this->cancelled_flag,
+            "default_location" => $this->default_location,
+            "length_in_minutes" => $this->length_in_minutes,
+            "pending_flag" => $this->pending_flag,
+            "timezone" => $this->timezone->getName(),
+        ];
     }
 }

@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Formats
+class Config_Formats extends Config_Section
 {
     /**
      * Church Suite CSV import date time.
@@ -117,9 +117,28 @@ class Config_Formats
         $this->ics_date = Arr::get($config, "ics_date", "Ymd");
         $this->ics_datetime = Arr::get($config, "ics_datetime", "Ymd\THis");
         $this->json_datetime = Arr::get($config, "json_datetime", "Y-m-d\TH:i:sO");
-        $this->refresh_date = Arr::get($config, "refresh_date", "d/n");
         $this->prayer_month_id = Arr::get($config, "prayer_month_id", "Y-m");
+        $this->refresh_date = Arr::get($config, "refresh_date", "d/n");
         $this->sortable_date = Arr::get($config, "sortable_date", "Y-m-d");
         $this->sortable_datetime = Arr::get($config, "sortable_datetime", "Y-m-d H:i");
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "csv_import_datetime" => $this->csv_import_datetime,
+            "display_date" => $this->display_date,
+            "display_day_and_month" => $this->display_day_and_month,
+            "display_day" => $this->display_day,
+            "display_month" => $this->display_month,
+            "display_time" => $this->display_time,
+            "ics_date" => $this->ics_date,
+            "ics_datetime" => $this->ics_datetime,
+            "json_datetime" => $this->json_datetime,
+            "prayer_month_id" => $this->prayer_month_id,
+            "refresh_date" => $this->refresh_date,
+            "sortable_date" => $this->sortable_date,
+            "sortable_datetime" => $this->sortable_datetime,
+        ];
     }
 }

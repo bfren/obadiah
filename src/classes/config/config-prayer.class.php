@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Prayer
+class Config_Prayer extends Config_Section
 {
     /**
      * Who / what to pray for on the 29th day of the month.
@@ -49,5 +49,15 @@ class Config_Prayer
         $this->day_30 = Arr::get($config, "day_30", []);
         $this->day_31 = Arr::get($config, "day_31", []);
         $this->show_last_name = Arr::get_boolean($config, "show_last_name", false);
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "day_29" => $this->day_29,
+            "day_30" => $this->day_30,
+            "day_31" => $this->day_31,
+            "show_last_name" => $this->show_last_name,
+        ];
     }
 }
