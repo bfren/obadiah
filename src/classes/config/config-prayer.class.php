@@ -31,6 +31,13 @@ class Config_Prayer extends Config_Section
     public readonly array $day_31;
 
     /**
+     * The number of recent months to show by default.
+     *
+     * @var int
+     */
+    public readonly int $show_recent_months;
+
+    /**
      * Whether or not to show the full last name for everyone, or an initial.
      *
      * @var bool
@@ -49,6 +56,7 @@ class Config_Prayer extends Config_Section
         $this->day_30 = Arr::get($config, "day_30", []);
         $this->day_31 = Arr::get($config, "day_31", []);
         $this->show_last_name = Arr::get_boolean($config, "show_last_name", false);
+        $this->show_recent_months = Arr::get_integer($config, "show_recent_months", 6);
     }
 
     public function as_array(): array
@@ -58,6 +66,7 @@ class Config_Prayer extends Config_Section
             "day_30" => $this->day_30,
             "day_31" => $this->day_31,
             "show_last_name" => $this->show_last_name,
+            "show_recent_months" => $this->show_recent_months,
         ];
     }
 }
