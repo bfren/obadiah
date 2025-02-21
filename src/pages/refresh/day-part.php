@@ -40,6 +40,7 @@ if ($model->day->format("N") == 7) {
                 <div class="fw-bold"><?php _e($lectionary_day->name); ?></div>
                 <div class="people text-body-secondary">Give thanks for those serving in today&rsquo;s services.</div>
                 <?php foreach ($services as $service) : ?>
+                    <?php if (empty($service->main_reading)) continue; ?>
                     <div class="service d-flex">
                         <div class="time"><?php _e($service->time); ?></div>
                         <div class="teaching">
