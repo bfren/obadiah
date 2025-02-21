@@ -116,8 +116,6 @@ class Config
         // read configuration file and store values
         $config = self::read_config_file();
         self::store_config($config);
-
-        self::save_config_file();
     }
 
     /**
@@ -147,10 +145,14 @@ class Config
     private static function read_config_file(): array
     {
         $config_file = self::get_config_file();
-        $config = yaml_parse_file($config_file); print_r($config);
-        return $config;
+        return yaml_parse_file($config_file);
     }
 
+    /**
+     * Save current config to YAML configuration file.
+     *
+     * @return void
+     */
     private static function save_config_file(): void
     {
         // create config object
@@ -167,21 +169,21 @@ class Config
             "rota" => self::$rota->as_array()
         ];
 
-        print_r($config);
-
         // save as yaml file
         $config_file = self::get_config_file();
-        //yaml_emit_file($config_file->getFilename(), $config);
+        yaml_emit_file($config_file->getFilename(), $config);
     }
 
     /**
      * Store configuration from value of arrays.
      *
      * @param array $config                         Config values.
+     * @param bool $save_file                       If true, the config will be persisted to YAML configuration file.
      * @return void
      */
-    private static function store_config(array $config): void
+    public static function store_config(array $config, bool $save_file = false): void
     {
+        // store values
         self::$baserow = new Config_Baserow(Arr::get_required($config, "baserow"));
         self::$cache = new Config_Cache(Arr::get_required($config, "cache"));
         self::$churchsuite = new Config_ChurchSuite(Arr::get_required($config, "churchsuite"));
@@ -192,5 +194,10 @@ class Config
         self::$prayer = new Config_Prayer(Arr::get_required($config, "prayer"));
         self::$refresh = new Config_Refresh(Arr::get_required($config, "refresh"));
         self::$rota = new Config_Rota(Arr::get_required($config, "rota"));
+
+        // save file
+        if ($save_file) {
+            self::save_config_file();
+        }
     }
 }
