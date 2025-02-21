@@ -89,7 +89,7 @@ class Rota
                 }
 
                 // include the service if the row counts match and there is a service assigned
-                if ($include && count($header_row) == count($row) && $row[1] != "No service") {
+                if ($include && count($header_row) == count($row) && !str_starts_with($row[0], "Key:") && $row[1] != "No service") {
                     // create service
                     $service = new Service($header_row, $row);
                     $services[] = $service;
