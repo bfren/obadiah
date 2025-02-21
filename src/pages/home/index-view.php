@@ -34,7 +34,8 @@ $this->header(new Header_Model("Home", subtitle: "Welcome to Obadiah, church adm
 
 <?php if (Request::$session->is_admin) : ?>
     <h2>Caches</h2>
-    <p><a href="/api/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <p><a href="javascript:reload_caches()">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <div id="reload"></div>
 <?php endif; ?>
 
 <?php
