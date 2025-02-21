@@ -42,7 +42,11 @@ $this->alert($model->result);
 </form>
 
 <?php if ($model->rota_files) : ?>
-    <p>The following files are currently uploaded:</p>
+    <?php if ($model->all) : ?>
+        <p>Showing all uploaded files. Click <a href="?all=false">here</a> to see the most recent <?php _e("%s", C::$rota->show_recent_files); ?>.</p>
+    <?php else: ?>
+        <p>Showing the <?php _e("%s", C::$rota->show_recent_files); ?> most recent uploaded files. Click <a href="?all=true">here</a> to see them all.</p>
+    <?php endif; ?>
     <ul>
         <?php foreach ($model->rota_files as $file) : ?>
             <li>

@@ -19,7 +19,7 @@ $refresh_print_uri = sprintf("/refresh/print/?%s", http_build_query($model->refr
 $refresh_feed_uri = sprintf("webcal://%s/refresh/ics/?%s", Request::$host, http_build_query($model->refresh_feed));
 
 // output header
-$this->header(new Header_Model("Home", subtitle: "These pages house the various feeds generated from Church Suite."));
+$this->header(new Header_Model("Home", subtitle: "Welcome to Obadiah, church administration software."));
 
 ?>
 
@@ -34,7 +34,8 @@ $this->header(new Header_Model("Home", subtitle: "These pages house the various 
 
 <?php if (Request::$session->is_admin) : ?>
     <h2>Caches</h2>
-    <p><a href="/api/preload?debug=true">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <p><a href="javascript:reload_caches()">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
+    <div id="reload"></div>
 <?php endif; ?>
 
 <?php

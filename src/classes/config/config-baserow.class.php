@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Baserow
+class Config_Baserow extends Config_Section
 {
     /**
      * API URI.
@@ -104,5 +104,21 @@ class Config_Baserow
         # Tokens - Lectionary and Safer Recruitment information should not be stored in the same database
         $this->lectionary_token = Arr::get($config, "lectionary_token", "");
         $this->safeguarding_token = Arr::get($config, "safeguarding_token", "");
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "api_uri" => $this->api_uri,
+            "concern_table_id" => $this->concern_table_id,
+            "day_table_id" => $this->day_table_id,
+            "day_view_id" => $this->day_view_id,
+            "declaration_table_id" => $this->declaration_table_id,
+            "lectionary_token" => $this->lectionary_token,
+            "reference_table_id" => $this->reference_table_id,
+            "safeguarding_token" => $this->safeguarding_token,
+            "service_table_id" => $this->service_table_id,
+            "service_view_id" => $this->service_view_id,
+        ];
     }
 }

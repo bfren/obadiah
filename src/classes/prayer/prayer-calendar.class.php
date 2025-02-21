@@ -101,9 +101,10 @@ class Prayer_Calendar
     /**
      * Get filenames of months that have been created for the prayer calendar.
      *
+     * @param $all                      If true, all months will be returned - otherwise just the most recent.
      * @return string[]                 Array of months.
      */
-    public static function get_months(): array
+    public static function get_months(bool $all = false): array
     {
         // get saved month files
         $files = glob(sprintf("%s/*.month", C::$dir->prayer));
@@ -113,6 +114,11 @@ class Prayer_Calendar
         sort($files);
 
         // return each month without the '.month' extension
-        return str_replace(array(C::$dir->prayer, "/", ".month"), "", $files);
+        $months = str_replace(array(C::$dir->prayer, "/", ".month"), "", $files);
+        if ($all) {
+            return $months;
+        } else {
+            return array_slice($months, C::$prayer->show_recent_months * -1);
+        }
     }
 }

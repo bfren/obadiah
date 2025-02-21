@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Rota_Ministry
+class Config_Rota_Ministry extends Config_Section
 {
     /**
      * The Church Suite ministry name (e.g. 'Readings').
@@ -41,5 +41,14 @@ class Config_Rota_Ministry
         $this->name = Arr::get($config, "name", "");
         $this->description = Arr::get($config, "desc");
         $this->abbreviation = Arr::get($config, "abbv");
+    }
+
+    public function as_array(): array
+    {
+        return array_filter([
+            "name" => $this->name,
+            "desc" => $this->description,
+            "abbv" => $this->abbreviation,
+        ]);
     }
 }

@@ -13,4 +13,8 @@ div>h2:first-child {
 
 p {
     margin-bottom: 0.5rem;
+
+    &.about {
+        max-width: 600px;
+    }
 }

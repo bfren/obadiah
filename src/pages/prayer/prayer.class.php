@@ -34,10 +34,12 @@ class Prayer extends Endpoint
      */
     public function index_get(): View
     {
+        $all = Request::$get->bool("all");
         $next_month = new DateTimeImmutable("next month");
         return new View("prayer", model: new Index_Model(
             result: $this->result,
-            months: Prayer_Calendar::get_months(),
+            all: $all,
+            months: Prayer_Calendar::get_months($all),
             next_month: $next_month->format(C::$formats->prayer_month_id)
         ));
     }

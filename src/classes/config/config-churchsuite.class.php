@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_ChurchSuite
+class Config_ChurchSuite extends Config_Section
 {
     /**
      * Church Suite API application.
@@ -57,5 +57,16 @@ class Config_ChurchSuite
         $this->org = Arr::get($config, "org", "");
         $this->tag_id_adults = Arr::get_integer($config, "tag_id_adults", 0);
         $this->tag_id_children = Arr::get_integer($config, "tag_id_children", 0);
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "api_application" => $this->api_application,
+            "api_key" => $this->api_key,
+            "org" => $this->org,
+            "tag_id_adults" => $this->tag_id_adults,
+            "tag_id_children" => $this->tag_id_children,
+        ];
     }
 }

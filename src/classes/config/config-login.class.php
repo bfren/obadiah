@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Login
+class Config_Login extends Config_Section
 {
     /**
      * Admin passphrase.
@@ -49,5 +49,15 @@ class Config_Login
         $this->api = Arr::get($config, "api", "");
         $this->max_attempts = Arr::get_integer($config, "max_attempts", 5);
         $this->pass = Arr::get($config, "pass", "");
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "admin" => $this->admin,
+            "api" => $this->api,
+            "max_attempts" => $this->max_attempts,
+            "pass" => $this->pass,
+        ];
     }
 }
