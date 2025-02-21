@@ -139,7 +139,6 @@ class Config
     /**
      * Read YAML configuration file into an array.
      *
-     * @param SplFileInfo $config_file              Config file object.
      * @return mixed[]                              Configuration object.
      */
     private static function read_config_file(): array
@@ -177,7 +176,7 @@ class Config
     /**
      * Store configuration from value of arrays.
      *
-     * @param array $config                         Config values.
+     * @param array<string, mixed> $config          Config values.
      * @param bool $save_file                       If true, the config will be persisted to YAML configuration file.
      * @return void
      */

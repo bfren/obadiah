@@ -11,7 +11,7 @@ abstract class Config_Section
     /**
      * Return the config values as an array, ready to be serialised.
      *
-     * @return array            Config values as an array.
+     * @return array<string, mixed>     Config values as an array.
      */
     abstract public function as_array(): array;
 }
