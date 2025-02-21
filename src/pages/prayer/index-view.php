@@ -24,9 +24,9 @@ $this->alert($model->result);
 
 <?php if ($model->months) : ?>
     <?php if ($model->all) : ?>
-        <p>Showing all months.  Click <a href="?all=false">here</a> to see the most recent <?php _e(C::$prayer->show_recent_months); ?>.</p>
+        <p>Showing all months.  Click <a href="?all=false">here</a> to see the most recent <?php _e("%s", C::$prayer->show_recent_months); ?>.</p>
     <?php else: ?>
-        <p>Showing the <?php _e(C::$prayer->show_recent_months); ?> most recent months.  Click <a href="?all=true">here</a> to see them all.</p>
+        <p>Showing the <?php _e("%s", C::$prayer->show_recent_months); ?> most recent months.  Click <a href="?all=true">here</a> to see them all.</p>
     <?php endif; ?>
     <ul>
         <?php foreach ($model->months as $month) : ?>

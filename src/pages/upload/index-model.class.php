@@ -13,6 +13,7 @@ class Index_Model
      * Create Index model.
      *
      * @param Result|null $result       Operation result.
+     * @param bool $all                 Whether or not all files are being displayed.
      * @param Rota_Period $rota         The first day of the rota period.
      * @param Rota_Period $next_rota    The last day of the rota period.
      * @param mixed[] $rota_files       Array of uploaded rota files.
@@ -21,6 +22,7 @@ class Index_Model
      */
     public function __construct(
         public readonly ?Result $result,
+        public readonly bool $all,
         public readonly Rota_Period $rota,
         public readonly Rota_Period $next_rota,
         public readonly array $rota_files,

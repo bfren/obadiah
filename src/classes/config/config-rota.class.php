@@ -40,6 +40,13 @@ class Config_Rota extends Config_Section
     public readonly array $ministries;
 
     /**
+     * The number of recent uploaded files to show by default.
+     *
+     * @var int
+     */
+    public readonly int $show_recent_files;
+
+    /**
      * Get values from rota configuration array.
      *
      * @param mixed[] $config           Rota configuration array.
@@ -50,6 +57,7 @@ class Config_Rota extends Config_Section
         $this->bible_version = Arr::get($config, "bible_version", "NIVUK");
         $this->default_days = Arr::get_integer($config, "default_days", 28);
         $this->default_length = new DateInterval(Arr::get($config, "default_length", "PT60M"));
+        $this->show_recent_files = Arr::get_integer($config, "show_recent_files", 4);
 
         $ministries = [];
         foreach (Arr::get($config, "ministries", []) as $ministry) {
@@ -70,6 +78,7 @@ class Config_Rota extends Config_Section
             "default_days" => $this->default_days,
             "default_length" => DateTime::get_interval_spec($this->default_length),
             "ministries" => $ministries,
+            "show_recent_files" => $this->show_recent_files,
         ];
     }
 }
