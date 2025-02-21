@@ -25,6 +25,7 @@ Router::map_endpoint(P\Robots\Robots::class, uri_path: "robots.txt", requires_au
 Router::map_endpoint(P\Rota\Rota::class);
 Router::map_endpoint(P\Services\Services::class, requires_auth: false);
 Router::map_endpoint(P\Upload\Upload::class, requires_admin: true);
+Router::map_endpoint(P\About\About::class);
 
 // get and execute page action
 $action = Router::get_action();

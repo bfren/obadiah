@@ -18,6 +18,7 @@ if (Request::$session->is_authorised) {
         "Home" => "/",
         "Rota" => "/rota",
         "Refresh" => "/refresh",
+        "About" => "/about",
         "Log Out" => "/auth/logout"
     );
     if (Request::$session->is_admin) {
