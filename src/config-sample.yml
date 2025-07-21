@@ -1,0 +1,73 @@
+---
+general:
+  church_domain:
+  church_name_full:
+  church_name:
+  production: false
+baserow:
+  api_uri:
+  concern_table_id:
+  day_table_id:
+  day_view_id:
+  declaration_table_id:
+  lectionary_token:
+  reference_table_id:
+  safeguarding_token:
+  service_table_id:
+  service_view_id:
+cache:
+  duration_in_seconds: 3600
+churchsuite:
+  api_application: obadiah
+  api_key:
+  org:
+  tag_id_adults: 30
+  tag_id_children: 31
+events:
+  cancelled_flag: '[Cancelled]'
+  default_location: Church
+  length_in_minutes: 60
+  pending_flag: '[tbc]'
+  timezone: Europe/London
+formats:
+  csv_import_datetime: d-M-Yg:ia
+  display_date: D j M Y
+  display_day_and_month: j F
+  display_day: D jS
+  display_month: F Y
+  display_time: H:i
+  ics_date: Ymd
+  ics_datetime: Ymd\THis
+  json_datetime: Y-m-d\TH:i:sO
+  prayer_month_id: Y-m
+  refresh_date: d/n
+  sortable_date: Y-m-d
+  sortable_datetime: Y-m-d H:i
+login:
+  admin:
+  api:
+  max_attempts: 5
+  pass:
+prayer:
+  day_29: []
+  day_30: []
+  day_31: []
+  show_last_name: true
+  show_recent_months: 4
+refresh:
+  days_before: 7
+  days_after: 2
+  footer_page_1_left: If you don&rsquo;t know someone, or don&rsquo;t know what to
+    say, you could pray...
+  footer_page_1_right: <strong>&lsquo;Father, may <em>N</em> know your love, be filled
+    with your Spirit, and share Jesus in all they do and say.&rsquo;</strong>
+  footer_page_2_left: Privacy Policy
+  footer_page_2_right: If you don&rsquo;t wish to be included, you can remove yourself
+    in My Church Suite or by contacting the office.
+rota:
+  bible_version: NIVUK
+  default_days: 28
+  default_length: PT60M
+  ministries:
+  show_recent_files: 6
+...
