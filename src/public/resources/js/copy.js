@@ -7,7 +7,7 @@ clipboard.on("success", function(e) {
 });
 
 clipboard.on("error", function(e) {
-    alert("Something went wrong, plese try copying manually: " + e.text);
+    alert("Something went wrong, please try copying manually: " + e.text);
     console.error("Action:", e.action);
     console.error("Trigger:", e.trigger);
 });
