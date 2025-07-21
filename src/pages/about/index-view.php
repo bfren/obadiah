@@ -20,10 +20,10 @@ $this->header(new Header_Model("About", subtitle: "More information about Obadia
 <h2>Why &lsquo;Obadiah&rsquo;?</h2>
 <p class="about">
     Obadiah was the faithful palace administrator during the time of Ahab. He supported Elijah and saved 100 prophets from Jezebel.
-    It seems to me like his is a good name to use for a piece of software that supports effective church administration.
+    It seems like his is a good name to use for a piece of software that supports effective church administration.
 </p>
 <p>
-    (See <a href="https://www.biblegateway.com/passage/?search=1%20Kings%2018&version=NIVUK" target="_blank">1 Kings 18</a>.)
+    (See <a href="https://www.biblegateway.com/passage/?search=1+Kings+18&version=NIVUK" target="_blank">1 Kings 18</a>.)
 </p>
 
 <h2>What does Obadiah do?</h2>
