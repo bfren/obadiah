@@ -13,7 +13,7 @@ class Rota_Period
     /**
      * Church Suite rota download URI.
      */
-    private const ROTA_HREF = "https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?%s";
+    private const ROTA_HREF = "https://%s.churchsuite.com/rotas/reports/rotas_overview?%s";
 
     /**
      * Create Rota Period model.
