@@ -16,4 +16,4 @@ App::check();
     class="form-control"
     id="<?php _e("%s", $model->name); ?>"
     name="<?php _e("%s", $model->name); ?>"
-    value="<?php _h("%s", $model->value) ?>" />
+    value="<?php _e("%s", $model->value) ?>" />
