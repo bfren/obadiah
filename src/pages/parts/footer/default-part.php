@@ -28,12 +28,15 @@ App::check();
 <!-- Copy -->
 <script src="/resources/js/clipboard.min.js"></script>
 <script src="/resources/js/copy.js?v=<?php _e(App::$version); ?>"></script>
-<script src="/resources/js/home.js?v=<?php _e(App::$version); ?>"></script>
 
 <!-- Prayer Calendar -->
 <script src="/resources/js/axios.min.js"></script>
 <script src="/resources/js/dragula.min.js"></script>
 <script src="/resources/js/prayer.js?v=<?php _e(App::$version); ?>"></script>
+
+<!-- Other Pages -->
+<script src="/resources/js/home.js?v=<?php _e(App::$version); ?>"></script>
+<script src="/resources/js/settings.js?v=<?php _e(App::$version); ?>"></script>
 
 </body>
 
