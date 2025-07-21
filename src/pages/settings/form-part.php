@@ -15,7 +15,7 @@ $values = $model->values->as_array();
 
 ?>
 
-<form id="<?php _e("%s", $model->id); ?>" class="mb-5">
+<form id="<?php _e("%s", $model->id); ?>" class="settings">
     <?php foreach ($values as $key => $value): $type = gettype($value);
         if (!$model->is_supported($type)) continue; ?>
         <div class="row mb-1">
@@ -25,4 +25,6 @@ $values = $model->values->as_array();
             </div>
         </div>
     <?php endforeach; ?>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <span class="ps-3 error text-danger"></span>
 </form>

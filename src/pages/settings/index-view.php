@@ -15,39 +15,47 @@ App::check();
 /** @var Index_Model $model */
 
 // output header
-$this->header(new Header_Model("Settings", subtitle: "Configure the various settings controlling how Obadiah works."));
+$this->header(new Header_Model("Settings", subtitle: "Here be dragons! Only adjust these values if you know what you are doing."));
 
 ?>
 
-<h2>General</h2>
-<?php $this->part("form", model: new Form_Model("general", values: C::$general)); ?>
+<p class="my-3">
+    Click <a data-bs-toggle="collapse" href="#settings">here</a> to show/hide values.
+</p>
 
-<h2>Baserow</h2>
-<?php $this->part("form", model: new Form_Model("baserow", values: C::$baserow)); ?>
+<div class="mb-5 collapse" id="settings">
 
-<h2>Cache</h2>
-<?php $this->part("form", model: new Form_Model("cache", values: C::$cache)); ?>
+    <h2 class="mt-0">General</h2>
+    <?php $this->part("form", model: new Form_Model("general", values: C::$general)); ?>
 
-<h2>Church Suite</h2>
-<?php $this->part("form", model: new Form_Model("churchsuite", values: C::$churchsuite)); ?>
+    <h2>Baserow</h2>
+    <?php $this->part("form", model: new Form_Model("baserow", values: C::$baserow)); ?>
 
-<h2>Events</h2>
-<?php $this->part("form", model: new Form_Model("events", values: C::$events)); ?>
+    <h2>Cache</h2>
+    <?php $this->part("form", model: new Form_Model("cache", values: C::$cache)); ?>
 
-<h2>Formats</h2>
-<?php $this->part("form", model: new Form_Model("formats", values: C::$formats)); ?>
+    <h2>Church Suite</h2>
+    <?php $this->part("form", model: new Form_Model("churchsuite", values: C::$churchsuite)); ?>
 
-<h2>Login</h2>
-<?php $this->part("form", model: new Form_Model("login", values: C::$login)); ?>
+    <h2>Events</h2>
+    <?php $this->part("form", model: new Form_Model("events", values: C::$events)); ?>
 
-<h2>Prayer</h2>
-<?php $this->part("form", model: new Form_Model("prayer", values: C::$prayer)); ?>
+    <h2>Formats</h2>
+    <?php $this->part("form", model: new Form_Model("formats", values: C::$formats)); ?>
 
-<h2>Refresh</h2>
-<?php $this->part("form", model: new Form_Model("refresh", values: C::$refresh)); ?>
+    <h2>Login</h2>
+    <?php $this->part("form", model: new Form_Model("login", values: C::$login)); ?>
 
-<h2>Rota</h2>
-<?php $this->part("form", model: new Form_Model("rota", values: C::$rota)); ?>
+    <h2>Prayer</h2>
+    <?php $this->part("form", model: new Form_Model("prayer", values: C::$prayer)); ?>
+
+    <h2>Refresh</h2>
+    <?php $this->part("form", model: new Form_Model("refresh", values: C::$refresh)); ?>
+
+    <h2>Rota</h2>
+    <?php $this->part("form", model: new Form_Model("rota", values: C::$rota)); ?>
+
+</div>
 
 <?php
 
