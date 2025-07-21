@@ -48,7 +48,7 @@ class Config_General extends Config_Section
         $this->church_name = Arr::get($config, "church_name", "");
         $this->church_name_full = Arr::get($config, "church_name_full", "");
         $this->church_domain = Arr::get($config, "church_domain", "");
-        $this->production = Arr::get_boolean($config, "production", true);
+        $this->production = Arr::get_boolean($config, "production", false);
     }
 
     public function as_array(): array

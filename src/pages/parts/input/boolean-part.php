@@ -16,5 +16,5 @@ App::check();
     class="form-check-input"
     id="<?php _e("%s", $model->name); ?>"
     name="<?php _e("%s", $model->name); ?>"
-    value=""
+    value="true"
     <?php if($model->value) _h("checked") ?> />
