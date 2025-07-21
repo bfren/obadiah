@@ -3,6 +3,7 @@
 namespace Obadiah\Pages\Prayer;
 
 use Obadiah\App;
+use Obadiah\Config\Config as C;
 use Obadiah\Pages\Parts\Header\Header_Model;
 use Obadiah\Response\View;
 
@@ -22,6 +23,11 @@ $this->alert($model->result);
 <h2>Months</h2>
 
 <?php if ($model->months) : ?>
+    <?php if ($model->all) : ?>
+        <p>Showing all months.  Click <a href="?all=false">here</a> to see the most recent <?php _e("%s", C::$prayer->show_recent_months); ?>.</p>
+    <?php else: ?>
+        <p>Showing the <?php _e("%s", C::$prayer->show_recent_months); ?> most recent months.  Click <a href="?all=true">here</a> to see them all.</p>
+    <?php endif; ?>
     <ul>
         <?php foreach ($model->months as $month) : ?>
             <?php

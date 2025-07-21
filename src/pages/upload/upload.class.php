@@ -44,6 +44,12 @@ class Upload extends Endpoint
         $bible_files = array_slice(scandir(C::$dir->bible) ?: [], 2);
         sort($bible_files);
 
+        // only show most recent Bible files unless 'all' is specified
+        $all = Request::$get->bool("all");
+        if (!$all) {
+            $rota_files = array_slice($rota_files, C::$rota->show_recent_files * -1);
+        }
+
         // calculate the current four-month period of the year
         $month = date("n"); // month number without leading zeroes
         $rota_period = ceil($month / 4);
@@ -59,6 +65,7 @@ class Upload extends Endpoint
         // return View
         return new View("upload", model: new Index_Model(
             result: $this->result,
+            all: $all,
             rota: Rota_Period::create($rota_period_first_day, $rota_period_last_day),
             next_rota: Rota_Period::create($next_period_first_day, $next_period_last_day),
             rota_files: $rota_files,

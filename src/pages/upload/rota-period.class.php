@@ -13,7 +13,7 @@ class Rota_Period
     /**
      * Church Suite rota download URI.
      */
-    private const ROTA_HREF = "https://%s.churchsuite.com/modules/rotas/reports/rotas_overview.php?%s";
+    private const ROTA_HREF = "https://%s.churchsuite.com/rotas/reports/rotas_overview?%s";
 
     /**
      * Create Rota Period model.
@@ -39,7 +39,6 @@ class Rota_Period
             "_module" => "ChurchSuite\Rotas",
             "_report_name" => "rotas_overview",
             "_report_view_module" => "rotas",
-            "_report_view_file" => "rotas_overview",
             "order_by" => "name",
             "group_by" => "time",
             "date_start" => $first_day->format("Y-m-d"),

@@ -1,0 +1,117 @@
+---
+general:
+  church_domain: christchurchb29.org
+  church_name_full: Christ Church Selly Park
+  church_name: Christ Church
+  production: false
+baserow:
+  api_uri: https://baserow.ccsp.uk/api
+  concern_table_id: 507
+  day_table_id: 492
+  day_view_id: 2092
+  declaration_table_id: 506
+  lectionary_token: PQWv02GosnljsV6Q5yfgQvTwNPsWZQyu
+  reference_table_id: 509
+  safeguarding_token: n2lNzGAX3BSvdzLCaC3ahj4jNXBK1Pof
+  service_table_id: 493
+  service_view_id: 2106
+cache:
+  duration_in_seconds: 3600
+churchsuite:
+  api_application: obadiah
+  api_key: qeblxabbneejed8ylsfh
+  org: ccsp
+  tag_id_adults: 30
+  tag_id_children: 31
+events:
+  cancelled_flag: '[Cancelled]'
+  default_location: Church
+  length_in_minutes: 60
+  pending_flag: '[tbc]'
+  timezone: Europe/London
+formats:
+  csv_import_datetime: d-M-Yg:ia
+  display_date: D j M Y
+  display_day_and_month: j F
+  display_day: D jS
+  display_month: F Y
+  display_time: H:i
+  ics_date: Ymd
+  ics_datetime: Ymd\THis
+  json_datetime: Y-m-d\TH:i:sO
+  prayer_month_id: Y-m
+  refresh_date: d/n
+  sortable_date: Y-m-d
+  sortable_datetime: Y-m-d H:i
+login:
+  admin: $argon2id$v=19$m=262144,t=3,p=1$dGrLgrdRc7G3tJV0iwTB3Q$XIBIdCQx/m/WdpyPOe30B/tG4Sh3IN7xnjoBtg6FGZM
+  api: Stranger-Nutshell
+  max_attempts: 5
+  pass: $argon2id$v=19$m=262144,t=3,p=1$3vt2XSZ01erMUmqzzndH1w$x3UiNpHPfPIyrSUXzwaZ5LSOnDuWgXSN4O1UsPPOjNc
+prayer:
+  day_29:
+  - Local Churches
+  - Anchor
+  - Selly Park Baptist
+  - St Stephen
+  - Ascension
+  - Encounter
+  - Riverside
+  - etc.
+  day_30:
+  - Church of England Birmingham
+  - New Bishop
+  - Bishop Anne
+  - Archdeacon Jenny
+  - Area Dean Phelim
+  day_31:
+  - National Church
+  - Archbishop Justin
+  - Archbishop Stephen
+  - Ecumenical Relationships
+  show_last_name: true
+refresh:
+  days_before: 7
+  days_after: 2
+  footer_page_1_left: If you don&rsquo;t know someone, or don&rsquo;t know what to
+    say, you could pray...
+  footer_page_1_right: <strong>&lsquo;Father, may <em>N</em> know your love, be filled
+    with your Spirit, and share Jesus in all they do and say.&rsquo;</strong>
+  footer_page_2_left: Privacy Policy
+  footer_page_2_right: If you don&rsquo;t wish to be included, you can remove yourself
+    in Church Suite or by contacting the office.
+rota:
+  bible_version: NIVUK
+  default_days: 28
+  default_length: PT60M
+  ministries:
+  - name: A/V Laptop
+  - name: Camera
+  - name: Children
+    abbv: Ch
+  - name: Communion Assistants
+  - name: Duty Warden
+    abbv: DW
+  - name: Intercessions
+  - name: Prayer Ministry
+  - name: Preacher
+    abbv: Pr
+  - name: President
+    abbv: Ps
+  - name: Readings
+  - name: Refreshments
+  - name: Revive
+    abbv: Rv
+  - name: Service Leader
+    desc: Leader
+    abbv: L
+  - name: Socially Distanced Service Leader
+    desc: Leader & Preacher
+    abbv: L/Pr
+  - name: Sound Desk
+  - name: Wednesday Morning Prayer
+    desc: Leader
+    abbv: L
+  - name: Welcome
+    abbv: W
+...

@@ -12,6 +12,13 @@ App::check();
 class Config
 {
     /**
+     * Config file path format.
+     *
+     * @var string
+     */
+    public const CONFIG_FILE_PATH = "%s/config.yml";
+
+    /**
      * Baserow config object.
      *
      * @var Config_Baserow
@@ -103,21 +110,92 @@ class Config
             App::die("Unable to find data directory at '%s'.", $data_dir->getRealPath());
         }
 
+        // store dir config - this should not be reloaded after init
+        self::$dir = new Config_Dir($cwd, $data_dir);
+
+        // read configuration file and store values
+        $config = self::read_config_file();
+        self::store_config($config);
+    }
+
+    /**
+     * Get a handle object for the config file - if it doesn't exist, the App will die.
+     *
+     * @return string                               Path to config file.
+     */
+    private static function get_config_file(): string
+    {
         // ensure config file exists
-        $config_file_path = sprintf("%s/config.yml", $data_dir);
+        $config_file_path = sprintf(self::CONFIG_FILE_PATH, self::$dir->data_dir);
         $config_file = new SplFileInfo($config_file_path);
         if (!$config_file->isFile()) {
             App::die("Unable to find configuration file at '%s' - see installation instructions.", $config_file->getRealPath());
         }
 
-        // read configuration file
-        $config = self::read_config($config_file);
+        // return file handle
+        return $config_file->getPathname();
+    }
 
-        // create configuration objects
+    /**
+     * Read YAML configuration file into an array.
+     *
+     * @return mixed[]                              Configuration object.
+     */
+    private static function read_config_file(): array
+    {
+        $config_file = self::get_config_file();
+        return yaml_parse_file($config_file);
+    }
+
+    /**
+     * Return config as an array, ready to be serialised.
+     *
+     * @return array<string, array<string, mixed>>  Configuration array.
+     */
+    public static function as_array(): array
+    {
+        return [
+            "general" => self::$general->as_array(),
+            "baserow" => self::$baserow->as_array(),
+            "cache" => self::$cache->as_array(),
+            "churchsuite" => self::$churchsuite->as_array(),
+            "events" => self::$events->as_array(),
+            "formats" => self::$formats->as_array(),
+            "login" => self::$login->as_array(),
+            "prayer" => self::$prayer->as_array(),
+            "refresh" => self::$refresh->as_array(),
+            "rota" => self::$rota->as_array()
+        ];
+    }
+
+    /**
+     * Save current config to YAML configuration file.
+     *
+     * @return void
+     */
+    private static function save_config_file(): void
+    {
+        // get config array
+        $config = self::as_array();
+
+        // save as yaml file
+        $config_file = self::get_config_file();
+        yaml_emit_file($config_file, $config);
+    }
+
+    /**
+     * Store configuration from value of arrays.
+     *
+     * @param array<string, mixed> $config          Config values.
+     * @param bool $save_file                       If true, the config will be persisted to YAML configuration file.
+     * @return void
+     */
+    public static function store_config(array $config, bool $save_file = false): void
+    {
+        // store values
         self::$baserow = new Config_Baserow(Arr::get_required($config, "baserow"));
         self::$cache = new Config_Cache(Arr::get_required($config, "cache"));
         self::$churchsuite = new Config_ChurchSuite(Arr::get_required($config, "churchsuite"));
-        self::$dir = new Config_Dir($cwd, $data_dir);
         self::$events = new Config_Events(Arr::get_required($config, "events"));
         self::$formats = new Config_Formats(Arr::get_required($config, "formats"));
         self::$general = new Config_General(Arr::get_required($config, "general"));
@@ -125,16 +203,10 @@ class Config
         self::$prayer = new Config_Prayer(Arr::get_required($config, "prayer"));
         self::$refresh = new Config_Refresh(Arr::get_required($config, "refresh"));
         self::$rota = new Config_Rota(Arr::get_required($config, "rota"));
-    }
 
-    /**
-     * Read YAML configuration file into an array.
-     *
-     * @param SplFileInfo $config_file              Config file object.
-     * @return mixed[]                              Configuration object.
-     */
-    private static function read_config(SplFileInfo $config_file): array
-    {
-        return yaml_parse_file($config_file);
+        // save file
+        if ($save_file) {
+            self::save_config_file();
+        }
     }
 }

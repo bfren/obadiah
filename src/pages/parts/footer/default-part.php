@@ -34,6 +34,10 @@ App::check();
 <script src="/resources/js/dragula.min.js"></script>
 <script src="/resources/js/prayer.js?v=<?php _e(App::$version); ?>"></script>
 
+<!-- Other Pages -->
+<script src="/resources/js/home.js?v=<?php _e(App::$version); ?>"></script>
+<script src="/resources/js/settings.js?v=<?php _e(App::$version); ?>"></script>
+
 </body>
 
 </html>

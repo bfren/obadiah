@@ -58,7 +58,7 @@ class Bible_Plan
             }
 
             // read values
-            $days[$values[0]] = new Day(
+            $days[intval($values[0])] = new Day(
                 ot_psalms: $trim($values[1]),
                 ot_1: $trim($values[2]),
                 ot_2: $trim($values[3]),

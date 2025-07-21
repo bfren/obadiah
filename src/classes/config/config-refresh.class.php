@@ -7,7 +7,7 @@ use Obadiah\Helpers\Arr;
 
 App::check();
 
-class Config_Refresh
+class Config_Refresh extends Config_Section
 {
     /**
      * The number of days before today to include in the Refresh calendar feed.
@@ -65,5 +65,17 @@ class Config_Refresh
         $this->footer_page_1_right = Arr::get($config, "footer_page_1_right", "");
         $this->footer_page_2_left = Arr::get($config, "footer_page_2_left", "");
         $this->footer_page_2_right = Arr::get($config, "footer_page_2_right", "");
+    }
+
+    public function as_array(): array
+    {
+        return [
+            "days_before" => $this->days_before,
+            "days_after" => $this->days_after,
+            "footer_page_1_left" => $this->footer_page_1_left,
+            "footer_page_1_right" => $this->footer_page_1_right,
+            "footer_page_2_left" => $this->footer_page_2_left,
+            "footer_page_2_right" => $this->footer_page_2_right,
+        ];
     }
 }

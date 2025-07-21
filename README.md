@@ -24,4 +24,4 @@ Obadiah was the faithful palace administrator during the time of Ahab. He suppor
 
 ## Copyright
 
-> Copyright (c) 2022-2024 [bfren](https://bfren.dev) (unless otherwise stated)
+> Copyright (c) 2022-2025 [bfren](https://bfren.dev) (unless otherwise stated)

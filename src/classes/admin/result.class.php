@@ -26,7 +26,7 @@ class Result
      * @param string|null $message      Optional message.
      * @return Result                   Success result.
      */
-    public static function success(?string $message): Result
+    public static function success(?string $message = null): Result
     {
         return new Result(true, $message);
     }

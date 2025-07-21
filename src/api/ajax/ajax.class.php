@@ -4,6 +4,7 @@ namespace Obadiah\Api\Ajax;
 
 use Obadiah\Admin\Result;
 use Obadiah\App;
+use Obadiah\Config\Config as C;
 use Obadiah\Prayer\Month;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
@@ -72,5 +73,136 @@ class Ajax extends Endpoint
         // save month data
         $result = Month::save($data);
         return new Json($result);
+    }
+
+    /**
+     * Save configuration.
+     *
+     * @param string $name              The name of the config section to be saved.
+     * @return Json                     JSON result.
+     */
+    private function save_config(string $name): Json
+    {
+        // get data
+        $data = $this->get_input();
+
+        // check for failure result
+        if ($this->result) {
+            return $this->result;
+        }
+
+        // get config array and update with new values
+        $config = C::as_array();
+        $config[$name] = json_decode(json_encode($data) ?: "[]", true);
+
+        // save settings to config file
+        try {
+            C::store_config($config, true);
+        } catch (Throwable $th) {
+            _l_throwable($th);
+            return new Json(Result::failure($th->getMessage()), 500);
+        }
+
+        return new Json(Result::success());
+    }
+
+    /**
+     * POST: /api/ajax/settings_general (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_general_post(): Json
+    {
+        return $this->save_config("general");
+    }
+
+    /**
+     * POST: /api/ajax/settings_baserow (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_baserow_post(): Json
+    {
+        return $this->save_config("general");
+    }
+
+    /**
+     * POST: /api/ajax/settings_cache (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_cache_post(): Json
+    {
+        return $this->save_config("general");
+    }
+
+    /**
+     * POST: /api/ajax/settings_churchsuite (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_churchsuite_post(): Json
+    {
+        return $this->save_config("churchsuite");
+    }
+
+    /**
+     * POST: /api/ajax/settings_events (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_events_post(): Json
+    {
+        return $this->save_config("events");
+    }
+
+    /**
+     * POST: /api/ajax/settings_formats (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_formats_post(): Json
+    {
+        return $this->save_config("formats");
+    }
+
+    /**
+     * POST: /api/ajax/settings_login (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_login_post(): Json
+    {
+        return $this->save_config("login");
+    }
+
+    /**
+     * POST: /api/ajax/settings_prayer (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_prayer_post(): Json
+    {
+        return $this->save_config("prayer");
+    }
+
+    /**
+     * POST: /api/ajax/settings_refresh (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_refresh_post(): Json
+    {
+        return $this->save_config("refresh");
+    }
+
+    /**
+     * POST: /api/ajax/settings_rota (called from Settings page)
+     *
+     * @return Json                     JSON result.
+     */
+    public function settings_rota_post(): Json
+    {
+        return $this->save_config("rota");
     }
 }
