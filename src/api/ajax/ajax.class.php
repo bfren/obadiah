@@ -93,7 +93,7 @@ class Ajax extends Endpoint
 
         // get config array and update with new values
         $config = C::as_array();
-        $config[$name] = json_decode(json_encode($data), true);
+        $config[$name] = json_decode(json_encode($data) ?: "[]", true);
 
         // save settings to config file
         try {

@@ -150,7 +150,7 @@ class Config
     /**
      * Return config as an array, ready to be serialised.
      *
-     * @return array<string, Config_Section>        Configuration array.
+     * @return array<string, array<string, mixed>>  Configuration array.
      */
     public static function as_array(): array
     {
