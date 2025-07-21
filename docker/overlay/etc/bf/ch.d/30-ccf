@@ -1,1 +1,1 @@
-/data www:www 0666 0777
+/data www:www 0644 0755
