@@ -121,9 +121,9 @@ class Config
     /**
      * Get a handle object for the config file - if it doesn't exist, the App will die.
      *
-     * @return SplFileInfo                          Config file object.
+     * @return string                               Path to config file.
      */
-    private static function get_config_file(): SplFileInfo
+    private static function get_config_file(): string
     {
         // ensure config file exists
         $config_file_path = sprintf(self::CONFIG_FILE_PATH, self::$dir->data_dir);
@@ -133,7 +133,7 @@ class Config
         }
 
         // return file handle
-        return $config_file;
+        return $config_file->getPathname();
     }
 
     /**
@@ -148,14 +148,13 @@ class Config
     }
 
     /**
-     * Save current config to YAML configuration file.
+     * Return config as an array, ready to be serialised.
      *
-     * @return void
+     * @return array<string, Config_Section>        Configuration array.
      */
-    private static function save_config_file(): void
+    public static function as_array(): array
     {
-        // create config object
-        $config = [
+        return [
             "general" => self::$general->as_array(),
             "baserow" => self::$baserow->as_array(),
             "cache" => self::$cache->as_array(),
@@ -167,10 +166,21 @@ class Config
             "refresh" => self::$refresh->as_array(),
             "rota" => self::$rota->as_array()
         ];
+    }
+
+    /**
+     * Save current config to YAML configuration file.
+     *
+     * @return void
+     */
+    private static function save_config_file(): void
+    {
+        // get config array
+        $config = self::as_array();
 
         // save as yaml file
         $config_file = self::get_config_file();
-        yaml_emit_file($config_file->getFilename(), $config);
+        yaml_emit_file($config_file, $config);
     }
 
     /**
