@@ -31,7 +31,7 @@ class Events extends Endpoint
     public function ics_get(): ICalendar
     {
         // get events
-        $query = self::get_query();
+        $query = self::get_query(Request::$get->all());
         $events = Cache::get_events($query, fn(string $q) => self::get_events($q));
 
         // create calendar
@@ -49,7 +49,7 @@ class Events extends Endpoint
     public function json_get(): Json
     {
         // get events
-        $events = Cache::get_events(self::get_query(), fn(string $q) => self::get_events($q));
+        $events = Cache::get_events(self::get_query(Request::$get->all()), fn(string $q) => self::get_events($q));
 
         // return JSON action
         return new Json($events);
@@ -58,16 +58,17 @@ class Events extends Endpoint
     /**
      * Get Church Suite compatible query options.
      *
-     * @return string                   URL-encoded query (using http_build_query()).
+     * @param array<string, mixed> $values          Query values.
+     * @return string                               URL-encoded query (using http_build_query()).
      */
-    private static function get_query(): string
+    private static function get_query(array $values): string
     {
         // get query options
         $query = array(
-            "category" => Request::$get->int("cat"),
-            "date_start" => Request::$get->string("start"),
-            "date_end" => Request::$get->string("end"),
-            "q" => Request::$get->string("q"),
+            "category" => Arr::get_integer($values, "cat"),
+            "date_start" => Arr::get($values, "start"),
+            "date_end" => Arr::get($values, "end"),
+            "q" => Arr::get($values, "q"),
         );
 
         // return encoded query
@@ -77,13 +78,16 @@ class Events extends Endpoint
     /**
      * Get events from Church Suite matching the query.
      *
-     * @param string $query             URL-encoded query (e.g. using http_build_query()).
-     * @return Event[]                  Array of matching events.
+     * @param array<string, mixed>|string $query    Array of query values, or URL-encoded query (e.g. using http_build_query()).
+     * @return Event[]                              Array of matching events.
      */
-    public static function get_events(string $query): array
+    public static function get_events(array|string $query): array
     {
+        // build query string
+        $query_values = is_array($query) ? self::get_query($query) : $query;
+
         // create curl request
-        $url = sprintf(self::CALENDAR_HREF, C::$churchsuite->org, $query);
+        $url = sprintf(self::CALENDAR_HREF, C::$churchsuite->org, $query_values);
         $handle = curl_init($url);
         if ($handle === false) {
             _l("Unable to create cURL request for %s.", $url);
@@ -138,6 +142,9 @@ class Events extends Endpoint
                 description: Arr::get($event, "description")
             );
         }
+
+        // sort events by start time
+        usort($events, fn($a, $b) => ($a->start < $b->start) ? -1 : 1);
 
         // return events
         return $events;

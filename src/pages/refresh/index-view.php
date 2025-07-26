@@ -50,6 +50,17 @@ $this->header(new Header_Model("Refresh"));
         <?php else : ?>
             <p>There are no Bible readings for today.</p>
         <?php endif; ?>
+        <h3 class="mt-3">Events &amp; Groups</h3>
+        <?php if ($model->today->events): ?>
+            <p class="small text-muted">The following events, groups and ministries are taking place today.</p>
+            <?php foreach ($model->today->events as $e): ?>
+                <p><?php _h("%s %s", $e->start->format(C::$formats->display_time), $e->title); ?></p>
+            <?php endforeach; ?>
+        <?php elseif ($model->today->date->format("N") == 7) : ?>
+            <p>Ask God to bless today&rsquo;s services.</p>
+        <?php else: ?>
+            <p>There are no groups or events today.</p>
+        <?php endif; ?>
     </div>
 
     <div class="col-12 col-md-4 mb-2">
