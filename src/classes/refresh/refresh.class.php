@@ -8,6 +8,8 @@ use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Pages\Events\Events;
 use Obadiah\Prayer\Prayer_Calendar;
 
 App::check();
@@ -46,6 +48,10 @@ class Refresh
 
         // get data from caches
         $bible = Cache::get_bible_plan();
+        $events = Events::get_events(array(
+            "start" => $period->start->format(C::$formats->sortable_date),
+            "end" => $period->end->format(C::$formats->sortable_date)
+        ));
 
         // get readings and people for each day
         $days = [];
@@ -58,9 +64,12 @@ class Refresh
 
             // create day object
             $immutable = DateTimeImmutable::createFromInterface($value);
+            $date = $immutable->format(C::$formats->sortable_date);
+            $date_events = Arr::match($events, fn ($e) => $e->start->format(C::$formats->sortable_date) == $date);
             $day = new Day(
                 date: $immutable,
                 people: Prayer_Calendar::get_day($immutable, Prayer_Calendar::RETURN_OBJECT),
+                events: $date_events,
                 readings: $bible->get_day($immutable)
             );
 
@@ -77,6 +86,6 @@ class Refresh
         $this->days = $days;
 
         // if today has not been set, create an empty one for today
-        $this->today = $today_value ?: new Day($today, people: [], readings: null);
+        $this->today = $today_value ?: new Day($today, people: [], events: [], readings: null);
     }
 }

@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Bible\Day as Readings;
 use Obadiah\Cache\Cache;
+use Obadiah\Calendar\Event;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\Psalms;
@@ -18,21 +19,23 @@ class Day
     /**
      * Create Day object.
      *
-     * @param DateTimeImmutable $date   The date.
-     * @param Person[]|string[] $people Array of people.
-     * @param Readings|null $readings   Bible readings.
+     * @param DateTimeImmutable $date       The date.
+     * @param Person[]|string[] $people     Array of people.
+     * @param Event[] $events               Array of people.
+     * @param Readings|null $readings       Bible readings.
      * @return void
      */
     public function __construct(
         public readonly DateTimeImmutable $date,
         public readonly array $people,
+        public readonly array $events,
         public readonly ?Readings $readings
     ) {}
 
     /**
      * Build event summary.
      *
-     * @return string                   Event summary.
+     * @return string                       Event summary.
      */
     public function get_summary(): string
     {
@@ -42,8 +45,8 @@ class Day
     /**
      * Build event description.
      *
-     * @param string $separator         Line separator.
-     * @return string                   Event description.
+     * @param string $separator             Line separator.
+     * @return string                       Event description.
      */
     public function get_description(string $separator = "\\n"): string
     {
@@ -65,6 +68,14 @@ class Day
             $description[] = "= People =";
             $people = Arr::map($this->people, fn($person) => $person instanceof Person ? $person->get_full_name(C::$prayer->show_last_name) : (string) $person);
             $description[] = join($separator, $people);
+            $description[] = "";
+        }
+
+        // add events
+        if (!empty($this->events)) {
+            $description[] = "= Events & Groups =";
+            $events = Arr::map($this->events, fn($e) => sprintf("%s - %s", $e->start->format(C::$formats->display_time), $e->title));
+            $description[] = join($separator, $events);
             $description[] = "";
         }
 
