@@ -149,7 +149,7 @@ class Arr
      *
      * @template T
      * @param T[] $array                            Array to search.
-     * @param callable|null $callback               Callback function (should return bool),
+     * @param callable(T)|null $callback            Callback function (should return bool),
      * @return T[]                                  Array of matching elements.
      */
     public static function match(array $array, ?callable $callback = null): array
