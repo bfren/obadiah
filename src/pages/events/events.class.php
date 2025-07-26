@@ -58,8 +58,8 @@ class Events extends Endpoint
     /**
      * Get Church Suite compatible query options.
      *
-     * @param array $values             Query values.
-     * @return string                   URL-encoded query (using http_build_query()).
+     * @param array<string, mixed> $values          Query values.
+     * @return string                               URL-encoded query (using http_build_query()).
      */
     private static function get_query(array $values): string
     {
@@ -78,8 +78,8 @@ class Events extends Endpoint
     /**
      * Get events from Church Suite matching the query.
      *
-     * @param array|string $query       Array of query values, or URL-encoded query (e.g. using http_build_query()).
-     * @return Event[]                  Array of matching events.
+     * @param array<string, mixed>|string $query    Array of query values, or URL-encoded query (e.g. using http_build_query()).
+     * @return Event[]                              Array of matching events.
      */
     public static function get_events(array|string $query): array
     {
