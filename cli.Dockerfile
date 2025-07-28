@@ -1,4 +1,4 @@
-FROM bfren/php:php8.3
+FROM bfren/php:php8.4
 
 ENV BF_PHP_EXT="curl session sodium pecl-yaml"
 
