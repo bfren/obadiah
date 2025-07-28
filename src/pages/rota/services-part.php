@@ -29,7 +29,9 @@ App::check();
 
                     <!-- Date -->
                     <h5 class="card-title"><?php _e($day->date->format(C::$formats->display_date)); ?></h5>
+                    <?php if($day->name): ?>
                     <h6 class="card-subtitle mb-2 text-muted"><?php _e($day->name); ?> &ndash; <?php _e($day->colour) ?></h6>
+                    <?php endif; ?>
 
                     <!-- Services -->
                     <?php foreach ($day->services as $combined_service) : ?>
