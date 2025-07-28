@@ -149,11 +149,8 @@ class Rota
         $series_filter = new Series_Filter();
 
         foreach ($this->services as $service) {
-            // include services by default
-            $include = true;
-
             // apply person filter
-            $include = $include && $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
+            $include = $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
 
             // apply date filters
             $include = $include && $after_filter->apply($lectionary, $service, Arr::get($filters, "start", ""));
