@@ -31,8 +31,8 @@ class App
      */
     public static function init(bool $is_http = true): void
     {
-        // ensure we are running on PHP 8.3
-        version_compare(PHP_VERSION, "8.3.0", ">=") || self::die("This application requires at least PHP 8.3.");
+        // ensure we are running on PHP 8.4
+        version_compare(PHP_VERSION, "8.4.0", ">=") || self::die("This application requires at least PHP 8.4.");
 
         // get current working directory
         $cwd = __DIR__;
