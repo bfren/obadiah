@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '2.2.0.x-dev',
-        'version' => '2.2.0.9999999-dev',
-        'reference' => '4995ce9b2170efb2cf3229c5cfabc6f5eed50bd3',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '8aedb743a81909d66001ba1b88e8040c5e7ee8ab',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '2.2.0.x-dev',
-            'version' => '2.2.0.9999999-dev',
-            'reference' => '4995ce9b2170efb2cf3229c5cfabc6f5eed50bd3',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8aedb743a81909d66001ba1b88e8040c5e7ee8ab',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '2.1.18',
-            'version' => '2.1.18.0',
-            'reference' => 'ee1f390b7a70cdf74a2b737e554f68afea885db7',
+            'pretty_version' => '2.1.21',
+            'version' => '2.1.21.0',
+            'reference' => '1ccf445757458c06a04eb3f803603cb118fe5fa6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
