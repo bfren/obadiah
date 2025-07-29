@@ -114,10 +114,10 @@ class Arr
      *
      * @param mixed[] $array                        Array of values.
      * @param int|string $key                       The key to search for.
-     * @param string $default                       Default value if key does not exist.
+     * @param string|null $default                  Default value if key does not exist.
      * @return string                               Key value, or $default if key does not exist.
      */
-    public static function get_sanitised(array $array, int|string $key, string $default = null): string
+    public static function get_sanitised(array $array, int|string $key, ?string $default = null): string
     {
         // get value from the array
         $value = self::get($array, $key, $default);
