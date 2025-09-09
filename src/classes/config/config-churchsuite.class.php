@@ -31,6 +31,13 @@ class Config_ChurchSuite extends Config_Section
     public readonly string $org;
 
     /**
+     * Church Suite service IDs, to exclude non-service rotas from imports.
+     *
+     * @var int[]
+     */
+    public readonly array $service_ids;
+
+    /**
      * Church Suite Tag ID for adults who have consented to be in the Prayer Calendar.
      *
      * @var int
@@ -55,6 +62,7 @@ class Config_ChurchSuite extends Config_Section
         $this->api_application = Arr::get($config, "api_application", "");
         $this->api_key = Arr::get($config, "api_key", "");
         $this->org = Arr::get($config, "org", "");
+        $this->service_ids = Arr::get($config, "service_ids", []);
         $this->tag_id_adults = Arr::get_integer($config, "tag_id_adults", 0);
         $this->tag_id_children = Arr::get_integer($config, "tag_id_children", 0);
     }
@@ -65,6 +73,7 @@ class Config_ChurchSuite extends Config_Section
             "api_application" => $this->api_application,
             "api_key" => $this->api_key,
             "org" => $this->org,
+            "service_ids" => $this->service_ids,
             "tag_id_adults" => $this->tag_id_adults,
             "tag_id_children" => $this->tag_id_children,
         ];
