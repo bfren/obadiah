@@ -23,6 +23,7 @@ church_suite:
   api_application: ''
   api_key: ''
   org: ''
+  service_ids: []
   tag_id_adults: 1
   tag_id_children: 2
 

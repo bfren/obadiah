@@ -43,7 +43,8 @@ class Rota_Period
             "group_by" => "time",
             "date_start" => $first_day->format("Y-m-d"),
             "date_end" => $last_day->format("Y-m-d"),
-            "show_empty_dates" => "1"
+            "show_empty_dates" => "1",
+            "service_ids" => C::$churchsuite->service_ids
         );
         $href = sprintf(self::ROTA_HREF, C::$churchsuite->org, http_build_query($query_values));
 
