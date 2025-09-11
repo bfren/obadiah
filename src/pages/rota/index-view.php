@@ -94,7 +94,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 <select class="form-control" name="days">
                     <option value="">Show All</option>
                     <?php for ($i = 1; $i <= 28; $i++) : $selected = $i == Arr::get($model->filters, "days") ? "selected" : ""; ?>
-                        <option value="<?php _e("%s", $i); ?>" <?php _e($selected); ?>><?php _e("%s", $i); ?> day<?php _e($i > 1 ? "s" : ""); ?></option>
+                        <option value="<?php _e("%s", $i); ?>" <?php _e($selected); ?>><?php _e("+%s", $i); ?> day<?php _e($i > 1 ? "s" : ""); ?></option>
                     <?php endfor; ?>
                 </select>
             </div>
