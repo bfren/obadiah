@@ -57,13 +57,13 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
     <div class="row mb-2">
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="start">From</span>
+                <span class="input-group-text" for="start">From (Date)</span>
                 <input type="date" class="form-control" name="start" id="start" placeholder="From" value="<?php _e(Arr::get($model->filters, "start")); ?>" />
             </div>
         </div>
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="end">To</span>
+                <span class="input-group-text" for="end">To (Date)</span>
                 <input type="date" class="form-control" name="end" id="end" placeholder="To" value="<?php _e(Arr::get($model->filters, "end")); ?>" />
             </div>
         </div>
@@ -71,7 +71,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
     <div class="row mb-2">
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="day">Day</span>
+                <span class="input-group-text" for="day">Day of Week</span>
                 <select class="form-control" name="day">
                     <option value="">Choose...</option>
                     <?php foreach (Builder::$days_of_the_week as $num => $txt) : $selected = $num == Arr::get($model->filters, "day") ? "selected" : ""; ?>
@@ -82,7 +82,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
         </div>
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="time">Time</span>
+                <span class="input-group-text" for="time">Start Time</span>
                 <input type="time" class="form-control" name="time" placeholder="Start" value="<?php _e(Arr::get($model->filters, "time")); ?>" />
             </div>
         </div>
@@ -90,7 +90,31 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
     <div class="row mb-2">
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="max">Limit</span>
+                <span class="input-group-text" for="max">Limit (Days)</span>
+                <select class="form-control" name="days">
+                    <option value="">Show All</option>
+                    <?php for ($i = 1; $i <= 28; $i++) : $selected = $i == Arr::get($model->filters, "days") ? "selected" : ""; ?>
+                        <option value="<?php _e("%s", $i); ?>" <?php _e($selected); ?>><?php _e("+%s", $i); ?> day<?php _e($i > 1 ? "s" : ""); ?></option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <span class="input-group-text" for="series">Series</span>
+                <select class="form-control" name="series">
+                    <option value="">Choose...</option>
+                    <?php foreach ($model->series as $series) : $selected = $series == html_entity_decode(Arr::get($model->filters, "series")) ? "selected" : ""; ?>
+                        <option value="<?php _e(htmlentities($series)); ?>" <?php _e($selected); ?>><?php _e($series); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="input-group">
+                <span class="input-group-text" for="max">Limit (Services)</span>
                 <select class="form-control" name="max">
                     <option value="">Show All</option>
                     <?php for ($i = 1; $i <= 20; $i++) : $selected = $i == Arr::get($model->filters, "max") ? "selected" : ""; ?>
@@ -101,19 +125,6 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
         </div>
         <div class="col-6">
             <div class="input-group">
-                <span class="input-group-text" for="series">Series</span>
-                <select class="form-control" name="series">
-                    <option value="">Choose...</option>
-                    <?php foreach ($model->series as $series) : $selected = $series == Arr::get($model->filters, "series") ? "selected" : ""; ?>
-                        <option value="<?php _e(htmlentities($series)); ?>" <?php _e($selected); ?>><?php _e($series); ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 mb-2 d-flex align-items-center">
-            <div class="input-group">
                 <span class="input-group-text" for="collect">Collects</span>
                 <select class="form-control" name="collect">
                     <?php $show = Arr::get($model->filters, "collect"); ?>
@@ -122,7 +133,9 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 </select>
             </div>
         </div>
-        <div class="col-12 col-lg-6 d-flex justify-content-end align-items-center">
+    </div>
+    <div class="row">
+        <div class="col-12 mt-2 d-flex justify-content-end align-items-center">
             <?php if (Request::$session->is_admin) : ?>
                 <div class="form-check d-none d-sm-block me-4">
                     <?php $checked = Request::$debug ? "checked" : ""; ?>

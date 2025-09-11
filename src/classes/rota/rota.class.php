@@ -153,8 +153,17 @@ class Rota
             $include = $person_filter->apply($lectionary, $service, Arr::get($filters, "person", ""));
 
             // apply date filters
-            $include = $include && $after_filter->apply($lectionary, $service, Arr::get($filters, "start", ""));
-            $include = $include && $before_filter->apply($lectionary, $service, Arr::get($filters, "end", ""));
+            $days = Arr::get_integer($filters, "days", 0);
+            if($days !== 0) {
+                $start = new DateTimeImmutable()->format("c");
+                $end = new DateTimeImmutable()->modify(sprintf("+%s day", $days))->format("c");
+            } else {
+                $start = Arr::get($filters, "start", "");
+                $end = Arr::get($filters, "end", "");
+            }
+
+            $include = $include && $after_filter->apply($lectionary, $service, $start);
+            $include = $include && $before_filter->apply($lectionary, $service, $end);
 
             // apply start time filter
             $include = $include && $start_filter->apply($lectionary, $service, Arr::get($filters, "time", ""));

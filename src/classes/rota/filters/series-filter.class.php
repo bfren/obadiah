@@ -3,6 +3,7 @@
 namespace Obadiah\Rota\Filters;
 
 use Obadiah\App;
+use Obadiah\Helpers\Log;
 use Obadiah\Lectionary\Lectionary;
 use Obadiah\Rota\Service;
 
@@ -32,6 +33,6 @@ class Series_Filter implements Filter
         }
 
         // compare the series title with the value
-        return $l_service->series == $value;
+        return $l_service->series == html_entity_decode($value);
     }
 }
