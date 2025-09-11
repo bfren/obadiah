@@ -104,7 +104,7 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
                 <span class="input-group-text" for="series">Series</span>
                 <select class="form-control" name="series">
                     <option value="">Choose...</option>
-                    <?php foreach ($model->series as $series) : $selected = $series == Arr::get($model->filters, "series") ? "selected" : ""; ?>
+                    <?php foreach ($model->series as $series) : $selected = $series == html_entity_decode(Arr::get($model->filters, "series")) ? "selected" : ""; ?>
                         <option value="<?php _e(htmlentities($series)); ?>" <?php _e($selected); ?>><?php _e($series); ?></option>
                     <?php endforeach; ?>
                 </select>
