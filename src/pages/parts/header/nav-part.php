@@ -18,6 +18,7 @@ if (Request::$session->is_authorised) {
         "Home" => "/",
         "Rota" => "/rota",
         "Refresh" => "/refresh",
+        "Bible" => "/bible",
         "About" => "/about",
         "Log Out" => "/auth/logout"
     );
@@ -27,9 +28,9 @@ if (Request::$session->is_authorised) {
             array("Upload" => "/upload"),
             array_slice($links, 1, 1),
             array("Prayer Calendar" => "/prayer"),
-            array_slice($links, 2, 1),
+            array_slice($links, 3, 1),
             array("Settings" => "/settings"),
-            array_slice($links, 3),
+            array_slice($links, 4),
         );
     }
 } else {
