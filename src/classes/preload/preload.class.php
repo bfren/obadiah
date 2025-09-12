@@ -16,7 +16,7 @@ class Preload
     /**
      * Preload Bible plan.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_bible_plan(): array
     {
@@ -26,7 +26,7 @@ class Preload
     /**
      * Preload events from ChurchSuite Events API.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_events(): array
     {
@@ -47,7 +47,7 @@ class Preload
     /**
      * Preload lectionary from Baserow.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_lectionary(): array
     {
@@ -57,7 +57,7 @@ class Preload
     /**
      * Preload people from ChurchSuite Address Book API.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_people(): array
     {
@@ -67,7 +67,7 @@ class Preload
     /**
      * Preload Refresh daily prayers.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_refresh(): array
     {
@@ -77,7 +77,7 @@ class Preload
     /**
      * Preload rota from ChurchSuite CSV export.
      *
-     * @return array
+     * @return mixed[]
      */
     public static function get_rota(): array
     {

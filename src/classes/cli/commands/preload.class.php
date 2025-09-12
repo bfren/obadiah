@@ -37,6 +37,8 @@ class Preload extends Command
         $execute("People", fn() => P::get_people());
         $execute("Refresh Daily Prayers", fn() => P::get_refresh());
         $execute("Rota", fn() => P::get_rota());
+
+        App::die("Done.");
     }
 
 
