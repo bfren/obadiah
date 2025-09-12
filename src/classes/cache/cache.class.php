@@ -346,7 +346,7 @@ class Cache
     private static function get_or_set(string $id, callable $callable, array $args = [], bool $force = false): mixed
     {
         // clear cache if $force is set
-        if ($force || Request::$get->bool("force")) {
+        if ($force) {
             self::clear($id);
         }
 
