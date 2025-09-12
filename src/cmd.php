@@ -9,6 +9,7 @@ require_once "app.class.php";
 App::init(false);
 
 // map commands
+Cli::map_command("preload", C\Preload::class);
 Cli::map_command("pwhash", C\Password_Hash::class);
 Cli::map_command("say:hello", C\Hello_World::class);
 
