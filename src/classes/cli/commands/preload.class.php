@@ -4,6 +4,7 @@ namespace Obadiah\Cli\Commands;
 
 use Obadiah\App;
 use Obadiah\Cli\Command;
+use Obadiah\Helpers\Log;
 use Obadiah\Preload\Preload as P;
 use Obadiah\Request\Request;
 
@@ -27,8 +28,12 @@ class Preload extends Command
     {
         $execute = function (string $name, callable $function) {
             printf("%s... ", $name);
-            $result = $function();
-            printf("%s\n", json_encode($result));
+            try {
+                $result = $function();
+                printf("%s\n", json_encode($result));
+            } catch (\Throwable $th) {
+                Log::error("Unable to preload %s\n%s", $name, $th);
+            }
         };
 
         $execute("Bible Reading Plan", fn() => P::get_bible_plan());
@@ -40,6 +45,4 @@ class Preload extends Command
 
         App::die("Done.");
     }
-
-
 }
