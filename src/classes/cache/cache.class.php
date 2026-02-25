@@ -343,7 +343,7 @@ class Cache
     private static function serialize_value(mixed $value): string
     {
         // Try JSON first for better performance
-        $json = json_encode($value, JSON_PRESERVE_ZERO_FLOAT | JSON_UNESCAPED_SLASHES);
+        $json = json_encode($value, JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_SLASHES);
         if ($json !== false) {
             // Prefix with 'j:' to indicate JSON format
             return 'j:' . $json;

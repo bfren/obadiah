@@ -2,6 +2,7 @@
 
 namespace Obadiah\ChurchSuite;
 
+use CurlHandle;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
@@ -33,7 +34,7 @@ class Api
     /**
      * Execute a CURL request with retry logic and exponential backoff.
      *
-     * @param resource $handle                      CURL handle.
+     * @param CurlHandle $handle                    CURL handle.
      * @param int $max_retries                      Maximum number of retries.
      * @return string|bool                          Response string or false on failure.
      */
@@ -97,10 +98,8 @@ class Api
         $json = $this->execute_with_retry($handle);
         if (!is_string($json)) {
             _l(print_r(curl_error($handle), true));
-            curl_close($handle);
             return null;
         }
-        curl_close($handle);
 
         // decode JSON response - on error log and return null
         $result = json_decode($json, true);

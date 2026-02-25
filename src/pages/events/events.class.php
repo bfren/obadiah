@@ -2,6 +2,7 @@
 
 namespace Obadiah\Pages\Events;
 
+use CurlHandle;
 use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Cache\Cache;
@@ -78,7 +79,7 @@ class Events extends Endpoint
     /**
      * Execute a CURL request with retry logic and exponential backoff.
      *
-     * @param resource $handle                      CURL handle.
+     * @param CurlHandle $handle                    CURL handle.
      * @param int $max_retries                      Maximum number of retries.
      * @return string|bool                          Response string or false on failure.
      */
@@ -137,10 +138,8 @@ class Events extends Endpoint
         $json = self::execute_with_retry($handle);
         if (!is_string($json)) {
             _l(curl_error($handle));
-            curl_close($handle);
             return [];
         }
-        curl_close($handle);
 
         // decode JSON
         $calendar = json_decode($json, true);

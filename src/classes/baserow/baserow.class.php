@@ -2,6 +2,7 @@
 
 namespace Obadiah\Baserow;
 
+use CurlHandle;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 
@@ -95,7 +96,7 @@ class Baserow
     /**
      * Execute a CURL request with retry logic and exponential backoff.
      *
-     * @param resource $handle                      CURL handle.
+     * @param CurlHandle $handle                    CURL handle.
      * @param int $max_retries                      Maximum number of retries.
      * @return string|bool                          Response string or false on failure.
      */
@@ -154,10 +155,8 @@ class Baserow
         $json = $this->execute_with_retry($handle);
         if (!is_string($json)) {
             _l(curl_error($handle));
-            curl_close($handle);
             return [];
         }
-        curl_close($handle);
 
         // decode JSON response and return empty array on error
         $result = json_decode($json, true);
@@ -227,10 +226,8 @@ class Baserow
         $json = $this->execute_with_retry($handle);
         if (!is_string($json)) {
             _l(curl_error($handle));
-            curl_close($handle);
             return new Post_Result(500, "Error, please try again.");
         }
-        curl_close($handle);
 
         // decode JSON response and output on error
         $result = json_decode($json, true);
