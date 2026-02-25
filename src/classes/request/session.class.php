@@ -71,6 +71,9 @@ class Session
      */
     public function authorise(bool $admin = false): void
     {
+        // regenerate session ID to prevent session fixation attacks
+        session_regenerate_id(true);
+
         // mark session as authenticated
         $_SESSION[self::AUTH] = true;
 

@@ -39,6 +39,15 @@ class App
 
         // start session unless running as CLI
         if ($is_http) {
+            // configure secure session cookie parameters
+            session_set_cookie_params([
+                'lifetime' => 0,              // Session cookie (deleted when browser closes)
+                'path' => '/',
+                'domain' => '',               // Default domain
+                'secure' => true,             // Only send over HTTPS
+                'httponly' => true,           // Not accessible from JavaScript
+                'samesite' => 'Lax'          // CSRF protection (Lax allows top-level navigation)
+            ]);
             session_start();
         }
 

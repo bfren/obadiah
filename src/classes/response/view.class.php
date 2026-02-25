@@ -37,6 +37,9 @@ class View extends Action
 
         // add standard HTML headers
         $this->add_header("Content-Type", "text/html; charset=utf-8");
+
+        // add Cache-Control header - cache HTML for 5 minutes to reduce server load
+        $this->add_header("Cache-Control", "public, max-age=300, must-revalidate");
     }
 
     /**

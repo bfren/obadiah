@@ -15,6 +15,9 @@ COPY ./docker/overlay /
 COPY ./src /www/
 COPY ./config-sample.yml /www/
 
+# remove source maps from production build (security & performance)
+RUN find /www -name "*.map" -delete
+
 ENV \
     # required extensions
     BF_PHP_EXT="curl session sodium pecl-yaml" \

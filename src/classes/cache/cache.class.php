@@ -335,6 +335,45 @@ class Cache
     }
 
     /**
+     * Serialize a value to JSON or fall back to serialize for complex objects.
+     *
+     * @param mixed $value              Value to serialize.
+     * @return string                   Serialized value.
+     */
+    private static function serialize_value(mixed $value): string
+    {
+        // Try JSON first for better performance
+        $json = json_encode($value, JSON_PRESERVE_ZERO_FLOAT | JSON_UNESCAPED_SLASHES);
+        if ($json !== false) {
+            // Prefix with 'j:' to indicate JSON format
+            return 'j:' . $json;
+        }
+
+        // Fall back to PHP serialize for complex objects
+        return 's:' . serialize($value);
+    }
+
+    /**
+     * Unserialize a value from JSON or PHP serialize format.
+     *
+     * @param string $data              Serialized value.
+     * @return mixed                    Unserialized value.
+     */
+    private static function unserialize_value(string $data): mixed
+    {
+        if (str_starts_with($data, 'j:')) {
+            // JSON format
+            return json_decode(substr($data, 2), true);
+        } elseif (str_starts_with($data, 's:')) {
+            // PHP serialize format
+            return unserialize(substr($data, 2));
+        } else {
+            // Legacy format (no prefix) - assume serialize
+            return unserialize($data);
+        }
+    }
+
+    /**
      * Get an item from the cache, or generate it if not set or expired.
      *
      * @param string $id                Cache file name.
@@ -353,15 +392,15 @@ class Cache
         // get path to cache file
         $path = self::get_cache_file_path($id);
 
-        // if the file exists, and the cache file has not expired, read and unserialise the value
+        // if the file exists, and the cache file has not expired, read and unserialize the value
         $last_modified = self::get_last_modified($path);
         if (time() - $last_modified < self::$duration_in_seconds) {
-            return unserialize(IO::file_get_contents($path));
+            return self::unserialize_value(IO::file_get_contents($path));
         }
 
-        // get a fresh value and serialise it to the cache
+        // get a fresh value and serialize it to the cache
         $value = call_user_func($callable, ...$args);
-        file_put_contents($path, serialize($value));
+        file_put_contents($path, self::serialize_value($value));
 
         // return value
         return $value;

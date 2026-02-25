@@ -53,6 +53,16 @@ class Refresh
             "end" => $period->end->format(C::$formats->sortable_date)
         ));
 
+        // pre-index events by date to avoid O(n) filtering for each day
+        $events_by_date = [];
+        foreach ($events as $event) {
+            $event_date = $event->start->format(C::$formats->sortable_date);
+            if (!isset($events_by_date[$event_date])) {
+                $events_by_date[$event_date] = [];
+            }
+            $events_by_date[$event_date][] = $event;
+        }
+
         // get readings and people for each day
         $days = [];
         $today_value = null;
@@ -65,7 +75,7 @@ class Refresh
             // create day object
             $immutable = DateTimeImmutable::createFromInterface($value);
             $date = $immutable->format(C::$formats->sortable_date);
-            $date_events = Arr::match($events, fn ($e) => $e->start->format(C::$formats->sortable_date) == $date);
+            $date_events = $events_by_date[$date] ?? [];
             $day = new Day(
                 date: $immutable,
                 people: Prayer_Calendar::get_day($immutable, Prayer_Calendar::RETURN_OBJECT),
