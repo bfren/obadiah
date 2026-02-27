@@ -8,6 +8,7 @@ use Obadiah\Helpers\Hash;
 use Obadiah\Pages\Parts\Header\Header_Model;
 use Obadiah\Prayer\Month;
 use Obadiah\Prayer\Prayer_Calendar;
+use Obadiah\Request\Request;
 use Obadiah\Response\View;
 
 App::check();
@@ -77,7 +78,7 @@ $this->alert($model->result);
     </div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" nonce="<?php _e(Request::$nonce) ?>">
     var prayer_calendar_month_max_days = <?php _e("%s", Month::MAX_DAYS); ?>;
     var prayer_calendar_month_id = "<?php _e($model->for->format(C::$formats->prayer_month_id)); ?>";
     var prayer_calendar_save_url = "/api/ajax/month";
