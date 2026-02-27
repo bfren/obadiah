@@ -39,9 +39,9 @@ class Curl
 
             // retry on network errors or 5xx errors
             if ($attempt < $max_retries) {
-                $wait_time = $wait_time = pow(2, $attempt) + random_int(0, 1000) / 1000;
+                $wait_time = intval((pow(2, $attempt) + random_int(0, 1000) / 1000) * 1000000);
                 _l("Retry attempt %d (waiting %ds).", $attempt + 1, $wait_time);
-                usleep($wait_time * 1000000); // Convert to microseconds
+                usleep($wait_time); // Convert to microseconds
             }
         }
 
