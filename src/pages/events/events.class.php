@@ -9,6 +9,7 @@ use Obadiah\Calendar\Event;
 use Obadiah\Calendar\VCal;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\Curl;
 use Obadiah\Request\Request;
 use Obadiah\Response\ICalendar;
 use Obadiah\Response\Json;
@@ -94,10 +95,8 @@ class Events extends Endpoint
             return [];
         }
 
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-
         // get calendar JSON
-        $json = curl_exec($handle);
+        $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
             _l(curl_error($handle));
             return [];

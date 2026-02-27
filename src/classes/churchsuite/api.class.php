@@ -5,6 +5,7 @@ namespace Obadiah\ChurchSuite;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\Curl;
 use Obadiah\Helpers\Hash;
 use Obadiah\Prayer\Person;
 use Obadiah\Prayer\Prayer_Calendar;
@@ -54,10 +55,9 @@ class Api
             sprintf("X-Application: %s", C::$churchsuite->api_application),
             sprintf("X-Auth: %s", C::$churchsuite->api_key)
         ));
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // make request - on error log and return null
-        $json = curl_exec($handle);
+        $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
             _l(print_r(curl_error($handle), true));
             return null;

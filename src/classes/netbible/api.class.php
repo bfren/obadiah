@@ -3,6 +3,7 @@
 namespace Obadiah\NetBible;
 
 use Obadiah\App;
+use Obadiah\Helpers\Curl;
 use Obadiah\Helpers\Log;
 
 App::check();
@@ -38,10 +39,8 @@ class Api
             return null;
         }
 
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-
         // make request - on error log and return null
-        $response = curl_exec($handle);
+        $response = Curl::execute_with_retry($handle);
         if (!is_string($response)) {
             _l(print_r(curl_error($handle), true));
             return null;
