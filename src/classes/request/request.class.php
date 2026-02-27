@@ -101,6 +101,13 @@ class Request
     public static string $uri;
 
     /**
+     * Nonce for this request.
+     *
+     * @var string
+     */
+    public static string $nonce;
+
+    /**
      * Set request values.
      *
      * @return void
@@ -121,5 +128,6 @@ class Request
         self::$host = self::$server->string("HTTP_HOST");
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
+        self::$nonce = sodium_bin2base64(random_bytes(16), SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
     }
 }
