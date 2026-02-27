@@ -62,7 +62,7 @@ class Arr
      * @template T
      * @param T[]|array<int|string, T> $array       Array of values.
      * @param T|null $default                       Default value to return if array is empty.
-     * @return T                                    Last value, or $default if array is empty.
+     * @return T|null                               Last value, or $default if array is empty.
      */
     public static function get_last(array $array, mixed $default = null): mixed
     {
@@ -135,7 +135,7 @@ class Arr
      * @template T
      * @template U
      * @param T[] $array                            Array to map.
-     * @param callable(T): U|null $callback         Callback function (should return a transformed value).
+     * @param callable(T): U $callback              Callback function (should return a transformed value).
      * @return U[]                                  Array of transformed elements.
      */
     public static function map(array $array, ?callable $callback = null): array
@@ -149,7 +149,7 @@ class Arr
      *
      * @template T
      * @param T[] $array                            Array to search.
-     * @param callable(T):bool|null $callback       Callback function (should return bool),
+     * @param callable(T):bool $callback            Callback function (should return bool),
      * @return T[]                                  Array of matching elements.
      */
     public static function match(array $array, ?callable $callback = null): array

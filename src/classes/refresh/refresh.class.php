@@ -49,8 +49,8 @@ class Refresh
         // get data from caches
         $bible = Cache::get_bible_plan();
         $events = Events::get_events(array(
-            "start" => $period->start->format(C::$formats->sortable_date),
-            "end" => $period->end->format(C::$formats->sortable_date)
+            "start" => $period->start?->format(C::$formats->sortable_date),
+            "end" => $period->end?->format(C::$formats->sortable_date)
         ));
 
         // pre-index events by date to avoid O(n) filtering for each day

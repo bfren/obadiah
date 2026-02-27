@@ -52,8 +52,8 @@ class Builder
             // update the Sunday collect
             $date = new DateTimeImmutable($lectionary_day->date);
             if ($date->format("N") == "7") {
-                $sunday_collect = $lectionary_day->collect;
-                $sunday_additional_collect = $lectionary_day->additional_collect;
+                $sunday_collect = $lectionary_day->collect ?: $sunday_collect;
+                $sunday_additional_collect = $lectionary_day->additional_collect ?: $sunday_additional_collect;
             }
 
             // look for any services on this day
