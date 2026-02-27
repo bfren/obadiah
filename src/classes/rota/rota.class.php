@@ -83,7 +83,7 @@ class Rota
             $header_row = [];
             while (!$file_obj->eof()) {
                 // read the next row
-                $row = $file_obj->fgetcsv();
+                $row = $file_obj->fgetcsv(",", "\"", "\\");
                 if ($row === false) {
                     continue;
                 }
