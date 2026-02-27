@@ -8,6 +8,7 @@ use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Serialise;
 use SplFileInfo;
 use Throwable;
 
@@ -111,7 +112,7 @@ class Month
         $path = sprintf("%s/%s.month", C::$dir->prayer, $month->id);
 
         // serialise and save to file
-        $data = serialize($month);
+        $data = Serialise::store($month);
         try {
             file_put_contents($path, $data);
         } catch (Throwable $th) {
@@ -140,7 +141,7 @@ class Month
         // if the file exists, read and deserialise
         $file = new SplFileInfo($path);
         if ($file->isReadable() && ($data = file_get_contents($file->getRealPath()))) {
-            $month = unserialize($data);
+            $month = Serialise::parse($data);
             if ($month !== false) {
                 return $month;
             }
