@@ -18,7 +18,7 @@ if (Request::$session->is_authorised) {
         "Home" => "/",
         "Rota" => "/rota",
         "Refresh" => "/refresh",
-        "Bible" => "/bible",
+        //"Bible" => "/bible",
         "About" => "/about",
         "Log Out" => "/auth/logout"
     );
