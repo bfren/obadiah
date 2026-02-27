@@ -1,4 +1,4 @@
-FROM bfren/nginx-php:php8.4-7.5.1
+FROM bfren/nginx-php:php8.5-8.1.4
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/obadiah"
 
@@ -20,6 +20,9 @@ ENV \
     BF_PHP_EXT="curl session sodium pecl-yaml" \
     # generate empty config.yml if one does not already exist
     BF_OBADIAH_GENERATE_EMPTY_CONFIG="1"
+
+# remove source maps from production build
+RUN find /www -name "*.map" -delete
 
 # run installation
 RUN bf-install

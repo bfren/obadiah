@@ -1,9 +1,9 @@
 #!/bin/sh
 
 docker pull bfren/obadiah:dev
-docker run \
+docker run -it \
     -p "127.0.0.1:3000:80" \
-    -e PHP_INI=development \
+    -e BF_PHP_ENV=development \
     -v $(pwd)/src:/www \
     -v $(pwd)/data:/data \
-    bfren/obadiah:dev
+    bfren/obadiah:dev nu

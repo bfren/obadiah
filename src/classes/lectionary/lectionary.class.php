@@ -65,6 +65,18 @@ class Lectionary
         );
         $service_results = $service_table->get(array("include" => join(",", $service)));
 
+        // pre-index services by date to avoid O(n) filtering for each day
+        $services_by_date = [];
+        foreach ($service_results as $service) {
+            $service_date = Arr::get($service, "Date");
+            if ($service_date) {
+                if (!isset($services_by_date[$service_date])) {
+                    $services_by_date[$service_date] = [];
+                }
+                $services_by_date[$service_date][] = $service;
+            }
+        }
+
         // add days and services
         $days = [];
         $series = [];
@@ -79,6 +91,9 @@ class Lectionary
             $day_services = array_filter($service_results, function (array $v, int $k) use ($date) {
                 return $v["Date"] === $date;
             }, ARRAY_FILTER_USE_BOTH);
+
+            // get Services for Day (using pre-indexed lookup)
+            $day_services = $services_by_date[$date] ?? [];
 
             // if there are no services, continue
             if (empty($day_services)) {
@@ -156,7 +171,7 @@ class Lectionary
      */
     public function get_collect(DateTimeImmutable $dt): ?string
     {
-        return $this->get_collect_common($dt, fn (Day $day) => $day->collect);
+        return $this->get_collect_common($dt, fn(Day $day) => $day->collect);
     }
 
     /**
@@ -167,7 +182,7 @@ class Lectionary
      */
     public function get_additional_collect(DateTimeImmutable $dt): ?string
     {
-        return $this->get_collect_common($dt, fn (Day $day) => $day->additional_collect);
+        return $this->get_collect_common($dt, fn(Day $day) => $day->additional_collect);
     }
 
     /**

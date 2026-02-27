@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#docker buildx build -f cli.Dockerfile -t obadiah:cli --load .
+docker buildx build -f cli.Dockerfile -t obadiah:cli --load .
 docker run \
     -v $(pwd)/data:/data \
     -v $(pwd)/src:/ws \

@@ -33,6 +33,7 @@ class Json extends Action
         // add standard JSON headers
         $this->add_header("Access-Control-Allow-Origin", "*");
         $this->add_header("Content-Type", "text/json; charset=utf-8");
+        $this->add_header("Cache-Control", "public, max-age=3600, must-revalidate");
         $this->add_last_modified_header($last_modified);
     }
 

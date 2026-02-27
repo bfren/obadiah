@@ -40,6 +40,6 @@ class Hash
      */
     public static function service(Combined_Service $service): string
     {
-        return md5(serialize($service));
+        return md5(Serialise::store($service));
     }
 }

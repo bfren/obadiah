@@ -11,7 +11,7 @@ App::check();
 class About extends Endpoint
 {
     /**
-     * GET: /
+     * GET: /about
      *
      * @return View
      */
