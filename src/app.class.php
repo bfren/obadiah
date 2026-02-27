@@ -47,8 +47,8 @@ class App
                 "secure" => true,
                 // not accessible from JavaScript
                 "httponly" => true,
-                // CSRF protection (Lax allows top-level navigation)
-                "samesite" => "Lax"
+                // CSRF protection
+                "samesite" => "Strict"
             ]);
 
             session_start();
