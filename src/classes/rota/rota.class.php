@@ -94,9 +94,10 @@ class Rota
                     $service = new Service($header_row, $row);
                     $services[] = $service;
 
-                    // add people, keeping array unique and sorted alphabetically
-                    $people = array_unique(array_merge($people, $service->people));
-                    asort($people);
+                    // add people, using person as key to keep values unique
+                    foreach ($service->people as $person) {
+                        $people[$person] = $person;
+                    }
                 }
 
                 // if the first value is 'Date' this is the header row,
@@ -108,18 +109,20 @@ class Rota
             }
         }
 
-        // sort services by timestamp
-        usort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
-
         // check lectionary cache last modified
         $lectionary_last_modified = Cache::get_lectionary_last_modified();
         if ($lectionary_last_modified > $last_modified_timestamp) {
             $last_modified_timestamp = $lectionary_last_modified;
         }
-
-        // set values
         $this->last_modified_timestamp = $last_modified_timestamp;
+
+        // sort services by timestamp
+        usort($services, fn(Service $a, Service $b) => $a->start->getTimestamp() < $b->start->getTimestamp() ? -1 : 1);
         $this->services = $services;
+
+        // get people array values and sort
+        $people = array_values($people);
+        asort($people);
         $this->people = $people;
     }
 
@@ -154,7 +157,7 @@ class Rota
 
             // apply date filters
             $days = Arr::get_integer($filters, "days", 0);
-            if($days !== 0) {
+            if ($days !== 0) {
                 $start = new DateTimeImmutable()->format("c");
                 $end = new DateTimeImmutable()->modify(sprintf("+%s day", $days))->format("c");
             } else {

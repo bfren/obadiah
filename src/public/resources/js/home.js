@@ -1,4 +1,6 @@
-function reload_caches() {
+document.getElementById("reload-link").addEventListener("click", (e) => {
+    e.preventDefault();
+
     let request = {
         method: "get",
         url: "/api/preload?debug=true"
@@ -9,4 +11,4 @@ function reload_caches() {
     axios(request).catch((e) => console.log(e)).then((r) => {
         target.textContent = JSON.stringify(r.data, null, 2);
     });
-}
+});

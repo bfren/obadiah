@@ -41,7 +41,7 @@ if (Request::$session->is_denied()) {
     </div>
 </form>
 
-<script type="text/javascript">
+<script type="text/javascript" nonce="<?php _e(Request::$nonce) ?>">
     document.getElementById("username").focus();
 </script>
 

@@ -29,16 +29,10 @@ class Sanitise
         }
 
         // remove invalid octets
-        $found = false;
-        while (preg_match("/%[a-f0-9]{2}/i", $filtered, $match)) {
-            $filtered = str_replace($match[0], "", $filtered);
-            $found = true;
-        }
+        $filtered = preg_replace("/%[a-f0-9]{2}/i", "", $filtered);
 
         // strip out the whitespace that may now exist after removing the octets.
-        if ($found) {
-            $filtered = preg_replace('/ +/', ' ', $filtered) ?: "";
-        }
+        $filtered = preg_replace("/ +/", " ", $filtered) ?: "";
 
         // trim and return filtered string
         return trim($filtered);
