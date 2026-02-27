@@ -21,6 +21,9 @@ ENV \
     # generate empty config.yml if one does not already exist
     BF_OBADIAH_GENERATE_EMPTY_CONFIG="1"
 
+# remove source maps from production build
+RUN find /www -name "*.map" -delete
+
 # run installation
 RUN bf-install
 
