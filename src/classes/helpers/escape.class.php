@@ -64,7 +64,7 @@ class Escape
             return self::get_html($formatted);
         }
 
-        // handle as HTML characters so the text is safe are safe
+        // handle as HTML characters so the text is safe
         return trim($html);
     }
 

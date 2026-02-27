@@ -41,12 +41,14 @@ class App
         if ($is_http) {
             // configure secure session cookie parameters
             session_set_cookie_params([
-                "lifetime" => 0,    // session cookie (deleted when browser closes)
+                "lifetime" => 0,
                 "path" => "/",
-                "domain" => "",     // default domain
-                "secure" => true,   // only send over HTTPS
-                "httponly" => true, // not accessible from JavaScript
-                "samesite" => "Lax" // CSRF protection (Lax allows top-level navigation)
+                "domain" => "",
+                "secure" => true,
+                // not accessible from JavaScript
+                "httponly" => true,
+                // CSRF protection (Lax allows top-level navigation)
+                "samesite" => "Lax"
             ]);
 
             session_start();
