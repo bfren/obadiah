@@ -18,7 +18,7 @@ class Crypto
      */
     public static function generate_nonce(int $length = 16):string
     {
-        $rnd = sodium_randombytes_buf($length);
+        $rnd = random_bytes($length);
         return sodium_bin2base64($rnd, SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
     }
 
