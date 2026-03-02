@@ -3,6 +3,7 @@
 namespace Obadiah\Request;
 
 use Obadiah\App;
+use Obadiah\Crypto\Crypto;
 use Obadiah\Helpers\IO;
 
 App::check();
@@ -128,6 +129,6 @@ class Request
         self::$host = self::$server->string("HTTP_HOST");
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
-        self::$nonce = sodium_bin2base64(random_bytes(16), SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
+        self::$nonce = Crypto::generate_nonce();
     }
 }

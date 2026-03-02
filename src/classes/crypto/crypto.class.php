@@ -11,6 +11,18 @@ App::check();
 class Crypto
 {
     /**
+     * Generate a URL-safe nonce for use in inline JavaScript / style blocks.
+     *
+     * @param int $length                   The length of the nonce.
+     * @return string                       Base64 nonce with URL-safe characters and no padding.
+     */
+    public static function generate_nonce(int $length = 16):string
+    {
+        $rnd = sodium_randombytes_buf($length);
+        return sodium_bin2base64($rnd, SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING);
+    }
+
+    /**
      * Hash a password using Argon2.
      *
      * @param string $password              The password to hash.
