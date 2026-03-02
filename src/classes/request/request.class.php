@@ -4,6 +4,7 @@ namespace Obadiah\Request;
 
 use Obadiah\App;
 use Obadiah\Crypto\Crypto;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\IO;
 
 App::check();
@@ -18,13 +19,6 @@ class Request
     public static Super_Global $cookies;
 
     /**
-     * True if the request is marked with a debug flag.
-     *
-     * @var bool
-     */
-    public static bool $debug;
-
-    /**
      * Encapsulates $_ENV.
      *
      * @var Super_Global
@@ -34,7 +28,7 @@ class Request
     /**
      * Encapsulates $_FILES.
      *
-     * @var mixed[]
+     * @var array<string, File>
      */
     public static array $files;
 
@@ -44,27 +38,6 @@ class Request
      * @var Super_Global
      */
     public static Super_Global $get;
-
-    /**
-     * Current request host.
-     *
-     * @var string
-     */
-    public static string $host;
-
-    /**
-     * Returns posted JSON as an associative array.
-     *
-     * @var mixed[]
-     */
-    public static array $json;
-
-    /**
-     * Request method (e.g. POST).
-     *
-     * @var string
-     */
-    public static string $method;
 
     /**
      * Encapsulates $_POST.
@@ -88,6 +61,48 @@ class Request
     public static Session $session;
 
     /**
+     * True if the request is marked with a debug flag.
+     *
+     * @var bool
+     */
+    public static bool $debug;
+
+    /**
+     * Current request host.
+     *
+     * @var string
+     */
+    public static string $host;
+
+    /**
+     * Returns posted JSON as an associative array.
+     *
+     * @var mixed[]
+     */
+    public static array $json;
+
+    /**
+     * Request method (e.g. POST).
+     *
+     * @var string
+     */
+    public static string $method;
+
+    /**
+     * Nonce for this request.
+     *
+     * @var string
+     */
+    public static string $nonce;
+
+    /**
+     * Current request protocol ('HTTP' or 'HTTPS').
+     *
+     * @var string
+     */
+    public static string $protocol;
+
+    /**
      * Request query string.
      *
      * @var string
@@ -102,13 +117,6 @@ class Request
     public static string $uri;
 
     /**
-     * Nonce for this request.
-     *
-     * @var string
-     */
-    public static string $nonce;
-
-    /**
      * Set request values.
      *
      * @return void
@@ -117,7 +125,7 @@ class Request
     {
         self::$cookies = new Super_Global(INPUT_COOKIE);
         self::$env = new Super_Global(INPUT_ENV);
-        self::$files = $_FILES ?: [];
+        self::$files = Arr::map($_FILES, fn($f) => File::create($f));
         self::$get = new Super_Global(INPUT_GET);
         self::$json = json_decode(IO::php_input(), true) ?: [];
         self::$post = new Super_Global(INPUT_POST);
@@ -127,8 +135,9 @@ class Request
         self::$debug = self::$get->bool("debug");
         self::$method = self::$server->string("REQUEST_METHOD");
         self::$host = self::$server->string("HTTP_HOST");
+        self::$nonce = Crypto::generate_nonce();
+        self::$protocol = self::$server->bool("HTTPS", false) ? "https" : "http";
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
-        self::$nonce = Crypto::generate_nonce();
     }
 }
