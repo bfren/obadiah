@@ -33,14 +33,13 @@ class Prayer_File
     {
         // only allow CSV files
         $info = Arr::get(Request::$files, "file");
-        in_array(Arr::get($info, "type"), array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
+        in_array($info->mime_type, array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // get paths
-        $tmp_path = Arr::get($info, "tmp_name");
         $csv_path = sprintf("%s/%s", C::$dir->prayer, $filename);
 
         // move file to the correct location, overwriting whatever is already there
-        if (is_string($tmp_path) && move_uploaded_file($tmp_path, $csv_path)) {
+        if (is_string($info->tmp_name) && move_uploaded_file($info->tmp_name, $csv_path)) {
             Cache::clear_prayer_calendar();
             return Result::success(sprintf("The %s prayer calendar file was uploaded successfully.", $type));
         }
