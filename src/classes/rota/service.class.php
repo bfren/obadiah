@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\DateTime;
+use Obadiah\Helpers\Str;
 
 App::check();
 
@@ -56,7 +57,7 @@ class Service
         $people = [];
         foreach ($this->ministries as $service_ministries) {
             // remove extra information and merge arrays
-            $people = array_merge(preg_replace("/ \(.*\)/", "", $service_ministries->people), $people);
+            $people = array_merge(Str::replace_all("/ \(.*\)/", "", $service_ministries->people), $people);
         }
 
         // sort alphabetically and remove duplicates
@@ -103,10 +104,7 @@ class Service
     private function sanitise_people(string $people): array
     {
         // remove any notes
-        $sanitised = preg_replace("/Notes:(.*)\n\n/s", "", $people);
-        if ($sanitised === null) {
-            return [];
-        }
+        $sanitised = Str::replace("/Notes:(.*)\n\n/s", "", $people);
 
         // split by new line
         $individuals = preg_split("/\n/", trim($sanitised));
