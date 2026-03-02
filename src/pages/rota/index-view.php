@@ -24,7 +24,7 @@ $header = new Header_Model("Rota", "Use the filters to create a personalised rot
 $this->header($header);
 
 // ics link (for copying)
-$ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
+$ics_link = sprintf( "%s://%s/rota/ics/?%s", Request::$protocol, Request::$host, $query_with_api);
 
 ?>
 
@@ -136,13 +136,6 @@ $ics_link = sprintf("https://%s/rota/ics/?%s", Request::$host, $query_with_api);
     </div>
     <div class="row">
         <div class="col-12 mt-2 d-flex justify-content-end align-items-center">
-            <?php if (Request::$session->is_admin) : ?>
-                <div class="form-check d-none d-sm-block me-4">
-                    <?php $checked = Request::$debug ? "checked" : ""; ?>
-                    <input class="form-check-input" type="checkbox" value="true" name="debug" id="debug" <?php _e($checked); ?> />
-                    <label class="form-check-label" for="debug">Debug</label>
-                </div>
-            <?php endif; ?>
             <button type="submit" class="btn btn-primary me-1">Apply</button>
             <a href="/rota/" class="btn btn-danger me-3">Reset</a>
             <span data-clipboard-text="<?php _e($ics_link); ?>" class="copy btn btn-secondary me-1">ICS</span>
