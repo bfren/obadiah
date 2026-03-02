@@ -31,9 +31,16 @@ class Prayer_File
      */
     private static function upload(string $type, string $filename): Result
     {
-        // only allow CSV files
+        // validate file upload
         $info = Arr::get(Request::$files, "file");
-        in_array(Arr::get($info, "type"), array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
+        if (!is_array($info)) {
+            return Result::failure("No file was uploaded.");
+        }
+
+        $validation = File_Validator::validate_csv($info);
+        if (!$validation["valid"]) {
+            return Result::failure($validation["error"] ?? "File validation failed.");
+        }
 
         // get paths
         $tmp_path = Arr::get($info, "tmp_name");

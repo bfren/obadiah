@@ -39,8 +39,11 @@ class Curl
 
             // retry on network errors or 5xx errors
             if ($attempt < $max_retries) {
-                $wait_time = pow(2, $attempt); // 1s, 2s, 4s, 8s
-                _l("Retry attempt %d (waiting %ds).", $attempt + 1, $wait_time);
+                // exponential backoff with jitter to prevent thundering herd
+                $base_wait = pow(2, $attempt); // 1s, 2s, 4s, 8s
+                $jitter = (random_int(0, 1000) / 1000); // 0-1000ms jitter
+                $wait_time = min($base_wait + $jitter, 8); // cap at 8 seconds
+                _l("Retry attempt %d (waiting %.2fs).", $attempt + 1, $wait_time);
                 usleep($wait_time * 1000000); // Convert to microseconds
             }
         }

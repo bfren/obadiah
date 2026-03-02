@@ -116,7 +116,7 @@ class Baserow
         // make request and return empty array on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            _l("Baserow API request failed: %s", $this->sanitize_error(curl_error($handle)));
             return [];
         }
 
@@ -181,7 +181,7 @@ class Baserow
         // make request and output on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            _l("Baserow API request failed: %s", $this->sanitize_error(curl_error($handle)));
             return new Post_Result(500, "Error, please try again.");
         }
 
@@ -193,5 +193,20 @@ class Baserow
 
         // if we get here the POST was successful
         return new Post_Result(200, "OK");
+    }
+
+    /**
+     * Sanitize error messages to prevent leaking sensitive information like authentication tokens.
+     *
+     * @param string $error             Raw error message from curl.
+     * @return string                   Sanitized error message.
+     */
+    private function sanitize_error(string $error): string
+    {
+        // Remove Authorization tokens from error messages
+        $sanitized = preg_replace('/Authorization:\s*Token\s*\S+/i', 'Authorization: Token [REDACTED]', $error) ?? $error;
+        // Remove API URIs that might contain sensitive info
+        $sanitized = preg_replace('/https?:\/\/[^\s]+/i', '[URL REDACTED]', $sanitized) ?? $sanitized;
+        return $sanitized;
     }
 }

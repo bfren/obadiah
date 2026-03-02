@@ -45,11 +45,13 @@ class Escape
     }
 
     /**
-     * Escape $html - using sprintf if $args are defined.
+     * Get pre-escaped HTML content (no escaping applied) - using sprintf if $args are defined.
+     * SECURITY NOTE: This function does NOT escape HTML. Only use with content that is already safe/escaped.
+     * For unsafe user input, use get_text() instead.
      *
-     * @param string|null $html             HTML (or sprintf format) to be escaped.
+     * @param string|null $html             HTML (or sprintf format) - must already be safe/escaped.
      * @param mixed $args                   Optional arguments to use for sprintf.
-     * @return string                       Safe (escaped) html.
+     * @return string                       HTML content (unescaped).
      */
     public static function get_html(?string $html, mixed ...$args): string
     {
@@ -64,14 +66,16 @@ class Escape
             return self::get_html($formatted);
         }
 
-        // handle as HTML characters so the text is safe are safe
+        // return HTML as-is (no escaping - must be pre-escaped by caller)
         return trim($html);
     }
 
     /**
-     * Safely echo $html - using sprintf if $args are defined.
+     * Echo pre-escaped HTML content (no escaping applied) - using sprintf if $args are defined.
+     * SECURITY NOTE: This function does NOT escape HTML. Only use with content that is already safe/escaped.
+     * For unsafe user input, use echo_text() instead.
      *
-     * @param string|null $html             HTML (or sprintf format) to be printed.
+     * @param string|null $html             HTML (or sprintf format) - must already be safe/escaped.
      * @param mixed $args                   Optional arguments to use for sprintf.
      * @return void
      */

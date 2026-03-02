@@ -42,7 +42,7 @@ class Api
         // make request - on error log and return null
         $response = Curl::execute_with_retry($handle);
         if (!is_string($response)) {
-            _l(print_r(curl_error($handle), true));
+            _l("NetBible API request failed: %s", self::sanitize_error(curl_error($handle)));
             return null;
         }
 
@@ -81,5 +81,18 @@ class Api
     public function get_text(string $passage): ?string
     {
         return $this->get($passage, "text");
+    }
+
+    /**
+     * Sanitize error messages to prevent leaking sensitive information.
+     *
+     * @param string $error             Raw error message from curl.
+     * @return string                   Sanitized error message.
+     */
+    private static function sanitize_error(string $error): string
+    {
+        // Remove URLs that might contain sensitive info
+        $sanitized = preg_replace('/https?:\/\/[^\s]+/i', '[URL REDACTED]', $error);
+        return $sanitized;
     }
 }

@@ -20,11 +20,16 @@ class Edit_Model
      * @param int $per_day              The average number of people per day to fill the calendar evenly.
      * @return void
      */
+    public readonly array $people_lookup;
+
     public function __construct(
         public readonly ?Result $result,
         public readonly DateTimeImmutable $for,
         public readonly array $days,
         public readonly array $people,
         public readonly int $per_day
-    ) {}
+    ) {
+        // create lookup array for O(1) searches (flip array so hashes are keys)
+        $this->people_lookup = array_flip($people);
+    }
 }

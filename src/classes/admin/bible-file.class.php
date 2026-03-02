@@ -24,9 +24,16 @@ class Bible_File
      */
     public static function upload(): Result
     {
-        // only allow CSV files
+        // validate file upload
         $info = Arr::get(Request::$files, "file");
-        in_array(Arr::get($info, "type"), array("text/plain")) || App::die("You may only upload text files.");
+        if (!is_array($info)) {
+            return Result::failure("No file was uploaded.");
+        }
+
+        $validation = File_Validator::validate_text($info, "txt");
+        if (!$validation["valid"]) {
+            return Result::failure($validation["error"] ?? "File validation failed.");
+        }
 
         // get paths
         $tmp_path = Arr::get($info, "tmp_name");

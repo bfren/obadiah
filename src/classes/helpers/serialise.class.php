@@ -36,6 +36,7 @@ class Serialise
 
     /**
      * Parse a value from JSON or PHP serialisation format and return the object.
+     * Security: Object instantiation is disabled to prevent object injection attacks.
      *
      * @param string $data              Serialised value.
      * @return mixed                    Deserialised value.
@@ -46,11 +47,11 @@ class Serialise
             // JSON format
             return json_decode(substr($data, 2), true);
         } elseif (str_starts_with($data, "s:")) {
-            // PHP object serialisation format
-            return unserialize(substr($data, 2));
+            // PHP object serialisation format - disable object instantiation for security
+            return unserialize(substr($data, 2), ['allowed_classes' => false]);
         } else {
-            // legacy format (no prefix) - assume PHP object serialisation
-            return unserialize($data);
+            // legacy format (no prefix) - assume PHP object serialisation, disable object instantiation
+            return unserialize($data, ['allowed_classes' => false]);
         }
     }
 }

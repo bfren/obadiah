@@ -61,7 +61,7 @@ class Rota
 
         // read each file into arrays
         $services = [];
-        $people = [];
+        $people = [];  // will use as associative array for deduplication
         $last_modified_timestamp = 0;
         foreach ($csv as $file) {
             // store the file modification time
@@ -94,9 +94,10 @@ class Rota
                     $service = new Service($header_row, $row);
                     $services[] = $service;
 
-                    // add people, keeping array unique and sorted alphabetically
-                    $people = array_unique(array_merge($people, $service->people));
-                    asort($people);
+                    // add people to associative array for O(1) deduplication
+                    foreach ($service->people as $person) {
+                        $people[$person] = $person;
+                    }
                 }
 
                 // if the first value is 'Date' this is the header row,
@@ -116,6 +117,10 @@ class Rota
         if ($lectionary_last_modified > $last_modified_timestamp) {
             $last_modified_timestamp = $lectionary_last_modified;
         }
+
+        // convert people back to indexed array and sort alphabetically
+        $people = array_values($people);
+        asort($people);
 
         // set values
         $this->last_modified_timestamp = $last_modified_timestamp;

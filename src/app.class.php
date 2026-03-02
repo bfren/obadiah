@@ -46,7 +46,7 @@ class App
                 "domain" => "",     // default domain
                 "secure" => true,   // only send over HTTPS
                 "httponly" => true, // not accessible from JavaScript
-                "samesite" => "Lax" // CSRF protection (Lax allows top-level navigation)
+                "samesite" => "Strict" // CSRF protection (Strict is more secure for admin apps)
             ]);
 
             session_start();
