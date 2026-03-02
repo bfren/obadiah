@@ -80,8 +80,9 @@ class Builder
                 foreach ($rota_service->ministries as $name => $ministry) {
                     $ministries[$name] = new Service_Ministry(
                         abbreviation: $ministry->abbreviation,
-                        people: Arr::map($ministry->people, function ($person) use ($lectionary_service) {
-                            return $person === "Guest Speaker" ? $lectionary_service->guest_speaker : $person;
+                        people: Arr::map($ministry->people, function ($person) use ($lectionary_service): string {
+                            // if the name of the guest speaker hasn't been set, use 'Guest Speaker' instead
+                            return $person === "Guest Speaker" ? $lectionary_service->guest_speaker ?? $person : $person;
                         })
                     );
                 };
