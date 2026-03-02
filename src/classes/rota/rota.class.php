@@ -73,6 +73,7 @@ class Rota
             // open the file for reading
             try {
                 $file_obj = new SplFileObject($file, "r");
+                $file_obj->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
             } catch (Throwable $th) {
                 _l_throwable($th);
                 App::die("Unable to open the file: %s.", $file);
@@ -80,16 +81,23 @@ class Rota
 
             // read each line of the csv file
             $include = false;
+            /** @var string[] */
             $header_row = [];
             while (!$file_obj->eof()) {
                 // read the next row
+                /** @var string[]|false|null */
                 $row = $file_obj->fgetcsv(",", "\"", "\\");
-                if ($row === false) {
+                if ($row === false || $row === null) {
                     continue;
                 }
 
+                // hold various checks
+                $correct_number_of_values = count($header_row) == count($row);
+                $is_not_key = !str_starts_with($row[0] ?? "", "Key:");
+                $contains_service = ($row[1] ?? "") != "No service";
+
                 // include the service if the row counts match and there is a service assigned
-                if ($include && count($header_row) == count($row) && !str_starts_with($row[0], "Key:") && $row[1] != "No service") {
+                if ($include && $correct_number_of_values && $is_not_key && $contains_service) {
                     // create service
                     $service = new Service($header_row, $row);
                     $services[] = $service;

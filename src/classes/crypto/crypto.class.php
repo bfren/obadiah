@@ -11,6 +11,20 @@ App::check();
 class Crypto
 {
     /**
+     * Generate a URL-safe nonce for use in inline JavaScript / style blocks.
+     *
+     * @param int<1, max> $length           The length of the nonce.
+     * @return string                       Base64 nonce with URL-safe characters and no padding.
+     */
+    public static function generate_nonce(int $length = 16):string
+    {
+        $str = random_bytes($length);
+        $enc = SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING;
+
+        return sodium_bin2base64($str, $enc);
+    }
+
+    /**
      * Hash a password using Argon2.
      *
      * @param string $password              The password to hash.
@@ -18,8 +32,11 @@ class Crypto
      */
     public static function hash_password(#[SensitiveParameter] string $password): string
     {
+        $ops = SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE;
+        $mem = SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE;
+
         try {
-            return sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE, SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE);
+            return sodium_crypto_pwhash_str($password, $ops, $mem);
         } catch (Throwable $th) {
             _l_throwable($th);
             App::die("Unable to hash password.");

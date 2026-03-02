@@ -29,10 +29,10 @@ class Sanitise
         }
 
         // remove invalid octets
-        $filtered = preg_replace("/%[a-f0-9]{2}/i", "", $filtered);
+        $filtered = Str::replace("/%[a-f0-9]{2}/i", "", $filtered);
 
-        // strip out the whitespace that may now exist after removing the octets.
-        $filtered = preg_replace("/ +/", " ", $filtered) ?: "";
+        // strip out multiple concurrent whitespace characters that may now exist after removing octets
+        $filtered = Str::replace("/ +/", " ", $filtered);
 
         // trim and return filtered string
         return trim($filtered);
@@ -49,12 +49,12 @@ class Sanitise
     public static function strip_tags($string, $remove_breaks = false)
     {
         // strip tags (including script / style)
-        $filtered = preg_replace("@<(script|style)[^>]*?>.*?</\\1>@si", "", $string) ?: "";
+        $filtered = Str::replace("@<(script|style)[^>]*?>.*?</\\1>@si", "", $string);
         $filtered = strip_tags($filtered);
 
         // remove breaks
         if ($remove_breaks) {
-            $filtered = preg_replace("/[\r\n\t ]+/", " ", $filtered) ?: "";
+            $filtered = Str::replace("/[\r\n\t ]+/", " ", $filtered);
         }
 
         // trim and return filtered string
