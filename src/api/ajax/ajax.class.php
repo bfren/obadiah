@@ -6,6 +6,7 @@ use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Prayer\Month;
+use Obadiah\Request\Csrf_Token;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
 use Obadiah\Router\Endpoint;
@@ -35,19 +36,16 @@ class Ajax extends Endpoint
             return null;
         }
 
-        // get input text
-        $input = file_get_contents("php://input");
-        if (!$input) {
-            $this->result = new Json(Result::failure("No input."), 400);
+        // get input JSON
+        $json = Request::$json;
+        if (empty($json)) {
+            $this->result = new Json(Result::failure("Invalid request."), 400);
             return null;
         }
 
-        // decode JSON
-        try {
-            $json = json_decode($input, flags: JSON_THROW_ON_ERROR);
-        } catch (Throwable $th) {
-            _l_throwable($th);
-            $this->result = new Json(Result::failure("Invalid request."), 400);
+        // validate CSRF
+        if(!isset($json[Csrf_Token::NAME]) || !Csrf_Token::validate($json[Csrf_Token::NAME], false)) {
+            $this->result = new Json(Result::validation_failure(), 400);
             return null;
         }
 
