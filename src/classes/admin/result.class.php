@@ -41,4 +41,14 @@ class Result
     {
         return new Result(false, $message);
     }
+
+    /**
+     * Return a CSRF validation failure result.
+     *
+     * @return Result                   Validation failure result.
+     */
+    public static function validation_failure(): Result
+    {
+        return new Result(false, "Validation failed.");
+    }
 }
