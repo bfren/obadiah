@@ -3,6 +3,7 @@
 namespace Obadiah\Pages\Parts\Header;
 
 use Obadiah\App;
+use Obadiah\Request\Request;
 use Obadiah\Response\View;
 
 App::check();
@@ -32,7 +33,7 @@ App::check();
 
     <?php if ($model->overflow_scroll) : ?>
 
-        <main class="flex-grow-1 h-100" style="overflow-y: auto">
+        <main class="flex-grow-1 h-100 main-overflow-y-auto" nonce="<?php _e(Request::$nonce); ?>">
             <div class="container-fluid h-100">
 
             <?php else : ?>
