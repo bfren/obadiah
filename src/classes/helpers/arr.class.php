@@ -40,6 +40,24 @@ class Arr
     }
 
     /**
+     * Safely get a value from an associative array.
+     *
+     * @template T
+     * @param array<int|string, array<T>> $array    Array of values.
+     * @param int|string $key                       The key to search for.
+     * @param array<T> $default                     Default value if key does not exist.
+     * @return array<T>                             Key value, or $default if key does not exist.
+     */
+    public static function get_array(array $array, int|string $key, array $default = []): array
+    {
+        if (self::exists($array, $key)) {
+            return $array[$key];
+        }
+
+        return $default;
+    }
+
+    /**
      * Safely get a boolean value from an array.
      *
      * @param mixed[] $array                        Array of values.

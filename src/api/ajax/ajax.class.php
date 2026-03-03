@@ -64,6 +64,11 @@ class Ajax extends Endpoint
         // get data
         $data = $this->get_input();
 
+        // check for null
+        if($data === null) {
+            return new Json(Result::failure("Empty data."), 400);
+        }
+
         // check for failure result
         if ($this->result) {
             return $this->result;

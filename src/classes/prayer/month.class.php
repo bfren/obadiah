@@ -8,6 +8,7 @@ use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Cache\Cache;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\Serialise;
 use SplFileInfo;
 use Throwable;
@@ -87,19 +88,21 @@ class Month
     /**
      * Create a Month object from $data and save it to the data store.
      *
-     * @param array<string, mixed>|null $data   Data posted from Prayer Calendar builder.
+     * @param array<string, mixed> $data    Data posted from Prayer Calendar builder.
      * @return Result
      */
-    public static function save($data): Result
+    public static function save(array $data): Result
     {
         try {
             // get data
-            $id = $data["id"];
+            $id = Arr::get($data,"id");
             $days = [];
-            foreach ($data["days"] as $day) {
-                $days[$day["date"]] = $day["people"];
+            foreach (Arr::get_array($data, "days") as $day) {
+                $day_date = Arr::get($day, "date");
+                $day_people = Arr::get_array($day, "people");
+                $days[$day_date] = $day_people;
             }
-            $people = $data["people"];
+            $people = Arr::get_array($data, "people");
         } catch (Throwable $th) {
             _l_throwable($th);
             return Result::failure("Unable to read month data.");
