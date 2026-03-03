@@ -5,14 +5,6 @@ document.querySelectorAll(".settings").forEach($el => {
         // stop default submit behaviour
         $e.preventDefault();
 
-        // get FormData
-        const data = new FormData($el);
-
-        // log form entries to console
-        for (let [key, value] of data.entries()) {
-            console.log(`${key}: ${value}`);
-        }
-
         // save data
         const submit = $el.querySelector("button[type=submit]");
         submit.setAttribute("disabled", true);

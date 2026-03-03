@@ -41,6 +41,7 @@ function save_prayer_calendar_data() {
         days: [],
         people: []
     };
+    month[prayer_calendar_csrf_name] = prayer_calendar_csrf_token;
 
     // loop through each day to create a JSON object of the month
     for (let index = 1; index <= prayer_calendar_month_max_days; index++) {
