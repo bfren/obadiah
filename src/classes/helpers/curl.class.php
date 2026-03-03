@@ -47,4 +47,24 @@ class Curl
 
         return false;
     }
+
+    /**
+     * Safely log curl errors, removing sensitive information first.
+     *
+     * @param CurlHandle $handle                    CURL handle.
+     * @return void
+     */
+    public static function log_error(CurlHandle $handle): void
+    {
+        $error = print_r(curl_error($handle), true);
+
+        // remove Authorization tokens from error messages
+        $sanitised = preg_replace('/Authorization:\s*Token\s*\S+/i', 'Authorization: Token [REDACTED]', $error) ?? $error;
+
+        // semove API URIs that might contain sensitive info
+        $sanitised = preg_replace('/https?:\/\/[^\s]+/i', '[URL REDACTED]', $sanitised) ?? $sanitised;
+
+        // log sanitised error
+        _l($sanitised);
+    }
 }

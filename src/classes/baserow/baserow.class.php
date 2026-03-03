@@ -116,7 +116,7 @@ class Baserow
         // make request and return empty array on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            Curl::log_error($handle);
             return [];
         }
 
@@ -181,7 +181,7 @@ class Baserow
         // make request and output on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            Curl::log_error($handle);
             return new Post_Result(500, "Error, please try again.");
         }
 
