@@ -10,6 +10,7 @@ use Obadiah\Admin\Rota_File;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Helpers\DateTime;
+use Obadiah\Request\Csrf_Token;
 use Obadiah\Request\Request;
 use Obadiah\Response\View;
 use Obadiah\Router\Endpoint;
@@ -81,14 +82,16 @@ class Upload extends Endpoint
      */
     public function index_post(): View
     {
-        // save files
-        $this->result = match (Request::$post->string("submit")) {
-            "bible" => Bible_File::upload(),
-            "prayer-adults" => Prayer_File::upload_adults(),
-            "prayer-children" => Prayer_File::upload_children(),
-            "rota" => Rota_File::upload(),
-            default => Result::failure("Unknown action.")
-        };
+        // validate input before saving files
+        if(Request::$post->validate()) {
+            $this->result = match (Request::$post->string("submit")) {
+                "bible" => Bible_File::upload(),
+                "rota" => Rota_File::upload(),
+                default => Result::failure("Unknown action.")
+            };
+        } else {
+            $this->result = Result::validation_failure();
+        }
 
         // show upload page
         return $this->index_get();
