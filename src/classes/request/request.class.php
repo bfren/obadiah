@@ -77,7 +77,7 @@ class Request
     /**
      * Returns posted JSON as an associative array.
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     public static array $json;
 

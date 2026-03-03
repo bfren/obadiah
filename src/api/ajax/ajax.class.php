@@ -5,6 +5,7 @@ namespace Obadiah\Api\Ajax;
 use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\IO;
 use Obadiah\Prayer\Month;
 use Obadiah\Request\Csrf_Token;
 use Obadiah\Request\Request;
@@ -26,9 +27,9 @@ class Ajax extends Endpoint
     /**
      * Get and validate JSON input from php://input.
      *
-     * @return mixed
+     * @return array<string, mixed>|null
      */
-    private function get_input(): mixed
+    private function get_input(): array|null
     {
         // check auth
         if (!Request::$session->is_admin) {
