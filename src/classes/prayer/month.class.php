@@ -24,10 +24,10 @@ class Month
     /**
      * Create Month object.
      *
-     * @param string $id                Month ID, format YYYY-MM.
-     * @param string[][] $days          The people assigned to each day, stored by hash.
+     * @param string $id                        Month ID, format YYYY-MM.
+     * @param string[][] $days                  The people assigned to each day, stored by hash.
      *      { 'YYYY-MM-DD' => string[] }
-     * @param string[] $people          Everyone included in this month's prayer calendar, stored by hash.
+     * @param string[] $people                  Everyone included in this month's prayer calendar, stored by hash.
      * @return void
      */
     public function __construct(
@@ -51,7 +51,7 @@ class Month
      *
      * Returns blank if the calendar does not exist.
      *
-     * @return Month                    Last month's prayer calendar.
+     * @return Month                            Last month's prayer calendar.
      */
     public function get_last_month(): Month
     {
@@ -65,7 +65,7 @@ class Month
      *
      * Returns blank if the calendar does not exist.
      *
-     * @return Month                    Next month's prayer calendar.
+     * @return Month                            Next month's prayer calendar.
      */
     public function get_next_month(): Month
     {
@@ -77,7 +77,7 @@ class Month
     /**
      * Return a formatted date string of this month.
      *
-     * @return string                   This month e.g. 'January 2022'.
+     * @return string                           This month e.g. 'January 2022'.
      */
     public function get_display_text(): string
     {
@@ -87,19 +87,19 @@ class Month
     /**
      * Create a Month object from $data and save it to the data store.
      *
-     * @param mixed $data               Data posted from Prayer Calendar builder.
+     * @param array<string, mixed>|null $data   Data posted from Prayer Calendar builder.
      * @return Result
      */
     public static function save($data): Result
     {
         try {
             // get data
-            $id = $data->id;
+            $id = $data["id"];
             $days = [];
-            foreach ($data->days as $day) {
-                $days[$day->date] = $day->people;
+            foreach ($data["days"] as $day) {
+                $days[$day["date"]] = $day["people"];
             }
-            $people = $data->people;
+            $people = $data["people"];
         } catch (Throwable $th) {
             _l_throwable($th);
             return Result::failure("Unable to read month data.");
@@ -130,8 +130,8 @@ class Month
     /**
      * Load the days for a specific month from a data store, if it exists.
      *
-     * @param string|null $id           Month ID, format YYYY-MM.
-     * @return Month                    Month object containing deserialised days (if store file exists).
+     * @param string|null $id                   Month ID, format YYYY-MM.
+     * @return Month                            Month object containing deserialised days (if store file exists).
      */
     public static function load(?string $id): Month
     {
@@ -154,7 +154,7 @@ class Month
     /**
      * Return most recent Month, or a blank Month object.
      *
-     * @return Month                    Most recent (or blank) month.
+     * @return Month                            Most recent (or blank) month.
      */
     public static function get_most_recent(): Month
     {

@@ -5,6 +5,7 @@ namespace Obadiah\Pages\Prayer;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Request\Csrf_Token;
 use Obadiah\Response\View;
 
 App::check();
@@ -32,8 +33,8 @@ $this->alert($model->result);
         <?php foreach ($model->months as $month) : ?>
             <?php
             $view_query = array("month" => $month);
-            $edit_query = array("from" => $month, "for" => $month);
-            $delete_query = array("file" => sprintf("%s.month", $month));
+            $edit_query = array("from" => $month, "for" => $month, Csrf_Token::NAME => Csrf_Token::get());
+            $delete_query = array("file" => sprintf("%s.month", $month), Csrf_Token::NAME => Csrf_Token::get());
             ?>
             <li>
                 <a href="/refresh/print/?<?php _e(http_build_query($view_query)); ?>" target="_blank"><?php _e($month); ?></a>
@@ -55,6 +56,7 @@ $this->alert($model->result);
         <div class="invalid-tooltip">Please enter the month to create a prayer calendar for.</div>
     </div>
     <div class="col-12">
+        <?php $this->csrf_token(); ?>
         <button type="submit" class="btn btn-primary">Create</button>
     </div>
 </form>
