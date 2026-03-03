@@ -13,7 +13,7 @@ class Crypto
     /**
      * Generate a hash from the current session id plus random bytes for entropy.
      *
-     * @param int $length                   The length of the random bytes.
+     * @param int<1, max> $length           The length of the random bytes.
      * @return string                       Unique session hash.
      */
     public static function generate_hash(int $length): string
