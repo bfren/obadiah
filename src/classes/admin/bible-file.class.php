@@ -18,14 +18,18 @@ class Bible_File
     public const NAME = "plan";
 
     /**
-     * Handle a Bible plan CSV file upload.
+     * Handle a Bible plan text file upload.
      *
      * @return Result
      */
     public static function upload(): Result
     {
-        // only allow CSV files
+        // only allow text files
         $info = Arr::get(Request::$files, "file");
+        if ($info === null || $info->error) {
+            _l("File upload error: '%s'.", $info->error);
+            App::die("No file was uploaded.");
+        }
         in_array($info->mime_type, array("text/plain")) || App::die("You may only upload text files.");
 
         // get paths
@@ -41,7 +45,7 @@ class Bible_File
     }
 
     /**
-     * Get the last modified date of the Bible plan CSV file.
+     * Get the last modified date of the Bible plan text file.
      *
      * @return string                               Formatted date time string.
      */
@@ -51,7 +55,7 @@ class Bible_File
     }
 
     /**
-     * Delete the Bible plan CSV file.
+     * Delete the Bible plan text file.
      *
      * @return Result
      */
