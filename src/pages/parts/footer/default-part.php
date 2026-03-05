@@ -14,7 +14,7 @@ App::check();
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container-fluid">
         <small class="text-muted">
-            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://github.com/bfren">bfren</a> (v<?php _e(App::$version) ?>).
+            Copyright &copy; <?php _e(date("Y")); ?> <a href="https://obadiah.uk">Obadiah</a> (v<?php _e(App::$version) ?>).
             <span class="d-none d-sm-inline">Source on <a href="https://github.com/bfren/obadiah" target="_blank">GitHub</a>.</span>
         </small>
     </div>

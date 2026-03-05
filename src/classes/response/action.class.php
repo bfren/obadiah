@@ -27,7 +27,7 @@ abstract class Action
         private readonly int $status
     ) {
         # identify self
-        $this->add_header("X-Software", "bfren/obadiah");
+        $this->add_header("X-Software", "obadiah");
 
         // add security headers
         $nonce = sprintf("nonce-%s", Request::$nonce);
