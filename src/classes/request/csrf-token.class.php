@@ -23,7 +23,7 @@ class Csrf_Token
     public static function generate(): string
     {
         // create token hash
-        $token = Crypto::generate_hash(32);
+        $token = Crypto::generate(32);
 
         // store for the current session
         Request::$session->set_csrf($token);

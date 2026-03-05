@@ -11,24 +11,12 @@ App::check();
 class Crypto
 {
     /**
-     * Generate a hash from the current session id plus random bytes for entropy.
+     * Generate a URL-safe random string for use in inline JavaScript / style blocks (e.g. nonce).
      *
-     * @param int<1, max> $length           The length of the random bytes.
-     * @return string                       Unique session hash.
+     * @param int<1, max> $length           The length of the string.
+     * @return string                       Base64 random string with URL-safe characters and no padding.
      */
-    public static function generate_hash(int $length): string
-    {
-        $str = sprintf("%s-%s", session_id(), random_bytes($length));
-        return hash("sha256", $str);
-    }
-
-    /**
-     * Generate a URL-safe nonce for use in inline JavaScript / style blocks.
-     *
-     * @param int<1, max> $length           The length of the nonce.
-     * @return string                       Base64 nonce with URL-safe characters and no padding.
-     */
-    public static function generate_nonce(int $length = 16): string
+    public static function generate(int $length): string
     {
         $str = random_bytes($length);
         $enc = SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING;
