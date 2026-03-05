@@ -28,7 +28,7 @@ class Api
      */
     public function __construct()
     {
-        $this->version = "v1";
+        $this->version = "v2";
     }
 
     /**
