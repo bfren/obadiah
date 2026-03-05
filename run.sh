@@ -6,4 +6,4 @@ docker run -it \
     -e BF_PHP_ENV=development \
     -v $(pwd)/src:/www \
     -v $(pwd)/data:/data \
-    bfren/obadiah:dev nu
+    bfren/obadiah:dev sh

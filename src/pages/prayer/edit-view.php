@@ -4,6 +4,7 @@ namespace Obadiah\Pages\Prayer;
 
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\Hash;
 use Obadiah\Pages\Parts\Header\Header_Model;
 use Obadiah\Prayer\Month;
@@ -38,7 +39,8 @@ $this->alert($model->result);
             There need to be an average of <?php _e("%s", $model->per_day); ?> people assigned to each day.
         </p>
         <div class="people">
-            <?php foreach (Prayer_Calendar::get_people() as $person) isset($model->people[Hash::person($person)]) || $this->part("person", model: $person); ?>
+            <?php $people_on_calendar = array_flip($model->people); ?>
+            <?php foreach (Prayer_Calendar::get_people() as $person) isset($people_on_calendar[Hash::person($person)]) || $this->part("person", model: $person); ?>
         </div>
     </div>
     <div class="col-6 col-lg-8 col-xxl-10 mh-100 admin-prayer-calendar-column">
@@ -57,7 +59,7 @@ $this->alert($model->result);
                 // get the hashes of people already added to this day
                 $date = $current->format(C::$formats->sortable_date);
                 if (isset($model->days[$i])) {
-                    $people_hashes = $model->days[$i];
+                    $people_hashes = Arr::get($model->days, $i);
                 } else {
                     $people_hashes = [];
                 }
