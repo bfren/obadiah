@@ -3,7 +3,7 @@
 namespace Obadiah\Request;
 
 use Obadiah\App;
-use Obadiah\Crypto\Crypto;
+use Obadiah\Helpers\Crypto;
 use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\IO;
 

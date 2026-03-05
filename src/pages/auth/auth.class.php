@@ -4,7 +4,7 @@ namespace Obadiah\Pages\Auth;
 
 use Obadiah\App;
 use Obadiah\Config\Config as C;
-use Obadiah\Crypto\Crypto;
+use Obadiah\Helpers\Crypto;
 use Obadiah\Request\Request;
 use Obadiah\Response\Action;
 use Obadiah\Response\View;

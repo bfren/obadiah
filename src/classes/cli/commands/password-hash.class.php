@@ -5,7 +5,7 @@ namespace Obadiah\Cli\Commands;
 use Obadiah\App;
 use Obadiah\Cli\Argument;
 use Obadiah\Cli\Command;
-use Obadiah\Crypto\Crypto;
+use Obadiah\Helpers\Crypto;
 use SensitiveParameter;
 
 App::check();

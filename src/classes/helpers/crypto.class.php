@@ -1,6 +1,6 @@
 <?php
 
-namespace Obadiah\Crypto;
+namespace Obadiah\Helpers;
 
 use Obadiah\App;
 use SensitiveParameter;
