@@ -5,6 +5,7 @@ namespace Obadiah\Api\Ajax;
 use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\IO;
 use Obadiah\Prayer\Month;
 use Obadiah\Request\Csrf_Token;
@@ -25,7 +26,7 @@ class Ajax extends Endpoint
     private ?Json $result = null;
 
     /**
-     * Get and validate JSON input from php://input.
+     * Get and validate JSON input.
      *
      * @return array<string, mixed>|null
      */
@@ -45,7 +46,7 @@ class Ajax extends Endpoint
         }
 
         // validate CSRF
-        if(!isset($json[Csrf_Token::NAME]) || !Csrf_Token::validate($json[Csrf_Token::NAME], false)) {
+        if(!($token = Arr::get($json, Csrf_Token::NAME)) || !Csrf_Token::validate($token, false)) {
             $this->result = new Json(Result::validation_failure(), 400);
             return null;
         }
