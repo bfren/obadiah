@@ -68,8 +68,8 @@ class Api
         if (!$result) {
             _l("Unable to decode JSON response from %s.", $url);
             return null;
-        } elseif (isset($result["error"])) {
-            _l("Error retrieving %s: %s.", $url, $result["error"]["message"]);
+        } elseif ($error = Arr::get_array($result, "error")) {
+            _l("Error retrieving %s: %s.", $url, Arr::get($error, "message"));
             return null;
         }
 
@@ -97,8 +97,8 @@ class Api
         foreach ($response[$kind] as $person) {
             $thumb_url = Arr::get(Arr::get(Arr::get($person, "images", []), "md", []), "url");
             $person = new Person(
-                first_name: $person["first_name"],
-                last_name: $person["last_name"],
+                first_name: Arr::get($person, "first_name"),
+                last_name: Arr::get($person, "last_name"),
                 is_child: $are_children,
                 image_url: $thumb_url
             );

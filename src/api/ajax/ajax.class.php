@@ -46,7 +46,7 @@ class Ajax extends Endpoint
         }
 
         // validate CSRF
-        if(!($token = Arr::get($json, Csrf_Token::NAME)) || !Csrf_Token::validate($token, false)) {
+        if (!($token = Arr::get($json, Csrf_Token::NAME)) || !Csrf_Token::validate($token, false)) {
             $this->result = new Json(Result::validation_failure(), 400);
             return null;
         }
@@ -66,7 +66,7 @@ class Ajax extends Endpoint
         $data = $this->get_input();
 
         // check for null
-        if($data === null) {
+        if ($data === null) {
             return new Json(Result::failure("Empty data."), 400);
         }
 
