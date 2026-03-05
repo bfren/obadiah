@@ -68,4 +68,15 @@ class Super_Global
         // return sanitised string
         return Sanitise::text_input($input);
     }
+
+    /**
+     * Validate CSRF token against this object's values.
+     *
+     * @return bool                     Whether or not the CSRF token is valid (false if it is not set).
+     */
+    public function validate(): bool
+    {
+        $token = $this->string(Csrf_Token::NAME);
+        return Csrf_Token::validate($token);
+    }
 }

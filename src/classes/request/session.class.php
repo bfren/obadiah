@@ -13,22 +13,27 @@ class Session
     /**
      * Admin user session key.
      */
-    private const ADMIN = "admin";
+    private const ADMIN = "_admin";
 
     /**
      * Authenticated user session key.
      */
-    private const AUTH = "auth";
+    private const AUTH = "_auth";
 
     /**
      * Login attempt count session key.
      */
-    private const COUNT = "count";
+    private const COUNT = "_count";
+
+    /**
+     * CSRF Token session key.
+     */
+    private const CSRF_TOKEN = "_csrf";
 
     /**
      * Access was denied.
      */
-    private const DENIED = "denied";
+    private const DENIED = "_denied";
 
     /**
      * True if the current request is an authenticated administrator.
@@ -126,5 +131,23 @@ class Session
     public function is_denied(): bool
     {
         return isset($_SESSION[self::DENIED]);
+    }
+
+    /**
+     *
+     * @param string $token
+     * @return void
+     */
+    public function set_csrf(string $token): void {
+        $_SESSION[self::CSRF_TOKEN] = $token;
+    }
+
+    public function get_csrf(): ?string
+    {
+        if (isset($_SESSION[self::CSRF_TOKEN])) {
+            return $_SESSION[self::CSRF_TOKEN];
+        }
+
+        return null;
     }
 }

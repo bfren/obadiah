@@ -98,7 +98,7 @@ class Events extends Endpoint
         // get calendar JSON
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            Curl::log_error($handle);
             return [];
         }
 

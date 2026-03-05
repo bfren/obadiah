@@ -6,6 +6,8 @@ use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
 use Obadiah\Pages\Parts\Header\Header_Model;
+use Obadiah\Pages\Parts\Input\Input_Model;
+use Obadiah\Request\Csrf_Token;
 use SplFileInfo;
 
 App::check();
@@ -97,6 +99,17 @@ class View extends Action
         if ($file_shared->isFile()) {
             $this->require($file_shared->getRealPath(), $model);
         }
+    }
+
+    /**
+     * Output CSRF token part.
+     *
+     * @return void
+     */
+    public function csrf_token(): void
+    {
+        $model = new Input_Model(Csrf_Token::NAME, Csrf_Token::get());
+        $this->part("input", "csrf", $model);
     }
 
     /**

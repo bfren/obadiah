@@ -42,7 +42,7 @@ class Api
         // make request - on error log and return null
         $response = Curl::execute_with_retry($handle);
         if (!is_string($response)) {
-            _l(print_r(curl_error($handle), true));
+            Curl::log_error($handle);
             return null;
         }
 

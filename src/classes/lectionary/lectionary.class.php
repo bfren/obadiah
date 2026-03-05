@@ -89,7 +89,7 @@ class Lectionary
 
             // get Services for Day
             $day_services = array_filter($service_results, function (array $v, int $k) use ($date) {
-                return $v["Date"] === $date;
+                return Arr::get($v, "date") === $date;
             }, ARRAY_FILTER_USE_BOTH);
 
             // get Services for Day (using pre-indexed lookup)

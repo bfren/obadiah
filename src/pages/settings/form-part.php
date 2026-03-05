@@ -28,6 +28,7 @@ $values = $model->values->as_array();
             </div>
         </div>
     <?php endforeach; ?>
+    <?php $this->csrf_token(); ?>
     <button type="submit" class="btn btn-primary">Save</button>
     <span class="ps-3 error text-danger"></span>
 </form>

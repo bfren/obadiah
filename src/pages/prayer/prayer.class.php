@@ -51,6 +51,12 @@ class Prayer extends Endpoint
      */
     public function edit_get(): Action
     {
+        // validate request
+        if (!Request::$get->validate()) {
+            $this->result = Result::validation_failure();
+            return $this->index_get();
+        }
+
         // define variables
         $people_per_day = (int)round(count(Cache::get_people()) / Month::MAX_DAYS, 1);
 
@@ -99,6 +105,12 @@ class Prayer extends Endpoint
      */
     public function delete_get(): View
     {
+        // validate request
+        if (!Request::$get->validate()) {
+            $this->result = Result::validation_failure();
+            return $this->index_get();
+        }
+
         // get file and delete
         if ($file = Request::$get->string("file")) {
             $this->result = Prayer_File::delete($file);

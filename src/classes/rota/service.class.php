@@ -5,6 +5,7 @@ namespace Obadiah\Rota;
 use DateTimeImmutable;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\DateTime;
 use Obadiah\Helpers\Str;
 
@@ -48,7 +49,9 @@ class Service
             $data[$header_row[$i]] = $row[$i];
         }
         // get the start date and time as a timestamp
-        $this->start = DateTime::create(C::$formats->csv_import_datetime, sprintf("%s%s", $data["Date"], $data["Time"]), true);
+        $date = Arr::get($data, "Date");
+        $time = Arr::get($data, "Time");
+        $this->start = DateTime::create(C::$formats->csv_import_datetime, sprintf("%s%s", $date, $time), true);
 
         // get the ministries
         $this->ministries = $this->get_ministries($data);

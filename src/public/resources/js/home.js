@@ -1,4 +1,4 @@
-document.getElementById("reload-link").addEventListener("click", (e) => {
+document.getElementById("reload-link")?.addEventListener("click", (e) => {
     e.preventDefault();
 
     let request = {

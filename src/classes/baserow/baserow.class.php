@@ -4,6 +4,7 @@ namespace Obadiah\Baserow;
 
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\Curl;
 
 App::check();
@@ -116,25 +117,25 @@ class Baserow
         // make request and return empty array on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            Curl::log_error($handle);
             return [];
         }
 
         // decode JSON response and return empty array on error
         $result = json_decode($json, true);
-        if (isset($result["error"])) {
-            _l("Error: %s", $result["detail"]);
+        if ($error = Arr::get_array($result, "error")) {
+            _l("Error: %s", Arr::get($error, "detail"));
             return [];
         }
 
         // get records
-        $results = $result["results"];
+        $results = Arr::get_array($result, "results");
 
         // if there are more records to get, make another response using offset info,
         // and keep going recursively until all the records have been retrieved
-        if (isset($result["next"])) {
+        if ($next = Arr::get($result, "next")) {
             // get the URL query and parse into an array to use for the next query
-            $next_url = parse_url($result["next"], PHP_URL_QUERY);
+            $next_url = parse_url($next, PHP_URL_QUERY);
             $next_data = [];
             if ($next_url) {
                 parse_str($next_url, $next_data);
@@ -181,14 +182,14 @@ class Baserow
         // make request and output on error
         $json = Curl::execute_with_retry($handle);
         if (!is_string($json)) {
-            _l(curl_error($handle));
+            Curl::log_error($handle);
             return new Post_Result(500, "Error, please try again.");
         }
 
         // decode JSON response and output on error
         $result = json_decode($json, true);
-        if (isset($result["error"])) {
-            return new Post_Result(400, $result["detail"]);
+        if ($error = Arr::get_array($result, "error")) {
+            return new Post_Result(400, Arr::get($error, "detail"));
         }
 
         // if we get here the POST was successful

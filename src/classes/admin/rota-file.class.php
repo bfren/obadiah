@@ -21,6 +21,10 @@ class Rota_File
     {
         // only allow CSV files
         $info = Arr::get(Request::$files, "file");
+        if ($info === null || $info->error) {
+            _l("File upload error: '%s'.", $info->error);
+            App::die("No file was uploaded.");
+        }
         in_array($info->mime_type, array("text/csv", "application/vnd.ms-excel")) || App::die("You may only upload CSV files.");
 
         // make sure the name was set

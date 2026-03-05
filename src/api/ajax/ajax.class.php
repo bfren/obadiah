@@ -5,7 +5,10 @@ namespace Obadiah\Api\Ajax;
 use Obadiah\Admin\Result;
 use Obadiah\App;
 use Obadiah\Config\Config as C;
+use Obadiah\Helpers\Arr;
+use Obadiah\Helpers\IO;
 use Obadiah\Prayer\Month;
+use Obadiah\Request\Csrf_Token;
 use Obadiah\Request\Request;
 use Obadiah\Response\Json;
 use Obadiah\Router\Endpoint;
@@ -23,11 +26,11 @@ class Ajax extends Endpoint
     private ?Json $result = null;
 
     /**
-     * Get and validate JSON input from php://input.
+     * Get and validate JSON input.
      *
-     * @return mixed
+     * @return array<string, mixed>|null
      */
-    private function get_input(): mixed
+    private function get_input(): array|null
     {
         // check auth
         if (!Request::$session->is_admin) {
@@ -35,19 +38,16 @@ class Ajax extends Endpoint
             return null;
         }
 
-        // get input text
-        $input = file_get_contents("php://input");
-        if (!$input) {
-            $this->result = new Json(Result::failure("No input."), 400);
+        // get input JSON
+        $json = Request::$json;
+        if (empty($json)) {
+            $this->result = new Json(Result::failure("Invalid request."), 400);
             return null;
         }
 
-        // decode JSON
-        try {
-            $json = json_decode($input, flags: JSON_THROW_ON_ERROR);
-        } catch (Throwable $th) {
-            _l_throwable($th);
-            $this->result = new Json(Result::failure("Invalid request."), 400);
+        // validate CSRF
+        if (!($token = Arr::get($json, Csrf_Token::NAME)) || !Csrf_Token::validate($token, false)) {
+            $this->result = new Json(Result::validation_failure(), 400);
             return null;
         }
 
@@ -64,6 +64,11 @@ class Ajax extends Endpoint
     {
         // get data
         $data = $this->get_input();
+
+        // check for null
+        if ($data === null) {
+            return new Json(Result::failure("Empty data."), 400);
+        }
 
         // check for failure result
         if ($this->result) {

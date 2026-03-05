@@ -3,7 +3,7 @@
 namespace Obadiah\Request;
 
 use Obadiah\App;
-use Obadiah\Crypto\Crypto;
+use Obadiah\Helpers\Crypto;
 use Obadiah\Helpers\Arr;
 use Obadiah\Helpers\IO;
 
@@ -77,7 +77,7 @@ class Request
     /**
      * Returns posted JSON as an associative array.
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     public static array $json;
 
@@ -135,7 +135,7 @@ class Request
         self::$debug = self::$get->bool("debug");
         self::$method = self::$server->string("REQUEST_METHOD");
         self::$host = self::$server->string("HTTP_HOST");
-        self::$nonce = Crypto::generate_nonce();
+        self::$nonce = Crypto::generate(16);
         self::$protocol = self::$server->bool("HTTPS", false) ? "https" : "http";
         self::$query_string = self::$server->string("QUERY_STRING");
         self::$uri = str_replace(sprintf("?%s", self::$query_string), "", self::$server->string("REQUEST_URI"));
