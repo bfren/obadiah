@@ -44,7 +44,7 @@ class App
                 "lifetime" => 0,
                 "secure" => true,
                 "httponly" => true,
-                "samesite" => "Lax"
+                "samesite" => "Lax" // Strict breaks API login on Android phones
             ]);
 
             session_start();
