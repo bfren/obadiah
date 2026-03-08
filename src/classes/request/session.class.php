@@ -63,8 +63,19 @@ class Session
      */
     public function __construct()
     {
-        $this->is_authorised = Arr::get($_SESSION, self::AUTH, false) || Request::$get->string("api") == C::$login->api;
-        $this->is_admin = $this->is_authorised && Arr::get($_SESSION, self::ADMIN, false);
+        // check for previously authenticated sessions
+        $is_authorised = Arr::get_boolean($_SESSION, self::AUTH);
+
+        // allow direct login via API
+        $is_api_login = C::$login->api && hash_equals(C::$login->api, Request::$get->string("api"));
+
+        // store authorisation status
+        $this->is_authorised = $is_authorised || $is_api_login;
+
+        // store admin permissions
+        $this->is_admin = $is_authorised && Arr::get_boolean($_SESSION, self::ADMIN);
+
+        // brute force protection
         $this->login_attempts = Arr::get($_SESSION, self::COUNT, 0);
     }
 
@@ -104,6 +115,7 @@ class Session
         // unset auth values
         unset($_SESSION[self::AUTH]);
         unset($_SESSION[self::ADMIN]);
+        unset($_SESSION[self::CSRF_TOKEN]);
     }
 
     /**
@@ -134,14 +146,21 @@ class Session
     }
 
     /**
+     * Store CSRF token.
      *
-     * @param string $token
+     * @param string $token             CSRF token value.
      * @return void
      */
-    public function set_csrf(string $token): void {
+    public function set_csrf(string $token): void
+    {
         $_SESSION[self::CSRF_TOKEN] = $token;
     }
 
+    /**
+     * Retrieve CSRF token.
+     *
+     * @return null|string              CSRF token value or null if not set.
+     */
     public function get_csrf(): ?string
     {
         if (isset($_SESSION[self::CSRF_TOKEN])) {
