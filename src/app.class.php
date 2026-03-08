@@ -40,16 +40,12 @@ class App
         // start session unless running as CLI
         if ($is_http) {
             // configure secure session cookie parameters
-            session_set_cookie_params([
-                "lifetime" => 0,
-                "path" => "/",
-                "domain" => "",
-                "secure" => true,
-                // not accessible from JavaScript
-                "httponly" => true,
-                // CSRF protection
-                "samesite" => "Strict"
-            ]);
+            // session_set_cookie_params([
+            //     "lifetime" => 0,
+            //     "secure" => true,
+            //     "httponly" => true,
+            //     "samesite" => "Strict"
+            // ]);
 
             session_start();
         }
