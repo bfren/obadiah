@@ -20,8 +20,8 @@ Obadiah was the faithful palace administrator during the time of Ahab. He suppor
 
 ## Licence
 
-> [MIT](https://mit.bfren.dev/2022)
+> MIT
 
 ## Copyright
 
-> Copyright (c) 2022-2026 [bfren](https://bfren.dev) (unless otherwise stated)
+> Copyright (c) 2022-2026 [Obadiah](https://obadiah.uk) (unless otherwise stated)
