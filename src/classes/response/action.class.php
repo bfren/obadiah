@@ -31,12 +31,12 @@ abstract class Action
 
         // add security headers
         $nonce = sprintf("nonce-%s", Request::$nonce);
-        //$this->add_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-        //$this->add_header("X-Content-Type-Options", "nosniff");
-        //$this->add_header("X-Frame-Options", "DENY");
+        $this->add_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        $this->add_header("X-Content-Type-Options", "nosniff");
+        $this->add_header("X-Frame-Options", "DENY");
         $this->add_header("Content-Security-Policy", "default-src 'self'; script-src 'self' '$nonce'; style-src 'self' '$nonce' https://static.bcg.xyz; img-src 'self' data: https:; font-src 'self' https://static.bcg.xyz; connect-src 'self'; frame-ancestors 'none'");
-        //$this->add_header("Referrer-Policy", "strict-origin-when-cross-origin");
-        //$this->add_header("Permissions-Policy", "geolocation=(), microphone=(), camera=(), payment=()");
+        $this->add_header("Referrer-Policy", "strict-origin-when-cross-origin");
+        $this->add_header("Permissions-Policy", "geolocation=(), microphone=(), camera=(), payment=()");
     }
 
     /**
