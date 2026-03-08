@@ -44,7 +44,7 @@ class App
                 "lifetime" => 0,
                 "secure" => true,
                 "httponly" => true,
-                // "samesite" => "Strict"
+                "samesite" => "Lax"
             ]);
 
             session_start();
