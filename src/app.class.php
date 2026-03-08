@@ -42,13 +42,9 @@ class App
             // configure secure session cookie parameters
             session_set_cookie_params([
                 "lifetime" => 0,
-                "path" => "/",
-                "domain" => "",
                 "secure" => true,
-                // not accessible from JavaScript
                 "httponly" => true,
-                // CSRF protection
-                "samesite" => "Strict"
+                "samesite" => "Lax" // Strict breaks API login on Android phones
             ]);
 
             session_start();
