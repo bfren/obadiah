@@ -157,7 +157,7 @@ class Safeguarding extends Endpoint
         Log::debug("Reference form received: %s", json_encode($form));
 
         // remove hyphens from select values
-        $get_select = fn(int $num) => str_replace("-", " ", Arr::get($form, "select_$num"));
+        $get_select = fn(int $num) => str_replace("-", " ", Arr::get($form, "select_$num", ""));
 
         // map JSON to Baserow table fields
         $row = array(
@@ -170,12 +170,12 @@ class Safeguarding extends Endpoint
             "Equality" => $get_select(4),
             "Honesty etc" => $get_select(5),
             "Comments" => Arr::get($form, "textarea_1"),
-            "Health" => Arr::get($form, "select_6"),
+            "Health" => $get_select(6),
             "Health Details" => Arr::get($form, "textarea_2"),
-            "Unsuitability" => Arr::get($form, "select_7"),
+            "Unsuitability" => $get_select(7),
             "Unsuitability Details" => Arr::get($form, "textarea_3"),
             "Referee Full Name" => Arr::get($form, "name_2"),
-            "Confirm" => Arr::get($form, "checkbox_1") == "true",
+            "Confirm" => Arr::get_boolean($form, "checkbox_1"),
             "Referee Email" => Arr::get($form, "email_1"),
             "Referee Phone" => Arr::get($form, "phone_1"),
         );
