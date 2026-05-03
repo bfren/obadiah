@@ -353,19 +353,23 @@ class Cache
 
         // get path to cache file
         $path = self::get_cache_file_path($id);
+        $get_current_value = fn() => Serialise::parse(IO::file_get_contents($path));
 
         // if the file exists, and the cache file has not expired, read and unserialise the value
         $last_modified = self::get_last_modified($path);
         if (time() - $last_modified < self::$duration_in_seconds) {
-            return Serialise::parse(IO::file_get_contents($path));
+            return $get_current_value();
         }
 
         // get a fresh value and serialise it to the cache
         $value = call_user_func($callable, ...$args);
-        file_put_contents($path, Serialise::store($value));
+        if ($value !== false) {
+            file_put_contents($path, Serialise::store($value));
+            return $value;
+        }
 
-        // return value
-        return $value;
+        // failed to get fresh value so return current cache value
+        return $get_current_value();
     }
 
     /**
