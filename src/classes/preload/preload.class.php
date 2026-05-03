@@ -34,13 +34,8 @@ class Preload
             // clear events cache
             Cache::clear_events();
 
-            // build query to preload events for this month
-            $today = new DateTimeImmutable(timezone: C::$events->timezone);
-            $start_of_month = $today->modify("first day of")->format(C::$formats->sortable_date);
-            $query = http_build_query(array("date_start" => $start_of_month));
-
             // get events
-            Cache::get_events($query, fn($q) => Events::get_events($q), true);
+            Cache::get_events(Events::get_default_query(), fn($q) => Events::get_events($q), true);
         });
     }
 
