@@ -77,6 +77,18 @@ class Events extends Endpoint
     }
 
     /**
+     * Return default events query to retrieve events for the current month.
+     *
+     * @return string                               URL-encoded query (using http_build_query()).
+     */
+    public static function get_default_query(): string
+    {
+        $today = new DateTimeImmutable(timezone: C::$events->timezone);
+        $start_of_month = $today->modify("first day of")->format(C::$formats->sortable_date);
+        return self::get_query(array("date_start" => $start_of_month));
+    }
+
+    /**
      * Get events from Church Suite matching the query.
      *
      * @param array<string, mixed>|string $query    Array of query values, or URL-encoded query (e.g. using http_build_query()).
