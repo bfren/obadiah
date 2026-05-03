@@ -112,7 +112,10 @@ class Baserow
             return [];
         }
 
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array(sprintf("Authorization: Token %s", $this->token)));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array(
+            sprintf("Authorization: Token %s", $this->token)
+        ));
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // make request and return empty array on error
         $json = Curl::execute_with_retry($handle);
@@ -178,6 +181,9 @@ class Baserow
         curl_setopt($handle, CURLOPT_HTTPHEADER, array(
             sprintf("Authorization: Token %s", $this->token)
         ));
+        curl_setopt($handle, CURLOPT_POST, true);
+        curl_setopt($handle, CURLOPT_POSTFIELDS, $form);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
         // make request and output on error
         $json = Curl::execute_with_retry($handle);
@@ -188,8 +194,9 @@ class Baserow
 
         // decode JSON response and output on error
         $result = json_decode($json, true);
-        if ($error = Arr::get_array($result, "error")) {
-            return new Post_Result(400, Arr::get($error, "detail"));
+        if ($error = Arr::get($result, "error")) {
+            $detail = is_array($error) ? Arr::get($error, "detail") : $error;
+            return new Post_Result(400, $detail);
         }
 
         // if we get here the POST was successful
