@@ -34,6 +34,11 @@ $this->header(new Header_Model("Home", subtitle: "Welcome to Obadiah, church adm
 
 <?php if (Request::$session->is_admin) : ?>
     <h2>Caches</h2>
+    <p>
+        <?php foreach($model->caches_check as $key => $value): ?>
+            <?php _h("%s %s", $value ? "<span class=\"text-success\">&check;</span>" : "<span class=\"text-danger\">&cross;</span>", ucfirst($key)); ?></br>
+        <?php endforeach; ?>
+        </p>
     <p><a href="#" id="reload-link">Reload</a> caches (this happens automatically every <?php _e("%s", C::$cache->duration_in_seconds / 60); ?> minutes).</p>
     <div id="reload"></div>
 <?php endif; ?>
