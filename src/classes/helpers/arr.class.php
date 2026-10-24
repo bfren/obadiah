@@ -24,11 +24,12 @@ class Arr
     /**
      * Safely get a value from an associative array.
      *
-     * @template T
-     * @param T[]|array<int|string, T> $array       Array of values.
-     * @param int|string $key                       The key to search for.
-     * @param T|null $default                       Default value if key does not exist.
-     * @return (T is null ? ?mixed : T)             Key value, or $default if key does not exist.
+     * @template T = mixed
+     * @template TDefault = null
+     * @param array<array-key, T> $array    Array of values.
+     * @param int|string $key               The key to search for.
+     * @param TDefault $default             Default value if key does not exist.
+     * @return T|TDefault                   Key value, or $default if key does not exist.
      */
     public static function get(array $array, int|string $key, mixed $default = null): mixed
     {
@@ -40,21 +41,17 @@ class Arr
     }
 
     /**
-     * Safely get a value from an associative array.
+     * Safely get an array value from an associative array.
      *
-     * @template T
-     * @param array<int|string, array<T>> $array    Array of values.
-     * @param int|string $key                       The key to search for.
-     * @param array<T> $default                     Default value if key does not exist.
-     * @return array<T>                             Key value, or $default if key does not exist.
+     * @param array<array-key, mixed> $array    Array of values.
+     * @param int|string $key                   The key to search for.
+     * @param array<mixed> $default             Default value if key does not exist or is not an array.
+     * @return array<mixed>                     Key value, or $default.
      */
     public static function get_array(array $array, int|string $key, array $default = []): array
     {
-        if (self::exists($array, $key)) {
-            return $array[$key];
-        }
-
-        return $default;
+        $value = self::exists($array, $key) ? $array[$key] : null;
+        return is_array($value) ? $value : $default;
     }
 
     /**
@@ -78,7 +75,7 @@ class Arr
      * Safely get the last value from an array.
      *
      * @template T
-     * @param T[]|array<int|string, T> $array       Array of values.
+     * @param T[]|array<array-key, T> $array       Array of values.
      * @param T|null $default                       Default value to return if array is empty.
      * @return T|null                               Last value, or $default if array is empty.
      */
@@ -112,9 +109,10 @@ class Arr
     /**
      * Get a required value from an associative array.
      *
-     * @param mixed[] $array                        Array of values.
+     * @template T = mixed
+     * @param array<array-key, T> $array            Array of values.
      * @param int|string $key                       The key to search for.
-     * @return mixed                                Key value if key does not exist.
+     * @return T                                    Key value.
      * @throws Exception                            When $key is not found in $array.
      */
     public static function get_required(array $array, int|string $key): mixed
@@ -148,17 +146,18 @@ class Arr
     }
 
     /**
-     * Transform each element in $array using $callback.
+     * Transform each element in $array using $callback, removing null results.
      *
+     * @template K of array-key
      * @template T
      * @template U
-     * @param T[] $array                            Array to map.
-     * @param callable(T): U $callback              Callback function (should return a transformed value).
-     * @return U[]                                  Array of transformed elements.
+     * @param array<K, T> $array                    Array to map.
+     * @param callable(T): (U|null) $callback       Callback function (return null to remove the element).
+     * @return array<K, U>                          Array of transformed, non-null elements.
      */
-    public static function map(array $array, ?callable $callback = null): array
+    public static function map(array $array, callable $callback): array
     {
-        return array_filter(array_map($callback, $array));
+        return array_filter(array_map($callback, $array), fn($v) => $v !== null);
     }
 
     /**
