@@ -7,13 +7,5 @@
 	"settings": {
 		"editor.renderWhitespace": "boundary",
 		"files.trimTrailingWhitespace": true,
-		"nushellLanguageServer.includeDirs": [
-			"Q:/src/docker/alpine/overlay/etc/nu/scripts",
-			"Q:/src/docker/nginx-php/overlay/etc/nu/scripts",
-			"Q:/src/docker/php/overlay/etc/nu/scripts",
-			"/Users/bcg/src/docker/alpine/overlay/etc/nu/scripts",
-			"/Users/bcg/src/docker/nginx-php/overlay/etc/nu/scripts",
-			"/Users/bcg/src/docker/php/overlay/etc/nu/scripts"
-		]
 	}
 }
