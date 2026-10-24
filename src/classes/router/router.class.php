@@ -82,18 +82,24 @@ class Router
 
         // search for endpoint without prefix
         $endpoint_without_prefix = Arr::get($parts, 0, "home");
-        if (Arr::exists(self::$routes, $endpoint_without_prefix)) {
+        $route = Arr::get(self::$routes, $endpoint_without_prefix);
+        if ($route !== null) {
             return new Matched_Endpoint(
-                route: Arr::get(self::$routes, $endpoint_without_prefix),
+                route: $route,
                 action: Arr::get($parts, 1, "index")
             );
         }
 
         // search for endpoint with prefix
-        $endpoint_with_prefix = sprintf("%s/%s", Arr::get($parts, 0), Arr::get($parts, 1, "home"));
-        if (Arr::exists(self::$routes, $endpoint_with_prefix)) {
+        $endpoint_with_prefix = sprintf(
+            "%s/%s",
+            Arr::get($parts, 0),
+            Arr::get($parts, 1, "home")
+        );
+        $route = Arr::get(self::$routes, $endpoint_with_prefix);
+        if ($route !== null) {
             return new Matched_Endpoint(
-                route: Arr::get(self::$routes, $endpoint_with_prefix),
+                route: $route,
                 action: Arr::get($parts, 2, "index")
             );
         }
